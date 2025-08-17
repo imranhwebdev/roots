@@ -1,4 +1,6 @@
 <footer>
+  <div class="container">
+    
   <div class="footer__copyright">
     &copy;
     {{ 'now' | date: '%Y' }}
@@ -17,6 +19,7 @@
         {{ type | payment_type_svg_tag }}
       {% endfor %}
     {% endif %}
+  </div>
   </div>
 </footer>
 

@@ -9,12 +9,17 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "hello-world",
+    "banner": {
+      "type": "home-banner",
+      "settings": {}
+    },
+    "why_choose": {
+      "type": "why-choose",
       "settings": {}
     }
   },
   "order": [
-    "main"
+    "banner",
+    "why_choose"
   ]
 }
