@@ -11,25 +11,49 @@
   "sections": {
     "banner": {
       "type": "home-banner",
+      "blocks": {
+        "slide_N3atmd": {
+          "type": "slide",
+          "settings": {
+            "heading": "Smarter Soccer Starts Here",
+            "subheading": "Premium soccer gear for players who demand the best. From pro-level cleats to authentic jerseys",
+            "button_label": "Shop Now",
+            "button_link": "/"
+          }
+        },
+        "slide_tgdXce": {
+          "type": "slide",
+          "settings": {
+            "heading": "Smarter Soccer Starts Here",
+            "subheading": "Premium soccer gear for players who demand the best. From pro-level cleats to authentic jerseys",
+            "button_label": "Shop Now",
+            "button_link": "/"
+          }
+        },
+        "slide_UVgWcJ": {
+          "type": "slide",
+          "settings": {
+            "heading": "Smarter Soccer Starts Here",
+            "subheading": "Premium soccer gear for players who demand the best. From pro-level cleats to authentic jerseys",
+            "button_label": "Shop Now",
+            "button_link": "/"
+          }
+        }
+      },
+      "block_order": [
+        "slide_N3atmd",
+        "slide_tgdXce",
+        "slide_UVgWcJ"
+      ],
       "settings": {}
     },
     "why_choose": {
       "type": "why-choose",
       "settings": {}
-    },
-    "best_sell": {
-      "type": "best-sell",
-      "settings": {}
-    },
-    "our_roots": {
-      "type": "our-roots",
-      "settings": {}
-    },
+    }
   },
   "order": [
     "banner",
-    "why_choose",
-    "best_sell",
-    "our_roots"
+    "why_choose"
   ]
 }
