@@ -1,69 +1,80 @@
-<div class="header-area">
-  <div class="container">
-    <header>
-      <h2 class="header__title">
-        {{ shop.name | link_to: routes.root_url }}
-      </h2>
+<!-- Topbar -->
+<div class="topbar bg-[#FFD500] text-black text-sm py-2 px-6 flex justify-between items-center">
+  <!-- Left -->
+  <div class="flex items-center gap-3">
+    <span>Follow Us</span>
+    <a href="#" aria-label="Instagram">{% render 'icon-instagram' %}</a>
+    <a href="#" aria-label="Twitter">{% render 'icon-twitter' %}</a>
+    <a href="#" aria-label="Facebook">{% render 'icon-facebook' %}</a>
+  </div>
 
-      <div class="header__menu">
-        {% for link in section.settings.menu.links %}
-          {{ link.title | link_to: link.url }}
-        {% endfor %}
-      </div>
+  <!-- Center -->
+  <p class="hidden md:block">Sign up get 20% Off for all collection</p>
 
-      <div class="header__icons">
-        {% if shop.customer_accounts_enabled %}
-          {{ 'icon-account.svg' | inline_asset_content | link_to: routes.account_url }}
-        {% endif %}
-
-        <a href="{{ routes.cart_url }}">
-          {% if cart.item_count > 0 %}
-            <sup>{{ cart.item_count }}</sup>
-          {% endif %}
-
-          {{ 'icon-cart.svg' | inline_asset_content }}
-        </a>
-      </div>
-    </header>
+  <!-- Right -->
+  <div class="flex items-center gap-2">
+    <span>📞 1 (100) 234-5678</span>
   </div>
 </div>
 
-{% stylesheet %}
-  header {
-    height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  header a {
-    position: relative;
-    text-decoration: none;
-    color: var(--color-foreground);
-  }
-  header a sup {
-    position: absolute;
-    left: 100%;
-    overflow: hidden;
-    max-width: var(--page-margin);
-  }
-  header svg {
-    width: 2rem;
-  }
-  header .header__menu,
-  header .header__icons {
-    display: flex;
-    gap: 1rem;
-  }
-{% endstylesheet %}
+<!-- Main Header -->
+<header class="main-header bg-[#1E6B43] text-white py-4 px-6 flex justify-between items-center">
+  <!-- Logo -->
+  <div>
+    <h1 class="text-3xl font-bold font-serif tracking-wide">
+      <a href="{{ routes.root_url }}">Roots</a>
+    </h1>
+  </div>
+
+  <!-- Desktop Menu -->
+  <nav class="hidden md:flex gap-6">
+    {% for link in section.settings.menu.links %}
+      <a href="{{ link.url }}" class="hover:text-[#FFD500] transition">{{ link.title }}</a>
+    {% endfor %}
+  </nav>
+
+  <!-- Right Icons -->
+  <div class="flex items-center gap-4">
+    <!-- Cart -->
+    <a href="{{ routes.cart_url }}" class="relative">
+      {% if cart.item_count > 0 %}
+        <sup class="absolute -top-2 -right-2 bg-[#FFD500] text-black rounded-full text-xs px-1">
+          {{ cart.item_count }}
+        </sup>
+      {% endif %}
+      {% render 'icon-cart' %}
+    </a>
+
+    <!-- Sign Up Button -->
+    <a href="/account/register" class="bg-[#FFD500] text-black px-4 py-1 rounded-full font-medium"> Sign Up </a>
+
+    <!-- Mobile Menu Toggle -->
+    <button id="menuToggle" class="md:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- Offcanvas Mobile Menu -->
+<div id="mobileMenu" class="fixed inset-0 bg-black/50 hidden z-50">
+  <div class="bg-white w-64 h-full p-6 flex flex-col">
+    <button id="menuClose" class="self-end mb-6 text-xl">✕</button>
+    {% for link in section.settings.menu.links %}
+      <a href="{{ link.url }}" class="block py-2 text-lg border-b">{{ link.title }}</a>
+    {% endfor %}
+  </div>
+</div>
 
 {% schema %}
 {
-  "name": "t:general.header",
+  "name": "Custom Header",
   "settings": [
     {
       "type": "link_list",
       "id": "menu",
-      "label": "t:labels.menu"
+      "label": "Navigation Menu"
     }
   ]
 }
