@@ -275,8 +275,14 @@
   .h-full {
     height: 100%;
   }
+  .max-h-12 {
+    max-height: calc(var(--spacing) * 12);
+  }
   .w-64 {
     width: calc(var(--spacing) * 64);
+  }
+  .w-auto {
+    width: auto;
   }
   .border-collapse {
     border-collapse: collapse;
@@ -498,6 +504,12 @@
   .md\:hidden {
     @media (width >= 768px) {
       display: none;
+    }
+  }
+  .lg\:text-lg {
+    @media (width >= 992px) {
+      font-size: var(--text-lg);
+      line-height: var(--tw-leading, var(--text-lg--line-height));
     }
   }
 }
