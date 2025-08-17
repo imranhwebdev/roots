@@ -5,8 +5,12 @@
     {% render 'css-variables' %}
 
     {% # Load and preload the critical CSS %}
-    {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}
     {{ 'output.css' | asset_url | stylesheet_tag }}
+
+    {{ 'swiper-bundle-min.css' | asset_url | stylesheet_tag }}
+
+    <script src="{{ 'swiper-bundle-min.js' | asset_url }}" defer></script>
+    <script src="{{ 'jquery.js' | asset_url }}" defer></script>
 
     {% # Social, title, etc. %}
     {% render 'meta-tags' %}
