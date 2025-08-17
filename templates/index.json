@@ -25,35 +25,37 @@
             "slide_image": "shopify://shop_images/banner-img.png"
           }
         },
-        "slide_tgdXce": {
+        "slide_tERyTX": {
           "type": "slide",
           "settings": {
             "tagline": "Made in USA • Cold-Pressed",
-            "heading": "Smarter Soccer Starts Here",
-            "des": "Your slide description goes here.",
-            "button_link": "/",
-            "button_text": "",
-            "button_link2": "",
-            "button_text2": ""
+            "heading": "Powered by nature, your beauty blooms.",
+            "des": "Unlock the power of nature with our premium Organic Castor Oil packed with Vitamin E, omega fatty acids, and nutrients to nourish from root to tip. Perfect for hair, lashes, brows, and skin.",
+            "button_link": "shopify://collections",
+            "button_text": "Shop Now",
+            "button_link2": "shopify://blogs/news",
+            "button_text2": "Discover Our Story",
+            "slide_image": "shopify://shop_images/banner-img.png"
           }
         },
-        "slide_UVgWcJ": {
+        "slide_RVy97j": {
           "type": "slide",
           "settings": {
             "tagline": "Made in USA • Cold-Pressed",
-            "heading": "Smarter Soccer Starts Here",
-            "des": "Your slide description goes here.",
-            "button_link": "/",
-            "button_text": "",
-            "button_link2": "",
-            "button_text2": ""
+            "heading": "Powered by nature, your beauty blooms.",
+            "des": "Unlock the power of nature with our premium Organic Castor Oil packed with Vitamin E, omega fatty acids, and nutrients to nourish from root to tip. Perfect for hair, lashes, brows, and skin.",
+            "button_link": "shopify://collections",
+            "button_text": "Shop Now",
+            "button_link2": "shopify://blogs/news",
+            "button_text2": "Discover Our Story",
+            "slide_image": "shopify://shop_images/banner-img.png"
           }
         }
       },
       "block_order": [
         "slide_N3atmd",
-        "slide_tgdXce",
-        "slide_UVgWcJ"
+        "slide_tERyTX",
+        "slide_RVy97j"
       ],
       "settings": {}
     },
