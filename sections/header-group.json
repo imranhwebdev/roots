@@ -14,6 +14,13 @@
     "header": {
       "type": "header",
       "blocks": {
+        "social_fTM8et": {
+          "type": "social",
+          "settings": {
+            "platform": "linkedin",
+            "url": ""
+          }
+        },
         "social_qpTdPK": {
           "type": "social",
           "settings": {
@@ -37,6 +44,7 @@
         }
       },
       "block_order": [
+        "social_fTM8et",
         "social_qpTdPK",
         "social_em4GMM",
         "social_eAT6iw"
@@ -44,9 +52,6 @@
       "settings": {
         "offer_text": "Sign up get 20% Off for all collection",
         "phone_number": "1 (100) 234-5678",
-        "instagram_url": "",
-        "twitter_url": "",
-        "facebook_url": "",
         "menu": "main-menu",
         "logo": "shopify://shop_images/site-logo.svg"
       }
