@@ -1,3 +1,8 @@
+{% stylesheet %}
+  .header-social-item svg {
+    max-width: 18px;
+  }
+{% endstylesheet %}
 <div class="topbar bg-[#FFD500] text-black text-sm py-2 px-6">
   <div class="container">
     <div class="topbar-inner flex justify-between items-center">
@@ -9,7 +14,7 @@
           {% if block.type == 'social' %}
             <a
               href="{{ block.settings.url }}"
-              class=" w-9 h-9 bg-[#FFE380] rounded-3xl flex items-center justify-center hover:bg-white transition-all duration-300"
+              class=" w-9 h-9 bg-[#FFE380] header-social-item rounded-3xl flex items-center justify-center hover:bg-white transition-all duration-300 p-1 text-xl"
               aria-label="{{ block.settings.platform }}"
             >
               {% case block.settings.platform %}
