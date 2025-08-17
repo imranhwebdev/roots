@@ -22,13 +22,13 @@
         toggle.addEventListener('click', () => {
           menu.classList.remove('hidden');
           setTimeout(() => {
-            panel.classList.remove('translate-x-full');
+            panel.classList.remove('-translate-x-full');
             panel.classList.add('translate-x-0');
           }, 10);
         });
 
         close.addEventListener('click', () => {
-          panel.classList.add('translate-x-full');
+          panel.classList.add('-translate-x-full');
           panel.classList.remove('translate-x-0');
           setTimeout(() => {
             menu.classList.add('hidden');
@@ -37,7 +37,7 @@
 
         menu.addEventListener('click', (e) => {
           if (e.target === menu) {
-            panel.classList.add('translate-x-full');
+            panel.classList.add('-translate-x-full');
             panel.classList.remove('translate-x-0');
             setTimeout(() => {
               menu.classList.add('hidden');

@@ -2,12 +2,16 @@
   <div class="container">
     <div class="topbar-inner flex justify-between items-center">
       <!-- Left: Social -->
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2">
         <span class="text-[#21201E] text-lg leading-normal">Follow Us</span>
 
         {% for block in section.blocks %}
           {% if block.type == 'social' %}
-            <a href="{{ block.settings.url }}" aria-label="{{ block.settings.platform }}">
+            <a
+              href="{{ block.settings.url }}"
+              class=" w-9 h-9 bg-[#FFE380] rounded-3xl flex items-center justify-center hover:bg-white transition-all duration-300"
+              aria-label="{{ block.settings.platform }}"
+            >
               {% case block.settings.platform %}
                 {% when 'instagram' %}
                   {% render 'icon-instagram' %}
@@ -72,7 +76,7 @@
       </div>
 
       <!-- Desktop Menu -->
-      <nav class="hidden md:flex gap-6">
+      <nav class="hidden md:flex gap-5 lg:gap-10">
         {% for link in section.settings.menu.links %}
           <a href="{{ link.url }}" class="text-lg text-white font-poppins hover:text-[#FFD500] transition">
             {{- link.title -}}
@@ -120,11 +124,30 @@
   <!-- Menu Content -->
   <div
     id="mobileMenuPanel"
-    class="bg-white w-64 h-full p-6 flex flex-col transform translate-x-0 transition-transform duration-300 ease-in-out"
+    class="bg-white w-64 h-full p-6 flex flex-col transform -translate-x-0 transition-transform duration-300 ease-in-out"
   >
-    <button id="menuClose" class="self-end mb-6 text-xl cursor-pointer">✕</button>
+    <div class="site-logo absolute left-4 top-5">
+      <a href="{{ routes.root_url }}">
+        {% if section.settings.logo != blank %}
+          <img
+            src="{{ section.settings.logo | image_url: width: 200 }}"
+            alt="{{ shop.name }}"
+            width=""
+            height=""
+            class="max-h-12 w-auto"
+          >
+        {% else %}
+          <span class="text-3xl font-bold font-serif tracking-wide">Roots</span>
+        {% endif %}
+      </a>
+    </div>
+    <button id="menuClose" class="self-end mb-6 text-xl cursor-pointer hover:scale-[1.05] transition-all duration-300">
+      ✕
+    </button>
     {% for link in section.settings.menu.links %}
-      <a href="{{ link.url }}" class="block py-2 text-lg border-b">{{ link.title }}</a>
+      <a href="{{ link.url }}" class="block py-4 text-lg border-b hover:text-primary transition-all duration-300">
+        {{- link.title -}}
+      </a>
     {% endfor %}
   </div>
 </div>
