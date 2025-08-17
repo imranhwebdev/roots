@@ -1,0 +1,47 @@
+<div class="out-rooms py-17.5 md:py-20 lg:py-25 xl:py-30 2xl:py-35">
+  <div class="container">
+    <div class="flex justify-center mb-8 md:mb-12 lg:mb-15">
+      <div class="section-title text-center w-full md:w-10/12 xl:w-8/12">
+        <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-green !leading-[1.25] font-bold font-armany-bold mb-4">
+          Our Roots, Your Ritual
+        </h2>
+        <p class=" lg:px-10 text-base md:text-lg lg:text-xl font-poppins !leading-[1.6] text-secondary mb-6">
+          At Roots, we celebrate nature’s healing power and timeless self-care. Our pure, organic castor oil nourishes,
+          restores, and transforms hair and skin. In a world of chemicals, we offer honest, clean, and effective care
+          for those who value purity and trust.
+        </p>
+        <a href="#" class="btn flex items-center gap-3 mx-auto max-w-max"
+          >Learn More About Us
+          <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="w-10/12 mx-auto">
+      <div class="relative w-full h-[400px]">
+        <video id="myVideo" class="w-full h-full rounded-xl lg:rounded-[10px] overflow-hidden" >
+          <source src="assets/video.mp4" class="rounded-xl lg:rounded-[10px] size-full object-cover" type="video/mp4">
+        </video>
+
+        <!-- Play button -->
+        <button
+          id="playBtn"
+          class="absolute inset-0 flex items-center justify-center text-white text-5xl"
+        >
+          ▶
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const video = document.getElementById('myVideo');
+  const playBtn = document.getElementById('playBtn');
+
+  playBtn.addEventListener('click', () => {
+    video.play();
+    playBtn.style.display = 'none'; // hide button after play
+  });
+</script>

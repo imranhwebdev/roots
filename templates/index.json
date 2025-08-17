@@ -16,10 +16,20 @@
     "why_choose": {
       "type": "why-choose",
       "settings": {}
-    }
+    },
+    "best_sell": {
+      "type": "best-sell",
+      "settings": {}
+    },
+    "our_roots": {
+      "type": "our-roots",
+      "settings": {}
+    },
   },
   "order": [
     "banner",
-    "why_choose"
+    "why_choose",
+    "best_sell",
+    "our_roots"
   ]
 }
