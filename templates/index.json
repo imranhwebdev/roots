@@ -15,28 +15,38 @@
         "slide_N3atmd": {
           "type": "slide",
           "settings": {
-            "heading": "Smarter Soccer Starts Here",
-            "subheading": "Premium soccer gear for players who demand the best. From pro-level cleats to authentic jerseys",
-            "button_label": "Shop Now",
-            "button_link": "/"
+            "tagline": "Made in USA • Cold-Pressed",
+            "heading": "Powered by nature, your beauty blooms.",
+            "des": "Unlock the power of nature with our premium Organic Castor Oil packed with Vitamin E, omega fatty acids, and nutrients to nourish from root to tip. Perfect for hair, lashes, brows, and skin.",
+            "button_link": "shopify://collections",
+            "button_text": "Shop Now",
+            "button_link2": "shopify://blogs/news",
+            "button_text2": "Discover Our Story",
+            "slide_image": "shopify://shop_images/banner-img.png"
           }
         },
         "slide_tgdXce": {
           "type": "slide",
           "settings": {
+            "tagline": "Made in USA • Cold-Pressed",
             "heading": "Smarter Soccer Starts Here",
-            "subheading": "Premium soccer gear for players who demand the best. From pro-level cleats to authentic jerseys",
-            "button_label": "Shop Now",
-            "button_link": "/"
+            "des": "Your slide description goes here.",
+            "button_link": "/",
+            "button_text": "",
+            "button_link2": "",
+            "button_text2": ""
           }
         },
         "slide_UVgWcJ": {
           "type": "slide",
           "settings": {
+            "tagline": "Made in USA • Cold-Pressed",
             "heading": "Smarter Soccer Starts Here",
-            "subheading": "Premium soccer gear for players who demand the best. From pro-level cleats to authentic jerseys",
-            "button_label": "Shop Now",
-            "button_link": "/"
+            "des": "Your slide description goes here.",
+            "button_link": "/",
+            "button_text": "",
+            "button_link2": "",
+            "button_text2": ""
           }
         }
       },
