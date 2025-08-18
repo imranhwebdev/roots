@@ -122,7 +122,15 @@
     },
     "best_sell": {
       "type": "best-sell",
-      "settings": {}
+      "settings": {
+        "product": "16-fl-oz-organic-castor-oil"
+      }
+    },
+    "signature_product": {
+      "type": "signature-product",
+      "settings": {
+        "product": "8-fl-oz-organic-castor-oil"
+      }
     },
     "our_root": {
       "type": "our-roots",
@@ -150,6 +158,7 @@
     "countdown",
     "why_choose",
     "best_sell",
+    "signature_product",
     "our_root",
     "simple_to_use",
     "reviews",
