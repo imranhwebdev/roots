@@ -47,11 +47,47 @@
     },
     "countdown": {
       "type": "countdown",
-      "settings": {}
+      "blocks": {
+        "countdown_item_37f33b": {
+          "type": "countdown_item",
+          "settings": {
+            "number": "100%",
+            "label": "Organic",
+            "icon_svg": ""
+          }
+        },
+        "countdown_item_BKXHXB": {
+          "type": "countdown_item",
+          "settings": {
+            "number": "100%",
+            "label": "Organic",
+            "icon_svg": ""
+          }
+        },
+        "countdown_item_RVLttp": {
+          "type": "countdown_item",
+          "settings": {
+            "number": "100%",
+            "label": "Organic",
+            "icon_svg": ""
+          }
+        }
+      },
+      "block_order": [
+        "countdown_item_37f33b",
+        "countdown_item_BKXHXB",
+        "countdown_item_RVLttp"
+      ],
+      "settings": {
+        "bg_color": "#082013"
+      }
     },
     "why_choose": {
       "type": "why-choose",
-      "settings": {}
+      "settings": {
+        "heading": "Why Choose Roots?",
+        "subheading": "Encourages natural volume, supporting thicker, healthier hair growth."
+      }
     },
     "best_sell": {
       "type": "best-sell",
@@ -76,7 +112,7 @@
     "join_roots": {
       "type": "join-roots",
       "settings": {}
-    },
+    }
   },
   "order": [
     "banner",
