@@ -1,1 +1,164 @@
-<h1>customer account</h1>
+{% layout none %}
+
+<section class="customer-account">
+  <!-- Header -->
+  <div class="bg-green-800 text-center text-white py-8">
+    <h1 class="text-3xl font-bold mb-2">My Account</h1>
+    <p>Manage your details, track orders, and enjoy a seamless shopping experience.</p>
+  </div>
+
+  <div class="flex max-w-6xl mx-auto mt-8 gap-6 px-6">
+    <!-- Sidebar Tabs -->
+    <aside class="w-1/4">
+      <ul class="space-y-2">
+        <li>
+          <button class="tab-btn w-full text-left px-4 py-3 rounded bg-green-700 text-white" data-tab="info">
+            Personal Information
+          </button>
+        </li>
+        <li>
+          <button class="tab-btn w-full text-left px-4 py-3 rounded bg-gray-100" data-tab="orders">My Orders</button>
+        </li>
+        <li>
+          <button class="tab-btn w-full text-left px-4 py-3 rounded bg-gray-100" data-tab="address">
+            Manage Address
+          </button>
+        </li>
+        <li>
+          <button class="tab-btn w-full text-left px-4 py-3 rounded bg-gray-100" data-tab="payment">
+            Payment Method
+          </button>
+        </li>
+        <li>
+          <button class="tab-btn w-full text-left px-4 py-3 rounded bg-gray-100" data-tab="password">
+            Password Manager
+          </button>
+        </li>
+        <li>
+          <a href="{{ routes.account_logout_url }}" class="block px-4 py-3 rounded bg-gray-100 text-left">Logout</a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Content Area -->
+    <div class="w-3/4 bg-white p-6 rounded-lg shadow-md">
+      <!-- Personal Information -->
+      <div class="tab-content" id="info">
+        <div class="flex items-center gap-6 mb-6">
+          <img src="https://i.pravatar.cc/100" class="w-20 h-20 rounded-full object-cover">
+        </div>
+        <form method="post" action="/account" class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium">First Name*</label>
+            <input type="text" value="{{ customer.first_name }}" class="w-full border rounded px-3 py-2">
+          </div>
+          <div>
+            <label class="block text-sm font-medium">Last Name*</label>
+            <input type="text" value="{{ customer.last_name }}" class="w-full border rounded px-3 py-2">
+          </div>
+          <div class="col-span-2">
+            <label class="block text-sm font-medium">Email*</label>
+            <input
+              type="email"
+              value="{{ customer.email }}"
+              disabled
+              class="w-full border rounded px-3 py-2 bg-gray-100"
+            >
+          </div>
+          <div class="col-span-2">
+            <label class="block text-sm font-medium">Phone*</label>
+            <input type="tel" value="{{ customer.phone }}" class="w-full border rounded px-3 py-2">
+          </div>
+          <div class="col-span-2">
+            <label class="block text-sm font-medium">Gender*</label>
+            <select class="w-full border rounded px-3 py-2">
+              <option
+                {% if customer.tags contains 'Male' %}
+                  selected
+                {% endif %}
+              >
+                Male
+              </option>
+              <option
+                {% if customer.tags contains 'Female' %}
+                  selected
+                {% endif %}
+              >
+                Female
+              </option>
+              <option
+                {% if customer.tags contains 'Other' %}
+                  selected
+                {% endif %}
+              >
+                Other
+              </option>
+            </select>
+          </div>
+          <div class="col-span-2">
+            <button type="submit" class="bg-yellow-400 text-black font-semibold px-6 py-2 rounded">
+              Update Changes
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Orders -->
+      <div class="tab-content hidden" id="orders">
+        <h2 class="text-xl font-semibold mb-4">My Orders</h2>
+        {% if customer.orders.size > 0 %}
+          <ul class="space-y-4">
+            {% for order in customer.orders %}
+              <li class="border p-4 rounded">
+                <p><strong>Order:</strong> {{ order.name }}</p>
+                <p><strong>Date:</strong> {{ order.created_at | date: '%b %d, %Y' }}</p>
+                <p><strong>Total:</strong> {{ order.total_price | money }}</p>
+                <p><strong>Status:</strong> {{ order.fulfillment_status | default: 'Pending' }}</p>
+                <a href="{{ order.status_url }}" class="text-green-700 underline">View Order</a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>You have no orders yet.</p>
+        {% endif %}
+      </div>
+
+      <!-- Addresses -->
+      <div class="tab-content hidden" id="address">
+        <h2 class="text-xl font-semibold mb-4">Manage Addresses</h2>
+        <a href="{{ routes.account_addresses_url }}" class="bg-green-600 text-white px-4 py-2 rounded"
+          >Manage Addresses</a
+        >
+      </div>
+
+      <!-- Payment -->
+      <div class="tab-content hidden" id="payment">
+        <h2 class="text-xl font-semibold mb-4">Payment Methods</h2>
+        <p>
+          Shopify doesn’t allow storing card details directly. You can manage saved payment methods via your checkout.
+        </p>
+      </div>
+
+      <!-- Password -->
+      <div class="tab-content hidden" id="password">
+        <h2 class="text-xl font-semibold mb-4">Change Password</h2>
+        <a href="{{ routes.account_login_url }}?reset_password=true" class="bg-green-600 text-white px-4 py-2 rounded"
+          >Reset Password</a
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tab Switching Script -->
+<script>
+  document.querySelectorAll('.tab-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach((b) => b.classList.remove('bg-green-700', 'text-white'));
+      btn.classList.add('bg-green-700', 'text-white');
+
+      document.querySelectorAll('.tab-content').forEach((c) => c.classList.add('hidden'));
+      document.getElementById(btn.dataset.tab).classList.remove('hidden');
+    });
+  });
+</script>
