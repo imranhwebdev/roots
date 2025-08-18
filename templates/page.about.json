@@ -28,13 +28,18 @@
       "settings": {
       },
     },
+      "join_roots": {
+      "type": "join-roots",
+      "settings": {}
+    }
   },
   "order": [
     "banner",
     "our_story",
     "our_mission",
     "our_vision",
-    "why_roots"
+    "why_roots",
+    "join_roots"
 
   ]
 }
