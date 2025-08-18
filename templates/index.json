@@ -122,11 +122,15 @@
     },
     "best_sell": {
       "type": "best-sell",
-      "settings": {}
+      "settings": {
+        "product": "16-fl-oz-organic-castor-oil"
+      }
     },
     "signature_product": {
       "type": "signature-product",
-      "settings": {}
+      "settings": {
+        "product": ""
+      }
     },
     "our_root": {
       "type": "our-roots",
