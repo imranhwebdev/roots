@@ -9,12 +9,17 @@
  */
 {
   "sections": {
+    "common_banner": {
+      "type": "common-banner",
+      "settings": {}
+    },
     "main": {
       "type": "blog",
       "settings": {}
     }
   },
   "order": [
+    "common_banner",
     "main"
   ]
 }
