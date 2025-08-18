@@ -272,6 +272,9 @@
   .order-2 {
     order: 2;
   }
+  .order-13 {
+    order: 13;
+  }
   .container {
     width: 100%;
     @media (width >= 390px) {
@@ -620,6 +623,10 @@
     border-style: var(--tw-border-style);
     border-width: 8px;
   }
+  .border-t {
+    border-top-style: var(--tw-border-style);
+    border-top-width: 1px;
+  }
   .border-b {
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 1px;
@@ -636,6 +643,9 @@
   }
   .border-\[rgba\(255\,_255\,_255\,_0\.40\)\] {
     border-color: rgba(255, 255, 255, 0.40);
+  }
+  .border-t-\[\#D1CDCE\] {
+    border-top-color: #D1CDCE;
   }
   .bg-\[\#1E6B43\] {
     background-color: #1E6B43;
@@ -732,6 +742,9 @@
   }
   .py-17\.5 {
     padding-block: calc(var(--spacing) * 17.5);
+  }
+  .pt-5 {
+    padding-top: calc(var(--spacing) * 5);
   }
   .pt-10 {
     padding-top: calc(var(--spacing) * 10);
@@ -1169,9 +1182,26 @@
       flex-wrap: nowrap;
     }
   }
+  .md\:gap-0 {
+    @media (width >= 768px) {
+      gap: calc(var(--spacing) * 0);
+    }
+  }
   .md\:gap-6 {
     @media (width >= 768px) {
       gap: calc(var(--spacing) * 6);
+    }
+  }
+  .md\:border-t {
+    @media (width >= 768px) {
+      border-top-style: var(--tw-border-style);
+      border-top-width: 1px;
+    }
+  }
+  .md\:border-t-0 {
+    @media (width >= 768px) {
+      border-top-style: var(--tw-border-style);
+      border-top-width: 0px;
     }
   }
   .md\:px-0 {
@@ -1207,6 +1237,11 @@
   .md\:py-22 {
     @media (width >= 768px) {
       padding-block: calc(var(--spacing) * 22);
+    }
+  }
+  .md\:pt-0 {
+    @media (width >= 768px) {
+      padding-top: calc(var(--spacing) * 0);
     }
   }
   .md\:pt-16 {
@@ -1368,6 +1403,26 @@
   .lg\:w-1\/2 {
     @media (width >= 992px) {
       width: calc(1/2 * 100%);
+    }
+  }
+  .lg\:w-5\/2 {
+    @media (width >= 992px) {
+      width: calc(5/2 * 100%);
+    }
+  }
+  .lg\:w-5\/12 {
+    @media (width >= 992px) {
+      width: calc(5/12 * 100%);
+    }
+  }
+  .lg\:w-7\/2 {
+    @media (width >= 992px) {
+      width: calc(7/2 * 100%);
+    }
+  }
+  .lg\:w-7\/12 {
+    @media (width >= 992px) {
+      width: calc(7/12 * 100%);
     }
   }
   .lg\:w-11\/12 {
