@@ -11,7 +11,10 @@
   "sections": {
     "common_banner": {
       "type": "common-banner",
-      "settings": {}
+      "settings": {
+        "default_title": "From the Roots Journal",
+        "default_description": "Discover beauty tips, self-care rituals, and wellness wisdom from nature and organic castor oil."
+      }
     },
     "main": {
       "type": "blog",
