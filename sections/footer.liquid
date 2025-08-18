@@ -1,28 +1,66 @@
-<footer>
-  <div class="container">
-    
-  <div class="footer__copyright">
-    &copy;
-    {{ 'now' | date: '%Y' }}
-    {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}
+
+  <div class="footer bg-[#F0ECDC] pt-12.5 md:pt-16 lg:pt-20 xl:pt-25 pb-6 md:pb-7 lg:pb-8 relative z-1">
+    <div class="container">
+       <div class="flex flex-col md:flex-row justify-between flex-wrap gap-4 md:flex-nowrap mb-8 md:mb-10 lg:mb-14 xl:mb-16 2xl:mb-20">
+        <div class="w-full lg:w-1/2 xl:w-3/12">
+            <div class="">
+              <img src="/assets/footer-icon.png" class="w-21 md:w-30 2xl:w-60.5 h-8.5 md:15  2xl:h-21 mb-5" width="" height="" alt="">
+              <p class="text-sm md:text-base lg:text-lg !leading-[1.6] text-[#514849] font-poppins">Pure, premium beauty care inspired by nature. USDA Organic, cold-pressed, made in the USA for healthy hair, skin, lashes, and brows.</p>
+            </div>
+        </div>
+        <div class="w-full lg:w-1/2 xl:w-6/12">
+           <div class="flex justify-between">
+            <div class="">
+              <p class="text-2xl font-medium !leading-[1.6] text-[#0D2E1D] mb-2">Pages</p>
+              <ul>
+                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">Shop</a></li>
+                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">How to Use</a></li>
+                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">Blog</a></li>
+                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">FAQs</a></li>
+                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">Contact</a></li>
+              </ul>
+            </div>
+            <div class="">
+              <p class="text-2xl font-medium !leading-[1.6] text-[#0D2E1D] mb-2">Policies</p>
+              <ul>
+                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">Shipping Policy</a></li>
+                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">Privacy Policy</a></li>
+                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">Terms & Conditions</a></li>
+                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">Refund Policy</a></li>
+              </ul>
+            </div>
+            <div class="">
+              <p class="text-2xl font-medium !leading-[1.6] text-[#0D2E1D] mb-2">Stay Connected</p>
+              <ul>
+                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">Instagram</a></li>
+                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">Facebook</a></li>
+                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">Twitter</a></li>
+                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">TikTok</a></li>
+              </ul>
+            </div>
+           </div>
+        </div>
+       </div>
+       <div class="flex items-center justify-between56">
+         <p class="text-[#797375)] md:text-[#514849] text-xl !leading-[1.2] md:!leading-normal">© 2025 Roots Organic Castor Oil.</p>
+         <div class="flex items-center gap-3 lg:gap-2.5">
+           <div class="w-11.5 h-8 border-[.8px] border-[#D9D9D9] rounded-[5px]"> <img src="/assets/ApplePay.png" class="size-full rounded-[5px] " width="" height="" alt=""></div>
+         </div>
+       </div>
+    </div>
   </div>
 
-  <div class="footer__links">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
 
-  <div class="footer__payment">
-    {% if section.settings.show_payment_icons %}
-      {% for type in shop.enabled_payment_types %}
-        {{ type | payment_type_svg_tag }}
-      {% endfor %}
-    {% endif %}
-  </div>
-  </div>
-</footer>
 
+
+
+
+
+
+
+
+
++
 {% stylesheet %}
   footer {
     display: flex;
