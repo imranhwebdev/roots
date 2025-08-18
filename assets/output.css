@@ -418,6 +418,9 @@
   .h-12 {
     height: calc(var(--spacing) * 12);
   }
+  .h-16 {
+    height: calc(var(--spacing) * 16);
+  }
   .h-21 {
     height: calc(var(--spacing) * 21);
   }
@@ -438,6 +441,9 @@
   }
   .max-h-12 {
     max-height: calc(var(--spacing) * 12);
+  }
+  .w-1 {
+    width: calc(var(--spacing) * 1);
   }
   .w-9 {
     width: calc(var(--spacing) * 9);
@@ -659,6 +665,9 @@
   .bg-\[\#F0ECDC\] {
     background-color: #F0ECDC;
   }
+  .bg-\[\#FFC801\] {
+    background-color: #FFC801;
+  }
   .bg-\[\#FFD500\] {
     background-color: #FFD500;
   }
@@ -737,11 +746,20 @@
   .py-10 {
     padding-block: calc(var(--spacing) * 10);
   }
+  .py-12 {
+    padding-block: calc(var(--spacing) * 12);
+  }
+  .py-12\.5 {
+    padding-block: calc(var(--spacing) * 12.5);
+  }
   .py-17 {
     padding-block: calc(var(--spacing) * 17);
   }
   .py-17\.5 {
     padding-block: calc(var(--spacing) * 17.5);
+  }
+  .ps-4 {
+    padding-inline-start: calc(var(--spacing) * 4);
   }
   .pt-5 {
     padding-top: calc(var(--spacing) * 5);
@@ -881,6 +899,9 @@
   }
   .text-\[\#CAA000\] {
     color: #CAA000;
+  }
+  .text-\[\#D1CDCE\] {
+    color: #D1CDCE;
   }
   .text-\[\#EEEFEE\] {
     color: #EEEFEE;
@@ -1617,6 +1638,11 @@
   .lg\:text-\[26px\] {
     @media (width >= 992px) {
       font-size: 26px;
+    }
+  }
+  .lg\:text-\[28px\] {
+    @media (width >= 992px) {
+      font-size: 28px;
     }
   }
   .lg\:shadow-\[-10px_-10px_\#FFC801\] {
