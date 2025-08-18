@@ -134,7 +134,14 @@
     },
     "our_root": {
       "type": "our-roots",
-      "settings": {}
+      "settings": {
+        "heading": "Our Roots, Your Ritual",
+        "description": "At Roots, we celebrate nature’s healing power and timeless self-care...",
+        "button_text": "Learn More About Us",
+        "button_link": "#",
+        "poster_image": "shopify://shop_images/poster.png",
+        "video_url": ""
+      }
     },
     "simple_to_use": {
       "type": "simple-to-use",
