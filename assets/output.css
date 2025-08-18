@@ -1668,6 +1668,11 @@
       padding-block: calc(var(--spacing) * 15);
     }
   }
+  .lg\:py-16 {
+    @media (width >= 992px) {
+      padding-block: calc(var(--spacing) * 16);
+    }
+  }
   .lg\:py-20 {
     @media (width >= 992px) {
       padding-block: calc(var(--spacing) * 20);
@@ -1955,14 +1960,34 @@
       padding-top: calc(var(--spacing) * 12.5);
     }
   }
+  .xl\:pt-20 {
+    @media (width >= 1240px) {
+      padding-top: calc(var(--spacing) * 20);
+    }
+  }
   .xl\:pt-25 {
     @media (width >= 1240px) {
       padding-top: calc(var(--spacing) * 25);
     }
   }
+  .xl\:pt-35 {
+    @media (width >= 1240px) {
+      padding-top: calc(var(--spacing) * 35);
+    }
+  }
+  .xl\:pb-2 {
+    @media (width >= 1240px) {
+      padding-bottom: calc(var(--spacing) * 2);
+    }
+  }
   .xl\:pb-16 {
     @media (width >= 1240px) {
       padding-bottom: calc(var(--spacing) * 16);
+    }
+  }
+  .xl\:pb-25 {
+    @media (width >= 1240px) {
+      padding-bottom: calc(var(--spacing) * 25);
     }
   }
   .xl\:text-2xl {

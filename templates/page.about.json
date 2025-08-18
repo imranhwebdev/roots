@@ -23,12 +23,18 @@
       "settings": {
       },
     },
+    "why_roots": {
+      "type": "about-roots",
+      "settings": {
+      },
+    },
   },
   "order": [
     "banner",
     "our_story",
     "our_mission",
-    "our_vision"
+    "our_vision",
+    "why_roots"
 
   ]
 }
