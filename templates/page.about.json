@@ -1,12 +1,4 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
+
 {
   "sections": {
     "banner": {
@@ -15,9 +7,28 @@
         "default_title": "ABOUT US",
         "default_description": "Roots creates pure, organic castor oil, nurturing natural beauty with clean, effective care for hair, skin, and wellness."
       }
-    }
+    },
+    "our_story": {
+      "type": "about-our-story",
+      "settings": {
+      },
+    },
+    "our_mission": {
+      "type": "our-mission",
+      "settings": {
+      },
+    },
+    "our_vision": {
+      "type": "our-vision",
+      "settings": {
+      },
+    },
   },
   "order": [
-    "banner"
+    "banner",
+    "our_story",
+    "our_mission",
+    "our_vision"
+
   ]
 }
