@@ -106,6 +106,10 @@
       "type": "best-sell",
       "settings": {}
     },
+    "signature_product": {
+      "type": "signature-product",
+      "settings": {}
+    },
     "our_root": {
       "type": "our-roots",
       "settings": {}
@@ -132,6 +136,7 @@
     "countdown",
     "why_choose",
     "best_sell",
+    "signature_product",
     "our_root",
     "simple_to_use",
     "reviews",

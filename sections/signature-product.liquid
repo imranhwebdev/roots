@@ -1,6 +1,6 @@
 {% schema %}
 {
-  "name": "Best Seller Product",
+  "name": "Signature Product",
   "settings": [
     {
       "type": "product",
@@ -10,7 +10,7 @@
   ],
   "presets": [
     {
-      "name": "Best Seller Product"
+      "name": "Signature Product"
     }
   ]
 }
@@ -18,18 +18,11 @@
 
 {% if section.settings.product != blank %}
   {% assign product = all_products[section.settings.product] %}
-  <section class="best-seller py-12" style="background:#d5ede0;">
+  <section class="signature py-12" style="background:#f5f2da;">
     <div class="container mx-auto grid md:grid-cols-2 items-center gap-8">
-      <!-- Product Image -->
-      <div class="relative">
-        <div class="bg-[#35734c] p-6 rounded-xl shadow-lg">
-          <img src="{{ product.featured_image | img_url: '600x600' }}" alt="{{ product.title }}" class="mx-auto">
-        </div>
-      </div>
-
       <!-- Product Info -->
       <div>
-        <h2 class="text-2xl font-bold mb-4">Our Best Seller - {{ product.title }}</h2>
+        <h2 class="text-2xl font-bold mb-4">Our Signature - {{ product.title }}</h2>
         <p class="mb-4">{{ product.description | strip_html | truncatewords: 40 }}</p>
 
         <ul class="mb-6 space-y-2 text-green-800 font-medium">
@@ -47,6 +40,13 @@
             Shop Now →
           </a>
           <span class="font-bold text-lg">${{ product.price | money_without_currency }}</span>
+        </div>
+      </div>
+
+      <!-- Product Image -->
+      <div class="relative">
+        <div class="bg-[#35734c] p-6 rounded-xl shadow-lg">
+          <img src="{{ product.featured_image | img_url: '600x600' }}" alt="{{ product.title }}" class="mx-auto">
         </div>
       </div>
     </div>
