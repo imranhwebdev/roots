@@ -69,6 +69,10 @@
       "type": "latest-blog",
       "settings": {}
     },
+    "join_roots": {
+      "type": "join-roots",
+      "settings": {}
+    },
   },
   "order": [
     "banner",
@@ -77,6 +81,7 @@
     "our_root",
     "simple_to_use",
     "reviews",
-    "latest_blog"
+    "latest_blog",
+    "join_roots"
   ]
 }
