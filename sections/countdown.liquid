@@ -1,9 +1,71 @@
-<div class="countdown-area">
+{% if section.blocks.sise > 0 %}
+  <div class="countdown-area py-12.5" style="background-color: {{ section.settings.bg_color }}">
     <div class="container">
-        <div class="countdown-inner">
-            <div class="single-item">
-                
-            </div>
-        </div>
+      <div class="countdown-inner flex items-center justify-between gap-5 w-full lg:w-7/12 mx-auto">
+        {% for block in section.blocks %}
+          <div class="single-item relative ps-4">
+            <span class="absolute top-1/2 left-0 -translate-y-1/2 h-16 w-1 bg-[#FFC801]"></span>
+            <span class="flex items-center gap-1 text-base lg:text-[28px] font-poppins leading-tight font-semibold text-white mb-2">
+              {{ block.settings.number }}
+              {% if block.settings.icon_svg != blank %}
+                {{ block.settings.icon_svg }}
+              {% endif %}
+            </span>
+            <p class="text-lg font-poppins leading-normal text-[#D1CDCE]">
+              {{ block.settings.label }}
+            </p>
+          </div>
+        {% endfor %}
+      </div>
     </div>
-</div>
+  </div>
+{% endif %}
+{% schema %}
+{
+  "name": "Countdown Area",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Countdown Section Settings"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#082013"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "countdown_item",
+      "name": "Single Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number / Text",
+          "default": "100%"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Organic"
+        },
+        {
+          "type": "textarea",
+          "id": "icon_svg",
+          "label": "Optional SVG Icon",
+          "info": "Paste your SVG code if needed (example: star icon). Leave empty if not needed."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Countdown Area",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

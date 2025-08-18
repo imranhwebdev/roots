@@ -45,6 +45,10 @@
       ],
       "settings": {}
     },
+    "countdown": {
+      "type": "countdown",
+      "settings": {}
+    },
     "why_choose": {
       "type": "why-choose",
       "settings": {}
@@ -61,12 +65,28 @@
       "type": "simple-to-use",
       "settings": {}
     },
+    "reviews": {
+      "type": "reviews",
+      "settings": {}
+    },
+    "latest_blog": {
+      "type": "latest-blog",
+      "settings": {}
+    },
+    "join_roots": {
+      "type": "join-roots",
+      "settings": {}
+    },
   },
   "order": [
     "banner",
+    "countdown",
     "why_choose",
     "best_sell",
     "our_root",
-    "simple_to_use"
+    "simple_to_use",
+    "reviews",
+    "latest_blog",
+    "join_roots"
   ]
 }
