@@ -61,12 +61,22 @@
       "type": "simple-to-use",
       "settings": {}
     },
+    "reviews": {
+      "type": "reviews",
+      "settings": {}
+    },
+    "latest_blog": {
+      "type": "latest-blog",
+      "settings": {}
+    },
   },
   "order": [
     "banner",
     "why_choose",
     "best_sell",
     "our_root",
-    "simple_to_use"
+    "simple_to_use",
+    "reviews",
+    "latest_blog"
   ]
 }
