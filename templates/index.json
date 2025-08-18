@@ -11,6 +11,38 @@
   "sections": {
     "banner": {
       "type": "home-banner",
+      "blocks": {
+        "slide_N3atmd": {
+          "type": "slide",
+          "settings": {
+            "tagline": "Made in USA • Cold-Pressed",
+            "heading": "Powered by nature, your beauty blooms.",
+            "des": "Unlock the power of nature with our premium Organic Castor Oil packed with Vitamin E, omega fatty acids, and nutrients to nourish from root to tip. Perfect for hair, lashes, brows, and skin.",
+            "button_link": "shopify://collections",
+            "button_text": "Shop Now",
+            "button_link2": "shopify://blogs/news",
+            "button_text2": "Discover Our Story",
+            "slide_image": "shopify://shop_images/banner-img.png"
+          }
+        },
+        "slide_tERyTX": {
+          "type": "slide",
+          "settings": {
+            "tagline": "Made in USA • Cold-Pressed",
+            "heading": "Powered by nature, your beauty blooms.",
+            "des": "Unlock the power of nature with our premium Organic Castor Oil packed with Vitamin E, omega fatty acids, and nutrients to nourish from root to tip. Perfect for hair, lashes, brows, and skin.",
+            "button_link": "shopify://collections",
+            "button_text": "Shop Now",
+            "button_link2": "shopify://blogs/news",
+            "button_text2": "Discover Our Story",
+            "slide_image": "shopify://shop_images/banner-img.png"
+          }
+        }
+      },
+      "block_order": [
+        "slide_N3atmd",
+        "slide_tERyTX"
+      ],
       "settings": {}
     },
     "why_choose": {
@@ -21,8 +53,12 @@
       "type": "best-sell",
       "settings": {}
     },
-    "our_roots": {
+    "our_root": {
       "type": "our-roots",
+      "settings": {}
+    },
+    "simple_to_use": {
+      "type": "simple-to-use",
       "settings": {}
     },
   },
@@ -30,6 +66,7 @@
     "banner",
     "why_choose",
     "best_sell",
-    "our_roots"
+    "our_root",
+    "simple_to_use"
   ]
 }

@@ -5,13 +5,51 @@
     {% render 'css-variables' %}
 
     {% # Load and preload the critical CSS %}
-    {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}
     {{ 'output.css' | asset_url | stylesheet_tag }}
+
+    {{ 'swiper-bundle-min.css' | asset_url | stylesheet_tag }}
+
+    <script src="{{ 'swiper-bundle-min.js' | asset_url }}" defer></script>
+    <script src="{{ 'jquery.js' | asset_url }}" defer></script>
 
     {% # Social, title, etc. %}
     {% render 'meta-tags' %}
 
     {{ content_for_header }}
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const toggle = document.getElementById('menuToggle');
+        const close = document.getElementById('menuClose');
+        const menu = document.getElementById('mobileMenu');
+        const panel = document.getElementById('mobileMenuPanel');
+
+        toggle.addEventListener('click', () => {
+          menu.classList.remove('hidden');
+          setTimeout(() => {
+            panel.classList.remove('-translate-x-full');
+            panel.classList.add('translate-x-0');
+          }, 10);
+        });
+
+        close.addEventListener('click', () => {
+          panel.classList.add('-translate-x-full');
+          panel.classList.remove('translate-x-0');
+          setTimeout(() => {
+            menu.classList.add('hidden');
+          }, 300); // match duration-300
+        });
+
+        menu.addEventListener('click', (e) => {
+          if (e.target === menu) {
+            panel.classList.add('-translate-x-full');
+            panel.classList.remove('translate-x-0');
+            setTimeout(() => {
+              menu.classList.add('hidden');
+            }, 300);
+          }
+        });
+      });
+    </script>
   </head>
 
   <body>

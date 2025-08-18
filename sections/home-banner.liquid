@@ -1,5 +1,253 @@
-<div class="homebanner">
-  <div class="container">
-    <h1>Home Banner</h1>
+{% stylesheet %}
+  /* Navigation arrow styles */
+  .swiper-button-nextt,
+  .swiper-button-prevv {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    right: 42px;
+    z-index: 99;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    transform: translateY(-50%);
+    margin-top: -35px;
+  }
+  .swiper-button-nextt:hover,
+  .swiper-button-prevv:hover {
+    background-color: #ffc801;
+  }
+  .swiper-button-prevv {
+    transform: translateY(-50%);
+    margin-top: 35px;
+  }
+  .swiper-button-nextt svg,
+  .swiper-button-prevv svg {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+  }
+  .swiper-pagination-bullet {
+    display: none;
+  }
+  @media screen and (max-width: 1280px) {
+    .banner .swiper-horizontal > .swiper-pagination-bullets,
+    .banner .swiper-pagination-bullets.swiper-pagination-horizontal,
+    .banner .swiper-pagination-custom,
+    .banner .swiper-pagination-fraction {
+      bottom: var(--swiper-pagination-bottom, 45px) !important;
+    }
+    .swiper-pagination-bullet {
+      border-radius: 30px !important;
+      background: #669f7f !important;
+      opacity: 1 !important;
+      display: block;
+    }
+    .swiper-pagination-bullet-active {
+      background: #fff !important;
+      opacity: 1 !important;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .banner .swiper-horizontal > .swiper-pagination-bullets,
+    .banner .swiper-pagination-bullets.swiper-pagination-horizontal,
+    .banner .swiper-pagination-custom,
+    .banner .swiper-pagination-fraction {
+      bottom: var(--swiper-pagination-bottom, 30px) !important;
+      left: 50% !important;
+      transform: translateX(-50%);
+    }
+    span.swiper-pagination-bullet {
+      width: 25px !important;
+    }
+    .swiper-button-nextt,
+    .swiper-button-prevv {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 390px) {
+    .banner .swiper-horizontal > .swiper-pagination-bullets,
+    .banner .swiper-pagination-bullets.swiper-pagination-horizontal,
+    .banner .swiper-pagination-custom,
+    .banner .swiper-pagination-fraction {
+      bottom: var(--swiper-pagination-bottom, 45px);
+      width: 55% !important;
+    }
+
+    span.swiper-pagination-bullet {
+      width: 50px !important;
+    }
+  }
+{% endstylesheet %}
+
+<div class="banner overflow-hidden bg-[#1E6C44]">
+  <div class="swiper banner-slider">
+    <div class="swiper-wrapper">
+      {% for block in section.blocks %}
+        <div class="swiper-slide">
+          <div class="pt-10 lg:pt-20 pb-25 relative z-1">
+            <div class="container mx-auto flex flex-col md:flex-row flex-wrap justify-between items-center overflow-hidden">
+              <div class="w-full md:w-6/12 mt-5 md:mt-6 lg:mt-7 xl:mt-10 mb-4 md:mb-0 text-center lg:text-start">
+                {% if block.settings.tagline != blank %}
+                  <span class="text-xs md:text-base uppercase font-poppins leading-tight tracking-[1.92px] text-[#EEEFEE] bg-[rgba(255,255,255,0.10)] border border-solid border-[rgba(255,255,255,0.12)] rounded-[20px] py-2.5 px-4 mb-5 inline-block">
+                    {{ block.settings.tagline }}
+                  </span>
+                {% endif %}
+
+                {% if block.settings.heading != blank %}
+                  <h1 class="font-armany-bold text-[28px] md:text-[28px] lg:text-4xl xl:text-6xl !text-white font-bold leading-tight mb-2 md:mb-3 lg:mb-3.5 uppercase max-w-[752px]">
+                    {{ block.settings.heading }}
+                  </h1>
+                {% endif %}
+
+                {% if block.settings.des != blank %}
+                  <p class="text-[#B7D6C6] text-sm md:text-lg lg:text-xl !leading-[1.6] font-poppins font-normal max-w-[717px]">
+                    {{ block.settings.des }}
+                  </p>
+                {% endif %}
+
+                <div class="relative flex items-center justify-center lg:justify-start gap-4 lg:gap-5 z-1 max-w-full lg:max-w-max group mt-7.5">
+                  {% if block.settings.button_link != blank and block.settings.button_text != blank %}
+                    <a href="{{ block.settings.button_link }}" class="btn">
+                      {{ block.settings.button_text }}
+                      <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                          <path d="M13.332 7.5L18.832 13M18.832 13L13.332 18.5M18.832 13L4.16536 13" stroke="#1F1904" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </span>
+                    </a>
+                  {% endif %}
+
+                  {% if block.settings.button_link2 != blank and block.settings.button_text2 != blank %}
+                    <a href="{{ block.settings.button_link2 }}" class="inline-btn">
+                      {{ block.settings.button_text2 }}
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+
+              <div class="w-full md:w-6/12 mt-10 lg:mt-0">
+                {% if block.settings.slide_image != blank %}
+                  <div class="w-full h-full xl:h-159.5">
+                    <img
+                      src="{{ block.settings.slide_image | image_url }}"
+                      class="size-full"
+                      width=""
+                      height=""
+                      alt="{{ block.settings.heading }}"
+                    >
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="swiper-pagination"></div>
+    <!-- Navigation Arrows -->
+    <div class="swiper-button-nextt">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M13.332 7L18.832 12.5M18.832 12.5L13.332 18M18.832 12.5L4.16536 12.5" stroke="#171516" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="swiper-button-prevv">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M10.668 7L5.16797 12.5M5.16797 12.5L10.668 18M5.16797 12.5L19.8346 12.5" stroke="#171516" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const swiper = new Swiper('.banner-slider', {
+      loop: true,
+      autoplay: false,
+      speed: 1200,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-nextt',
+        prevEl: '.swiper-button-prevv',
+      },
+      scrollbar: false,
+      grabCursor: true,
+      effect: 'slide',
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Dynamic Banner Slider",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tagline",
+          "label": "Tagline",
+          "default": "Made in USA • Cold-Pressed"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Your Slide Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "des",
+          "label": "Description",
+          "default": "Your slide description goes here."
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text"
+        },
+        {
+          "type": "url",
+          "id": "button_link2",
+          "label": "Second Button Link"
+        },
+        {
+          "type": "text",
+          "id": "button_text2",
+          "label": "Second Button Text"
+        },
+        {
+          "type": "image_picker",
+          "id": "slide_image",
+          "label": "Slide Image"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Banner Section",
+      "category": "Banner"
+    }
+  ]
+}
+{% endschema %}
