@@ -1,16 +1,7 @@
 <section class="common-banner">
   <div class="container">
-    {% if section.settings.banner_image != blank %}
-      <img
-        src="{{ section.settings.banner_image | image_url: '1600x' }}"
-        width=""
-        height=""
-        alt="Banner"
-        class="w-full h-64 object-cover"
-      >
-    {% endif %}
-
-    <div class="absolute inset-0 flex flex-col items-center justify-center text-center bg-black bg-opacity-40 text-white p-6">
+    
+    <div class="banner-wrapper">
       <h1 class="text-3xl font-bold">
         {% if page.metafields.custom.banner_title != blank %}
           {{ page.metafields.custom.banner_title }}
