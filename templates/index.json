@@ -140,11 +140,28 @@
         "button_text": "Learn More About Us",
         "button_link": "/pages/about-us",
         "youtube_url": "https://youtu.be/AKeUssuu3Is?si=5z4VBi1U2QVh4R9J",
-        "poster_image": "shopify://shop_images/poster.png"
+        "poster_image": "shopify://shop_images/poster.png",
+        "poster_alt": "Video preview image",
+        "video_height": "medium"
       }
     },
     "simple_to_use": {
       "type": "simple-to-use",
+      "settings": {}
+    },
+    "175552553738dc4067": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_featured_carousel_KzqzyX": {
+          "type": "shopify://apps/judge-me-reviews/blocks/featured_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "maxwidth": 1080
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_featured_carousel_KzqzyX"
+      ],
       "settings": {}
     },
     "reviews": {
@@ -168,6 +185,7 @@
     "signature_product",
     "our_root",
     "simple_to_use",
+    "175552553738dc4067",
     "reviews",
     "latest_blog",
     "join_roots"
