@@ -407,6 +407,10 @@
     width: calc(var(--spacing) * 10);
     height: calc(var(--spacing) * 10);
   }
+  .size-12 {
+    width: calc(var(--spacing) * 12);
+    height: calc(var(--spacing) * 12);
+  }
   .size-13 {
     width: calc(var(--spacing) * 13);
     height: calc(var(--spacing) * 13);
@@ -816,8 +820,20 @@
   .pt-12\.5 {
     padding-top: calc(var(--spacing) * 12.5);
   }
+  .pr-\[20\%\] {
+    padding-right: 20%;
+  }
+  .pr-\[25\%\] {
+    padding-right: 25%;
+  }
   .pr-\[30\%\] {
     padding-right: 30%;
+  }
+  .pr-\[30\] {
+    padding-right: 30;
+  }
+  .pr-\[40\%\] {
+    padding-right: 40%;
   }
   .pr-\[50\%\] {
     padding-right: 50%;
@@ -1214,6 +1230,12 @@
       display: none;
     }
   }
+  .md\:size-14 {
+    @media (width >= 768px) {
+      width: calc(var(--spacing) * 14);
+      height: calc(var(--spacing) * 14);
+    }
+  }
   .md\:h-20 {
     @media (width >= 768px) {
       height: calc(var(--spacing) * 20);
@@ -1388,6 +1410,11 @@
   .md\:pt-16 {
     @media (width >= 768px) {
       padding-top: calc(var(--spacing) * 16);
+    }
+  }
+  .md\:pr-\[20\%\] {
+    @media (width >= 768px) {
+      padding-right: 20%;
     }
   }
   .md\:pb-7 {
@@ -1636,6 +1663,11 @@
   .lg\:grid-cols-3 {
     @media (width >= 992px) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .lg\:flex-row {
+    @media (width >= 992px) {
+      flex-direction: row;
     }
   }
   .lg\:justify-start {
@@ -2142,6 +2174,11 @@
       padding-top: calc(var(--spacing) * 25);
     }
   }
+  .xl\:pr-\[40\%\] {
+    @media (width >= 1240px) {
+      padding-right: 40%;
+    }
+  }
   .xl\:pb-16 {
     @media (width >= 1240px) {
       padding-bottom: calc(var(--spacing) * 16);
@@ -2340,6 +2377,11 @@
   .\33 xl\:px-\[5\%\] {
     @media (width >= 1520px) {
       padding-inline: 5%;
+    }
+  }
+  .\33 xl\:pr-\[50\%\] {
+    @media (width >= 1520px) {
+      padding-right: 50%;
     }
   }
 }
