@@ -24,53 +24,138 @@
 
     <!-- Video -->
     <div class="w-10/12 mx-auto">
-      <div class="relative w-full h-[500px]">
+      <div class="relative w-full h-[300px] md:h-[400px] lg:h-[500px] xl:h-[600px]">
+        <!-- Poster Image -->
         {% if section.settings.poster_image != blank %}
           <img
             src="{{ section.settings.poster_image | image_url: width: 1600 }}"
-            width=""
-            height=""
-            alt="Video poster"
+            width="1600"
+            height="600"
+            alt="{{ section.settings.poster_alt | default: 'Video poster' }}"
             class="w-full h-full object-cover rounded-xl"
+            loading="lazy"
           >
+        {% else %}
+          <!-- Default background if no poster image -->
+          <div class="w-full h-full bg-gray-200 rounded-xl flex items-center justify-center">
+            <p class="text-gray-500">Video poster image lagbe</p>
+          </div>
         {% endif %}
 
-        <button
-          id="playBtn-{{ section.id }}"
-          class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded-full shadow-lg"
-        >
-          ▶
-        </button>
+        <!-- Play Button -->
+        {% if section.settings.youtube_url != blank and section.settings.youtube_url != '/' %}
+          <button
+            id="playBtn-{{ section.id }}"
+            class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 p-4 md:p-6 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+            aria-label="Play video"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="text-green"
+            >
+              <path d="M8 5V19L19 12L8 5Z" fill="currentColor"/>
+            </svg>
+          </button>
 
-        <div id="videoWrapper-{{ section.id }}" class="absolute inset-0 hidden">
-          <iframe
-            id="youtube-{{ section.id }}"
-            class="w-full h-full rounded-xl"
-            src=""
-            title="YouTube video"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </div>
+          <!-- Video Wrapper -->
+          <div id="videoWrapper-{{ section.id }}" class="absolute inset-0 hidden">
+            <iframe
+              id="youtube-{{ section.id }}"
+              class="w-full h-full rounded-xl"
+              src=""
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+        {% endif %}
       </div>
     </div>
   </div>
 </div>
+
+<style>
+  /* Custom CSS for better styling */
+  .video-banner-section {
+    position: relative;
+  }
+
+  .video-banner-section .btn {
+    @apply bg-green text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700 transition-colors duration-300;
+  }
+
+  .video-banner-section .play-btn-hover:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+</style>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const playBtn = document.getElementById('playBtn-{{ section.id }}');
     const wrapper = document.getElementById('videoWrapper-{{ section.id }}');
     const iframe = document.getElementById('youtube-{{ section.id }}');
+    const posterImg = playBtn?.parentElement.querySelector('img');
 
-    if (playBtn) {
-      playBtn.addEventListener('click', () => {
+    if (playBtn && wrapper && iframe) {
+      playBtn.addEventListener('click', function () {
         const url = '{{ section.settings.youtube_url }}';
-        const videoId = url.split('v=')[1]?.split('&')[0];
-        iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
-        wrapper.classList.remove('hidden');
-        playBtn.style.display = 'none';
+
+        // YouTube video ID extract korar function
+        function getYouTubeVideoId(url) {
+          if (!url) return null;
+
+          // Different YouTube URL patterns handle kora
+          const patterns = [
+            /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/v\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/,
+            /youtube\.com\/watch\?.*v=([a-zA-Z0-9_-]{11})/,
+          ];
+
+          for (let pattern of patterns) {
+            const match = url.match(pattern);
+            if (match && match[1]) {
+              return match[1];
+            }
+          }
+
+          return null;
+        }
+
+        const videoId = getYouTubeVideoId(url);
+
+        if (videoId) {
+          // Video load kora
+          const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+          iframe.src = embedUrl;
+
+          // UI update kora
+          wrapper.classList.remove('hidden');
+          playBtn.style.display = 'none';
+
+          // Optional: Poster image hide kora
+          if (posterImg) {
+            posterImg.style.display = 'none';
+          }
+        } else {
+          console.error('Invalid YouTube URL: ', url);
+          alert('Doya kore thik YouTube URL din. Example: https://www.youtube.com/watch?v=VIDEO_ID');
+        }
+      });
+
+      // ESC key diye video close korar option
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !wrapper.classList.contains('hidden')) {
+          iframe.src = '';
+          wrapper.classList.add('hidden');
+          playBtn.style.display = 'block';
+          if (posterImg) {
+            posterImg.style.display = 'block';
+          }
+        }
       });
     }
   });
@@ -79,47 +164,96 @@
 {% schema %}
 {
   "name": "Video Banner",
+  "tag": "section",
+  "class": "video-banner-section",
   "settings": [
+    {
+      "type": "header",
+      "content": "Section Content"
+    },
     {
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Our Roots, Your Ritual"
+      "default": "Our Roots, Your Ritual",
+      "info": "Main heading for the video section"
     },
     {
       "type": "textarea",
       "id": "description",
       "label": "Description",
-      "default": "At Roots, we celebrate nature’s healing power and timeless self-care..."
+      "default": "At Roots, we celebrate nature's healing power and timeless self-care rituals that connect you to your authentic self.",
+      "info": "Description text below the heading"
+    },
+    {
+      "type": "header",
+      "content": "Button Settings"
     },
     {
       "type": "text",
       "id": "button_text",
       "label": "Button Text",
-      "default": "Learn More About Us"
+      "default": "Learn More About Us",
+      "info": "Button text (leave blank to hide button)"
     },
     {
-      "type": "text",
+      "type": "url",
       "id": "button_link",
       "label": "Button Link",
-      "default": "#"
+      "info": "Where the button should link to"
     },
-
+    {
+      "type": "header",
+      "content": "Video Settings"
+    },
     {
       "type": "url",
       "id": "youtube_url",
       "label": "YouTube URL",
-      "default": "/"
+      "info": "Full YouTube video URL (e.g., https://www.youtube.com/watch?v=VIDEO_ID)"
     },
     {
       "type": "image_picker",
       "id": "poster_image",
-      "label": "Poster Image"
+      "label": "Poster Image",
+      "info": "Image shown before video plays (recommended: 1600x600px)"
+    },
+    {
+      "type": "text",
+      "id": "poster_alt",
+      "label": "Poster Image Alt Text",
+      "default": "Video preview image",
+      "info": "Alt text for accessibility"
+    },
+    {
+      "type": "header",
+      "content": "Styling Options"
+    },
+    {
+      "type": "select",
+      "id": "video_height",
+      "label": "Video Height",
+      "default": "medium",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small (300px)"
+        },
+        {
+          "value": "medium",
+          "label": "Medium (500px)"
+        },
+        {
+          "value": "large",
+          "label": "Large (600px)"
+        }
+      ]
     }
   ],
   "presets": [
     {
-      "name": "Video Banner"
+      "name": "Video Banner",
+      "category": "Media"
     }
   ]
 }
