@@ -311,6 +311,9 @@
   .mt-3\.5 {
     margin-top: calc(var(--spacing) * 3.5);
   }
+  .mt-4 {
+    margin-top: calc(var(--spacing) * 4);
+  }
   .mt-5 {
     margin-top: calc(var(--spacing) * 5);
   }
@@ -639,6 +642,9 @@
   .bg-\[\#FFE380\] {
     background-color: #FFE380;
   }
+  .bg-\[\#v\] {
+    background-color: #v;
+  }
   .bg-\[rgba\(255\,255\,255\,0\.10\)\] {
     background-color: rgba(255,255,255,0.10);
   }
@@ -720,6 +726,9 @@
   .py-17\.5 {
     padding-block: calc(var(--spacing) * 17.5);
   }
+  .py-20 {
+    padding-block: calc(var(--spacing) * 20);
+  }
   .ps-4 {
     padding-inline-start: calc(var(--spacing) * 4);
   }
@@ -757,6 +766,10 @@
   .text-3xl {
     font-size: var(--text-3xl);
     line-height: var(--tw-leading, var(--text-3xl--line-height));
+  }
+  .text-4xl {
+    font-size: var(--text-4xl);
+    line-height: var(--tw-leading, var(--text-4xl--line-height));
   }
   .text-base {
     font-size: var(--text-base);
