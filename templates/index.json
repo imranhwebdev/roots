@@ -84,6 +84,37 @@
     },
     "why_choose": {
       "type": "why-choose",
+      "blocks": {
+        "choose_item_4Ccpxf": {
+          "type": "choose_item",
+          "settings": {
+            "icon_svg": "",
+            "title": "Strengthens & Promotes Growth",
+            "description": "Our organic castor oil nourishes from scalp to tip, reducing breakage and promoting stronger, healthier growth."
+          }
+        },
+        "choose_item_GPET3Q": {
+          "type": "choose_item",
+          "settings": {
+            "icon_svg": "",
+            "title": "Strengthens & Promotes Growth",
+            "description": "Our organic castor oil nourishes from scalp to tip, reducing breakage and promoting stronger, healthier growth."
+          }
+        },
+        "choose_item_QmmFmr": {
+          "type": "choose_item",
+          "settings": {
+            "icon_svg": "",
+            "title": "Strengthens & Promotes Growth",
+            "description": "Our organic castor oil nourishes from scalp to tip, reducing breakage and promoting stronger, healthier growth."
+          }
+        }
+      },
+      "block_order": [
+        "choose_item_4Ccpxf",
+        "choose_item_GPET3Q",
+        "choose_item_QmmFmr"
+      ],
       "settings": {
         "heading": "Why Choose Roots?",
         "subheading": "Encourages natural volume, supporting thicker, healthier hair growth."
