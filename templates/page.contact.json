@@ -15,9 +15,15 @@
         "default_title": "Contact",
         "default_description": "Reach out anytime for product questions, orders, or support - our team is always here to help."
       }
-    }
+    },
+      "contact-touch": {
+      "type": "contact-touch",
+      "settings": {
+      },
+    },
   },
   "order": [
-    "common_banner"
+    "common_banner",
+    "contact-touch"
   ]
 }
