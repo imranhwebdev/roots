@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "common_banner": {
+      "type": "common-banner",
+      "settings": {}
+    }
+  },
+  "order": [
+    "common_banner"
+  ]
+}
