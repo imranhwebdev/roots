@@ -689,6 +689,12 @@
   .pb-25 {
     padding-bottom: calc(var(--spacing) * 25);
   }
+  .pl-2 {
+    padding-left: calc(var(--spacing) * 2);
+  }
+  .pl-2\.5 {
+    padding-left: calc(var(--spacing) * 2.5);
+  }
   .text-center {
     text-align: center;
   }
@@ -1332,6 +1338,11 @@
       padding-block: calc(var(--spacing) * 28);
     }
   }
+  .lg\:pt-2 {
+    @media (width >= 992px) {
+      padding-top: calc(var(--spacing) * 2);
+    }
+  }
   .lg\:pt-2\.5 {
     @media (width >= 992px) {
       padding-top: calc(var(--spacing) * 2.5);
@@ -1355,6 +1366,16 @@
   .lg\:pb-2 {
     @media (width >= 992px) {
       padding-bottom: calc(var(--spacing) * 2);
+    }
+  }
+  .lg\:pb-5 {
+    @media (width >= 992px) {
+      padding-bottom: calc(var(--spacing) * 5);
+    }
+  }
+  .lg\:pl-2\.5 {
+    @media (width >= 992px) {
+      padding-left: calc(var(--spacing) * 2.5);
     }
   }
   .lg\:text-start {
