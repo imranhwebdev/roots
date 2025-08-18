@@ -1,4 +1,3 @@
-
 {
   "sections": {
     "common_banner": {
@@ -11,10 +10,20 @@
     "main": {
       "type": "blog",
       "settings": {}
+    },
+    "block_insights": {
+      "type": "block-insights",
+      "settings": {}
+    },
+    "join_roots": {
+      "type": "join-roots",
+      "settings": {}
     }
   },
   "order": [
     "common_banner",
-    "main"
+    "main",
+    "block_insights",
+    "join_roots"
   ]
 }
