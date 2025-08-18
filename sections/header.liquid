@@ -3,18 +3,18 @@
     max-width: 18px;
   }
 {% endstylesheet %}
-<div class="topbar bg-[#FFD500] text-black text-sm py-2 px-6">
+<div class="topbar bg-[#FFD500] text-black text-sm py-2 px-2 lg:px-6">
   <div class="container">
     <div class="topbar-inner flex justify-between items-center">
       <!-- Left: Social -->
       <div class="flex items-center gap-2">
-        <span class="text-[#21201E] text-lg leading-normal">Follow Us</span>
+        <span class="text-[#21201E] text-sm lg:text-lg leading-normal">Follow Us</span>
 
         {% for block in section.blocks %}
           {% if block.type == 'social' %}
             <a
               href="{{ block.settings.url }}"
-              class=" w-9 h-9 bg-[#FFE380] header-social-item rounded-3xl flex items-center justify-center hover:bg-white transition-all duration-300 p-1 text-xl"
+              class=" w-6 lg:w-9 h-6 lg:h-9 bg-[#FFE380] header-social-item rounded-3xl flex items-center justify-center hover:bg-white transition-all duration-300 p-1 text-xl"
               aria-label="{{ block.settings.platform }}"
             >
               {% case block.settings.platform %}
@@ -60,7 +60,7 @@
 </div>
 
 <!-- Main Header -->
-<header class="main-header bg-[#1E6B43] text-white py-4 px-6">
+<header class="main-header bg-[#1E6B43] text-white py-4 px-2 lg:px-6">
   <div class="container">
     <div class="header-inner flex justify-between items-center">
       <!-- Logo -->
@@ -72,10 +72,10 @@
               alt="{{ shop.name }}"
               width=""
               height=""
-              class="max-h-12 w-auto"
+              class="w-full max-w-20 lg:max-w-44"
             >
           {% else %}
-            <span class="text-3xl font-bold font-serif tracking-wide">Roots</span>
+            <span class="text-lg lg:text-3xl font-bold font-serif tracking-wide">Roots</span>
           {% endif %}
         </a>
       </div>
@@ -94,7 +94,7 @@
         <!-- Cart -->
         <a
           href="{{ routes.cart_url }}"
-          class="relative flex items-center gap-1 text-lg font-poppins text-white hover:text-[#FFD500] transition"
+          class="relative flex items-center gap-1 text-sm lg:text-lg font-poppins text-white hover:text-[#FFD500] transition"
         >
           {% if cart.item_count > 0 %}
             <sup class="absolute -top-2 -right-2 bg-[#FFD500] text-black rounded-full text-xs px-1">
@@ -107,7 +107,7 @@
         <!-- Sign Up Button -->
         <a
           href="{{routes.account_register_url}}"
-          class="bg-primary text-[#1F1904] px-6 py-2.5 rounded-full font-poppins text-lg font-medium hover:text-white transition-all duration-300"
+          class="bg-primary text-[#1F1904] px-6 py-2.5 rounded-full font-poppins text-sm lg:text-lg font-medium hover:text-white transition-all duration-300"
         >
           Sign Up
         </a>
