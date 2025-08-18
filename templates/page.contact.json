@@ -9,15 +9,15 @@
  */
 {
   "sections": {
-    "banner": {
+    "common_banner": {
       "type": "common-banner",
       "settings": {
-        "default_title": "ABOUT US",
-        "default_description": "Roots creates pure, organic castor oil, nurturing natural beauty with clean, effective care for hair, skin, and wellness."
+        "default_title": "Contact",
+        "default_description": "Reach out anytime for product questions, orders, or support - our team is always here to help."
       }
     }
   },
   "order": [
-    "banner"
+    "common_banner"
   ]
 }

@@ -1,15 +1,17 @@
-<section class="common-banner">
-  <div class="container">
-    
+<!-- sections/common-banner.liquid -->
+<section
+  class="common-banner bg-[#1E6C44]"
+>
+  <div class="container mx-auto py-20 text-center text-white">
     <div class="banner-wrapper">
-      <h1 class="text-3xl font-bold">
+      <h1 class="text-4xl font-bold">
         {% if page.metafields.custom.banner_title != blank %}
           {{ page.metafields.custom.banner_title }}
         {% else %}
           {{ section.settings.default_title }}
         {% endif %}
       </h1>
-      <p class="mt-2 text-lg">
+      <p class="mt-4 text-lg">
         {% if page.metafields.custom.banner_description != blank %}
           {{ page.metafields.custom.banner_description }}
         {% else %}
@@ -19,3 +21,23 @@
     </div>
   </div>
 </section>
+
+{% schema %}
+{
+  "name": "Common Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "default_title",
+      "label": "Page Title",
+      "default": "Welcome to Our Store"
+    },
+    {
+      "type": "textarea",
+      "id": "default_description",
+      "label": "Banner Description",
+      "default": "Banner Description"
+    }
+  ]
+}
+{% endschema %}
