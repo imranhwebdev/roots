@@ -24,27 +24,35 @@
 
     <!-- Video -->
     <div class="w-10/12 mx-auto">
-      <div class="relative w-full h-55 md:h-100 lg:h-130 xl:h-141.5 z-1">
-        <video
-          id="myVideo-{{ section.id }}"
-          poster="{{ section.settings.poster_image | image_url: width: 1600 }}"
-          class="w-full h-full rounded-xl lg:rounded-[10px] overflow-hidden bg-white"
-        >
-          {% if section.settings.video_url != blank %}
-            <source src="{{ section.settings.video_url }}" type="video/mp4">
-          {% endif %}
-        </video>
+      <div class="relative w-full h-[500px]">
+        {% if section.settings.poster_image != blank %}
+          <img
+            src="{{ section.settings.poster_image | image_url: width: 1600 }}"
+            width=""
+            height=""
+            alt="Video poster"
+            class="w-full h-full object-cover rounded-xl"
+          >
+        {% endif %}
 
-        <!-- Play button -->
         <button
           id="playBtn-{{ section.id }}"
-          class="absolute z-2 left-1/2 top-1/2 -translate-x-1/2 cursor-pointer -translate-y-1/2 size-6.5 lg:size-9 xl:size-11 2xl:size-13 rounded-full flex-[0_0_auto] text-white flex items-center justify-center"
+          class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded-full shadow-lg"
         >
-          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="52" height="52" rx="26" fill="white"/>
-            <path d="M20.54 16.0494C20.4186 15.9773 20.2802 15.9388 20.139 15.9375C19.9978 15.9363 19.8588 15.9725 19.7361 16.0423C19.6134 16.1122 19.5114 16.2133 19.4404 16.3354C19.3695 16.4575 19.3321 16.5962 19.332 16.7374V35.2627C19.3321 35.4039 19.3695 35.5426 19.4404 35.6646C19.5114 35.7867 19.6134 35.8878 19.7361 35.9577C19.8588 36.0276 19.9978 36.0638 20.139 36.0625C20.2802 36.0613 20.4186 36.0227 20.54 35.9507L36.1707 26.688C36.2901 26.6172 36.389 26.5165 36.4577 26.3959C36.5263 26.2753 36.5625 26.1388 36.5625 26C36.5625 25.8612 36.5263 25.7248 36.4577 25.6042C36.389 25.4835 36.2901 25.3829 36.1707 25.312L20.54 16.0494Z" fill="#1E6C44"/>
-          </svg>
+          ▶
         </button>
+
+        <div id="videoWrapper-{{ section.id }}" class="absolute inset-0 hidden">
+          <iframe
+            id="youtube-{{ section.id }}"
+            class="w-full h-full rounded-xl"
+            src=""
+            title="YouTube video"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
       </div>
     </div>
   </div>
@@ -52,13 +60,19 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    const video = document.getElementById('myVideo-{{ section.id }}');
     const playBtn = document.getElementById('playBtn-{{ section.id }}');
+    const wrapper = document.getElementById('videoWrapper-{{ section.id }}');
+    const iframe = document.getElementById('youtube-{{ section.id }}');
 
-    playBtn.addEventListener('click', () => {
-      video.play();
-      playBtn.style.display = 'none';
-    });
+    if (playBtn) {
+      playBtn.addEventListener('click', () => {
+        const url = '{{ section.settings.youtube_url }}';
+        const videoId = url.split('v=')[1]?.split('&')[0];
+        iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
+        wrapper.classList.remove('hidden');
+        playBtn.style.display = 'none';
+      });
+    }
   });
 </script>
 
@@ -85,21 +99,22 @@
       "default": "Learn More About Us"
     },
     {
-      "type": "url",
+      "type": "text",
       "id": "button_link",
       "label": "Button Link",
       "default": "#"
     },
 
     {
-      "type": "image_picker",
-      "id": "poster_image",
-      "label": "Video Poster Image"
+      "type": "url",
+      "id": "youtube_url",
+      "label": "YouTube URL",
+      "default": "/"
     },
     {
-      "type": "url",
-      "id": "video_url",
-      "label": "Video URL (MP4)"
+      "type": "image_picker",
+      "id": "poster_image",
+      "label": "Poster Image"
     }
   ],
   "presets": [
