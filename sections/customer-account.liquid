@@ -56,12 +56,23 @@
           </button>
         </li>
         <li>
-          <a
-            href="{{ routes.account_logout_url }}"
-            class="block cursor-pointer text-[#514849] w-full text-left text-lg md:text-xl lg:text-[26px] py-4 md:py-5 lg:py-5.5 px-5 md:px-6 lg:px-8 mb-2 md:mb-3 2xl:mb-4  font-medium !leading-[1.2] font-poppins  border md:border-[1.2px] border-[#E3E2E0] rounded-lg"
-            >Logout</a
+          <button
+            data-tab="logout"
+            class="tab-btn cursor-pointer text-[#514849] w-full text-left text-lg md:text-xl lg:text-[26px] py-4 md:py-5 lg:py-5.5 px-5 md:px-6 lg:px-8 mb-2 md:mb-3 2xl:mb-4  font-medium !leading-[1.2] font-poppins  border md:border-[1.2px] border-[#E3E2E0] rounded-lg "
+            data-tab="info"
           >
+            Logout
+          </button>
         </li>
+        {% comment %}
+          <li>
+            <a
+              href="{{ routes.account_logout_url }}"
+              class="block cursor-pointer text-[#514849] w-full text-left text-lg md:text-xl lg:text-[26px] py-4 md:py-5 lg:py-5.5 px-5 md:px-6 lg:px-8 mb-2 md:mb-3 2xl:mb-4  font-medium !leading-[1.2] font-poppins  border md:border-[1.2px] border-[#E3E2E0] rounded-lg"
+              >Logout</a
+            >
+          </li>
+        {% endcomment %}
       </ul>
     </aside>
 
@@ -540,6 +551,45 @@
             <button type="submit" class="btn !py-4 lg:!py-5 !px-7 lg:!px-8">Save Address</button>
           </div>
         </form>
+      </div>
+      <!-- Logout -->
+      <div class="tab-content hidden" id="logout">
+        <div class="">
+          <h5 class="text-2xl lg:text-3xl xl:text-4xl 2xl:text-[40px] font-medium !leading-[1.5] font-poppins text-[#514849] mb-4 lg:mb-5">
+            Logout
+          </h5>
+          <p class="text-[#797375] text-lg lg:text-xl font-poppins !leading-[1.2] mb-5 md:mb-6 lg:mb-7 xl:mb-10">
+            Are you sure you want to log out?
+          </p>
+          <button class="btn !py-4 lg:!py-5 !px-7 lg:!px-8 cursor-pointer !text-[#1F1904] hover:!text-white">
+            Yes, Logout
+          </button>
+        </div>
+
+        {% comment %} Track Your Order {% endcomment %}
+        <div class="w-full lg:w-220.5 mx-auto">
+          <div class="mb-4 lg:mb-5 xl:mb-6 w-full">
+            <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+              >Order ID*</label
+            >
+            <input
+              placeholder="Enter Your Order ID"
+              type="text"
+              value="{{ customer.last_name }}"
+              class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+            >
+          </div>
+          <div class="mb-4 lg:mb-5 xl:mb-6 2xl:mb-8 w-full">
+            <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Billing Email*</label>
+            <input
+              placeholder="Enter Email Address"
+              type="email"
+              value="{{ customer.email }}"
+              class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg "
+            >
+          </div>
+          <button class="btn">Track Order</button>
+        </div>
       </div>
     </div>
   </div>
