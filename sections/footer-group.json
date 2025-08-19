@@ -22,8 +22,12 @@
         "policies_menu": "policies",
         "social_heading": "Stay Connected",
         "copyright_text": "© 2025 Roots Organic Castor Oil.",
-        "show_payment_icons": true,
-        "background_image": "shopify://shop_images/footer-img.png"
+        "background_image": "shopify://shop_images/footer-img.png",
+        "facebook_url": "#",
+        "instagram_url": "#",
+        "twitter_url": "#",
+        "tiktok_url": "#",
+        "show_payment_icons": true
       }
     }
   },
