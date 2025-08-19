@@ -156,10 +156,40 @@
             "card_image": "shopify://shop_images/use1.png",
             "bg_color": "#b7d6c6"
           }
+        },
+        "card_4pzHdR": {
+          "type": "card",
+          "settings": {
+            "card_title": "For Hair",
+            "card_text": "Massage into scalp 3–4 times a week for strength and growth.",
+            "card_image": "shopify://shop_images/use1.png",
+            "bg_color": "#b7d6c6"
+          }
+        },
+        "card_GMV6r7": {
+          "type": "card",
+          "settings": {
+            "card_title": "For Hair",
+            "card_text": "Massage into scalp 3–4 times a week for strength and growth.",
+            "card_image": "shopify://shop_images/use1.png",
+            "bg_color": "#b7d6c6"
+          }
+        },
+        "card_hLH6qH": {
+          "type": "card",
+          "settings": {
+            "card_title": "For Hair",
+            "card_text": "Massage into scalp 3–4 times a week for strength and growth.",
+            "card_image": "shopify://shop_images/use1.png",
+            "bg_color": "#b7d6c6"
+          }
         }
       },
       "block_order": [
-        "card_QexQbD"
+        "card_QexQbD",
+        "card_4pzHdR",
+        "card_GMV6r7",
+        "card_hLH6qH"
       ],
       "settings": {
         "title": "Simple to Use, Powerful in Results"
