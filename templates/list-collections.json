@@ -9,12 +9,27 @@
  */
 {
   "sections": {
+    "banner": {
+      "type": "common-banner",
+      "settings": {}
+    },
     "main": {
       "type": "collections",
+      "settings": {}
+    },
+    "why_choose": {
+      "type": "why-choose",
+      "settings": {}
+    },
+    "join_roots": {
+      "type": "join-roots",
       "settings": {}
     }
   },
   "order": [
-    "main"
+    "banner",
+    "main",
+    "why_choose",
+    "join_roots",
   ]
 }
