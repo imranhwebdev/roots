@@ -1,48 +1,59 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const cartCountEl = document.querySelector(".cart-count");
-  
-  document.querySelectorAll(".add-to-cart").forEach(btn => {
-    btn.addEventListener("click", function (e) {
+document.addEventListener("DOMContentLoaded", function() {
+  // Select all Add to Cart buttons
+  const buttons = document.querySelectorAll(".add-to-cart");
+
+  buttons.forEach(btn => {
+    btn.addEventListener("click", function(e) {
       e.preventDefault();
-      const variantId = this.dataset.variantId;
+      const variantId = this.getAttribute("data-variant-id");
 
       if (!variantId) return;
 
+      // Ajax request
       fetch("/cart/add.js", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json"
         },
-        body: JSON.stringify({
-          id: variantId,
-          quantity: 1
-        })
+        body: JSON.stringify({ id: variantId, quantity: 1 })
       })
-      .then(res => res.json())
+      .then(response => response.json())
       .then(data => {
-        // Update header cart count
-        fetch("/cart.js")
-          .then(res => res.json())
-          .then(cart => {
-            if(cartCountEl) cartCountEl.textContent = cart.item_count;
-          });
+        console.log("Added to cart:", data);
 
-        // Optional: show toast message
-        showToast(`${data.title} added to cart`);
+        // Update cart count in header
+        updateCartCount();
+
+        // Show toast notification
+        showToast(`${data.title} added to cart!`);
       })
       .catch(err => console.error(err));
     });
   });
 
-  // Toast function
+  // Function to update cart count
+  function updateCartCount() {
+    fetch("/cart.js")
+      .then(res => res.json())
+      .then(cart => {
+        const cartIcon = document.querySelector(".cart-count");
+        if (cartIcon) cartIcon.textContent = cart.item_count;
+      });
+  }
+
+  // Simple toast notification
   function showToast(message) {
-    let toast = document.createElement("div");
+    const toast = document.createElement("div");
     toast.textContent = message;
-    toast.className = "fixed bottom-5 right-5 bg-black text-white p-3 rounded shadow-lg z-50";
+    toast.className = "toast-notification fixed bottom-5 right-5 bg-black text-white px-4 py-2 rounded opacity-0 transition-opacity duration-300";
     document.body.appendChild(toast);
+
+    // Animate
+    setTimeout(() => toast.classList.add("opacity-100"), 50);
     setTimeout(() => {
-      toast.remove();
-    }, 2500);
+      toast.classList.remove("opacity-100");
+      setTimeout(() => toast.remove(), 500);
+    }, 2000);
   }
 });
