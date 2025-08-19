@@ -3545,15 +3545,15 @@
   src: url('/assets/ArmanyRegular.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'Armany-regular';
+  font-family: 'Armany-Medium';
   src: url('/assets/ArmanyMedium.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'Armany-regular';
+  font-family: 'Armany-Semibold';
   src: url('/assets/ArmanySemibold.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'Armany-regular';
+  font-family: 'Armany-Bold';
   src: url('/assets/ArmanyBold.ttf') format('truetype');
 }
 @layer base {
