@@ -12,7 +12,7 @@
     "banner": {
       "type": "common-banner",
       "settings": {
-        "default_title": "Roots Organic Castor Oil – 16 fl oz Details",
+        "default_title": "Roots Organic Castor Oil – 16 fl oz Details{{ collection.title }}",
         "default_description": ""
       }
     },
