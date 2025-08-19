@@ -11,25 +11,45 @@
   "sections": {
     "banner": {
       "type": "common-banner",
-      "settings": {}
+      "settings": {
+        "default_title": "Shop Roots Organic Castor Oil",
+        "default_description": "Pure, premium, USDA Organic castor oil crafted to nourish hair, lashes, brows, and skin naturally."
+      }
     },
     "main": {
       "type": "collections",
-      "settings": {}
+      "settings": {
+        "product": ""
+      }
     },
     "why_choose": {
       "type": "why-choose",
-      "settings": {}
+      "settings": {
+        "heading": "Why Choose Roots?",
+        "subheading": "Encourages natural volume, supporting thicker, healthier hair growth."
+      }
     },
     "join_roots": {
       "type": "join-roots",
-      "settings": {}
+      "settings": {
+        "title": "Join the Roots Family",
+        "description": "Be the first to know about exclusive offers, self-care tips, and new launches.",
+        "enable_newsletter": true,
+        "email_placeholder": "Enter your email address",
+        "success_message": "Thank you for subscribing! You'll hear from us soon.",
+        "button_text": "Subscribe Now",
+        "button_link": "",
+        "show_arrow": false,
+        "card_bg_color": "#1e6c44",
+        "title_color": "#ffffff",
+        "description_color": "#f5f5f5"
+      }
     }
   },
   "order": [
     "banner",
     "main",
     "why_choose",
-    "join_roots",
+    "join_roots"
   ]
 }
