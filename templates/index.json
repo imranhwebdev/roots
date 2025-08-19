@@ -147,7 +147,23 @@
     },
     "simple_to_use": {
       "type": "simple-to-use",
-      "settings": {}
+      "blocks": {
+        "card_QexQbD": {
+          "type": "card",
+          "settings": {
+            "card_title": "For Hair",
+            "card_text": "Massage into scalp 3–4 times a week for strength and growth.",
+            "card_image": "shopify://shop_images/use1.png",
+            "bg_color": "#b7d6c6"
+          }
+        }
+      },
+      "block_order": [
+        "card_QexQbD"
+      ],
+      "settings": {
+        "title": "Simple to Use, Powerful in Results"
+      }
     },
     "reviews": {
       "type": "reviews",
