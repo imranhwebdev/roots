@@ -200,110 +200,40 @@
       "type": "image_picker",
       "id": "background_image",
       "label": "Footer Background Image"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "social_link",
-      "name": "Social Link",
-      "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Social Platform Name",
-          "default": "Instagram"
-        },
-        {
-          "type": "url",
-          "id": "url",
-          "label": "Social Link URL"
-        },
-        {
-          "type": "image_picker",
-          "id": "icon",
-          "label": "Social Icon (for mobile)"
-        }
-      ]
     },
     {
-      "type": "payment_icon",
-      "name": "Payment Icon",
-      "settings": [
-        {
-          "type": "text",
-          "id": "name",
-          "label": "Payment Method Name"
-        },
-        {
-          "type": "image_picker",
-          "id": "icon",
-          "label": "Payment Icon"
-        }
-      ]
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "twitter_url",
+      "label": "Twitter (X) URL"
+    },
+    {
+      "type": "url",
+      "id": "tiktok_url",
+      "label": "TikTok URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": true
     }
   ],
+
   "presets": [
     {
       "name": "Dynamic Footer",
       "blocks": [
-        {
-          "type": "social_link",
-          "settings": {
-            "title": "Instagram",
-            "url": "#"
-          }
-        },
-        {
-          "type": "social_link",
-          "settings": {
-            "title": "Facebook",
-            "url": "#"
-          }
-        },
-        {
-          "type": "social_link",
-          "settings": {
-            "title": "Twitter",
-            "url": "#"
-          }
-        },
-        {
-          "type": "social_link",
-          "settings": {
-            "title": "TikTok",
-            "url": "#"
-          }
-        },
-        {
-          "type": "payment_icon",
-          "settings": {
-            "name": "PayPal"
-          }
-        },
-        {
-          "type": "payment_icon",
-          "settings": {
-            "name": "Visa"
-          }
-        },
-        {
-          "type": "payment_icon",
-          "settings": {
-            "name": "Mastercard"
-          }
-        },
-        {
-          "type": "payment_icon",
-          "settings": {
-            "name": "Apple Pay"
-          }
-        },
-        {
-          "type": "payment_icon",
-          "settings": {
-            "name": "Google Pay"
-          }
-        }
+       
       ]
     }
   ]
