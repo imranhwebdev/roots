@@ -49,6 +49,54 @@
           }
         });
       });
+
+      function updateCartCount() {
+        fetch('/cart.js')
+          .then((res) => res.json())
+          .then((cart) => {
+            const cartCountEl = document.getElementById('cart-count');
+            if (cart.item_count > 0) {
+              cartCountEl.innerText = cart.item_count;
+              cartCountEl.style.display = 'inline-block';
+            } else {
+              cartCountEl.style.display = 'none';
+            }
+          });
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.add-to-cart-btn').forEach((button) => {
+          button.addEventListener('click', function () {
+            const variantId = this.getAttribute('data-variant-id');
+
+            fetch('/cart/add.js', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+              },
+              body: JSON.stringify({
+                id: variantId,
+                quantity: 1,
+              }),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                console.log('Added to cart:', data);
+                updateCartCount(); // cart count update
+              })
+              .catch((err) => console.error(err));
+          });
+        });
+      });
+
+      function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'fixed bottom-5 right-5 bg-green-600 text-white px-4 py-2 rounded shadow-lg z-50';
+        toast.innerText = message;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+      }
     </script>
   </head>
 
