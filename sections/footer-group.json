@@ -14,17 +14,16 @@
     "footer": {
       "type": "footer",
       "settings": {
-        "logo": "shopify://shop_images/footer-icon.png",
+        "logo_image": "shopify://shop_images/footer-icon.png",
         "description": "Pure, premium beauty care inspired by nature. USDA Organic, cold-pressed, made in the USA for healthy hair, skin, lashes, and brows.",
-        "menu_title": "Pages",
-        "menu": "",
-        "policies_title": "Policies",
+        "pages_heading": "Pages",
+        "pages_menu": "",
+        "policies_heading": "Policies",
         "policies_menu": "",
-        "facebook_url": "#",
-        "instagram_url": "#",
-        "twitter_url": "#",
-        "tiktok_url": "#",
-        "show_payment_icons": true
+        "social_heading": "Stay Connected",
+        "copyright_text": "© 2025",
+        "show_payment_icons": true,
+        "background_image": "shopify://shop_images/footer-img.png"
       }
     }
   },
