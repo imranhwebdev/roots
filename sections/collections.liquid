@@ -67,12 +67,13 @@
                 {{ product1.price | money }}
               </p>
               <div class="flex items-center gap-5 mt-3.5">
-                <a
-                  href="{{ routes.cart_add_url }}"
-                  class="btn flex items-center gap-3"
+                <button
+                  type="button"
+                  class="btn flex items-center gap-3 add-to-cart-btn"
+                  data-variant-id="{{ product.selected_or_first_available_variant.id }}"
                 >
                   Add to Cart
-                </a>
+                </button>
                 <a
                   href="{{product.url}}"
                   class="inline-btn border border-solid border-[#1E6C44] text-[#1F1904] hover:text-white hover:border-primary transition duration-300 flex items-center gap-3"
@@ -276,3 +277,45 @@
   ]
 }
 {% endschema %}
+<script>
+  function updateCartCount() {
+    fetch('/cart.js')
+      .then((res) => res.json())
+      .then((cart) => {
+        const cartCountEl = document.getElementById('cart-count');
+        if (cart.item_count > 0) {
+          cartCountEl.innerText = cart.item_count;
+          cartCountEl.style.display = 'inline-block';
+        } else {
+          cartCountEl.style.display = 'none';
+        }
+      });
+  }
+
+  // Example: যখন add-to-cart success হয়
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.add-to-cart-btn').forEach((button) => {
+      button.addEventListener('click', function () {
+        const variantId = this.getAttribute('data-variant-id');
+
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            id: variantId,
+            quantity: 1,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log('Added to cart:', data);
+            updateCartCount(); // cart count update
+          })
+          .catch((err) => console.error(err));
+      });
+    });
+  });
+</script>

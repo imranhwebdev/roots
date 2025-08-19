@@ -97,7 +97,7 @@
           class="relative flex items-center gap-1 text-sm lg:text-lg font-poppins text-white hover:text-[#FFD500] transition"
         >
           {% if cart.item_count > 0 %}
-            <sup class="absolute -top-2 -right-2 bg-[#FFD500] text-black rounded-full text-xs px-1">
+            <sup id="cart-count" class="absolute -top-2 -right-2 bg-[#FFD500] text-black rounded-full text-xs px-1">
               {{ cart.item_count }}
             </sup>
           {% endif %}
