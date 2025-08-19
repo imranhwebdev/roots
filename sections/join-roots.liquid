@@ -1,16 +1,196 @@
+<!-- sections/subscribe-section.liquid -->
 <div class="join-rools py-10 md:py-16 lg:py-25 xl:py-35 2xl:py-41 relative z-1">
-    <img src="/assets/join.png" class="size-full left-0 top-0 absolute -z-1" width="" height="" alt="">
-    <div class="container">
-       <div class="  rounded-2xl  border border-[rgba(255,_255,_255,_0.40)] backdrop-blur-[16px] p-3 lg:p-4 bg-[rgba(255,_255,_255,_0.01)] w-full md:w-10/12 2xl:w-8/12 mx-auto">
-        <div class="py-6 md:py-10 lg:py-12 xl:py-16 2xl:py-20 bg-[#1E6C44] rounded-xl">
-          <div class="section-title text-center mx-auto w-full px-6 sm:px-8.5 md:px-0">
-          <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-white !leading-[1.25] font-bold font-armany-bold mb-3 lg:mb-5">Join the Roots Family</h2>
-          <p class="lg:pr-8 text-base md:text-lg lg:text-xl font-poppins !leading-[1.6] text-[#F5F5F5] mb-6 lg:mb-8 xl:mb-10">Be the first to know about exclusive offers, self-care tips, and new launches.</p>
-          <a href="#" class="btn flex items-center gap-3 mx-auto max-w-max"
-          > Subscribe Now
-          </a>
-      </div>
+  {% if section.settings.background_image != blank %}
+    <img
+      src="{{ section.settings.background_image | img_url: '1920x' }}"
+      class="size-full left-0 top-0 absolute -z-1 object-cover"
+      width="{{ section.settings.background_image.width }}"
+      height="{{ section.settings.background_image.height }}"
+      alt="{{ section.settings.background_image.alt | default: 'Background' }}"
+      loading="lazy"
+    >
+  {% else %}
+    <!-- Fallback background -->
+    <div class="size-full left-0 top-0 absolute -z-1 bg-gradient-to-br from-green-600 to-green-800"></div>
+  {% endif %}
+
+  <div class="container">
+    <div class="rounded-2xl border border-[rgba(255,_255,_255,_0.40)] backdrop-blur-[16px] p-3 lg:p-4 bg-[rgba(255,_255,_255,_0.01)] w-full md:w-10/12 2xl:w-8/12 mx-auto">
+      <div
+        class="py-6 md:py-10 lg:py-12 xl:py-16 2xl:py-20 rounded-xl"
+        style="background-color: {{ section.settings.card_bg_color }}"
+      >
+        <div class="section-title text-center mx-auto w-full px-6 sm:px-8.5 md:px-0">
+          <h2
+            class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] !leading-[1.25] font-bold font-armany-bold mb-3 lg:mb-5"
+            style="color: {{ section.settings.title_color }}"
+          >
+            {{ section.settings.title }}
+          </h2>
+          <p
+            class="lg:pr-8 text-base md:text-lg lg:text-xl font-poppins !leading-[1.6] mb-6 lg:mb-8 xl:mb-10"
+            style="color: {{ section.settings.description_color }}"
+          >
+            {{ section.settings.description }}
+          </p>
+
+          {% if section.settings.enable_newsletter %}
+            <!-- Newsletter Form -->
+            <div class="max-w-full md:max-w-lg mx-auto">
+              {% form 'customer' %}
+                {% if form.posted_successfully? %}
+                  <div class="mb-4 p-3 bg-green-100 border border-primary text-white rounded">
+                    <p>{{ section.settings.success_message }}</p>
+                  </div>
+                {% endif %}
+
+                {% if form.errors %}
+                  <div class="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+                    {{ form.errors | default_errors }}
+                  </div>
+                {% endif %}
+
+                <div class="w-full flex flex-col  md:flex-row gap-3">
+                  <input
+                    type="email"
+                    name="contact[email]"
+                    id="newsletter-email"
+                    placeholder="{{ section.settings.email_placeholder }}"
+                    class="flex-1 px-5 py-3 text-white text-lg rounded-full border w-full max-w-170 border-primary focus:outline-none focus:ring-2 focus:primary focus:border-transparent"
+                    required
+                  >
+                  <input type="hidden" name="contact[tags]" value="newsletter">
+                  <button
+                    type="submit"
+                    class="btn px-6 py-3 whitespace-nowrap cursor-pointer"
+                  >
+                    {{ section.settings.button_text }}
+                  </button>
+                </div>
+              {% endform %}
+            </div>
+          {% else %}
+            <!-- Simple Button -->
+            {% if section.settings.button_text != blank and section.settings.button_link != blank %}
+              <a
+                href="{{ section.settings.button_link }}"
+                class="btn flex items-center gap-3 mx-auto max-w-max cursor-pointer"
+              >
+                {{ section.settings.button_text }}
+                {% if section.settings.show_arrow %}
+                  <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                {% endif %}
+              </a>
+            {% endif %}
+          {% endif %}
         </div>
-       </div>
+      </div>
     </div>
+  </div>
 </div>
+
+{% schema %}
+{
+  "name": "Subscribe Section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Join the Roots Family"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Section Description",
+      "default": "Be the first to know about exclusive offers, self-care tips, and new launches."
+    },
+    {
+      "type": "header",
+      "content": "Newsletter Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_newsletter",
+      "label": "Enable Newsletter Signup",
+      "default": true,
+      "info": "Enable this to show email signup form instead of button"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email Placeholder Text",
+      "default": "Enter your email address"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success Message",
+      "default": "Thank you for subscribing! You'll hear from us soon."
+    },
+    {
+      "type": "header",
+      "content": "Button Settings"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Subscribe Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link",
+      "info": "Only used when newsletter is disabled"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrow",
+      "label": "Show Arrow Icon",
+      "default": false,
+      "info": "Show arrow icon in button (only for simple button mode)"
+    },
+    {
+      "type": "header",
+      "content": "Design Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image",
+      "info": "Upload background image for the section"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card Background Color",
+      "default": "#1E6C44"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#F5F5F5"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Subscribe Section",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}
