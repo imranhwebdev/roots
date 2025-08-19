@@ -3,19 +3,19 @@
 
 @font-face {
     font-family: 'Armany-regular';
-    src: url('{{ "ArmanyRegular.ttf" | asset_url }}') format('truetype');
+    src: url({{ "ArmanyRegular.ttf" | asset_url }}) format('truetype');
 }
 @font-face {
     font-family: 'Armany-Medium';
-    src: url('{{ "ArmanyMedium.ttf" | asset_url }}') format('truetype');
+    src: url({{ "ArmanyMedium.ttf" | asset_url }}) format('truetype');
 }
 @font-face {
     font-family: 'Armany-Semibold';
-    src: url('{{ "ArmanySemibold.ttf" | asset_url }}') format('truetype');
+    src: url({{ "ArmanySemibold.ttf" | asset_url }}) format('truetype');
 }
 @font-face {
     font-family: 'Armany-Bold';
-    src: url('{{ "ArmanyBold.ttf" | asset_url }}') format('truetype');
+    src: url({{ "ArmanyBold.ttf" | asset_url }}) format('truetype');
 }
 @font-face {
     font-family: 'Armany-regular';
