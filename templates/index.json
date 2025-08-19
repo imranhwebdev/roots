@@ -201,7 +201,16 @@
     },
     "latest_blog": {
       "type": "latest-blog",
-      "settings": {}
+      "settings": {
+        "title": "Explore Our Latest Blog",
+        "description": "Tips, insights, and natural beauty wisdom straight from our experts.",
+        "blog_handle": "news",
+        "posts_count": 4,
+        "sort_order": "desc",
+        "bg_color": "#b7d6c6",
+        "button_text": "View All Posts",
+        "button_link": "shopify://blogs/news"
+      }
     },
     "join_roots": {
       "type": "join-roots",
