@@ -30,10 +30,10 @@
               </p>
               <ul>
                 {% for link in section.settings.pages_menu.links %}
-                  <li class="mb-2 lg:mb-2.5">
+                  <li class="mb-2 lg:mb-2.5 group block">
                     <a
                       href="{{ link.url }}"
-                      class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]"
+                      class="text-[#514849] group-hover:text-primary transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]"
                     >
                       {{ link.title }}
                     </a>
@@ -54,7 +54,7 @@
                   <li class="mb-2 lg:mb-2.5">
                     <a
                       href="{{ link.url }}"
-                      class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]"
+                      class="text-[#514849] hover:text-primary transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]"
                     >
                       {{ link.title }}
                     </a>
@@ -64,49 +64,26 @@
             </div>
           {% endif %}
 
-          <!-- Social Links -->
-          <div class="">
-            <p class="text-2xl font-medium !leading-[1.6] text-[#0D2E1D] mb-2">
-              {{ section.settings.social_heading | default: 'Stay Connected' }}
-            </p>
-
-            <!-- Desktop Social Links -->
+          <div>
+            <p class="text-2xl font-medium !leading-[1.6] text-[#0D2E1D] mb-2">Stay Connected</p>
             <ul class="hidden md:block">
-              {% for block in section.blocks %}
-                {% if block.type == 'social_link' %}
-                  <li class="mb-2 lg:mb-2.5">
-                    <a
-                      href="{{ block.settings.url }}"
-                      target="_blank"
-                      class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]"
-                    >
-                      {{ block.settings.title }}
-                    </a>
-                  </li>
-                {% endif %}
-              {% endfor %}
+              {% if section.settings.instagram_url != blank %}
+                <li class="mb-2 lg:mb-2.5">
+                  <a href="{{ section.settings.instagram_url }}" target="_blank">Instagram</a>
+                </li>
+              {% endif %}
+              {% if section.settings.facebook_url != blank %}
+                <li class="mb-2 lg:mb-2.5">
+                  <a href="{{ section.settings.facebook_url }}" target="_blank">Facebook</a>
+                </li>
+              {% endif %}
+              {% if section.settings.twitter_url != blank %}
+                <li class="mb-2 lg:mb-2.5"><a href="{{ section.settings.twitter_url }}" target="_blank">Twitter</a></li>
+              {% endif %}
+              {% if section.settings.tiktok_url != blank %}
+                <li class="mb-2 lg:mb-2.5"><a href="{{ section.settings.tiktok_url }}" target="_blank">TikTok</a></li>
+              {% endif %}
             </ul>
-
-            <!-- Mobile Social Icons -->
-            <div class="flex items-center gap-3 md:hidden">
-              {% for block in section.blocks %}
-                {% if block.type == 'social_link' and block.settings.icon %}
-                  <a
-                    href="{{ block.settings.url }}"
-                    target="_blank"
-                    class="size-14 rounded-full bg-primary p-3.5 flex items-center justify-center transform hover:scale-[1.04] ease-in-out duration-300"
-                  >
-                    <img
-                      src="{{ block.settings.icon | img_url: '56x56' }}"
-                      class="size-full"
-                      width="56"
-                      height="56"
-                      alt="{{ block.settings.title }}"
-                    >
-                  </a>
-                {% endif %}
-              {% endfor %}
-            </div>
           </div>
         </div>
       </div>
@@ -115,24 +92,15 @@
     <!-- Bottom Section -->
     <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap items-center justify-between gap-4 pt-5 md:pt-0 border-t md:border-t-0 border-t-[#D1CDCE]">
       <p class="text-[#797375)] md:text-[#514849] text-xl !leading-[1.2] md:!leading-normal order-2 md:order-1">
-        {{ section.settings.copyright_text | default: '© 2025 ' |  append: '.' }}
+        {{ section.settings.copyright_text | default: '© 2025 ' | append: '.' }}
       </p>
 
-      <!-- Payment Icons -->
       {% if section.settings.show_payment_icons %}
         <div class="flex items-center gap-3 lg:gap-2.5 mb-5 md:mb-0 order-1 md:order-2">
-          {% for block in section.blocks %}
-            {% if block.type == 'payment_icon' and block.settings.icon %}
-              <div class="w-11.5 h-8 border-[.8px] border-[#D9D9D9] rounded-[5px]">
-                <img
-                  src="{{ block.settings.icon | img_url: '46x32' }}"
-                  class="size-full rounded-[5px]"
-                  width="46"
-                  height="32"
-                  alt="{{ block.settings.name }}"
-                >
-              </div>
-            {% endif %}
+          {% for type in shop.enabled_payment_types %}
+            <div class="w-11.5 h-8 border-[.8px] border-[#D9D9D9] rounded-[5px]">
+              {{ type | payment_type_svg_tag: class: 'size-full rounded-[5px]' }}
+            </div>
           {% endfor %}
         </div>
       {% endif %}
