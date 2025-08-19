@@ -1,36 +1,85 @@
-<div class="simple-to-use  lg:pt-2.5">
+<!-- sections/simple-to-use.liquid -->
+<div class="simple-to-use lg:pt-2.5">
   <div class="container">
-    <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-center text-green !leading-[1.25] font-bold font-armany-bold mb-8 lg:mb-11 xl:mb-12.5">Simple to Use, Powerful in Results</h2>
+    <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-center text-green !leading-[1.25] font-bold font-armany-bold mb-8 lg:mb-11 xl:mb-12.5">
+      {{ section.settings.title }}
+    </h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5 md:gap-6 xl:gap-8">
-      <a href="#" class="flex flex-col justify-between bg-[#B7D6C6] rounded-xl px-3 lg:px-2 py-3 lg:pt-7.5 lg:pb-2">
+      {% for card in section.blocks %}
+        <div class="flex flex-col justify-between {{ card.settings.bg_color }} rounded-xl px-3 lg:px-2 py-3 lg:pt-7.5 lg:pb-2">
           <div class="mb-8.5 text-center">
-            <h5 class="text-xl lg:text-2xl text-green font-medium !leading-[1.6] mb-4">For Hair</h5>
-            <p class="3xl:px-13 text-[#514849] text-lg !leading-[1.6]">Massage into scalp 3–4 times a week for strength and growth.</p>
+            <h5 class="text-xl lg:text-2xl text-green font-medium !leading-[1.6] mb-4">
+              {{ card.settings.card_title }}
+            </h5>
+            <p class="3xl:px-13 text-[#514849] text-lg !leading-[1.6]">{{ card.settings.card_text }}</p>
           </div>
-          <div class="w-full h-68 md:h-55 lg:h-55 xl:h-64 2xl:h-58  3xl:h-64 rounded-[10px]"><img src="/assets/use1.png" class="size-full rounded-[10px]" height="" width="" alt="img"></div>
-      </a>
-      <a href="#" class="flex flex-col justify-between bg-[#B7D6C6] rounded-xl px-3 lg:px-2 py-3 lg:pt-7.5 lg:pb-2">
-          <div class="mb-8.5 text-center">
-            <h5 class="text-xl lg:text-2xl text-green font-medium !leading-[1.6] mb-4">For Lashes & Brows</h5>
-            <p class="3xl:px-13 text-[#514849] text-lg !leading-[1.6]">Apply nightly for a fuller, healthier look.</p>
+          <div class="w-full h-68 md:h-55 lg:h-55 xl:h-64 2xl:h-58 3xl:h-64 rounded-[10px]">
+            {% if card.settings.card_image != blank %}
+              <img
+                src="{{ card.settings.card_image | image_url: '1024x' }}"
+                class="size-full rounded-[10px]"
+                alt="{{ card.settings.card_title }}"
+                width=""
+                height=""
+              >
+            {% endif %}
           </div>
-          <div class="w-full h-68  md:h-55 lg:h-55 xl:h-64 2xl:h-58 3xl:h-64 rounded-[10px]"><img src="/assets/use2.png" class="size-full rounded-[10px]" height="" width="" alt="img"></div>
-      </a>
-      <a href="#" class="flex flex-col justify-between bg-[#B7D6C6] rounded-xl px-3 lg:px-2 py-3 lg:pt-7.5 lg:pb-2">
-          <div class="mb-8.5 text-center">
-            <h5 class="text-xl lg:text-2xl text-green font-medium !leading-[1.6] mb-4">For Skin</h5>
-            <p class="3xl:px-13 text-[#514849] text-lg !leading-[1.6]">Smooth onto dry areas for deep hydration.</p>
-          </div>
-          <div class="w-full h-68  md:h-55 lg:h-55 xl:h-64 2xl:h-58 3xl:h-64 rounded-[10px]"><img src="/assets/use3.png" class="size-full rounded-[10px]" height="" width="" alt="img"></div>
-      </a>
-      <a href="#" class="flex flex-col justify-between bg-[#B7D6C6] rounded-xl px-3 lg:px-2 py-3 lg:pt-7.5 lg:pb-2">
-          <div class="mb-8.5 text-center">
-            <h5 class="text-xl lg:text-2xl text-green font-medium !leading-[1.6] mb-4">For Wellness Wraps</h5>
-            <p class="3xl:px-13 text-[#514849] text-lg !leading-[1.6]">Enhance results by applying to targeted areas before wrapping.</p>
-          </div>
-          <div class="w-full h-68  md:h-55 lg:h-55 xl:h-64 2xl:h-58 3xl:h-64 rounded-[10px]"><img src="/assets/use4.png" class="size-full rounded-[10px]" height="" width="" alt="img"></div>
-      </a>
+        </div>
+      {% endfor %}
     </div>
   </div>
 </div>
+
+{% schema %}
+{
+  "name": "Simple to Use Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Simple to Use, Powerful in Results"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "card_title",
+          "label": "Card Title",
+          "default": "For Hair"
+        },
+        {
+          "type": "textarea",
+          "id": "card_text",
+          "label": "Card Text",
+          "default": "Massage into scalp 3–4 times a week for strength and growth."
+        },
+        {
+          "type": "image_picker",
+          "id": "card_image",
+          "label": "Card Image"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color",
+          "default": "#B7D6C6"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Simple to Use",
+      "category": "Custom Sections",
+      "blocks": [{ "type": "card" }, { "type": "card" }, { "type": "card" }, { "type": "card" }]
+    }
+  ]
+}
+{% endschema %}

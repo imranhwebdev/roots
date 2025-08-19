@@ -1295,6 +1295,11 @@
       margin-inline: calc(var(--spacing) * 0);
     }
   }
+  .md\:ms-3 {
+    @media (width >= 768px) {
+      margin-inline-start: calc(var(--spacing) * 3);
+    }
+  }
   .md\:mt-0 {
     @media (width >= 768px) {
       margin-top: calc(var(--spacing) * 0);
