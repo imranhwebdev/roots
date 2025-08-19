@@ -8,7 +8,7 @@
 }
 @font-face {
     font-family: 'Armany-Medium';
-    src: url('{{ "ArmanyMedium.ttf" | asset_url }}') format('truetype');
+    src: url("/assets/ArmanyMedium.ttf") format('truetype');
     font-display: swap;
 }
 @font-face {
