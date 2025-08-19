@@ -7,7 +7,7 @@
             {% if section.settings.logo_image %}
               <img
                 src="{{ section.settings.logo_image | img_url: '242x84' }}"
-                class="w-21 md:w-30 2xl:w-60.5 h-8.5 md:15 2xl:h-21 mb-5"
+                class="w-21 md:w-30 2xl:w-60.5 md:15  mb-5"
                 width="{{ section.settings.logo_image.width }}"
                 height="{{ section.settings.logo_image.height }}"
                 alt="{{ section.settings.logo_image.alt | default: shop.name }}"
