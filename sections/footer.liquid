@@ -6,7 +6,7 @@
           <a href="{{routes.root_url}}">
             {% if section.settings.logo_image %}
               <img
-                src="{{ section.settings.logo_image | image_url: '242x84' }}"
+                src="{{ section.settings.logo_image | img_url: '242x84' }}"
                 class="w-21 md:w-30 2xl:w-60.5 md:15  mb-5"
                 width="{{ section.settings.logo_image.width }}"
                 height="{{ section.settings.logo_image.height }}"
@@ -117,7 +117,7 @@
                     href="{{ block.settings.url }}"
                     class="size-14 rounded-full bg-primary p-3.5 flex items-center justify-center transform hover:scale-[1.04] ease-in-out duration-300"
                     ><img
-                      src="{{ block.settings.icon | image_url: 'master' }}"
+                      src="{{ block.settings.icon | img_url: 'master' }}"
                       class="size-full"
                       width=""
                       height=""
@@ -153,7 +153,7 @@
   <!-- Background Image -->
   {% if section.settings.background_image %}
     <img
-      src="{{ section.settings.background_image | image_url: '328x236' }}"
+      src="{{ section.settings.background_image | img_url: '328x236' }}"
       class="w-43 md:w-35 lg:w-50 xl:w-82 h-33 md:h-20 lg:h-30 xl:h-59 absolute bottom-[24%] md:bottom-0 right-0 md:left-[40%] lg:left-[30%] xl:left-[24%] -z-1"
       width="{{ section.settings.background_image.width }}"
       height="{{ section.settings.background_image.height }}"
