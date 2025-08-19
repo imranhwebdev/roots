@@ -1,21 +1,27 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 @font-face {
     font-family: 'Armany-regular';
-    src: url('/assets/ArmanyRegular.ttf') format('truetype');
+    src: url('{{ "ArmanyRegular.ttf" | asset_url }}') format('truetype');
+    font-display: swap;
 }
 @font-face {
     font-family: 'Armany-Medium';
-    src: url('/assets/ArmanyMedium.ttf') format('truetype');
+    src: url('{{ "ArmanyMedium.ttf" | asset_url }}') format('truetype');
+    font-display: swap;
 }
 @font-face {
     font-family: 'Armany-Semibold';
-    src: url('/assets/ArmanySemibold.ttf') format('truetype');
+    src: url('{{ "ArmanySemibold.ttf" | asset_url }}') format('truetype');
+    font-display: swap;
 }
 @font-face {
     font-family: 'Armany-Bold';
-    src: url('/assets/ArmanyBold.ttf') format('truetype');
+    src: url('{{ "ArmanyBold.ttf" | asset_url }}') format('truetype');
+    font-display: swap;
 }
+
 @theme {
     --color-primary: #FFC801;
     --color-secondary: #797375;
@@ -32,20 +38,21 @@
     --breakpoint-2xl: 1400px;
     --breakpoint-3xl: 1520px;
     --font-poppins: "Poppins", sans-serif;
-    --font-armany-regular: 'Armany-regular';
-    --font-armany-medium: 'Armany-Medium';
-    --font-armany-semibold: 'Armany-Semibold';
-    --font-armany-bold: 'Armany-Bold';
+    --font-armany-regular: 'Armany-regular', sans-serif;
+    --font-armany-medium: 'Armany-Medium', sans-serif;
+    --font-armany-semibold: 'Armany-Semibold', sans-serif;
+    --font-armany-bold: 'Armany-Bold', sans-serif;
 }
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
     .btn {
         @apply inline-flex items-center justify-center gap-2 rounded-[40px] !leading-tight px-8 min-h-16 bg-primary text-[#1F1904] text-xl font-poppins border border-solid border-primary hover:text-white transition-all duration-300 cursor-pointer;
-}
+    }
     .inline-btn {
         @apply inline-flex items-center justify-center gap-2 rounded-[40px] !leading-tight px-8 min-h-16 text-white text-xl font-poppins border border-solid border-[#B7D6C6] hover:bg-primary transition-all duration-300 hover:border-primary cursor-pointer;
-}
+    }
 }
 
 .container{
