@@ -10,46 +10,6 @@
 {
   "type": "footer",
   "name": "t:general.footer",
-  "sections": {
-    "footer": {
-      "type": "footer",
-      "blocks": {
-        "social_link_Vmdtfk": {
-          "type": "social_link",
-          "settings": {
-            "title": "Instagram",
-            "url": "#",
-            "icon": "shopify://shop_images/ApplePay.png"
-          }
-        },
-        "social_link_xg66zX": {
-          "type": "social_link",
-          "settings": {
-            "title": "Instagram",
-            "url": "#",
-            "icon": "shopify://shop_images/ApplePay.png"
-          }
-        }
-      },
-      "block_order": [
-        "social_link_Vmdtfk",
-        "social_link_xg66zX"
-      ],
-      "settings": {
-        "logo_image": "shopify://shop_images/footer-icon.png",
-        "description": "Pure, premium beauty care inspired by nature. USDA Organic, cold-pressed, made in the USA for healthy hair, skin, lashes, and brows.",
-        "pages_heading": "Pages",
-        "pages_menu": "footer",
-        "policies_heading": "Policies",
-        "policies_menu": "policies",
-        "social_heading": "Stay Connected",
-        "copyright_text": "© 2025 Roots Organic Castor Oil.",
-        "show_payment_icons": true,
-        "background_image": "shopify://shop_images/footer-img.png"
-      }
-    }
-  },
-  "order": [
-    "footer"
-  ]
+  "sections": {},
+  "order": []
 }
