@@ -14,13 +14,6 @@
     "header": {
       "type": "header",
       "blocks": {
-        "social_fTM8et": {
-          "type": "social",
-          "settings": {
-            "platform": "linkedin",
-            "url": ""
-          }
-        },
         "social_qpTdPK": {
           "type": "social",
           "settings": {
@@ -44,7 +37,6 @@
         }
       },
       "block_order": [
-        "social_fTM8et",
         "social_qpTdPK",
         "social_em4GMM",
         "social_eAT6iw"
