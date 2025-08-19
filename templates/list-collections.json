@@ -19,7 +19,9 @@
     "main": {
       "type": "collections",
       "settings": {
-        "product": "16-fl-oz-organic-castor-oil"
+        "layout_1_product": "16-fl-oz-organic-castor-oil",
+        "layout_2_product": "8-fl-oz-organic-castor-oil",
+        "layout_3_product": "16-fl-oz-organic-castor-oil"
       }
     },
     "why_choose": {
