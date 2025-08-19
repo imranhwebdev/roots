@@ -1,23 +1,298 @@
-{% comment %}
-  This section is used in the 404 template to render page shown when customers
-  enter an invalid store URL.
-
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/404
-{% endcomment %}
-
-<h1>{{ '404.title' | t }}</h1>
-
-<p>
-  {{ '404.not_found' | t }}
-</p>
-
-<a href="{{ routes.all_products_collection_url }}">
-  {{ '404.back_to_shopping' | t }}
-</a>
+<div class="footer bg-[#F0ECDC] pt-12.5 md:pt-16 lg:pt-20 xl:pt-25 pb-6 md:pb-7 lg:pb-8 relative z-1">
+  <div class="container">
+    <div class="flex flex-col md:flex-row justify-between flex-wrap gap-4 md:flex-nowrap mb-8 md:mb-10 lg:mb-14 xl:mb-16 2xl:mb-20">
+      <div class="w-full md:w-5/12 xl:w-3/12">
+        <div class="">
+          {% if section.settings.logo_image %}
+            <img
+              src="{{ section.settings.logo_image | img_url: 'master' }}"
+              class="w-21 md:w-30 2xl:w-60.5 h-8.5 md:15  2xl:h-21 mb-5"
+              width=""
+              height=""
+              alt="{{ section.settings.logo_alt | default: shop.name }}"
+            >
+          {% endif %}
+          {% if section.settings.description %}
+            <p class="text-sm md:text-base lg:text-lg !leading-[1.6] text-[#514849] font-poppins">
+              {{ section.settings.description }}
+            </p>
+          {% endif %}
+        </div>
+      </div>
+      <div class="w-full md:w-7/12 xl:w-6/12">
+        <div class="flex justify-between flex-wrap gap-5 md:gap-0">
+          <div class="">
+            <p class="text-2xl font-medium !leading-[1.6] text-[#0D2E1D] mb-2">
+              {{ section.settings.pages_heading | default: 'Pages' }}
+            </p>
+            <ul>
+              {% for link in section.settings.pages_menu.links %}
+                <li class="mb-2 lg:mb-2.5">
+                  <a
+                    href="{{ link.url }}"
+                    class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]"
+                  >
+                    {{- link.title -}}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="">
+            <p class="text-2xl font-medium !leading-[1.6] text-[#0D2E1D] mb-2">
+              {{ section.settings.policies_heading | default: 'Policies' }}
+            </p>
+            <ul>
+              {% for link in section.settings.policies_menu.links %}
+                <li class="mb-2 lg:mb-2.5">
+                  <a
+                    href="{{ link.url }}"
+                    class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]"
+                  >
+                    {{- link.title -}}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="">
+            <p class="text-2xl font-medium !leading-[1.6] text-[#0D2E1D] mb-2">
+              {{ section.settings.social_heading | default: 'Stay Connected' }}
+            </p>
+            <ul class="hidden md:block">
+              {% for block in section.blocks %}
+                {% if block.type == 'social_link' %}
+                  <li class="mb-2 lg:mb-2.5">
+                    <a
+                      href="{{ block.settings.url }}"
+                      class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]"
+                    >
+                      {{- block.settings.title -}}
+                    </a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+            <div class="flex items-center gap-3 md:hidden">
+              {% for block in section.blocks %}
+                {% if block.type == 'social_link' and block.settings.icon %}
+                  <a
+                    href="{{ block.settings.url }}"
+                    class="size-14 rounded-full bg-primary p-3.5 flex items-center justify-center transform hover:scale-[1.04] ease-in-out duration-300"
+                    ><img
+                      src="{{ block.settings.icon | img_url: 'master' }}"
+                      class="size-full"
+                      width=""
+                      height=""
+                      alt="{{ block.settings.title }}"
+                  ></a>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap items-center justify-between gap-4 pt-5 md:pt-0 border-t md:border-t-0 border-t-[#D1CDCE]">
+      <p class="text-[#797375)] md:text-[#514849] text-xl !leading-[1.2] md:!leading-normal order-2 md:order-1">
+        {{ section.settings.copyright_text | default: '© 2025 Roots Organic Castor Oil.' }}
+      </p>
+      {% if section.settings.show_payment_icons %}
+        <div class="flex items-center gap-3 lg:gap-2.5 mb-5 md:mb-0 order-1 md:order-2">
+          {% for block in section.blocks %}
+            {% if block.type == 'payment_icon' %}
+              <div class="w-11.5 h-8 border-[.8px] border-[#D9D9D9] rounded-[5px]">
+                <img
+                  src="{{ block.settings.icon | img_url: 'master' }}"
+                  class="size-full rounded-[5px] "
+                  width=""
+                  height=""
+                  alt="{{ block.settings.name }}"
+                >
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  {% if section.settings.background_image %}
+    <img
+      src="{{ section.settings.background_image | img_url: 'master' }}"
+      class="w-43 md:w-35 lg:w-50 xl:w-82 h-33 md:h-20 lg:h-30 xl:h-59 absolute bottom-[24%] md:bottom-0 right-0 md:left-[40%] lg:left-[30%] xl:left-[24%]  -z-1"
+      class=""
+      width=""
+      height=""
+      alt=""
+    >
+  {% endif %}
+</div>
 
 {% schema %}
 {
-  "name": "t:general.404",
-  "settings": []
+  "name": "Dynamic Footer",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Footer Logo"
+    },
+    {
+      "type": "text",
+      "id": "logo_alt",
+      "label": "Logo Alt Text"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Footer Description",
+      "default": "Pure, premium beauty care inspired by nature. USDA Organic, cold-pressed, made in the USA for healthy hair, skin, lashes, and brows."
+    },
+    {
+      "type": "text",
+      "id": "pages_heading",
+      "label": "Pages Section Title",
+      "default": "Pages"
+    },
+    {
+      "type": "link_list",
+      "id": "pages_menu",
+      "label": "Pages Menu"
+    },
+    {
+      "type": "text",
+      "id": "policies_heading",
+      "label": "Policies Section Title",
+      "default": "Policies"
+    },
+    {
+      "type": "link_list",
+      "id": "policies_menu",
+      "label": "Policies Menu"
+    },
+    {
+      "type": "text",
+      "id": "social_heading",
+      "label": "Social Section Title",
+      "default": "Stay Connected"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright Text",
+      "default": "© 2025 Roots Organic Castor Oil."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show Payment Icons",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Footer Background Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "social_link",
+      "name": "Social Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Social Platform Name"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Social Link URL"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Social Icon (for mobile)"
+        }
+      ]
+    },
+    {
+      "type": "payment_icon",
+      "name": "Payment Icon",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Payment Method Name"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Payment Icon"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Dynamic Footer",
+      "blocks": [
+        {
+          "type": "social_link",
+          "settings": {
+            "title": "Instagram"
+          }
+        },
+        {
+          "type": "social_link",
+          "settings": {
+            "title": "Facebook"
+          }
+        },
+        {
+          "type": "social_link",
+          "settings": {
+            "title": "Twitter"
+          }
+        },
+        {
+          "type": "social_link",
+          "settings": {
+            "title": "TikTok"
+          }
+        },
+        {
+          "type": "payment_icon",
+          "settings": {
+            "name": "PayPal"
+          }
+        },
+        {
+          "type": "payment_icon",
+          "settings": {
+            "name": "Visa"
+          }
+        },
+        {
+          "type": "payment_icon",
+          "settings": {
+            "name": "Mastercard"
+          }
+        },
+        {
+          "type": "payment_icon",
+          "settings": {
+            "name": "Apple Pay"
+          }
+        },
+        {
+          "type": "payment_icon",
+          "settings": {
+            "name": "Google Pay"
+          }
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

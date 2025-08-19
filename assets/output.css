@@ -451,6 +451,9 @@
   .h-20 {
     height: calc(var(--spacing) * 20);
   }
+  .h-21 {
+    height: calc(var(--spacing) * 21);
+  }
   .h-25 {
     height: calc(var(--spacing) * 25);
   }
@@ -462,6 +465,9 @@
   }
   .h-53 {
     height: calc(var(--spacing) * 53);
+  }
+  .h-59 {
+    height: calc(var(--spacing) * 59);
   }
   .h-68 {
     height: calc(var(--spacing) * 68);
@@ -529,8 +535,14 @@
   .w-21 {
     width: calc(var(--spacing) * 21);
   }
+  .w-30 {
+    width: calc(var(--spacing) * 30);
+  }
   .w-43 {
     width: calc(var(--spacing) * 43);
+  }
+  .w-60 {
+    width: calc(var(--spacing) * 60);
   }
   .w-64 {
     width: calc(var(--spacing) * 64);
@@ -540,6 +552,9 @@
   }
   .w-78 {
     width: calc(var(--spacing) * 78);
+  }
+  .w-82 {
+    width: calc(var(--spacing) * 82);
   }
   .w-auto {
     width: auto;
@@ -863,6 +878,9 @@
   .to-green-800 {
     --tw-gradient-to: var(--color-green-800);
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+  .object-contain {
+    object-fit: contain;
   }
   .object-cover {
     object-fit: cover;
