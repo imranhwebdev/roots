@@ -1,3 +1,163 @@
-<div class="register-page">
-  <h1>Register page</h1>
+<div class="register-page grid grid-cols-1 md:grid-cols-2 bg-[#1E6C44] min-h-screen">
+  <div class="overflow-auto py-25 max-h-screen">
+     <div class="w-full mx-auto px-5 min-w-full 2xl:min-w-164 lg:w-53.5 mb-7.5 lg:mb-9 xl:mb-11 2xl:mb-12.5">
+        <div class="w-31.5 mb-7.5 md:mb-9 lg:mb-11 xl:mb-12.5 mx-auto">
+          <img src="/assets/login-icon.png" class="size-full object-center" alt="" width="" height="">
+        </div>
+        <p class="text-white text-2xl lg:text-3xl xl:text-[32px] font-medium !leading-[1.25] font-poppins mb-1.4 lg:mb-3">
+          Sign Up
+        </p>
+        <p class="text-[#B7D6C6] text-base md:text-lg xl:text-xl !leading-[1.6]">
+          Fill your information below or register with your account.
+        </p>
+        <form method="post" action="#" class=" my-6 lg:my-8 xl:my-10">
+          <div class="flex flex-col lg:flex-row flex-wrap lg:flex-nowrap gap-4 lg:gap-5  lg:mb-5">
+            <div class="w-full mb-4 md:mb-0">
+              <label class="block text-white text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25] font-poppins"
+                >First Name*</label
+              >
+              <input
+                placeholder="Enter First Name"
+                type="text"
+                class="w-full text-base md:text-lg lg:text-xl focus:outline-0 !leading-[1.2] text-[#B7D6C6] placeholder:text-[#B7D6C6] border font-poppins border-[#B7D6C6] bg-[#2A7A51] py-4 lg:py-5 px-5 lg:px-6 rounded-lg "
+              >
+            </div>
+            <div class="w-full mb-4 lg:mb-0">
+              <label class="block text-white text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25] font-poppins"
+                >Last Name*</label
+              >
+              <input
+                placeholder="Enter Last Name"
+                type="text"
+                class="w-full text-base md:text-lg lg:text-xl focus:outline-0 !leading-[1.2] text-[#B7D6C6] placeholder:text-[#B7D6C6] border font-poppins border-[#B7D6C6] bg-[#2A7A51] py-4 lg:py-5 px-5 lg:px-6 rounded-lg "
+              >
+            </div>
+          </div>
+          <div class="w-full mb-4 lg:mb-5">
+            <label class="block text-white text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25] font-poppins"
+              >Email*</label
+            >
+            <input
+              placeholder="Enter Email Address"
+              type="email"
+              class="w-full text-base md:text-lg lg:text-xl focus:outline-0 !leading-[1.2] text-[#B7D6C6] placeholder:text-[#B7D6C6] border font-poppins border-[#B7D6C6] bg-[#2A7A51] py-4 lg:py-5 px-5 lg:px-6 rounded-lg "
+            >
+          </div>
+          <div class="w-full mb-4 lg:mb-5 ">
+            <label class="block text-white text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25] font-poppins"
+              >Password*</label
+            >
+            <div class="relative z-1 mb-3">
+              <button
+                type="button"
+                id="togglePassword"
+                class="eyebtn cursor-pointer absolute top-1/2 right-4 -translate-y-1/2 z-2"
+              >
+                <svg
+                  id="eyeIcon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="25"
+                  viewBox="0 0 24 25"
+                  fill="none"
+                >
+                  <path d="M2.68936 7.28269C2.52619 6.90196 2.08528 6.7256 1.70456 6.88877C1.32384 7.05193 1.14747 7.49284 1.31064 7.87356L2 7.57812L2.68936 7.28269ZM15.5872 13.9068L15.3125 13.2089L15.5872 13.9068ZM9.04145 14.3159C9.26736 13.9687 9.16904 13.5041 8.82185 13.2782C8.47466 13.0523 8.01008 13.1506 7.78417 13.4978L8.41281 13.9068L9.04145 14.3159ZM6.37136 15.6691C6.14545 16.0163 6.24377 16.4809 6.59096 16.7068C6.93815 16.9327 7.40273 16.8344 7.62864 16.4872L7 16.0781L6.37136 15.6691ZM22.6894 7.87356C22.8525 7.49284 22.6762 7.05193 22.2954 6.88877C21.9147 6.7256 21.4738 6.90196 21.3106 7.28269L22 7.57812L22.6894 7.87356ZM19 11.707L18.4867 11.1601V11.1601L19 11.707ZM19.9697 13.7373C20.2626 14.0302 20.7374 14.0302 21.0303 13.7373C21.3232 13.4444 21.3232 12.9695 21.0303 12.6766L20.5 13.207L19.9697 13.7373ZM11.25 17.0781C11.25 17.4923 11.5858 17.8281 12 17.8281C12.4142 17.8281 12.75 17.4923 12.75 17.0781H12H11.25ZM16.3714 16.4872C16.5973 16.8344 17.0619 16.9327 17.409 16.7068C17.7562 16.4809 17.8545 16.0163 17.6286 15.6691L17 16.0781L16.3714 16.4872ZM5.53033 12.2373C5.82322 11.9444 5.82322 11.4695 5.53033 11.1766C5.23744 10.8837 4.76256 10.8837 4.46967 11.1766L5 11.707L5.53033 12.2373ZM2.96967 12.6766C2.67678 12.9695 2.67678 13.4444 2.96967 13.7373C3.26256 14.0302 3.73744 14.0302 4.03033 13.7373L3.5 13.207L2.96967 12.6766ZM12 14.5781V13.8281C8.77611 13.8281 6.46133 12.2227 4.9246 10.5678C4.15645 9.74056 3.59325 8.91096 3.22259 8.28826C3.03769 7.97762 2.90187 7.72044 2.8134 7.5435C2.76919 7.45508 2.73689 7.38687 2.71627 7.34224C2.70597 7.31993 2.69859 7.30353 2.69411 7.29346C2.69187 7.28842 2.69036 7.28497 2.68957 7.28316C2.68917 7.28225 2.68896 7.28175 2.68892 7.28167C2.68891 7.28163 2.68893 7.2817 2.68901 7.28186C2.68904 7.28195 2.68913 7.28215 2.68915 7.2822C2.68925 7.28243 2.68936 7.28269 2 7.57812C1.31064 7.87356 1.31077 7.87388 1.31092 7.87421C1.31098 7.87436 1.31114 7.87473 1.31127 7.87502C1.31152 7.87562 1.31183 7.87632 1.31218 7.87713C1.31287 7.87874 1.31376 7.88078 1.31483 7.88324C1.31698 7.88816 1.31988 7.89475 1.32353 7.90296C1.33083 7.91937 1.34115 7.94228 1.35453 7.97124C1.38127 8.02914 1.42026 8.11133 1.47176 8.21432C1.57469 8.42018 1.72794 8.70988 1.93366 9.05549C2.34425 9.74529 2.96855 10.6657 3.8254 11.5885C5.53867 13.4335 8.22389 15.3281 12 15.3281V14.5781ZM15.5872 13.9068L15.3125 13.2089C14.3421 13.5909 13.2417 13.8281 12 13.8281V14.5781V15.3281C13.4382 15.3281 14.7246 15.0524 15.8619 14.6047L15.5872 13.9068ZM8.41281 13.9068L7.78417 13.4978L6.37136 15.6691L7 16.0781L7.62864 16.4872L9.04145 14.3159L8.41281 13.9068ZM22 7.57812C21.3106 7.28269 21.3107 7.28253 21.3108 7.28239C21.3108 7.28236 21.3108 7.28222 21.3109 7.28215C21.3109 7.282 21.311 7.28189 21.311 7.28181C21.3111 7.28165 21.3111 7.28162 21.3111 7.28172C21.311 7.28192 21.3107 7.28265 21.3101 7.28388C21.309 7.28635 21.307 7.29087 21.3041 7.29737C21.2983 7.31035 21.2889 7.33122 21.2758 7.35937C21.2495 7.41569 21.2086 7.50108 21.1526 7.61079C21.0406 7.83039 20.869 8.14643 20.6354 8.52133C20.1669 9.27328 19.4563 10.2501 18.4867 11.1601L19 11.707L19.5133 12.2538C20.6023 11.2316 21.3917 10.144 21.9085 9.31459C22.1676 8.89881 22.36 8.54493 22.4889 8.29228C22.5533 8.16587 22.602 8.06455 22.6353 7.9932C22.6519 7.95751 22.6647 7.9293 22.6737 7.90917C22.6782 7.8991 22.6818 7.89105 22.6844 7.88509C22.6857 7.88211 22.6867 7.87965 22.6876 7.87773C22.688 7.87677 22.6883 7.87594 22.6886 7.87524C22.6888 7.8749 22.6889 7.87458 22.689 7.8743C22.6891 7.87416 22.6892 7.87398 22.6892 7.87391C22.6893 7.87373 22.6894 7.87356 22 7.57812ZM19 11.707L18.4867 11.1601C17.6277 11.9664 16.5739 12.7125 15.3125 13.2089L15.5872 13.9068L15.8619 14.6047C17.3355 14.0247 18.5466 13.1611 19.5133 12.2538L19 11.707ZM19 11.707L18.4697 12.2373L19.9697 13.7373L20.5 13.207L21.0303 12.6766L19.5303 11.1766L19 11.707ZM12 14.5781H11.25V17.0781H12H12.75V14.5781H12ZM15.5872 13.9068L14.9586 14.3159L16.3714 16.4872L17 16.0781L17.6286 15.6691L16.2158 13.4978L15.5872 13.9068ZM5 11.707L4.46967 11.1766L2.96967 12.6766L3.5 13.207L4.03033 13.7373L5.53033 12.2373L5 11.707Z" fill="white"/>
+                </svg>
+              </button>
+              <input
+                id="passwordInput"
+                placeholder="Enter Password"
+                type="password"
+                class="w-full text-base md:text-lg lg:text-xl focus:outline-0 !leading-[1.2] text-[#B7D6C6] placeholder:text-[#B7D6C6] border font-poppins  border-[#B7D6C6] bg-[#2A7A51] py-4 lg:py-5 px-5 lg:px-6 rounded-lg "
+              >
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center  gap-1.5 lg:gap-2">
+                <label class="flex  xl:items-center gap-2 cursor-pointer">
+                  <input type="checkbox" class="hidden peer">
+                  <span class="w-[22px] h-[22px] border border-white bg-[#1E6C44] p-1 peer-checked:bg-white rounded-sm flex items-center justify-center">
+                    <!-- check icon -->
+                    <svg
+                      class="w-4 h-4 text-white hidden peer-checked:block"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      viewBox="0 0 24 24"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <div class="xl:flex items-center  gap-1">
+                    <p class="text-white text-base md:text-lg lg:text-xl font-poppins !leading-[1.2] flex  items-center gap-1">Agree with <a href="#" class="text-[#FFC801] !underline">Terms & Condition </a> and</p>
+                  <a href="#" class="text-base md:text-lg lg:text-xl mt-2 lg:mt-0 block font-poppins !leading-[1.2] text-[#FFC801] !underline"> Privacy Policy</a>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="w-full mb-4 lg:mb-5">
+            <button
+              type="submit"
+              class="text-[#1F1904] text-base md:text-lg lg:text-xl py-4 lg:py-5 w-full cursor-pointer !leading-[1.2] font-medium font-poppins text-center px-5 rounded-lg bg-[#FFC801]"
+            >
+              Sign Up
+            </button>
+          </div>
+        </form>
+
+        <div class="relative z-1 mb-6 lg:mb-8 xl:mb -10">
+          <div class="h-[1px] w-[35%] 2xl:w-[40%] bg-[#B7D6C6] absolute left-0 top-1/2 -translate-y-1/2 "></div>
+          <div class="h-[1px] w-[35%] 2xl:w-[40%] bg-[#B7D6C6] absolute right-0 top-1/2 -translate-y-1/2 "></div>
+          <p class=" text-white text-base md:text-lg lg:text-xl  !leading-[1.2] font-medium font-poppins text-center">
+            Sign In with
+          </p>
+        </div>
+        <button class="text-[#1E6C44] text-base md:text-lg lg:text-xl py-4 lg:py-5 w-full flex items-center justify-center gap-1.5 lg:gap-2 cursor-pointer !leading-[1.2] font-medium font-poppins text-center px-5 rounded-lg bg-white">
+          <span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="!size-4.5 lg:!size-6"
+              width="100%"
+              height="100%"
+              viewBox="0 0 24 25"
+              fill="none"
+            >
+              <g clip-path="url(#clip0_2074_5320)">
+                <path d="M8.36055 1.36805C5.96258 2.19992 3.89457 3.77886 2.46029 5.87292C1.026 7.96699 0.301037 10.4658 0.391883 13.0024C0.482728 15.5389 1.38459 17.9795 2.96501 19.9655C4.54543 21.9516 6.72109 23.3786 9.17243 24.0368C11.1598 24.5496 13.2419 24.5721 15.2399 24.1024C17.0499 23.6959 18.7233 22.8262 20.0962 21.5787C21.5251 20.2406 22.5622 18.5383 23.0962 16.6549C23.6765 14.6068 23.7798 12.4529 23.3981 10.3587H12.2381V14.988H18.7012C18.572 15.7264 18.2952 16.4311 17.8873 17.06C17.4795 17.6889 16.9489 18.229 16.3274 18.648C15.5382 19.1701 14.6485 19.5214 13.7156 19.6793C12.7798 19.8533 11.82 19.8533 10.8843 19.6793C9.93591 19.4832 9.03874 19.0918 8.24993 18.5299C6.98271 17.6329 6.0312 16.3585 5.53118 14.8887C5.02271 13.3913 5.02271 11.7679 5.53118 10.2705C5.8871 9.22095 6.47549 8.2653 7.25243 7.47492C8.14154 6.55382 9.26718 5.89541 10.5058 5.57194C11.7445 5.24846 13.0484 5.27242 14.2743 5.64117C15.232 5.93515 16.1078 6.4488 16.8318 7.14117C17.5606 6.41617 18.2881 5.6893 19.0143 4.96055C19.3893 4.56867 19.7981 4.19555 20.1674 3.7943C19.0622 2.76581 17.765 1.96553 16.3499 1.4393C13.7731 0.503652 10.9536 0.478507 8.36055 1.36805Z" fill="white"/>
+                <path d="M8.3607 1.367C10.9536 0.476861 13.7731 0.501343 16.3501 1.43638C17.7654 1.96619 19.062 2.77033 20.1657 3.80263C19.7907 4.20388 19.3951 4.57888 19.0126 4.96888C18.2851 5.69513 17.5582 6.41888 16.832 7.14013C16.1079 6.44776 15.2321 5.93411 14.2745 5.64013C13.0489 5.27008 11.7451 5.24474 10.5061 5.5669C9.26712 5.88905 8.14079 6.54624 7.2507 7.46638C6.47377 8.25676 5.88538 9.21241 5.52945 10.262L1.64258 7.25263C3.03384 4.49368 5.44273 2.3833 8.3607 1.367Z" fill="#E33629"/>
+                <path d="M0.611401 10.2352C0.820316 9.19977 1.16716 8.19708 1.64265 7.25391L5.52953 10.2708C5.02105 11.7682 5.02105 13.3915 5.52953 14.8889C4.23453 15.8889 2.9389 16.8939 1.64265 17.9039C0.452308 15.5345 0.0892746 12.8348 0.611401 10.2352Z" fill="#F8BD00"/>
+                <path d="M12.2381 10.3555H23.3981C23.7799 12.4497 23.6766 14.6036 23.0963 16.6517C22.5623 18.5351 21.5252 20.2374 20.0963 21.5755C18.8419 20.5967 17.5819 19.6255 16.3275 18.6467C16.9494 18.2272 17.4802 17.6865 17.8881 17.057C18.296 16.4274 18.5726 15.722 18.7013 14.983H12.2381C12.2363 13.4417 12.2381 11.8986 12.2381 10.3555Z" fill="#587DBD"/>
+                <path d="M1.64062 17.9037C2.93687 16.9037 4.2325 15.8987 5.5275 14.8887C6.02851 16.359 6.98138 17.6335 8.25 18.5299C9.04126 19.0892 9.94037 19.4774 10.89 19.6699C11.8257 19.8439 12.7855 19.8439 13.7212 19.6699C14.6542 19.512 15.5439 19.1607 16.3331 18.6387C17.5875 19.6174 18.8475 20.5887 20.1019 21.5674C18.7292 22.8157 17.0558 23.6859 15.2456 24.093C13.2476 24.5627 11.1655 24.5402 9.17812 24.0274C7.60632 23.6077 6.13814 22.8679 4.86562 21.8543C3.51874 20.785 2.41867 19.4374 1.64062 17.9037Z" fill="#319F43"/>
+              </g>
+              <defs>
+                <clipPath id="clip0_2074_5320">
+                  <rect width="24" height="24" fill="white" transform="translate(0 0.578125)"/>
+                </clipPath>
+              </defs>
+            </svg>
+          </span>
+          Sign In With Google
+        </button>
+        <p class="text-white text-base md:text-lg lg:text-xl mt-10 lg:mt-12.5 text-center ">
+          Already have an account? <a href={{routes.account_login_url}} class="text-[#FFC801] !underline">Sign In</a>
+        </p>
+      </div>
+  </div>
+  <div class="hidden md:flex bg-[#FFC801] justify-end py-13 h-screen">
+    <img class="w-full object-contain h-full" src="/assets/login-img.png" alt="" width="100" height="100">
+  </div>
 </div>
+
+<script>
+  const togglePassword = document.getElementById('togglePassword');
+  const passwordInput = document.getElementById('passwordInput');
+  const eyeIcon = document.getElementById('eyeIcon');
+
+  togglePassword.addEventListener('click', () => {
+    const isPassword = passwordInput.type === 'password';
+    passwordInput.type = isPassword ? 'text' : 'password';
+
+    // Optional: change eye icon color or style
+    eyeIcon.setAttribute('fill', isPassword ? '#FFD700' : 'white');
+  });
+</script>
