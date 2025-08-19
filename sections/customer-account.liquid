@@ -7,71 +7,143 @@
     <p>Manage your details, track orders, and enjoy a seamless shopping experience.</p>
   </div>
 
-  <div class="flex max-w-6xl mx-auto mt-8 gap-6 px-6">
+  <div class="flex flex-col md:flex-row md:flex-nowrap flex-wrap  xl:w-11/12 mx-auto  gap-6 px-6 justify-between ga-5 py-10 md:py-16 lg:py-20 xl:py-25">
     <!-- Sidebar Tabs -->
-    <aside class="w-1/4">
+    <aside class="w-full md:w-4/12 xl:w-4/12">
       <ul class="space-y-2">
         <li>
-          <button class="tab-btn w-full text-left px-4 py-3 rounded bg-green-700 text-white" data-tab="info">
+          <button
+            class="tab-btn cursor-pointer text-[#514849] w-full text-left text-lg md:text-xl lg:text-[26px] py-4 md:py-5 lg:py-5.5 px-5 md:px-6 lg:px-8 mb-2 md:mb-3 2xl:mb-4  font-medium !leading-[1.2] font-poppins  border md:border-[1.2px] border-[#E3E2E0] rounded-lg "
+            data-tab="info"
+          >
             Personal Information
           </button>
         </li>
         <li>
-          <button class="tab-btn w-full text-left px-4 py-3 rounded bg-gray-100" data-tab="orders">My Orders</button>
+          <button
+            data-tab="orders"
+            class="tab-btn cursor-pointer text-[#514849] w-full text-left text-lg md:text-xl lg:text-[26px] py-4 md:py-5 lg:py-5.5 px-5 md:px-6 lg:px-8 mb-2 md:mb-3 2xl:mb-4  font-medium !leading-[1.2] font-poppins  border md:border-[1.2px] border-[#E3E2E0] rounded-lg "
+            data-tab="info"
+          >
+            My Orders
+          </button>
         </li>
         <li>
-          <button class="tab-btn w-full text-left px-4 py-3 rounded bg-gray-100" data-tab="address">
+          <button
+            data-tab="address"
+            class="tab-btn cursor-pointer text-[#514849] w-full text-left text-lg md:text-xl lg:text-[26px] py-4 md:py-5 lg:py-5.5 px-5 md:px-6 lg:px-8 mb-2 md:mb-3 2xl:mb-4  font-medium !leading-[1.2] font-poppins  border md:border-[1.2px] border-[#E3E2E0] rounded-lg "
+            data-tab="info"
+          >
             Manage Address
           </button>
         </li>
         <li>
-          <button class="tab-btn w-full text-left px-4 py-3 rounded bg-gray-100" data-tab="payment">
+          <button
+            data-tab="payment"
+            class="tab-btn cursor-pointer text-[#514849] w-full text-left text-lg md:text-xl lg:text-[26px] py-4 md:py-5 lg:py-5.5 px-5 md:px-6 lg:px-8 mb-2 md:mb-3 2xl:mb-4  font-medium !leading-[1.2] font-poppins  border md:border-[1.2px] border-[#E3E2E0] rounded-lg "
+            data-tab="info"
+          >
             Payment Method
           </button>
         </li>
         <li>
-          <button class="tab-btn w-full text-left px-4 py-3 rounded bg-gray-100" data-tab="password">
+          <button
+            data-tab="password"
+            class="tab-btn cursor-pointer text-[#514849] w-full text-left text-lg md:text-xl lg:text-[26px] py-4 md:py-5 lg:py-5.5 px-5 md:px-6 lg:px-8 mb-2 md:mb-3 2xl:mb-4  font-medium !leading-[1.2] font-poppins  border md:border-[1.2px] border-[#E3E2E0] rounded-lg "
+            data-tab="info"
+          >
             Password Manager
           </button>
         </li>
         <li>
-          <a href="{{ routes.account_logout_url }}" class="block px-4 py-3 rounded bg-gray-100 text-left">Logout</a>
+          <button
+            data-tab="logout"
+            class="tab-btn cursor-pointer text-[#514849] w-full text-left text-lg md:text-xl lg:text-[26px] py-4 md:py-5 lg:py-5.5 px-5 md:px-6 lg:px-8 mb-2 md:mb-3 2xl:mb-4  font-medium !leading-[1.2] font-poppins  border md:border-[1.2px] border-[#E3E2E0] rounded-lg "
+            data-tab="info"
+          >
+            Logout
+          </button>
         </li>
+        {% comment %}
+          <li>
+            <a
+              href="{{ routes.account_logout_url }}"
+              class="block cursor-pointer text-[#514849] w-full text-left text-lg md:text-xl lg:text-[26px] py-4 md:py-5 lg:py-5.5 px-5 md:px-6 lg:px-8 mb-2 md:mb-3 2xl:mb-4  font-medium !leading-[1.2] font-poppins  border md:border-[1.2px] border-[#E3E2E0] rounded-lg"
+              >Logout</a
+            >
+          </li>
+        {% endcomment %}
       </ul>
     </aside>
 
     <!-- Content Area -->
-    <div class="w-3/4 bg-white p-6 rounded-lg shadow-md">
+    <div class="w-full md:w-8/12 xl:w-7/12">
       <!-- Personal Information -->
       <div class="tab-content" id="info">
-        <div class="flex items-center gap-6 mb-6">
-          <img src="https://i.pravatar.cc/100" class="w-20 h-20 rounded-full object-cover">
+        <div class="mb-5 md:mb-7 lg:mb-8 xl:mb-10 w-30 xl:w-40 h-30 xl:h-40  2xl:mb-11.5 relative z-1">
+          <img
+            src="https://i.pravatar.cc/100"
+            class="size-full rounded-xl lg:rounded-[18px] object-cover"
+            width=""
+            height=""
+          >
+          <a href="#"
+            ><img
+              src="/assets/edit-icon.png"
+              class="absolute -bottom-1 -right-1 z-2 size-9 md:size-10 lg:size-11"
+              width=""
+              height=""
+              alt=""
+          ></a>
         </div>
-        <form method="post" action="/account" class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="block text-sm font-medium">First Name*</label>
-            <input type="text" value="{{ customer.first_name }}" class="w-full border rounded px-3 py-2">
-          </div>
-          <div>
-            <label class="block text-sm font-medium">Last Name*</label>
-            <input type="text" value="{{ customer.last_name }}" class="w-full border rounded px-3 py-2">
-          </div>
-          <div class="col-span-2">
-            <label class="block text-sm font-medium">Email*</label>
+        <form method="post" action="/account" class="grid grid-cols-2 gap-4 lg:gap-5 xl:gap-6">
+          <div class="col-span-2 lg:col-span-1">
+            <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+              >First Name*</label
+            >
             <input
-              type="email"
-              value="{{ customer.email }}"
-              disabled
-              class="w-full border rounded px-3 py-2 bg-gray-100"
+              placeholder="First Name"
+              type="text"
+              value="{{ customer.first_name }}"
+              class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+            >
+          </div>
+          <div class="col-span-2 lg:col-span-1">
+            <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+              >Last Name*</label
+            >
+            <input
+              placeholder="Last Name"
+              type="text"
+              value="{{ customer.last_name }}"
+              class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
             >
           </div>
           <div class="col-span-2">
-            <label class="block text-sm font-medium">Phone*</label>
-            <input type="tel" value="{{ customer.phone }}" class="w-full border rounded px-3 py-2">
+            <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Email*</label>
+            <input
+              placeholder="example@gmail.com"
+              type="email"
+              value="{{ customer.email }}"
+              disabled
+              class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg "
+            >
           </div>
           <div class="col-span-2">
-            <label class="block text-sm font-medium">Gender*</label>
-            <select class="w-full border rounded px-3 py-2">
+            <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Phone*</label>
+            <input
+              placeholder="+0123-456----"
+              type="tel"
+              value="{{ customer.phone }}"
+              class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+            >
+          </div>
+          <div class="col-span-2 relative z-1">
+            <span class="block w-3.5 h-2 rounded-full absolute right-5 lg:right-6 bottom-7"
+              ><img src="/assets/arrow-down.svg" class="size-full" width="" height="" alt=""
+            ></span>
+            <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Gender*</label>
+            <select class="w-full border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 appearance-none rounded-lg text-[#797375] text-lg lg:text-xl !leading-[1.2] font-poppins">
               <option
                 {% if customer.tags contains 'Male' %}
                   selected
@@ -96,16 +168,164 @@
             </select>
           </div>
           <div class="col-span-2">
-            <button type="submit" class="bg-yellow-400 text-black font-semibold px-6 py-2 rounded">
-              Update Changes
-            </button>
+            <button type="submit" class="btn">Update Changes</button>
           </div>
         </form>
       </div>
 
       <!-- Orders -->
       <div class="tab-content hidden" id="orders">
-        <h2 class="text-xl font-semibold mb-4">My Orders</h2>
+        <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap items-center justify-between gap-4 mb-5 md:mb-6 xl:mb-7.5">
+          <h2 class="text-[#21201E] text-2xl lg:text-3xl xl:text-[36px] font-medium !leading-[1.2] font-poppins">
+            My Orders(1)
+          </h2>
+          <div class=" flex items-center gap-3 lg:gap-4">
+            <p class="text-lg lg:text-xl !leading-[1.2] text-[#514849]">Shot by:</p>
+            <div class="relative inline-block text-left">
+              <button
+                id="dropdownBtn"
+                class="inline-flex min-w-27 justify-between items-center text-[#514849] w-full text-lg lg:text-xl !leading-[#514849] py-3 px-5 rounded-lg border border-[#E3E2E0] focus:outline-none"
+              >
+                <span id="selectedText">All</span>
+                <svg
+                  class="h-6.5 w-6 ml-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div
+                id="dropdownMenu"
+                class="absolute hidden"
+              >
+                <div class="py-1 min-w-27">
+                  <button class="dropdown-item block text-[#514849] w-full text-lg lg:text-xl !leading-[#514849]  bg-[#FCFBF7] py-2 px-3  cursor-pointer hover:bg-white">
+                    All
+                  </button>
+                  <button class="dropdown-item block text-[#514849] w-full text-lg lg:text-xl !leading-[#514849] bg-[#FCFBF7] py-2 px-3 cursor-pointer hover:bg-white ">
+                    All2
+                  </button>
+                  <button class="dropdown-item block text-[#514849] w-full text-lg lg:text-xl !leading-[#514849] bg-[#FCFBF7] py-2 px-3  cursor-pointer hover:bg-white">
+                    All3
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-area">
+          <div class="rounded-xl lg:rounded-2xl bg-[#B7D6C6] p-4 lg:p-5 3xl:p-7.5 mb-8 md:mb-10 lg:mb-12 xl:mb-15">
+            <div class="flex flex-col xl:flex-row flex-wrap xl:flex-nowrap items-center gap-4 lg:gap-5 mb-4 lg:mb-5 xl:mb-6">
+              <div class="w-36.5 h-39">
+                <img src="/assets/product2.png" class="size-full rounded-[10px]" width="" height="" alt="">
+              </div>
+              <div class="w-full">
+                <div class="md:flex items-center justify-between gap-3 mb-5 md:mb-6 lg:mb-7.5 xl:mb-8.5">
+                  <h6 class="mb-4 md:mb-0 text-xl lg:text-2xl font-medium !leading-[#0D2E1D] text-green">
+                    Roots Organic Castor Oil – 16 fl oz
+                  </h6>
+                  <p class="text-lg lg:text-xl !leading-[1.2] text-[#514849]">
+                    Total: <span class="font-medium text-[#0D2E1D]">$14.99</span>
+                  </p>
+                </div>
+                <div class="md:flex items-center justify-between gap-3 mb-4 lg:mb-5 xl:mb-6">
+                  <p class="mb-4 md:mb-0 text-lg lg:text-xl !leading-[1.2] text-[#514849]">
+                    Quantity: <span class="font-medium text-[#0D2E1D]">01</span>
+                  </p>
+                  <p class="text-lg lg:text-xl !leading-[1.2] text-[#514849]">
+                    Delivery: <span class="font-medium text-[#0D2E1D]">24 April 2025</span>
+                  </p>
+                </div>
+                <div class="md:flex items-center justify-between gap-3">
+                  <p class="mb-4 md:mb-0 text-lg lg:text-xl !leading-[1.2] text-[#514849]">
+                    Payment By: <span class="font-medium text-[#0D2E1D]">PayPal</span>
+                  </p>
+                  <p class="text-lg lg:text-xl !leading-[1.2] text-[#514849]">
+                    Order ID: <span class="font-medium text-[#0D2E1D]">#SDGT1254FD</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap md:items-center gap-4 lg:gap-5 mb-5 lg:mb-6 xl:mb-8">
+              <span class="md:block text-[#1E6C44] text-lg lg:text-xl max-w-max font-poppins border border-[#B7D6C6] rounded-3xl lg:rounded-[34px] bg-[rgba(30,108,68,0.10)] py-2 lg:py-2.5 px-3 lg:px-4 "
+                >Accepted</span
+              >
+              <p class="text-[#0D2E1D]  text-lg lg:text-xl font-poppins">Your Order has been Accepted</p>
+            </div>
+            <div class="md:flex items-center justify-between gap-4 mb-4 md:mb-0">
+              <div class="flex-col md:flex-row flex-wrap md:flex-nowrap items-center gap-4 lg:gap-5 mb-4 md:mb-0">
+                <a href="#" class="btn w-full md:w-auto mb-4 md:mb-0">Track Order</a>
+                <a
+                  href="#"
+                  class="btn w-full md:w-auto border !border-[#1E6C44] hover:!border-primary !bg-transparent hover:!bg-primary hover:!text-green"
+                  >Invoice</a
+                >
+              </div>
+              <button class="text-[#514849] text-lg lg:text-xl  font-medium !leading-[1.2] font-poppins cursor-pointer">
+                Cancel
+              </button>
+            </div>
+          </div>
+          <h2 class="text-[#21201E] text-2xl lg:text-3xl xl:text-[36px] font-medium !leading-[1.2] font-poppins mb-5 md:mb-6 xl:mb-7.5">
+            Past Order
+          </h2>
+          <div class="rounded-xl lg:rounded-2xl bg-[#B7D6C6] p-4 lg:p-5 3xl:p-7.5 mb-8 md:mb-10 lg:mb-12 xl:mb-15">
+            <div class="flex flex-col xl:flex-row flex-wrap xl:flex-nowrap items-center gap-4 lg:gap-5 mb-4 lg:mb-5 xl:mb-6">
+              <div class="w-36.5 h-39">
+                <img src="/assets/product2.png" class="size-full rounded-[10px]" width="" height="" alt="">
+              </div>
+              <div class="w-full">
+                <div class="md:flex items-center justify-between gap-3 mb-5 md:mb-6 lg:mb-7.5 xl:mb-8.5">
+                  <h6 class="mb-4 md:mb-0 text-xl lg:text-2xl font-medium !leading-[#0D2E1D] text-green">
+                    Roots Organic Castor Oil – 16 fl oz
+                  </h6>
+                  <p class="text-lg lg:text-xl !leading-[1.2] text-[#514849]">
+                    Total: <span class="font-medium text-[#0D2E1D]">$14.99</span>
+                  </p>
+                </div>
+                <div class="md:flex items-center justify-between gap-3 mb-4 lg:mb-5 xl:mb-6">
+                  <p class="mb-4 md:mb-0 text-lg lg:text-xl !leading-[1.2] text-[#514849]">
+                    Quantity: <span class="font-medium text-[#0D2E1D]">01</span>
+                  </p>
+                  <p class="text-lg lg:text-xl !leading-[1.2] text-[#514849]">
+                    Delivery: <span class="font-medium text-[#0D2E1D]">24 April 2025</span>
+                  </p>
+                </div>
+                <div class="md:flex items-center justify-between gap-3">
+                  <p class="mb-4 md:mb-0 text-lg lg:text-xl !leading-[1.2] text-[#514849]">
+                    Payment By: <span class="font-medium text-[#0D2E1D]">PayPal</span>
+                  </p>
+                  <p class="text-lg lg:text-xl !leading-[1.2] text-[#514849]">
+                    Order ID: <span class="font-medium text-[#0D2E1D]">#SDGT1254FD</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap md:items-center gap-4 lg:gap-5 mb-5 lg:mb-6 xl:mb-8">
+              <span class="md:block text-[#1E6C44] text-lg lg:text-xl max-w-max font-poppins border border-[#B7D6C6] rounded-3xl lg:rounded-[34px] bg-[rgba(30,108,68,0.10)] py-2 lg:py-2.5 px-3 lg:px-4 "
+                >Delivered</span
+              >
+              <p class="text-[#0D2E1D]  text-lg lg:text-xl font-poppins">Your Order has been Accepted</p>
+            </div>
+            <div class="md:flex items-center justify-between gap-4 mb-4 md:mb-0">
+              <div class="flex-col md:flex-row flex-wrap md:flex-nowrap items-center gap-4 lg:gap-5 mb-4 md:mb-0">
+                <a href="#" class="btn w-full md:w-auto mb-4 md:mb-0">Buy again</a>
+                <a
+                  href="#"
+                  class="btn w-full md:w-auto border !border-[#1E6C44] hover:!border-primary !bg-transparent hover:!bg-primary hover:!text-green"
+                  >Invoice</a
+                >
+              </div>
+              <button class="text-[#514849] text-lg lg:text-xl  font-medium !leading-[1.2] font-poppins cursor-pointer">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+
         {% if customer.orders.size > 0 %}
           <ul class="space-y-4">
             {% for order in customer.orders %}
@@ -119,16 +339,146 @@
             {% endfor %}
           </ul>
         {% else %}
-          <p>You have no orders yet.</p>
+
         {% endif %}
       </div>
 
       <!-- Addresses -->
       <div class="tab-content hidden" id="address">
-        <h2 class="text-xl font-semibold mb-4">Manage Addresses</h2>
-        <a href="{{ routes.account_addresses_url }}" class="bg-green-600 text-white px-4 py-2 rounded"
-          >Manage Addresses</a
-        >
+        <div class="rounded-lg border  border-[#E3E2E0] bg-[#FCFBF7] p-5 md:p-6 lg:p-7 xl:p-8 3xl:p-10 mb-5 md:pb-6 lg:mb-7 xl:mb-8 3xl:mb-10">
+          <div class="flex flex-col lg:flex-row flex-wrap lg:flex-nowrap lg:items-center lg:justify-between gap-4 mb-5 md:pb-6 lg:mb-7 xl:mb-8 3xl:mb-10">
+            <div class="flex items-center gap-3">
+              <span class="size-13 lg:size-14.5 flex-[0_0_auto] border border-[#E3E2E0] rounded-full p-4 flex items-center justify-center"
+                ><img src="/assets/location.svg" class="size-full" alt="" width="" height=""
+              ></span>
+              <div class="">
+                <h6 class=" text-[#21201E] text-lg lg:text-[22px] font-medium !leading-[1.25] font-poppins mb-2">
+                  Bessie Cooper
+                </h6>
+                <p class="text-[#797375] text-lg lg:text-xl !leading-[1.2]">2464 Royal Ln. Mesa, New Jersey 45463</p>
+              </div>
+            </div>
+            <div class=" max-w-max flex items-center gap-7 lg:gap-8 border border-[#E3E2E0] rounded-[150px] lg:rounded-[198px] py-3.5 lg:py-4.5 px-5.5 lg:px-6.5 relative z-1">
+              <span class="h-4 w-[1px] bg-[#E3E2E0] absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2"></span>
+              <a href="#" class=" size-5 lg:size-6 flex-[0_0_auto]"
+                ><img src="/assets/edit-icon.svg" class="size-full" alt="" width="" height=""
+              ></a>
+              <button class=" size-5 lg:size-6 flex-[0_0_auto] cursor-pointer">
+                <img src="/assets/delete-icon.svg" class="size-full" alt="" width="" height="">
+              </button>
+            </div>
+          </div>
+          <a href="#" class="btn">Add New Address</a>
+        </div>
+        <h2 class=" text-[#0D2E1D] text-xl lg:text-2xl xl:text-[32px] font-medium font-poppins !leading-[1.25] mb-5 lg:mb-6">
+          Add New Address
+        </h2>
+        <form method="post" action="/address" class="grid grid-cols-2 gap-4 lg:gap-5 xl:gap-6">
+          <div class="col-span-2 lg:col-span-1">
+            <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+              >First Name*</label
+            >
+            <input
+              placeholder="First Name"
+              type="text"
+              value="{{ customer.first_name }}"
+              class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+            >
+          </div>
+          <div class="col-span-2 lg:col-span-1">
+            <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+              >Last Name*</label
+            >
+            <input
+              placeholder="Last Name"
+              type="text"
+              value="{{ customer.last_name }}"
+              class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+            >
+          </div>
+          <div class="col-span-2">
+            <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Email*</label>
+            <input
+              placeholder="example@gmail.com"
+              type="email"
+              value="{{ customer.email }}"
+              disabled
+              class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg "
+            >
+          </div>
+          <div class="col-span-2">
+            <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+              >Street Address*</label
+            >
+            <input
+              placeholder="example@gmail.com"
+              type="text"
+              value="{{ customer.address.street }}"
+              class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg "
+            >
+          </div>
+          <div class="col-span-2 lg:col-span-1">
+            <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Phone*</label>
+            <input
+              placeholder="+0123-456----"
+              type="tel"
+              value="{{ customer.phone }}"
+              class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+            >
+          </div>
+          <div class="col-span-2 lg:col-span-1">
+            <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+              >Zip Code*</label
+            >
+            <input
+              placeholder="Cooper"
+              type="text"
+              value="{{ customer.address.zip }}"
+              class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+            >
+          </div>
+          <div class="col-span-2 lg:col-span-1">
+            <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">City*</label>
+            <input
+              placeholder="City*"
+              type="text"
+              value="{{ customer.city }}"
+              class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+            >
+          </div>
+          <div class="col-span-2 lg:col-span-1 relative z-1">
+            <span class=" w-3.5 h-2 rounded-full absolute right-5 lg:right-6 bottom-7"
+              ><img src="/assets/arrow-down.svg" class="size-full" width="" height="" alt=""
+            ></span>
+            <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">State*</label>
+            <select class="w-full border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 appearance-none rounded-lg text-[#797375] text-lg lg:text-xl !leading-[1.2] font-poppins">
+              <option
+                {% if customer.tags contains 'Male' %}
+                  selected
+                {% endif %}
+              >
+                Cooper
+              </option>
+              <option
+                {% if customer.tags contains 'Female' %}
+                  selected
+                {% endif %}
+              >
+                Cooper
+              </option>
+              <option
+                {% if customer.tags contains 'Other' %}
+                  selected
+                {% endif %}
+              >
+                Cooper
+              </option>
+            </select>
+          </div>
+          <div class="col-span-2">
+            <button type="submit" class="btn">Save Address</button>
+          </div>
+        </form>
       </div>
 
       <!-- Payment -->
@@ -141,10 +491,107 @@
 
       <!-- Password -->
       <div class="tab-content hidden" id="password">
-        <h2 class="text-xl font-semibold mb-4">Change Password</h2>
-        <a href="{{ routes.account_login_url }}?reset_password=true" class="bg-green-600 text-white px-4 py-2 rounded"
-          >Reset Password</a
-        >
+        <form method="post" action="/password" class="grid grid-cols-2 gap-4 lg:gap-5 xl:gap-6">
+          <div class="col-span-2 ">
+            <div class="">
+              <div class="relative z-1">
+                <button class="size-5 lg:size-6 absolute z-2 top-[56%] right-5 lg:right-6 cupsor-pointer">
+                  <img src="/assets/eye-icon.svg" class="size-full" alt="" width="" height="">
+                </button>
+                <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+                  >Password*</label
+                >
+                <input
+                  placeholder="Enter Password"
+                  type="password"
+                  value="{{ customer.password }}"
+                  class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+                >
+              </div>
+              <a
+                href="#"
+                class="block mt-3 ml-auto text-base lg:text-lg text-[#1E6C44] text-end !leading-[1.2] !underline"
+                >Forgot Password?</a
+              >
+            </div>
+          </div>
+          <div class="col-span-2 ">
+            <div class="relative z-1">
+              <button class="size-5 lg:size-6 absolute z-2 top-[56%] right-5 lg:right-6 cupsor-pointer">
+                <img src="/assets/eye-icon.svg" class="size-full" alt="" width="" height="">
+              </button>
+              <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+                >New Password</label
+              >
+              <input
+                placeholder="Enter Password"
+                type="password"
+                value="{{ customer.password }}"
+                class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+              >
+            </div>
+          </div>
+          <div class="col-span-2 ">
+            <div class="relative z-1">
+              <button class="size-5 lg:size-6 absolute z-2 top-[56%] right-5 lg:right-6 cupsor-pointer">
+                <img src="/assets/eye-icon.svg" class="size-full" alt="" width="" height="">
+              </button>
+              <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+                >Confirm New Password</label
+              >
+              <input
+                placeholder="Enter Password"
+                type="password"
+                value="{{ customer.password }}"
+                class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+              >
+            </div>
+          </div>
+          <div class="col-span-2">
+            <button type="submit" class="btn !py-4 lg:!py-5 !px-7 lg:!px-8">Update Password</button>
+          </div>
+        </form>
+      </div>
+      <!-- Logout -->
+      <div class="tab-content hidden" id="logout">
+        <div class="">
+          <h5 class="text-2xl lg:text-3xl xl:text-4xl 2xl:text-[40px] font-medium !leading-[1.5] font-poppins text-[#514849] mb-4 lg:mb-5">
+            Logout
+          </h5>
+          <p class="text-[#797375] text-lg lg:text-xl font-poppins !leading-[1.2] mb-5 md:mb-6 lg:mb-7 xl:mb-10">
+            Are you sure you want to log out?
+          </p>
+          <button class="btn !py-4 lg:!py-5 !px-7 lg:!px-8 cursor-pointer !text-[#1F1904] hover:!text-white">
+            Yes, Logout
+          </button>
+        </div>
+
+        {% comment %} Track Your Order {% endcomment %}
+        <div class="w-full lg:w-220.5 mx-auto">
+          <div class="mb-4 lg:mb-5 xl:mb-6 w-full">
+            <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+              >Order ID*</label
+            >
+            <input
+              placeholder="Enter Your Order ID"
+              type="text"
+              value="{{ customer.last_name }}"
+              class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+            >
+          </div>
+          <div class="mb-4 lg:mb-5 xl:mb-6 2xl:mb-8 w-full">
+            <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+              >Billing Email*</label
+            >
+            <input
+              placeholder="Enter Email Address"
+              type="email"
+              value="{{ customer.email }}"
+              class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg "
+            >
+          </div>
+          <button class="btn">Track Order</button>
+        </div>
       </div>
     </div>
   </div>
@@ -154,11 +601,35 @@
 <script>
   document.querySelectorAll('.tab-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.tab-btn').forEach((b) => b.classList.remove('bg-green-700', 'text-white'));
-      btn.classList.add('bg-green-700', 'text-white');
+      document.querySelectorAll('.tab-btn').forEach((b) => b.classList.remove('bg-[#1E6C44]', 'text-white'));
+      btn.classList.add('bg-[#1E6C44]', 'text-white');
 
       document.querySelectorAll('.tab-content').forEach((c) => c.classList.add('hidden'));
       document.getElementById(btn.dataset.tab).classList.remove('hidden');
     });
+  });
+  const btn = document.getElementById('dropdownBtn');
+  const menu = document.getElementById('dropdownMenu');
+  const selectedText = document.getElementById('selectedText');
+  const items = document.querySelectorAll('.dropdown-item');
+
+  // Toggle dropdown open/close
+  btn.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+  });
+
+  // Update selected text
+  items.forEach((item) => {
+    item.addEventListener('click', (e) => {
+      selectedText.textContent = e.target.textContent; // show selected item
+      menu.classList.add('hidden'); // close after selecting
+    });
+  });
+
+  // Close if clicked outside
+  window.addEventListener('click', (e) => {
+    if (!btn.contains(e.target) && !menu.contains(e.target)) {
+      menu.classList.add('hidden');
+    }
   });
 </script>
