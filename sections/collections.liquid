@@ -22,7 +22,7 @@
           <div class="w-full md:w-1/2 xl:w-6/12 mb-8 md:mb-0 order-1 md:order-2">
             <div class=" xl:mr-10">
               <h4 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-green font-bold mb-4">
-                Our Best Seller - {{ product1.title }}
+                {{ product1.title }}
               </h4>
 
               <div class="text-base md:text-lg lg:text-xl font-poppins mb-5">
@@ -37,15 +37,26 @@
                   {% endif %}
                 {% endfor %}
 
-                <div class="prose mb-4">
+                <div class="prose text-para lading-[160%] mb-4">
                   {{ only_paragraphs }}
                 </div>
 
                 {% if list_items.size > 1 %}
-                  <ul class="mb-6 space-y-2 text-green-800 font-medium">
+                  <ul class="mb-6 space-y-2 text-[#1E6C44] font-medium">
                     {% for item in list_items %}
                       {% if item contains '</li>' %}
-                        <li class="flex items-center gap-2">✅ {{ item | split: '</li>' | first | strip }}</li>
+                        <li class="flex items-center gap-2">
+                          <svg
+                            width="25"
+                            height="25"
+                            viewBox="0 0 25 25"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M22.8262 11.5799V12.4999C22.8249 14.6563 22.1267 16.7545 20.8355 18.4817C19.5443 20.2088 17.7295 21.4723 15.6615 22.0838C13.5936 22.6952 11.3834 22.6218 9.36064 21.8744C7.33785 21.1271 5.61083 19.746 4.43713 17.9369C3.26344 16.1279 2.70596 13.9879 2.84785 11.8362C2.98973 9.68443 3.82338 7.63619 5.22445 5.99694C6.62552 4.35768 8.51896 3.21525 10.6224 2.74001C12.7258 2.26477 14.9264 2.4822 16.8962 3.35986M22.8262 4.49986L12.8262 14.5099L9.82618 11.5099" stroke="#1E6C44" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                          {{ item | split: '</li>' | first | strip }}
+                        </li>
                       {% endif %}
                     {% endfor %}
                   </ul>
@@ -80,7 +91,7 @@
           <div class="w-full md:w-1/2 xl:w-6/12 mb-8 md:mb-0 ">
             <div class=" xl:ml-10">
               <h4 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-green font-bold mb-4">
-                Our Signature - {{ product2.title }}
+                {{ product2.title }}
               </h4>
 
               <div class="text-base md:text-lg lg:text-xl font-poppins mb-5">
@@ -95,15 +106,26 @@
                   {% endif %}
                 {% endfor %}
 
-                <div class="prose mb-4">
+                <div class="prose mb-4 text-para text-base lg:text-xl leading-[160%]">
                   {{ only_paragraphs }}
                 </div>
 
                 {% if list_items.size > 1 %}
-                  <ul class="mb-6 space-y-2 text-green-800 font-medium">
+                  <ul class="mb-6 space-y-2 text-[#1E6C44] font-medium">
                     {% for item in list_items %}
                       {% if item contains '</li>' %}
-                        <li class="flex items-center gap-2">✅ {{ item | split: '</li>' | first | strip }}</li>
+                        <li class="flex items-center gap-2">
+                          <svg
+                            width="25"
+                            height="25"
+                            viewBox="0 0 25 25"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M22.8262 11.5799V12.4999C22.8249 14.6563 22.1267 16.7545 20.8355 18.4817C19.5443 20.2088 17.7295 21.4723 15.6615 22.0838C13.5936 22.6952 11.3834 22.6218 9.36064 21.8744C7.33785 21.1271 5.61083 19.746 4.43713 17.9369C3.26344 16.1279 2.70596 13.9879 2.84785 11.8362C2.98973 9.68443 3.82338 7.63619 5.22445 5.99694C6.62552 4.35768 8.51896 3.21525 10.6224 2.74001C12.7258 2.26477 14.9264 2.4822 16.8962 3.35986M22.8262 4.49986L12.8262 14.5099L9.82618 11.5099" stroke="#1E6C44" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                          {{ item | split: '</li>' | first | strip }}
+                        </li>
                       {% endif %}
                     {% endfor %}
                   </ul>
@@ -176,15 +198,26 @@
                   {% endif %}
                 {% endfor %}
 
-                <div class="prose mb-4">
+                <div class="prose  text-para lading-[160% mb-4">
                   {{ only_paragraphs }}
                 </div>
 
                 {% if list_items.size > 1 %}
-                  <ul class="mb-6 space-y-2 text-green-800 font-medium">
+                  <ul class="mb-6 space-y-2 text-[#1E6C44] font-medium">
                     {% for item in list_items %}
                       {% if item contains '</li>' %}
-                        <li class="flex items-center gap-2">✅ {{ item | split: '</li>' | first | strip }}</li>
+                        <li class="flex items-center gap-2">
+                          <svg
+                            width="25"
+                            height="25"
+                            viewBox="0 0 25 25"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M22.8262 11.5799V12.4999C22.8249 14.6563 22.1267 16.7545 20.8355 18.4817C19.5443 20.2088 17.7295 21.4723 15.6615 22.0838C13.5936 22.6952 11.3834 22.6218 9.36064 21.8744C7.33785 21.1271 5.61083 19.746 4.43713 17.9369C3.26344 16.1279 2.70596 13.9879 2.84785 11.8362C2.98973 9.68443 3.82338 7.63619 5.22445 5.99694C6.62552 4.35768 8.51896 3.21525 10.6224 2.74001C12.7258 2.26477 14.9264 2.4822 16.8962 3.35986M22.8262 4.49986L12.8262 14.5099L9.82618 11.5099" stroke="#1E6C44" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                          {{ item | split: '</li>' | first | strip }}
+                        </li>
                       {% endif %}
                     {% endfor %}
                   </ul>

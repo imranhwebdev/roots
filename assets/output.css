@@ -1166,6 +1166,14 @@
     --tw-leading: 1.25 !important;
     line-height: 1.25 !important;
   }
+  .leading-\[160\%\] {
+    --tw-leading: 160%;
+    line-height: 160%;
+  }
+  .leading-\[160\] {
+    --tw-leading: 160;
+    line-height: 160;
+  }
   .leading-normal {
     --tw-leading: var(--leading-normal);
     line-height: var(--leading-normal);
