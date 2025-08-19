@@ -827,6 +827,9 @@
   .\!border-\[\#B7D6C6\] {
     border-color: #B7D6C6 !important;
   }
+  .border-\[\#1E6C44\] {
+    border-color: #1E6C44;
+  }
   .border-\[\#B7D6C6\] {
     border-color: #B7D6C6;
   }
@@ -1261,6 +1264,9 @@
   .text-\[\#EEEFEE\] {
     color: #EEEFEE;
   }
+  .text-\[\#v\] {
+    color: #v;
+  }
   .text-black {
     color: var(--color-black);
   }
@@ -1436,6 +1442,13 @@
     &:hover {
       @media (hover: hover) {
         border-color: var(--color-primary) !important;
+      }
+    }
+  }
+  .hover\:border-primary {
+    &:hover {
+      @media (hover: hover) {
+        border-color: var(--color-primary);
       }
     }
   }
