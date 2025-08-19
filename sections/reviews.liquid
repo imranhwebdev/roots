@@ -1,9 +1,8 @@
 <div class="roots-customer-reviews py-17.5 md:py-20 lg:py-25 xl:py-30 2xl:py-37.5">
   <div class="container">
-    <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-green !leading-[1.25] font-bold font-armany-bold mb-5.5 md:mb-7 lg:mb-10 xl:mb-12.5">
+    <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-green !leading-[1.25] font-bold font-armany-bold mb-5.5 md:mb-7 lg:mb-10 xl:mb-12.5 ms-3">
       Customer Reviews
     </h2>
-    <!-- Add inside product-template.liquid বা main-product.liquid -->
     {% render 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: true %}
   </div>
 </div>
@@ -91,6 +90,13 @@
     .jdgm-carousel__item-wrapper {
       width: calc(100% - 40px) !important;
     }
+    .jdgm-carousel-item__review-body {
+      font-size: 16px;
+    }
+
+    .jdgm-carousel--aligned-theme .jdgm-carousel-item__reviewer-name {
+      font-size: 16px !important;
+    }
   }
   @media (max-width: 767px) {
     .jdgm-carousel--aligned-theme .jdgm-carousel-item {
@@ -98,6 +104,12 @@
     }
     .jdgm-carousel__item-wrapper {
       width: 100% !important;
+    }
+    .jdgm-carousel__item-wrapper {
+      height: 250px !important;
+    }
+    .jdgm-carousel--aligned-theme .jdgm-carousel-item {
+      padding: 15px !important;
     }
   }
 {% endstylesheet %}
