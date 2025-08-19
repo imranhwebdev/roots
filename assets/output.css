@@ -3219,22 +3219,34 @@
 @font-face {
   font-family: 'Armany-regular';
   src: url('{{ "ArmanyRegular.ttf" | asset_url }}') format('truetype');
-  font-display: swap;
 }
 @font-face {
   font-family: 'Armany-Medium';
-  src: url("/assets/ArmanyMedium.ttf") format('truetype');
-  font-display: swap;
+  src: url('{{ "ArmanyMedium.ttf" | asset_url }}') format('truetype');
 }
 @font-face {
   font-family: 'Armany-Semibold';
   src: url('{{ "ArmanySemibold.ttf" | asset_url }}') format('truetype');
-  font-display: swap;
 }
 @font-face {
   font-family: 'Armany-Bold';
   src: url('{{ "ArmanyBold.ttf" | asset_url }}') format('truetype');
-  font-display: swap;
+}
+@font-face {
+  font-family: 'Armany-regular';
+  src: url('/assets/ArmanyRegular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Armany-regular';
+  src: url('/assets/ArmanyMedium.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Armany-regular';
+  src: url('/assets/ArmanySemibold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Armany-regular';
+  src: url('/assets/ArmanyBold.ttf') format('truetype');
 }
 @layer base {
   .btn {
@@ -3310,6 +3322,12 @@
   max-width: 1648px;
   margin-inline: auto;
   padding-inline: 15px;
+}
+body {
+  font-family: "Poppins", sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Armany-regular';
 }
 @property --tw-translate-x {
   syntax: "*";
