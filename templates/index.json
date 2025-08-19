@@ -160,8 +160,8 @@
         "card_4pzHdR": {
           "type": "card",
           "settings": {
-            "card_title": "For Hair",
-            "card_text": "Massage into scalp 3–4 times a week for strength and growth.",
+            "card_title": "For Lashes & Brows",
+            "card_text": "Apply nightly for a fuller, healthier look.",
             "card_image": "shopify://shop_images/use2.png",
             "bg_color": "#b7d6c6"
           }
@@ -169,18 +169,18 @@
         "card_GMV6r7": {
           "type": "card",
           "settings": {
-            "card_title": "For Hair",
-            "card_text": "Massage into scalp 3–4 times a week for strength and growth.",
-            "card_image": "shopify://shop_images/use1.png",
+            "card_title": "For Skin",
+            "card_text": "Smooth onto dry areas for deep hydration.",
+            "card_image": "shopify://shop_images/use3.png",
             "bg_color": "#b7d6c6"
           }
         },
         "card_hLH6qH": {
           "type": "card",
           "settings": {
-            "card_title": "For Hair",
-            "card_text": "Massage into scalp 3–4 times a week for strength and growth.",
-            "card_image": "shopify://shop_images/use1.png",
+            "card_title": "For Wellness Wraps",
+            "card_text": "Enhance results by applying to targeted areas before wrapping.",
+            "card_image": "shopify://shop_images/use4.png",
             "bg_color": "#b7d6c6"
           }
         }
