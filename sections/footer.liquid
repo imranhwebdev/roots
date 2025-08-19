@@ -1,106 +1,172 @@
+<!-- sections/footer.liquid -->
+<div class="footer bg-[#F0ECDC] pt-12.5 md:pt-16 lg:pt-20 xl:pt-25 pb-6 md:pb-7 lg:pb-8 relative z-1">
+  <div class="container">
+    <div class="flex flex-col md:flex-row justify-between flex-wrap gap-4 md:flex-nowrap mb-8 md:mb-10 lg:mb-14 xl:mb-16 2xl:mb-20">
+      <!-- Footer Logo + Description -->
+      <div class="w-full md:w-5/12 xl:w-3/12">
+        <div>
+          {% if section.settings.logo != blank %}
+            <img
+              src="{{ section.settings.logo | image_url }}"
+              class="w-21 md:w-30 2xl:w-60.5 h-8.5 md:h-15 2xl:h-21 mb-5"
+              alt="{{ section.settings.logo.alt | escape }}"
+            >
+          {% endif %}
+          {% if section.settings.description != blank %}
+            <p class="text-sm md:text-base lg:text-lg !leading-[1.6] text-[#514849] font-poppins">
+              {{ section.settings.description }}
+            </p>
+          {% endif %}
+        </div>
+      </div>
 
-  <div class="footer bg-[#F0ECDC] pt-12.5 md:pt-16 lg:pt-20 xl:pt-25 pb-6 md:pb-7 lg:pb-8 relative z-1">
-    <div class="container">
-       <div class="flex flex-col md:flex-row justify-between flex-wrap gap-4 md:flex-nowrap mb-8 md:mb-10 lg:mb-14 xl:mb-16 2xl:mb-20">
-        <div class="w-full md:w-5/12 xl:w-3/12">
-            <div class="">
-              <img src="/assets/footer-icon.png" class="w-21 md:w-30 2xl:w-60.5 h-8.5 md:15  2xl:h-21 mb-5" width="" height="" alt="">
-              <p class="text-sm md:text-base lg:text-lg !leading-[1.6] text-[#514849] font-poppins">Pure, premium beauty care inspired by nature. USDA Organic, cold-pressed, made in the USA for healthy hair, skin, lashes, and brows.</p>
-            </div>
+      <!-- Footer Menus -->
+      <div class="w-full md:w-7/12 xl:w-6/12">
+        <div class="flex justify-between flex-wrap gap-5 md:gap-0">
+          <!-- Pages Menu -->
+          <div>
+            <p class="text-2xl font-medium !leading-[1.6] text-[#0D2E1D] mb-2">
+              {{ section.settings.menu_title }}
+            </p>
+            <ul>
+              {% for link in linklists[section.settings.menu].links %}
+                <li class="mb-2 lg:mb-2.5">
+                  <a
+                    href="{{ link.url }}"
+                    class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]"
+                  >
+                    {{ link.title }}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <!-- Policies Menu -->
+          <div>
+            <p class="text-2xl font-medium !leading-[1.6] text-[#0D2E1D] mb-2">
+              {{ section.settings.policies_title }}
+            </p>
+            <ul>
+              {% for link in linklists[section.settings.policies_menu].links %}
+                <li class="mb-2 lg:mb-2.5">
+                  <a
+                    href="{{ link.url }}"
+                    class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]"
+                  >
+                    {{ link.title }}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <!-- Social Links -->
+          <div>
+            <p class="text-2xl font-medium !leading-[1.6] text-[#0D2E1D] mb-2">Stay Connected</p>
+            <ul class="hidden md:block">
+              {% if section.settings.instagram_url != blank %}
+                <li class="mb-2 lg:mb-2.5">
+                  <a href="{{ section.settings.instagram_url }}" target="_blank">Instagram</a>
+                </li>
+              {% endif %}
+              {% if section.settings.facebook_url != blank %}
+                <li class="mb-2 lg:mb-2.5">
+                  <a href="{{ section.settings.facebook_url }}" target="_blank">Facebook</a>
+                </li>
+              {% endif %}
+              {% if section.settings.twitter_url != blank %}
+                <li class="mb-2 lg:mb-2.5"><a href="{{ section.settings.twitter_url }}" target="_blank">Twitter</a></li>
+              {% endif %}
+              {% if section.settings.tiktok_url != blank %}
+                <li class="mb-2 lg:mb-2.5"><a href="{{ section.settings.tiktok_url }}" target="_blank">TikTok</a></li>
+              {% endif %}
+            </ul>
+          </div>
         </div>
-        <div class="w-full md:w-7/12 xl:w-6/12">
-           <div class="flex justify-between flex-wrap gap-5 md:gap-0">
-            <div class="">
-              <p class="text-2xl font-medium !leading-[1.6] text-[#0D2E1D] mb-2">Pages</p>
-              <ul>
-                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">Shop</a></li>
-                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">How to Use</a></li>
-                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">Blog</a></li>
-                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">FAQs</a></li>
-                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">Contact</a></li>
-              </ul>
-            </div>
-            <div class="">
-              <p class="text-2xl font-medium !leading-[1.6] text-[#0D2E1D] mb-2">Policies</p>
-              <ul>
-                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">Shipping Policy</a></li>
-                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">Privacy Policy</a></li>
-                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">Terms & Conditions</a></li>
-                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">Refund Policy</a></li>
-              </ul>
-            </div>
-            <div class="">
-              <p class="text-2xl font-medium !leading-[1.6] text-[#0D2E1D] mb-2">Stay Connected</p>
-              <ul class="hidden md:block">
-                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">Instagram</a></li>
-                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">Facebook</a></li>
-                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">Twitter</a></li>
-                <li class="mb-2 lg:mb-2.5"><a href="#" class="text-[#514849] hover:ml-1 transform ease-in-out duration-300 text-sm lg:text-lg xl:text-2xl !leading-[1.6]">TikTok</a></li>
-              </ul>
-              <div class="flex items-center gap-3 md:hidden">
-                <a href="#" class="size-14 rounded-full bg-primary p-3.5 flex items-center justify-center transform hover:scale-[1.04] ease-in-out duration-300"><img src="/assets/Facebook.png" class="size-full" width="" height="" alt=""></a>
-                <a href="#" class="size-14 rounded-full bg-primary p-3.5 flex items-center justify-center transform hover:scale-[1.04] ease-in-out duration-300"><img src="/assets/Instagram.png" class="size-full" width="" height="" alt=""></a>
-                <a href="#" class="size-14 rounded-full bg-primary p-3.5 flex items-center justify-center transform hover:scale-[1.04] ease-in-out duration-300"><img src="/assets/tiktolk.png" class="size-full" width="" height="" alt=""></a>
-                <a href="#" class="size-14 rounded-full bg-primary p-3.5 flex items-center justify-center transform hover:scale-[1.04] ease-in-out duration-300"><img src="/assets/x.png" class="size-full" width="" height="" alt=""></a>
-              </div>
-            </div>
-           </div>
-        </div>
-       </div>
-       <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap items-center justify-between gap-4 pt-5 md:pt-0 border-t md:border-t-0 border-t-[#D1CDCE]">
-         <p class="text-[#797375)] md:text-[#514849] text-xl !leading-[1.2] md:!leading-normal order-2 md:order-1">© 2025 Roots Organic Castor Oil.</p>
-         <div class="flex items-center gap-3 lg:gap-2.5 mb-5 md:mb-0 order-1 md:order-2">
-           <div class="w-11.5 h-8 border-[.8px] border-[#D9D9D9] rounded-[5px]"> <img src="/assets/PayPal.png" class="size-full rounded-[5px] " width="" height="" alt=""></div>
-           <div class="w-11.5 h-8 border-[.8px] border-[#D9D9D9] rounded-[5px]"> <img src="/assets/Visa.png" class="size-full rounded-[5px] " width="" height="" alt=""></div>
-           <div class="w-11.5 h-8 border-[.8px] border-[#D9D9D9] rounded-[5px]"> <img src="/assets/Mastercard.png" class="size-full rounded-[5px] " width="" height="" alt=""></div>
-           <div class="w-11.5 h-8 border-[.8px] border-[#D9D9D9] rounded-[5px]"> <img src="/assets/ApplePay.png" class="size-full rounded-[5px] " width="" height="" alt=""></div>
-           <div class="w-11.5 h-8 border-[.8px] border-[#D9D9D9] rounded-[5px]"> <img src="/assets/GooglePay.png" class="size-full rounded-[5px] " width="" height="" alt=""></div>
-         </div>
-       </div>
+      </div>
     </div>
-    <img src="/assets/footer-img.png" class="w-43 md:w-35 lg:w-50 xl:w-82 h-33 md:h-20 lg:h-30 xl:h-59 absolute bottom-[24%] md:bottom-0 right-0 md:left-[40%] lg:left-[30%] xl:left-[24%]  -z-1" class="" width="" height="" alt="">
+
+    <!-- Bottom Row -->
+    <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap items-center justify-between gap-4 pt-5 md:pt-0 border-t md:border-t-0 border-t-[#D1CDCE]">
+      <p class="text-[#797375] md:text-[#514849] text-xl !leading-[1.2] md:!leading-normal order-2 md:order-1">
+        © {{ 'now' | date: '%Y' }}
+        {{ shop.name }}
+      </p>
+
+      {% if section.settings.show_payment_icons %}
+        <div class="flex items-center gap-3 lg:gap-2.5 mb-5 md:mb-0 order-1 md:order-2">
+          {% for type in shop.enabled_payment_types %}
+            <div class="w-11.5 h-8 border-[.8px] border-[#D9D9D9] rounded-[5px]">
+              {{ type | payment_type_svg_tag: class: 'size-full rounded-[5px]' }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-{% stylesheet %}
-  footer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
-  }
-  footer a {
-    text-decoration: none;
-    color: var(--color-foreground);
-  }
-  footer .footer__links,
-  footer .footer__payment {
-    display: flex;
-    gap: 1rem;
-  }
-{% endstylesheet %}
+</div>
 
 {% schema %}
 {
-  "name": "t:general.footer",
+  "name": "Footer",
   "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Footer Logo"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Footer Description"
+    },
+    {
+      "type": "text",
+      "id": "menu_title",
+      "label": "Pages Menu Title",
+      "default": "Pages"
+    },
     {
       "type": "link_list",
       "id": "menu",
-      "label": "t:labels.menu"
+      "label": "Pages Menu"
+    },
+    {
+      "type": "text",
+      "id": "policies_title",
+      "label": "Policies Menu Title",
+      "default": "Policies"
+    },
+    {
+      "type": "link_list",
+      "id": "policies_menu",
+      "label": "Policies Menu"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "twitter_url",
+      "label": "Twitter (X) URL"
+    },
+    {
+      "type": "url",
+      "id": "tiktok_url",
+      "label": "TikTok URL"
     },
     {
       "type": "checkbox",
       "id": "show_payment_icons",
-      "label": "t:labels.show_payment_icons",
+      "label": "Show payment icons",
       "default": true
     }
   ]

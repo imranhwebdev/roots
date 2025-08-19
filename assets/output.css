@@ -1251,6 +1251,13 @@
       }
     }
   }
+  .group-hover\:text-primary {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        color: var(--color-primary);
+      }
+    }
+  }
   .placeholder\:text-\[\#D1CDCE\] {
     &::placeholder {
       color: #D1CDCE;
@@ -1506,6 +1513,11 @@
     @media (width >= 768px) {
       width: calc(var(--spacing) * 14);
       height: calc(var(--spacing) * 14);
+    }
+  }
+  .md\:h-15 {
+    @media (width >= 768px) {
+      height: calc(var(--spacing) * 15);
     }
   }
   .md\:h-20 {
