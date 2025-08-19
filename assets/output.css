@@ -255,6 +255,15 @@
   .top-5 {
     top: calc(var(--spacing) * 5);
   }
+  .top-\[50\%\] {
+    top: 50%;
+  }
+  .top-\[50\] {
+    top: 50;
+  }
+  .top-\[56\%\] {
+    top: 56%;
+  }
   .-right-1 {
     right: calc(var(--spacing) * -1);
   }
@@ -405,6 +414,9 @@
   .ml-1 {
     margin-left: calc(var(--spacing) * 1);
   }
+  .ml-auto {
+    margin-left: auto;
+  }
   .block {
     display: block;
   }
@@ -523,6 +535,9 @@
   .h-\[1px\] {
     height: 1px;
   }
+  .h-\[9\.5px\] {
+    height: 9.5px;
+  }
   .h-\[300px\] {
     height: 300px;
   }
@@ -549,6 +564,9 @@
   }
   .w-3\/4 {
     width: calc(3/4 * 100%);
+  }
+  .w-5 {
+    width: calc(var(--spacing) * 5);
   }
   .w-6 {
     width: calc(var(--spacing) * 6);
@@ -942,6 +960,9 @@
   .p-6 {
     padding: calc(var(--spacing) * 6);
   }
+  .\!px-7 {
+    padding-inline: calc(var(--spacing) * 7) !important;
+  }
   .px-1 {
     padding-inline: calc(var(--spacing) * 1);
   }
@@ -965,6 +986,9 @@
   }
   .px-7 {
     padding-inline: calc(var(--spacing) * 7);
+  }
+  .\!py-4 {
+    padding-block: calc(var(--spacing) * 4) !important;
   }
   .py-1 {
     padding-block: calc(var(--spacing) * 1);
@@ -1037,6 +1061,9 @@
   }
   .text-center {
     text-align: center;
+  }
+  .text-end {
+    text-align: end;
   }
   .text-left {
     text-align: left;
@@ -1197,6 +1224,9 @@
   .text-\[\#F5F5F5\] {
     color: #F5F5F5;
   }
+  .text-\[\[\[\[\[\[\[\[\]\]\]\]\]\]\]\] {
+    color: [[[[[[[]]]]]]];
+  }
   .text-black {
     color: var(--color-black);
   }
@@ -1232,6 +1262,9 @@
   }
   .italic {
     font-style: italic;
+  }
+  .\!underline {
+    text-decoration-line: underline !important;
   }
   .underline {
     text-decoration-line: underline;
@@ -2247,6 +2280,11 @@
       padding: calc(var(--spacing) * 9);
     }
   }
+  .lg\:\!px-8 {
+    @media (width >= 992px) {
+      padding-inline: calc(var(--spacing) * 8) !important;
+    }
+  }
   .lg\:px-2 {
     @media (width >= 992px) {
       padding-inline: calc(var(--spacing) * 2);
@@ -2275,6 +2313,11 @@
   .lg\:px-10 {
     @media (width >= 992px) {
       padding-inline: calc(var(--spacing) * 10);
+    }
+  }
+  .lg\:\!py-5 {
+    @media (width >= 992px) {
+      padding-block: calc(var(--spacing) * 5) !important;
     }
   }
   .lg\:py-2\.5 {
