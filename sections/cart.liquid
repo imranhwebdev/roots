@@ -98,9 +98,10 @@
             </div>
 
             <!-- Checkout Button -->
-            <button
+            <a
+              href="/checkout"
               type="button"
-              onclick="window.location='{{ routes.checkout_url }}'"
+              id="checkout-btn"
               class="btn w-full text-center flex items-center justify-center gap-3"
             >
               Checkout
@@ -109,7 +110,7 @@
                   <path d="M10.832 1L16.332 6.5M16.332 6.5L10.832 12M16.332 6.5L1.66536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </span>
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -166,5 +167,17 @@
         updateCart(row.dataset.key, qty, row);
       });
     });
+  });
+  document.addEventListener('DOMContentLoaded', function () {
+    const checkoutBtn = document.getElementById('checkout-btn');
+
+    if (checkoutBtn) {
+      checkoutBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        this.disabled = true;
+        this.innerHTML = 'Processing...';
+      });
+    }
   });
 </script>
