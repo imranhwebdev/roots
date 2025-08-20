@@ -398,6 +398,9 @@
   .mt-8 {
     margin-top: calc(var(--spacing) * 8);
   }
+  .mt-9 {
+    margin-top: calc(var(--spacing) * 9);
+  }
   .mt-10 {
     margin-top: calc(var(--spacing) * 10);
   }
@@ -2502,6 +2505,11 @@
   .lg\:mt-7 {
     @media (width >= 992px) {
       margin-top: calc(var(--spacing) * 7);
+    }
+  }
+  .lg\:mt-8 {
+    @media (width >= 992px) {
+      margin-top: calc(var(--spacing) * 8);
     }
   }
   .lg\:mt-10 {
