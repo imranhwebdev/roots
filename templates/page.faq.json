@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "common_banner": {
+      "type": "common-banner",
+      "settings": {
+        "default_title": "FAQ",
+      }
+    },
+    "main": {
+      "type": "faq",
+      "settings": {}
+    },
+
+  },
+  "order": [
+    "common_banner",
+    "main",
+  ]
+}

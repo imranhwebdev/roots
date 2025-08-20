@@ -780,6 +780,12 @@
   .max-w-170 {
     max-width: calc(var(--spacing) * 170);
   }
+  .max-w-172 {
+    max-width: calc(var(--spacing) * 172);
+  }
+  .max-w-172\.5 {
+    max-width: calc(var(--spacing) * 172.5);
+  }
   .max-w-\[717px\] {
     max-width: 717px;
   }
@@ -1263,6 +1269,12 @@
   }
   .py-25 {
     padding-block: calc(var(--spacing) * 25);
+  }
+  .py-37 {
+    padding-block: calc(var(--spacing) * 37);
+  }
+  .py-37\.5 {
+    padding-block: calc(var(--spacing) * 37.5);
   }
   .ps-4 {
     padding-inline-start: calc(var(--spacing) * 4);
