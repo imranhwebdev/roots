@@ -2,11 +2,11 @@
   <div class="container">
     <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap gap-5 lg:gap-10 2xl:gap-16 3xl:gap-30 justify-between w-full xl:w-11/12 2xl:w-10/12 mx-auto">
       <!-- Cart Items -->
-      <div class="max-h-max w-full md:w-7/12 flex flex-col gap-6">
+      <div class="max-h-max w-full md:w-7/12 flex flex-col gap-6 ">
         <form id="cart-form" action="{{ routes.cart_url }}" method="post" novalidate>
           {% for item in cart.items %}
             <div
-              class="flex flex-col lg:flex-row flex-wrap lg:flex-nowrap items-center gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-9.5 rounded-xl lg:rounded-2xl border lg:border-[1.5px] border-[#E3E2E0] bg-[#F0ECDC] p-4 lg:p-6"
+              class="flex flex-col lg:flex-row flex-wrap lg:flex-nowrap mb-4 lg:mb-5 items-center gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-9.5 rounded-xl lg:rounded-2xl border lg:border-[1.5px] border-[#E3E2E0] bg-[#F0ECDC] p-4 lg:p-6"
               data-key="{{ item.key }}"
             >
               <!-- Product Image -->
@@ -16,6 +16,8 @@
                     src="{{ item.image | img_url: 'medium' }}"
                     alt="{{ item.product.title }}"
                     class="size-full rounded-[10px]"
+                    width=""
+                    height=""
                   >
                 </a>
               </div>
@@ -27,15 +29,23 @@
                 </p>
 
                 <!-- Quantity Control -->
-                <div class="bg-[#669F7F] flex items-center justify-between gap-3.5 rounded-lg p-2.5 w-34.5 mb-8 md:mb-10 lg:mb-12 xl:mb-14">
-                  <button type="button" class="decrease cursor-pointer">-</button>
+                <div class="bg-[#669F7F]  flex items-center justify-between gap-3.5 rounded-lg p-2.5 w-34.5 mb-8 md:mb-10 lg:mb-12 xl:mb-14">
+                  <button type="button" class="decrease cursor-pointer">
+                    <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3.75 10.5H15.4167" stroke="#ECECEC" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
                   <input
                     type="number"
                     class="qty-input w-8 focus:outline-0 text-lg font-medium font-poppins text-center text-white bg-transparent"
                     value="{{ item.quantity }}"
                     min="0"
                   >
-                  <button type="button" class="increase cursor-pointer">+</button>
+                  <button type="button" class="increase cursor-pointer">
+                    <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M9.99935 4.66602V16.3327M4.16602 10.4993H15.8327" stroke="white" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
                 </div>
 
                 <!-- Price & Remove -->
@@ -43,7 +53,9 @@
                   <h6 class="item-price text-2xl lg:text-3xl xl:text-4xl text-[#0D2E1D] font-medium font-poppins !leading-[1.25]">
                     {{ item.final_line_price | money }}
                   </h6>
-                  <a href="{{ item.url_to_remove }}" class="remove-item text-lg lg:text-xl font-poppins !leading-[1.25]"
+                  <a
+                    href="{{ item.url_to_remove }}"
+                    class="remove-item hover:text-primary transform duration-300 ease-in-out  text-lg lg:text-xl font-poppins !leading-[1.25]"
                     >Cancel</a
                   >
                 </div>
