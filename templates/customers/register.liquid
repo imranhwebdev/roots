@@ -1,3 +1,4 @@
+{% comment %} register-page start--> {% endcomment %}
 <div class="register-page grid grid-cols-1 md:grid-cols-2 bg-[#1E6C44] min-h-screen">
   <div class="overflow-auto py-25 max-h-screen">
      <div class="w-full mx-auto px-5 min-w-full 2xl:min-w-164 lg:w-53.5 mb-7.5 lg:mb-9 xl:mb-11 2xl:mb-12.5">
@@ -146,7 +147,82 @@
   <div class="hidden md:flex bg-[#FFC801] justify-end py-13 h-screen">
     <img class="w-full object-contain h-full" src="/assets/login-img.png" alt="" width="100" height="100">
   </div>
-</div>
+</div> 
+{% comment %} register-page end--> {% endcomment %}
+
+{% comment %}  Verify Code--> {% endcomment %}
+   {% comment %} <div class="Verify Code grid grid-cols-1 md:grid-cols-2 bg-[#1E6C44] min-h-screen">
+    <div class="max-h-screen flex items-center justify-center overflow-auto py-12">
+      <div class="w-full px-5 2xl:px-0 mx-auto max-w-164">
+        <a href="{{routes.root_url}}" class="w-31.5 mb-7.5 md:mb-9 block lg:mb-11 xl:mb-12.5">
+          <img src="/assets/login-icon.png" class="size-full object-center" alt="" width="" height="">
+        </a>
+        <p class="text-white text-2xl lg:text-3xl xl:text-[32px] font-medium !leading-[1.25] font-poppins mb-1.4 lg:mb-3">
+          Verify Code
+        </p>
+        <p class="text-[#B7D6C6] text-base md:text-lg xl:text-xl !leading-[1.6]">
+          Please enter the code we just sent to email
+        </p>
+        <p class="text-[#FFC801] text-base md:text-lg xl:text-xl !leading-[1.2]">example@gmail.com</p>
+        <form method="post" action="#" class=" my-6 lg:my-8 xl:my-10">
+          <div class="w-full mb-4 lg:mb-5">
+            <label class="block text-white text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25] font-poppins"
+              >Code</label
+            >
+            <div class="flex items-center gap-2 lg:gap-2.5 justify-between">
+              <input
+                placeholder="5"
+                type="text"
+                class=" text-base md:text-lg lg:text-xl px-4 md:px-4.5 lg:px-6.5 xl:px-8 2xl:px-11 w-full xl:w-21 2xl:w-25 h-13 lg:h-15 xl:h-20 2xl:h-21 flex items-center justify-center focus:outline-0 !leading-[1.2] text-[#B7D6C6] placeholder:text-[#B7D6C6] border font-poppins border-[#B7D6C6] bg-[#2A7A51]  rounded-lg "
+              >
+              <input
+                placeholder="5"
+                type="text"
+                class=" text-base md:text-lg lg:text-xl px-4 md:px-4.5 lg:px-6.5 xl:px-8 2xl:px-11 w-full xl:w-21 2xl:w-25 h-13 lg:h-15 xl:h-20 2xl:h-21 flex items-center justify-center focus:outline-0 !leading-[1.2] text-[#B7D6C6] placeholder:text-[#B7D6C6] border font-poppins border-[#B7D6C6] bg-[#2A7A51]  rounded-lg "
+              >
+              <input
+                placeholder="5"
+                type="text"
+                class=" text-base md:text-lg lg:text-xl px-4 md:px-4.5 lg:px-6.5 xl:px-8 2xl:px-11 w-full xl:w-21 2xl:w-25 h-13 lg:h-15 xl:h-20 2xl:h-21 flex items-center justify-center focus:outline-0 !leading-[1.2] text-[#B7D6C6] placeholder:text-[#B7D6C6] border font-poppins border-[#B7D6C6] bg-[#2A7A51]  rounded-lg "
+              >
+              <input
+                placeholder="5"
+                type="text"
+                class=" text-base md:text-lg lg:text-xl px-4 md:px-4.5 lg:px-6.5 xl:px-8 2xl:px-11 w-full xl:w-21 2xl:w-25 h-13 lg:h-15 xl:h-20 2xl:h-21 flex items-center justify-center focus:outline-0 !leading-[1.2] text-[#B7D6C6] placeholder:text-[#B7D6C6] border font-poppins border-[#B7D6C6] bg-[#2A7A51]  rounded-lg "
+              >
+              <input
+                placeholder="5"
+                type="text"
+                class=" text-base md:text-lg lg:text-xl px-4 md:px-4.5 lg:px-6.5 xl:px-8 2xl:px-11 w-full xl:w-21 2xl:w-25 h-13 lg:h-15 xl:h-20 2xl:h-21 flex items-center justify-center focus:outline-0 !leading-[1.2] text-[#B7D6C6] placeholder:text-[#B7D6C6] border font-poppins border-[#B7D6C6] bg-[#2A7A51]  rounded-lg "
+              >
+              <input
+                placeholder="5"
+                type="text"
+                class=" text-base md:text-lg lg:text-xl px-4 md:px-4.5 lg:px-6.5 xl:px-8 2xl:px-11 w-full xl:w-21 2xl:w-25 h-13 lg:h-15 xl:h-20 2xl:h-21 flex items-center justify-center focus:outline-0 !leading-[1.2] text-[#B7D6C6] placeholder:text-[#B7D6C6] border font-poppins border-[#B7D6C6] bg-[#2A7A51]  rounded-lg "
+              >
+
+
+            </div>
+          </div>
+          <div class="w-full mb-4 lg:mb-5">
+            <button
+              type="submit"
+              class="text-[#1F1904] text-base md:text-lg lg:text-xl py-4 lg:py-5 w-full cursor-pointer !leading-[1.2] font-medium font-poppins text-center px-5 rounded-lg bg-[#FFC801]"
+            >
+              Verify
+            </button>
+          </div>
+        </form>
+        <p class="text-white text-base md:text-lg lg:text-xl mt-10 lg:mt-12.5 text-center ">
+          Didn't receive code? <a href="{{routes.account_recover_url}}" class="text-[#FFC801] !underline">Resend Code</a>
+        </p>
+      </div>
+    </div>
+    <div class="hidden md:flex bg-[#FFC801] justify-end py-13 px-10 h-screen">
+      <img class="w-full object-contain h-full" src="/assets/login-img.png" alt="" width="100" height="100">
+    </div>
+  </div> {% endcomment %}
+{% comment %} Verify Code end--> {% endcomment %}
 
 <script>
   const togglePassword = document.getElementById('togglePassword');
