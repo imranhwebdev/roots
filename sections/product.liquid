@@ -1,3 +1,6 @@
+{% comment %}
+  Add this CSS to your stylesheet section at the top
+{% endcomment %}
 {% stylesheet %}
   .product-area .product-image,
   .product-area .product-image img {
@@ -7,10 +10,83 @@
     border-radius: 8px;
   }
   .tab-btn.active {
-    border-bottom: 2px solid #1e6c44; /* green highlight */
+    border-bottom: 2px solid #1e6c44;
     color: #1e6c44;
   }
+
+  /* Judge.me Custom Styling */
+  .jdgm-widget * {
+    font-family: inherit !important;
+  }
+
+  .jdgm-rev-widg__summary-stars {
+    margin-bottom: 1rem !important;
+  }
+
+  .jdgm-rev-widg__reviews {
+    margin-top: 1.5rem !important;
+  }
+
+  .jdgm-rev__author {
+    color: #1e6c44 !important;
+    font-weight: 600 !important;
+  }
+
+  .jdgm-rev__timestamp {
+    color: #797375 !important;
+  }
+
+  .jdgm-rev__title {
+    color: #514849 !important;
+    font-weight: 600 !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .jdgm-rev__body {
+    color: #514849 !important;
+    line-height: 1.6 !important;
+  }
+
+  .jdgm-star {
+    color: #ffc801 !important;
+  }
+
+  .jdgm-paginate__page-btn {
+    background-color: #1e6c44 !important;
+    color: white !important;
+    border-radius: 4px !important;
+    padding: 0.5rem 1rem !important;
+  }
+
+  .jdgm-write-rev-link {
+    background-color: #1e6c44 !important;
+    color: white !important;
+    border-radius: 8px !important;
+    padding: 0.75rem 1.5rem !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    margin-bottom: 1rem !important;
+    transition: background-color 0.3s ease !important;
+  }
+
+  .jdgm-write-rev-link:hover {
+    background-color: #155a37 !important;
+  }
+
+  /* Hide Judge.me default elements that might conflict */
+  .jdgm-widget .jdgm-widget__title {
+    display: none !important;
+  }
+
+  .jdgm-row-rating {
+    width: max-content;
+    display: flex;
+    flex-direction: column-reverse;
+    position: absolute;
+    right: 0;
+  }
 {% endstylesheet %}
+
 <div class="product-details-area py-9">
   <div class="container !max-w-[1400px] mx-auto">
     <div class="bradcramp">
@@ -18,16 +94,16 @@
         <li>
           <a
             href="{{routes.collections_url}}"
-            class="text-[#797375] capitalize  hover:text-primary transition-all duration-300"
+            class="text-[#797375] capitalize hover:text-primary transition-all duration-300"
             >shop</a
           >
         </li>
-        >
         <li>
           <span class="text-[#514849] font-medium capitalize">{{ product.title }}</span>
         </li>
       </ul>
     </div>
+
     <div class="product-area mt-10">
       <div class="w-full">
         <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap gap-4 items-center justify-between w-full">
@@ -38,8 +114,9 @@
               {% endfor %}
             </div>
           </div>
+
           <div class="w-full md:w-1/2 xl:w-6/12 mb-8 md:mb-0 order-1 md:order-2">
-            <div class=" xl:mr-10">
+            <div class="xl:mr-10">
               <h4 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-green font-bold mb-4">
                 {{ product.title }}
               </h4>
@@ -47,8 +124,8 @@
               <div class="text-base md:text-lg lg:text-xl font-poppins mb-5">
                 {% assign description_html = product.description %}
                 {% assign list_items = description_html | split: '<li>' %}
-
                 {% assign only_paragraphs = description_html | remove: '<ul>' | remove: '</ul>' %}
+
                 {% for item in list_items %}
                   {% if item contains '</li>' %}
                     {% assign clean_li = '<li>' | append: item | split: '</li>' | first | append: '</li>' %}
@@ -83,7 +160,11 @@
               </div>
 
               <div class="mb-6">
-                {% render 'product-rating' %}
+                <!-- Judge.me Product Rating Widget -->
+                <div class="jdgm-widget jdgm-preview-badge" data-id="{{ product.id }}">
+                  {{ product.metafields.judgeme.badge }}
+                </div>
+
                 <div class="flex items-center gap-4 mb-6">
                   <div class="flex items-center border rounded-lg">
                     <button type="button" onclick="changeQty(-1)" class="px-3 py-2">-</button>
@@ -93,15 +174,18 @@
                   <p class="text-xl lg:text-[26px] font-semibold">{{ product.price | money }}</p>
                 </div>
               </div>
+
               <div class="flex items-center gap-5 mt-3.5">
                 <a
                   href="{{routes.cart_url}}/{{ product.selected_or_first_available_variant.id }}:1"
                   class="btn flex items-center gap-3"
-                  >Shop Now
+                >
+                  Shop Now
                   <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </a>
+
                 <button
                   class="inline-btn text-[#1F1904] hover:text-white add-to-cart-btn"
                   data-variant-id="{{ product.selected_or_first_available_variant.id }}"
@@ -122,6 +206,7 @@
         </div>
       </div>
     </div>
+
     <!-- Tabs: Description + Reviews -->
     <div class="mt-12">
       <div class="border-b flex gap-8">
@@ -141,23 +226,32 @@
         </div>
 
         <!-- Reviews (Judge.me Widget) -->
-        <div id="tab-reviews" class="tab-pane hidden">
-          {% render 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: true %}
+        <div id="tab-reviews" class="tab-pane hidden customer-reviews">
+          <!-- Start of Judge.me code -->
+          <div style="clear:both"></div>
+          <div
+            id="judgeme_product_reviews"
+            class="jdgm-widget jdgm-review-widget"
+            data-product-title="{{ product.title | escape }}"
+            data-id="{{ product.id }}"
+            data-auto-install="false"
+          >
+            {{ product.metafields.judgeme.widget }}
+          </div>
+          <!-- End of Judge.me code -->
         </div>
       </div>
     </div>
   </div>
 </div>
 
-{% schema %}
-{
-  "name": "t:general.product",
-  "settings": [],
-  "disabled_on": {
-    "groups": ["header", "footer"]
-  }
-}
-{% endschema %}
+{% comment %}
+  Add this to your theme.liquid file in the <head> section if not already present
+{% endcomment %}
+{% comment %}
+  <script async src="https://cdn.judge.me/widgets/platform.js"></script>
+{% endcomment %}
+
 <script>
   function changeQty(amount) {
     const qtyInput = document.getElementById('quantity');
@@ -178,12 +272,38 @@
       btn.addEventListener('click', function () {
         const target = this.getAttribute('data-tab');
 
+        // Remove active classes
         tabBtns.forEach((b) => b.classList.remove('active'));
         tabPanes.forEach((p) => p.classList.add('hidden'));
 
+        // Add active classes
         this.classList.add('active');
         document.getElementById('tab-' + target).classList.remove('hidden');
+
+        // Trigger Judge.me widget refresh if reviews tab is opened
+        if (target === 'reviews') {
+          if (window.jdgm && window.jdgm.reviewWidget) {
+            window.jdgm.reviewWidget.render();
+          }
+        }
       });
     });
+
+    // Initialize Judge.me after DOM is loaded
+    if (window.jdgm) {
+      window.jdgm.customizeBadge({
+        hideEmptyBadges: false,
+      });
+    }
   });
 </script>
+
+{% schema %}
+{
+  "name": "t:general.product",
+  "settings": [],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}
