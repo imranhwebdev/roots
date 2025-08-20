@@ -12,8 +12,8 @@
     "banner": {
       "type": "common-banner",
       "settings": {
-        "default_title": "Welcome to Our Store",
-        "default_description": "Banner Description"
+        "default_title": "{{ product.title }}",
+        "default_description": ""
       }
     },
     "main": {
