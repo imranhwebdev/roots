@@ -21,8 +21,8 @@
     <div class="container">
       <div class="w-full 2xl:w-10/12 mx-auto">
         <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap gap-4 items-center justify-between w-full">
-          <div class="w-full md:w-1/2 xl:w-5/12 order-2 md:order-1">
-            <div class="xl:ml-10 size-full lg:h-135.5 lg:w-110.5 shadow-[-8px_-10px_#FFC801] rounded-lg lg:rounded-[10px] lg:shadow-[-10px_-10px_#FFC801]">
+          <div class="w-full md:w-1/2 xl:w-5/12 mb-6 md:mb-0">
+            <div class="xl:ml-10 w-full h-112.5 md:size-full lg:h-135.5 lg:w-110.5 shadow-[-8px_-10px_#FFC801] rounded-lg lg:rounded-[10px] lg:shadow-[-10px_-10px_#FFC801]">
               <img
                 src="{{ product1.featured_image | image_url }}"
                 alt="{{ product1.title }}"
@@ -32,9 +32,9 @@
               >
             </div>
           </div>
-          <div class="w-full md:w-1/2 xl:w-6/12 mb-8 md:mb-0 order-1 md:order-2">
+          <div class="w-full md:w-1/2 xl:w-6/12">
             <div class=" xl:mr-10">
-              <h4 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-green font-bold mb-4">
+              <h4 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-green font-bold mb-4 font-armany-bold">
                 {{ product1.title }}
               </h4>
 
@@ -50,12 +50,12 @@
                   {% endif %}
                 {% endfor %}
 
-                <div class="prose text-para lading-[160%] mb-4">
+                <div class="prose text-para text-sm lg:text-base xl:text-xl lading-[160%] mb-5">
                   {{ only_paragraphs }}
                 </div>
 
                 {% if list_items.size > 1 %}
-                  <ul class="mb-6 space-y-2 text-[#1E6C44] font-medium">
+                  <ul class="mb-5 space-y-2 text-base lg:text-lg xl:text-[22px] text-[#1E6C44] !leading-[1.6] font-medium">
                     {% for item in list_items %}
                       {% if item contains '</li>' %}
                         <li class="flex items-center gap-2">
@@ -76,16 +76,16 @@
                 {% endif %}
               </div>
 
-              <p class="text-xl lg:text-[26px] font-semibold">
+              <p class="text-xl lg:text-3xl !leading-[1.2] mb-4 font-semibold">
                 {{ product1.price | money }}
               </p>
-              <div class="flex items-center gap-5 mt-3.5">
+              <div class="flex items-center gap-3 lg:gap-4 xl:gap-5">
                 <button
-                  class="btn add-to-cart-btn"
+                  class="btn add-to-cart-btn !text-base lg:!text-lg xl:!text-xl !font-medium !leading-[1.6] lg:!leading-[1.2] text-[#1F1904]"
                   data-variant-id="{{ product1.selected_or_first_available_variant.id }}"
                   data-product-title="{{ product1.title }}"
                 >
-                  <span class="btn-text">Add to Cart</span>
+                  <span class="btn-text !text-base lg:!text-lg xl:!text-xl !font-medium !leading-[1.6] lg:!leading-[1.2] text-[#1F1904]">Add to Cart</span>
                   <span class="btn-loading hidden">
                     <svg class="animate-spin h-4 w-4 inline-block" viewBox="0 0 24 24">
                       <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
@@ -96,7 +96,7 @@
                 </button>
                 <a
                   href="{{product1.url}}"
-                  class="inline-btn border border-solid border-[#1E6C44] text-[#1F1904] hover:text-white hover:border-primary transition duration-300 flex items-center gap-3"
+                  class="inline-btn !text-base lg:!text-lg xl:!text-xl !font-medium !leading-[1.6] lg:!leading-[1.2]  border border-solid border-[#1E6C44] text-[#1F1904] hover:text-white hover:border-primary transition duration-300 flex items-center gap-3"
                 >
                   View Details
                 </a>
@@ -115,9 +115,9 @@
     <div class="container">
       <div class="w-full 2xl:w-10/12 mx-auto">
         <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap gap-4 items-center justify-between w-full">
-          <div class="w-full md:w-1/2 xl:w-6/12 mb-8 md:mb-0 ">
+          <div class="w-full md:w-1/2 xl:w-6/12 order-2 md:order-1 ">
             <div class=" xl:ml-10">
-              <h4 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-green font-bold mb-4">
+              <h4 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-green font-bold mb-4 font-armany-bold">
                 {{ product2.title }}
               </h4>
 
@@ -133,15 +133,15 @@
                   {% endif %}
                 {% endfor %}
 
-                <div class="prose mb-4 text-para text-base lg:text-xl leading-[160%]">
+                <div class="prose mb-5 text-para text-sm lg:text-base xl:text-xl leading-[160%]">
                   {{ only_paragraphs }}
                 </div>
 
                 {% if list_items.size > 1 %}
-                  <ul class="mb-6 space-y-2 text-[#1E6C44] font-medium">
+                  <ul class="mb-5 space-y-2 text-[#1E6C44] font-medium">
                     {% for item in list_items %}
                       {% if item contains '</li>' %}
-                        <li class="flex items-center gap-2">
+                        <li class="flex items-center gap-2 text-base lg:text-lg xl:text-[22px] font-medium !leading-[1.6]">
                           <svg
                             width="25"
                             height="25"
@@ -159,12 +159,12 @@
                 {% endif %}
               </div>
 
-              <p class="text-xl lg:text-[26px] font-semibold">
+              <p class="text-3xl !leading-[1.2] text-[#1F1904] font-semibold mb-4">
                 {{ product2.price | money }}
               </p>
-              <div class="flex items-center gap-5 mt-3.5">
+              <div class="flex items-center gap-3 lg:gap-4 xl:gap-5">
                 <button
-                  class="btn add-to-cart-btn"
+                  class="btn add-to-cart-btn !text-base lg:!text-lg xl:!text-xl !font-medium !leading-[1.6] lg:!leading-[1.2] text-[#1F1904]"
                   data-variant-id="{{ product2.selected_or_first_available_variant.id }}"
                   data-product-title="{{ product2.title }}"
                 >
@@ -179,16 +179,15 @@
                 </button>
                 <a
                   href="{{product2.url}}"
-                  class="inline-btn border border-solid border-[#1E6C44] text-[#1F1904] hover:text-white hover:border-primary transition duration-300 flex items-center gap-3"
+                  class="inline-btn !text-base lg:!text-lg xl:!text-xl !font-medium !leading-[1.6] lg:!leading-[1.2]  border border-solid border-[#1E6C44] text-[#1F1904] hover:text-white hover:border-primary transition duration-300 flex items-center gap-3"
                 >
                   View Details
                 </a>
               </div>
             </div>
-          </div>
-
-          <div class="w-full md:w-1/2 xl:w-5/12 ">
-            <div class="xl:ml-10 size-full lg:h-135.5 lg:w-110.5 shadow-[8px_-10px_#FFC801] rounded-lg">
+          </div> 
+          <div class="w-full md:w-1/2 xl:w-5/12 order-1 md:order-2 mb-6 md:mb-0">
+            <div class="xl:ml-10 w-full h-112 md:size-full lg:h-135.5 lg:w-110.5 shadow-[8px_-10px_#FFC801] rounded-lg">
               <img
                 src="{{ product2.featured_image | image_url }}"
                 width=""
@@ -210,8 +209,8 @@
     <div class="container">
       <div class="w-full 2xl:w-10/12 mx-auto">
         <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap gap-4 items-center justify-between w-full">
-          <div class="w-full md:w-1/2 xl:w-5/12 order-2 md:order-1">
-            <div class="xl:ml-10 size-full lg:h-135.5 lg:w-110.5 shadow-[-8px_-10px_#FFC801] rounded-lg">
+          <div class="w-full md:w-1/2 xl:w-5/12 mb-6 md:mb-0">
+            <div class="xl:ml-10 w-full h-97 md:size-full  lg:h-135.5 lg:w-110.5 shadow-[-8px_-10px_#FFC801] rounded-lg">
               <img
                 src="{{ product3.featured_image | image_url }}"
                 alt="{{ product3.title }}"
@@ -221,9 +220,9 @@
               >
             </div>
           </div>
-          <div class="w-full md:w-1/2 xl:w-6/12 mb-8 md:mb-0 order-1 md:order-2">
+          <div class="w-full md:w-1/2 xl:w-6/12">
             <div class=" xl:mr-10">
-              <h4 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-green font-bold mb-4">
+              <h4 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-green font-bold mb-4 font-armany-bold">
                 {{ product3.title }}
               </h4>
 
@@ -239,15 +238,15 @@
                   {% endif %}
                 {% endfor %}
 
-                <div class="prose text-para lading-[160%] mb-4">
+                <div class="prose text-para text-sm lg:text-lg xl:text-xl  lading-[160%] mb-5">
                   {{ only_paragraphs }}
                 </div>
 
                 {% if list_items.size > 1 %}
-                  <ul class="mb-6 space-y-2 text-[#1E6C44] font-medium">
+                  <ul class="mb-6 space-y-2 text-[#1E6C44] font-medium ">
                     {% for item in list_items %}
                       {% if item contains '</li>' %}
-                        <li class="flex items-center gap-2">
+                        <li class="flex items-center gap-2 text-base lg:text-lg xl:text-[22px] font-medium !leading-[1.6]">
                           <svg
                             width="25"
                             height="25"
@@ -264,13 +263,12 @@
                   </ul>
                 {% endif %}
               </div>
-
-              <p class="text-xl lg:text-[26px] font-semibold">
+              <p class="text-3xl !leading-[1.2] text-[#1F1904] font-semibold mb-4">
                 {{ product3.price | money }}
               </p>
               <div class="flex items-center gap-5 mt-3.5">
                 <button
-                  class="btn add-to-cart-btn"
+                  class="btn add-to-cart-btn !text-base lg:!text-lg xl:!text-xl !font-medium !leading-[1.6] lg:!leading-[1.2] text-[#1F1904]"
                   data-variant-id="{{ product3.selected_or_first_available_variant.id }}"
                   data-product-title="{{ product3.title }}"
                 >
@@ -285,7 +283,7 @@
                 </button>
                 <a
                   href="{{product3.url}}"
-                  class="inline-btn border border-solid border-[#1E6C44] text-[#1F1904] hover:text-white hover:border-primary transition duration-300 flex items-center gap-3"
+                  class="inline-btn !text-base lg:!text-lg xl:!text-xl !font-medium !leading-[1.6] lg:!leading-[1.2] border border-solid border-[#1E6C44] text-[#1F1904] hover:text-white hover:border-primary transition duration-300 flex items-center gap-3"
                 >
                   View Details
                 </a>
