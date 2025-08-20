@@ -1,5 +1,5 @@
 {% comment %} login-page start--> {% endcomment %}
-{% comment %}
+
   <div class="login-page grid grid-cols-1 md:grid-cols-2 bg-[#1E6C44] min-h-screen">
     <div class="max-h-screen overflow-auto py-12">
       <div class="w-full px-5 mx-auto max-w-164">
@@ -116,7 +116,7 @@
       <img class="w-full object-contain h-full" src="/assets/login-img.png" alt="" width="100" height="100">
     </div>
   </div>
-{% endcomment %}
+
 {% comment %} login-page end--> {% endcomment %}
 
 {% comment %} Forgot Password? start--> {% endcomment %}
@@ -179,7 +179,7 @@
         <p class="text-[#B7D6C6] text-base md:text-lg xl:text-xl !leading-[1.6]">
           Please enter the code we just sent to email
         </p>
-        <p class="text-[#FFC801] text-base md:text-lg xl:text-xl !leading-[1.2]"></p>
+        <p class="text-[#FFC801] text-base md:text-lg xl:text-xl !leading-[1.2]">example@gmail.com</p>
         <form method="post" action="#" class=" my-6 lg:my-8 xl:my-10">
           <div class="w-full mb-4 lg:mb-5">
             <label class="block text-white text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25] font-poppins"
@@ -314,7 +314,7 @@
 {% comment %} Set New Password end--> {% endcomment %}
 
 {% comment %} Complete Your Profile start--> {% endcomment %}
-<div class="login-page grid grid-cols-1 md:grid-cols-2 bg-[#1E6C44] min-h-screen">
+{% comment %} <div class="login-page grid grid-cols-1 md:grid-cols-2 bg-[#1E6C44] min-h-screen">
   <div class="max-h-screen overflow-auto py-12">
     <div class="w-full px-5 mx-auto max-w-164">
       <a href="{{routes.root_url}}" class="w-31.5 mb-7.5 md:mb-9 block lg:mb-11 xl:mb-12.5">
@@ -401,7 +401,7 @@
   <div class="hidden md:flex bg-[#FFC801] justify-end py-13 px-10 h-screen">
     <img class="w-full object-contain h-full" src="/assets/login-img.png" alt="" width="100" height="100">
   </div>
-</div>
+</div> {% endcomment %}
 {% comment %} Complete Your Profile end--> {% endcomment %}
 
 {% comment %} login-page JS--> {% endcomment %}
