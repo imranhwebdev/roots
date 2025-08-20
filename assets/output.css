@@ -504,6 +504,9 @@
   .aspect-\[1\/\.46\] {
     aspect-ratio: 1/.46;
   }
+  .aspect-\[1\/\.52\] {
+    aspect-ratio: 1/.52;
+  }
   .aspect-\[1\/\.54\] {
     aspect-ratio: 1/.54;
   }
@@ -1831,6 +1834,13 @@
     &:hover {
       @media (hover: hover) {
         color: var(--color-black);
+      }
+    }
+  }
+  .hover\:text-green {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-green);
       }
     }
   }
