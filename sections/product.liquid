@@ -85,6 +85,61 @@
     position: absolute;
     right: 0;
   }
+
+  /* desc ar css code  start*/
+
+  #tab-desc ul {
+    list-style-type: none;
+    margin-bottom: 1rem;
+    padding-right: 15%;
+  }
+
+  #tab-desc ul li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #797375;
+    font-size: 20px;
+    line-height: 1.6;
+    position: relative;
+    margin-bottom: 24;
+  }
+
+  #tab-desc ul li::before {
+    content: '';
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40' fill='none'><path d='M23.03 19.7987L7.27246 7.27344V32.526L23.03 19.7987Z' fill='%231E6C44'/><path d='M19.3934 9.29492H14.5449L27.8783 19.8L15.353 29.901H19.7974L32.3227 19.8L19.3934 9.29492Z' fill='%23103C25'/></svg>")
+      no-repeat center;
+    background-size: contain;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    #tab-desc ul li {
+      font-size: 16px;
+    }
+    #tab-desc ul {
+      padding-right: 0px;
+    }
+  }
+
+  @media (max-width: 390px) {
+    #tab-desc ul li {
+      font-size: 14px;
+      margin-bottom: 20;
+      align-items: start;
+      margin-top: 4px;
+    }
+
+    #tab-desc ul li::before {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  /* desc ar css code  end*/
 {% endstylesheet %}
 
 <div class="product-details-area py-9">
@@ -245,9 +300,19 @@
 
     <!-- Tabs: Description + Reviews -->
     <div class="mt-12">
-      <div class="border-b flex items-center border px-4 lg:px-5 lg:pt-4 border-[#B7D6C6] rounded-lg gap-6 lg:gap-9">
-        <button class="tab-btn active border pb-4 border-transparent text-[#514849] text-sm md:text-base lg:text-lg xl:text-xl !leading-[1.6] font-medium" data-tab="desc">Product Description</button>
-        <button class="tab-btn pb-4 border border-transparent text-[#514849] text-sm md:text-base lg:text-lg xl:text-xl !leading-[1.6] font-medium" data-tab="reviews">Customer Reviews</button>
+      <div class="border-b flex items-center border px-4 lg:px-5 pt-4 border-[#B7D6C6] rounded-lg gap-6 lg:gap-9">
+        <button
+          class="tab-btn active border pb-4 border-transparent text-[#514849] text-sm md:text-base lg:text-lg xl:text-xl !leading-[1.6] font-medium"
+          data-tab="desc"
+        >
+          Product Description
+        </button>
+        <button
+          class="tab-btn pb-4 border border-transparent text-[#514849] text-sm md:text-base lg:text-lg xl:text-xl !leading-[1.6] font-medium"
+          data-tab="reviews"
+        >
+          Customer Reviews
+        </button>
       </div>
 
       <!-- Tab Content -->
