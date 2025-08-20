@@ -19,5 +19,10 @@
         "settings": {}
       }
     }
+  },
+  "platform_customizations": {
+    "custom_css": [
+      "._4QenE {background: #1e6c44 !important; color: #fff; border-radius: 12px; margin: 40px;}"
+    ]
   }
 }
