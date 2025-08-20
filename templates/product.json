@@ -11,26 +11,87 @@
   "sections": {
     "banner": {
       "type": "common-banner",
-      "settings": {}
+      "settings": {
+        "default_title": "{{ product.title }}",
+        "default_description": ""
+      }
     },
     "main": {
       "type": "product",
       "settings": {}
-    },    
+    },
     "simple_to_use": {
       "type": "simple-to-use",
-      "settings": {}
+      "blocks": {
+        "card_CPVKAt": {
+          "type": "card",
+          "settings": {
+            "card_title": "For Hair",
+            "card_text": "Massage into scalp 3–4 times a week for strength and growth.",
+            "card_image": "shopify://shop_images/use1.png",
+            "bg_color": "#b7d6c6"
+          }
+        },
+        "card_JaArwz": {
+          "type": "card",
+          "settings": {
+            "card_title": "For Lashes & Brows",
+            "card_text": "Apply nightly for a fuller, healthier look.",
+            "card_image": "shopify://shop_images/use2.png",
+            "bg_color": "#b7d6c6"
+          }
+        },
+        "card_QAUmJT": {
+          "type": "card",
+          "settings": {
+            "card_title": "For Skin",
+            "card_text": "Smooth onto dry areas for deep hydration.",
+            "card_image": "shopify://shop_images/use3.png",
+            "bg_color": "#b7d6c6"
+          }
+        },
+        "card_ALDpih": {
+          "type": "card",
+          "settings": {
+            "card_title": "For Wellness Wraps",
+            "card_text": "Enhance results by applying to targeted areas before wrapping.",
+            "card_image": "shopify://shop_images/use4.png",
+            "bg_color": "#b7d6c6"
+          }
+        }
+      },
+      "block_order": [
+        "card_CPVKAt",
+        "card_JaArwz",
+        "card_QAUmJT",
+        "card_ALDpih"
+      ],
+      "settings": {
+        "title": "Simple to Use, Powerful in Results"
+      }
     },
     "join_roots": {
       "type": "join-roots",
-      "settings": {}
-    },
+      "settings": {
+        "title": "Join the Roots Family",
+        "description": "Be the first to know about exclusive offers, self-care tips, and new launches.",
+        "enable_newsletter": true,
+        "email_placeholder": "Enter your email address",
+        "success_message": "Thank you for subscribing! You'll hear from us soon.",
+        "button_text": "Subscribe Now",
+        "button_link": "",
+        "show_arrow": false,
+        "background_image": "shopify://shop_images/join.png",
+        "card_bg_color": "#1e6c44",
+        "title_color": "#ffffff",
+        "description_color": "#f5f5f5"
+      }
+    }
   },
-  
   "order": [
     "banner",
     "main",
     "simple_to_use",
-    "join_roots",
+    "join_roots"
   ]
 }
