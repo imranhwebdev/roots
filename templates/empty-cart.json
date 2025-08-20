@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "empty-cart",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

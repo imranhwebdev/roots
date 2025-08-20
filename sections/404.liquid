@@ -1,90 +1,69 @@
-{% comment %}
-  This section is used in the 404 template to render page shown when customers
-  enter an invalid store URL.
-
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/404
-{% endcomment %}
-
-<div class="404page py-10 md:py-16 lg:py-20 xl:py-25 2xl:py-30">
+<!-- templates/404.liquid -->
+<div class="404 page py-10 md:py-16 lg:py-20 xl:py-25 2xl:py-30">
   <div class="container">
     <div class="w-full md:w-10/12 xl:w-7/12 mx-auto relative z-1 pt-32 md:pt-55 lg:pt-65">
-      <img
-        src="/assets/page404.png"
-        class="size-55 md:size-70 lg:size-80 left-1/2 -translate-x-1/2 top-0 -z-1 absolute"
-        alt=""
-        width=""
-        height=""
-      >
+      {% if settings.page404_image != blank %}
+        <img
+          src="{{ settings.page404_image | img_url: '1024x' }}"
+          class="size-55 md:size-70 lg:size-80 left-1/2 -translate-x-1/2 top-0 -z-1 absolute"
+          alt="404 Image"
+          width=""
+          height=""
+        >
+      {% endif %}
+
       <div class="text-center">
         <h5 class="text-green text-3xl lg:text-4xl x3l:text-[52px] !leading-[1.25] font-bold font-armany-bold mb-4 lg:mb-5">
-          Oops! This Page Got Lost in the Roots.
+          {{ settings.page404_heading | default: 'Oops! This Page Got Lost in the Roots.' }}
         </h5>
-        <p class="text-[#797375] text-lg lg:text-xl xl:text-2xl !leading-[1.6] font-poppins mb-5 lg:mb-6 ">
-          It might have been moved, renamed, or doesn’t exist anymore. But don’t worry, your journey to natural beauty
-          doesn’t have to end here.
+
+        <p class="text-[#797375] text-lg lg:text-xl xl:text-2xl !leading-[1.6] font-poppins mb-5 lg:mb-6">
+          {{
+            settings.page404_text
+            | default: 'It might have been moved, renamed, or doesn’t exist anymore. But don’t worry, your journey to natural beauty doesn’t have to end here.'
+          }}
         </p>
-        <a href="{{ routes.collections_url }}" class="btn !text-[#1F1904]">Return to Home</a>
+
+        <a href="{{ settings.page404_button_link | default: routes.collections_url }}" class="btn !text-[#1F1904]">
+          {{ settings.page404_button_text | default: 'Return to Home' }}
+        </a>
       </div>
     </div>
   </div>
-
-  {% comment %} <div class="empty-card py-10 md:py-16 lg:py-20 xl:py-25 2xl:py-30 3xl:py-36">
-    <div class="container">
-      <div
-        class="text-center py-8 md:py-16 xl:py-23 3xl:py-29 rounded-2xl lg:rounded-[20px] bg-[#B7D6C6] border border-[#1E6C44)]"
-      >
-        <div class="w-full md:w-9/12 xl:w-8/12 2xl:w-6/12 px-5 md:mx-auto">
-          <h5 class="text-green text-2xl md:text-3xl lg:text-4xl x3l:text-[52px] !leading-[1.25] font-bold font-armany-bold mb-5 md:mb-7 lg:mb-8 2xl:mb-10">
-            Your cart is empty. Let’s start your natural beauty journey Now.
-          </h5>
-          <a href="#" class="btn">Continue Shopping</a>
-        </div>
-      </div>
-    </div>
-  </div> {% endcomment %}
-
-  {% comment %} <div class="tnx-page py-10 md:py-16 lg:py-20 xl:py-25 2xl:pb-30 3xl:pb-37">
-    <div class="container">
-      <div
-        class="w-full md:w-11/12 xl:w-10/12  px-5 md:px-10 lg:px-16 2xl:px-20 py-10 md:py-12 lg:py-20 2xl:py-27.5 mx-auto text-center border-[#CAA000] border bg-[#1E6C44] rounded-2xl lg:rounded-[20px]"
-      >
-        <div class="text-center">
-          <h5 class="text-white  text-4xl lg:text-5xl 2xl:text-6xl 3xl:text-7xl !leading-[1.25] font-bold font-armany-bold mb-4 md:mb-5  ">
-            Thank you for your purchase!
-          </h5>
-          <div class=" md:px-[5%] lg:px-[10%] xl:px-[15%] 2xl:px-[20%] mx-auto">
-            <p class="text-[#ECECEC] text-xl md:text-2xl lg:text-3xl xl:text-[32px] font-poppins !leading-[1.5] mb-4 lg:mb-5">
-              Your order has been successfully processed. Here are the details
-            </p>
-            <p class="text-xl lg:text-2xl lg:text-[28px] !leading-[1.5] text-[#D1CDCE] mb-3 lg:mb-4">
-              Order Number: <span class="text-white">#SDGT1254FD</span>
-            </p>
-            <p class="text-xl lg:text-2xl lg:text-[28px] !leading-[1.5] text-[#D1CDCE] mb-4 lg:mb-5">
-              Estimated delivery: <span class="text-white">8/18/2025</span>
-            </p>
-            <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap items-center gap-4 lg:gap-5 justify-center">
-              <a href="#" class="btn w-full md:w-auto">Track My Order</a>
-              <a
-                href="#"
-                class="btn w-full md:w-auto !border text-white hover:!border-primary !bg-transparent !border-[#B7D6C6]"
-                >Continue Shopping</a
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> {% endcomment %}
 </div>
-
-{% comment %}
-  <h1>{{ '404.title' | t }}</h1>
-
-  <p>
-    {{ '404.not_found' | t }}
-  </p>
-
-  <a href="{{ routes.all_products_collection_url }}">
-    {{ '404.back_to_shopping' | t }}
-  </a>
-{% endcomment %}
+{% schema %}
+{
+  "name": "404 Page Settings",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "page404_image",
+      "label": "404 Page Image"
+    },
+    {
+      "type": "text",
+      "id": "page404_heading",
+      "label": "Heading",
+      "default": "Oops! This Page Got Lost in the Roots."
+    },
+    {
+      "type": "textarea",
+      "id": "page404_text",
+      "label": "Description",
+      "default": "It might have been moved, renamed, or doesn’t exist anymore. But don’t worry, your journey to natural beauty doesn’t have to end here."
+    },
+    {
+      "type": "url",
+      "id": "page404_button_link",
+      "label": "Button Link",
+      "default": "/collections"
+    },
+    {
+      "type": "text",
+      "id": "page404_button_text",
+      "label": "Button Text",
+      "default": "Return to Home"
+    }
+  ]
+}
+{% endschema %}
