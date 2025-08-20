@@ -133,7 +133,11 @@
       <div class="tab-content mt-6">
         <!-- Description -->
         <div id="tab-desc" class="tab-pane active prose max-w-none">
-          {{ product.description }}
+          {% if product.metafields.custom.product_description != blank %}
+            {{ product.metafields.custom.product_description }}
+          {% else %}
+            {{ product.description }}
+          {% endif %}
         </div>
 
         <!-- Reviews (Judge.me Widget) -->
