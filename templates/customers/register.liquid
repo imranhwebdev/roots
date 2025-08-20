@@ -153,21 +153,18 @@
       return emailRegex.test(email);
     }
 
-    // Check email availability
+    // Check email availability using customer password reset
     function checkEmailAvailability(email) {
       // Show loading
       emailLoading.classList.remove('hidden');
       emailCheckResult.classList.add('hidden');
 
-      // Create a temporary customer creation attempt to check if email exists
+      // Use password recovery form to check if email exists
       const formData = new FormData();
-      formData.append('form_type', 'create_customer');
-      formData.append('customer[email]', email);
-      formData.append('customer[first_name]', 'temp');
-      formData.append('customer[last_name]', 'temp');
-      formData.append('customer[password]', 'temppass123');
+      formData.append('form_type', 'recover_customer_password');
+      formData.append('email', email);
 
-      fetch('{{ routes.account_url }}', {
+      fetch('{{ routes.account_recover_url }}', {
         method: 'POST',
         body: formData,
       })
@@ -175,42 +172,64 @@
         .then((html) => {
           emailLoading.classList.add('hidden');
 
-          // Parse the response to check for errors
+          // Parse the response to check for success or error messages
           const parser = new DOMParser();
           const doc = parser.parseFromString(html, 'text/html');
-          const errors = doc.querySelector('.errors') || doc.querySelector('[class*="error"]');
+
+          // Check for success message (means email exists)
+          const successMsg =
+            doc.querySelector('.note') ||
+            doc.querySelector('[class*="success"]') ||
+            doc.querySelector('[class*="message"]');
+
+          // Check for error message (means email doesn't exist)
+          const errorMsg = doc.querySelector('.errors') || doc.querySelector('[class*="error"]');
 
           if (
-            errors &&
-            (errors.textContent.includes('already') ||
-              errors.textContent.includes('associated') ||
-              errors.textContent.includes('exists') ||
-              errors.textContent.includes('taken'))
+            successMsg &&
+            (successMsg.textContent.includes('sent') ||
+              successMsg.textContent.includes('instructions') ||
+              successMsg.textContent.includes('reset'))
           ) {
-            // Email is already registered
+            // Email exists (password reset instructions sent)
             isEmailAvailable = false;
             emailCheckResult.innerHTML = '❌ <span class="text-red-400">Email is already registered</span>';
             emailCheckResult.classList.remove('hidden');
             emailInput.classList.add('border-red-500');
+            emailInput.classList.remove('border-green-500');
             updateSignupButton();
-          } else {
-            // Email is available
+          } else if (
+            errorMsg ||
+            html.includes('not found') ||
+            html.includes('not exist') ||
+            html.includes('no account')
+          ) {
+            // Email doesn't exist (available for registration)
             isEmailAvailable = true;
             emailCheckResult.innerHTML = '✅ <span class="text-green-400">Email is available</span>';
             emailCheckResult.classList.remove('hidden');
             emailInput.classList.remove('border-red-500');
             emailInput.classList.add('border-green-500');
             updateSignupButton();
+          } else {
+            // Unable to determine, allow registration attempt
+            isEmailAvailable = true;
+            emailCheckResult.innerHTML =
+              '⚠️ <span class="text-yellow-400">Unable to verify email, you can try to register</span>';
+            emailCheckResult.classList.remove('hidden');
+            emailInput.classList.remove('border-red-500', 'border-green-500');
+            updateSignupButton();
           }
         })
         .catch((error) => {
           console.error('Email check error:', error);
           emailLoading.classList.add('hidden');
-          // On error, assume email might be available
+          // On error, allow registration attempt
           isEmailAvailable = true;
           emailCheckResult.innerHTML =
-            '⚠️ <span class="text-yellow-400">Unable to verify email, please try to register</span>';
+            '⚠️ <span class="text-yellow-400">Unable to verify email, you can try to register</span>';
           emailCheckResult.classList.remove('hidden');
+          emailInput.classList.remove('border-red-500', 'border-green-500');
           updateSignupButton();
         });
     }
@@ -287,18 +306,57 @@
         .then((html) => {
           const parser = new DOMParser();
           const doc = parser.parseFromString(html, 'text/html');
+
+          // Check for errors
           const errors = doc.querySelector('.errors') || doc.querySelector('[class*="error"]');
 
-          if (errors) {
-            // Registration failed
+          // Check for success indicators (no errors and account page elements)
+          const accountElements =
+            doc.querySelector('[class*="account"]') || doc.querySelector('#customer') || doc.querySelector('.customer');
+
+          // Check if redirected to account page or success page
+          const isSuccess =
+            !errors &&
+            (accountElements ||
+              html.includes('welcome') ||
+              html.includes('successful') ||
+              window.location.href.includes('/account'));
+
+          if (
+            errors &&
+            (errors.textContent.includes('already') ||
+              errors.textContent.includes('associated') ||
+              errors.textContent.includes('exists'))
+          ) {
+            // Email already registered error
             btnText.classList.remove('hidden');
             btnLoader.classList.add('hidden');
             signupBtn.disabled = false;
-            alert('Registration failed: ' + errors.textContent);
+
+            // Update email check result
+            isEmailAvailable = false;
+            emailCheckResult.innerHTML = '❌ <span class="text-red-400">Email is already registered</span>';
+            emailCheckResult.classList.remove('hidden');
+            emailInput.classList.add('border-red-500');
+            updateSignupButton();
+          } else if (errors) {
+            // Other registration errors
+            btnText.classList.remove('hidden');
+            btnLoader.classList.add('hidden');
+            signupBtn.disabled = false;
+
+            // Show error message
+            emailCheckResult.innerHTML = '❌ <span class="text-red-400">' + errors.textContent.trim() + '</span>';
+            emailCheckResult.classList.remove('hidden');
           } else {
             // Registration successful
             successModal.classList.remove('hidden');
             form.reset();
+
+            // Reset email check states
+            isEmailAvailable = false;
+            emailCheckResult.classList.add('hidden');
+            emailInput.classList.remove('border-red-500', 'border-green-500');
 
             // Redirect to home page after 3 seconds
             setTimeout(() => {
@@ -311,7 +369,11 @@
           btnText.classList.remove('hidden');
           btnLoader.classList.add('hidden');
           signupBtn.disabled = false;
-          alert('Something went wrong. Please try again.');
+
+          // Show generic error
+          emailCheckResult.innerHTML =
+            '❌ <span class="text-red-400">Network error. Please check your connection and try again.</span>';
+          emailCheckResult.classList.remove('hidden');
         });
     });
 
