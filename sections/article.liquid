@@ -11,7 +11,8 @@
 {% endif %}
 
 <h1>{{ article.title }}</h1>
-
+hi
+hi 
 {% assign date = article.published_at | time_tag: format: 'date' %}
 <p>{{ 'blog.article_metadata_html' | t: date: date, author: article.author }}</p>
 

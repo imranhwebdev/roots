@@ -1,59 +1,89 @@
-document.addEventListener("DOMContentLoaded", function() {
-  // Select all Add to Cart buttons
-  const buttons = document.querySelectorAll(".add-to-cart");
 
-  buttons.forEach(btn => {
-    btn.addEventListener("click", function(e) {
-      e.preventDefault();
-      const variantId = this.getAttribute("data-variant-id");
+  document.addEventListener('DOMContentLoaded', function () {
+    // Get all add to cart buttons
+    const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+    const toast = document.getElementById('cart-success-toast');
+    const toastMessage = document.getElementById('cart-success-message');
 
-      if (!variantId) return;
+    // Function to show toast notification
+    function showToast(message) {
+      toastMessage.textContent = message;
+      toast.classList.remove('translate-x-full', 'opacity-0');
+      toast.classList.add('translate-x-0', 'opacity-100');
 
-      // Ajax request
-      fetch("/cart/add.js", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify({ id: variantId, quantity: 1 })
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log("Added to cart:", data);
+      setTimeout(() => {
+        toast.classList.remove('translate-x-0', 'opacity-100');
+        toast.classList.add('translate-x-full', 'opacity-0');
+      }, 3000);
+    }
 
-        // Update cart count in header
-        updateCartCount();
+    // Function to update cart count (if you have a cart counter in your theme)
+    function updateCartCount() {
+      fetch('/cart.js')
+        .then((response) => response.json())
+        .then((cart) => {
+          const cartCountElements = document.querySelectorAll('.cart-count');
+          cartCountElements.forEach((element) => {
+            element.textContent = cart.item_count;
+          });
+        });
+    }
 
-        // Show toast notification
-        showToast(`${data.title} added to cart!`);
-      })
-      .catch(err => console.error(err));
+    // Add click event listeners to all add to cart buttons
+    addToCartButtons.forEach((button) => {
+      button.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const variantId = this.getAttribute('data-variant-id');
+        const productTitle = this.getAttribute('data-product-title');
+        const btnText = this.querySelector('.btn-text');
+        const btnLoading = this.querySelector('.btn-loading');
+
+        // Show loading state
+        btnText.classList.add('hidden');
+        btnLoading.classList.remove('hidden');
+        this.disabled = true;
+
+        // Add item to cart
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: variantId,
+            quantity: 1,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Reset button state
+            btnText.classList.remove('hidden');
+            btnLoading.classList.add('hidden');
+            this.disabled = false;
+
+            // Show success message
+            showToast(`${productTitle} added to cart!`);
+
+            // Update cart count
+            updateCartCount();
+
+            // Optional: Trigger any custom cart drawer or refresh cart
+            if (typeof window.theme !== 'undefined' && window.theme.cart) {
+              window.theme.cart.refresh();
+            }
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+
+            // Reset button state
+            btnText.classList.remove('hidden');
+            btnLoading.classList.add('hidden');
+            this.disabled = false;
+
+            // Show error message
+            showToast('Error adding product to cart. Please try again.');
+          });
+      });
     });
   });
-
-  // Function to update cart count
-  function updateCartCount() {
-    fetch("/cart.js")
-      .then(res => res.json())
-      .then(cart => {
-        const cartIcon = document.querySelector(".cart-count");
-        if (cartIcon) cartIcon.textContent = cart.item_count;
-      });
-  }
-
-  // Simple toast notification
-  function showToast(message) {
-    const toast = document.createElement("div");
-    toast.textContent = message;
-    toast.className = "toast-notification fixed bottom-5 right-5 bg-black text-white px-4 py-2 rounded opacity-0 transition-opacity duration-300";
-    document.body.appendChild(toast);
-
-    // Animate
-    setTimeout(() => toast.classList.add("opacity-100"), 50);
-    setTimeout(() => {
-      toast.classList.remove("opacity-100");
-      setTimeout(() => toast.remove(), 500);
-    }, 2000);
-  }
-});

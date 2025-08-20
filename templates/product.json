@@ -9,12 +9,28 @@
  */
 {
   "sections": {
+    "banner": {
+      "type": "common-banner",
+      "settings": {}
+    },
     "main": {
       "type": "product",
       "settings": {}
-    }
+    },    
+    "simple_to_use": {
+      "type": "simple-to-use",
+      "settings": {}
+    },
+    "join_roots": {
+      "type": "join-roots",
+      "settings": {}
+    },
   },
+  
   "order": [
-    "main"
+    "banner",
+    "main",
+    "simple_to_use",
+    "join_roots",
   ]
 }

@@ -1,43 +1,147 @@
-{% comment %}
-  This section is used in the product template to render product page with
-  media, content, and add-to-cart form.
-
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/product
-{% endcomment %}
-
-<div class="product-images">
-  {% for image in product.images %}
-    {% render 'image', class: 'product-image', image: image %}
-  {% endfor %}
-</div>
-<div class="product-info">
-  <h1>{{ product.title }}</h1>
-  <p>{{ product.price | money }}</p>
-  <p>{{ product.description }}</p>
-</div>
-
-<div class="product-form">
-  {% form 'product', product %}
-    {% assign current_variant = product.selected_or_first_available_variant %}
-
-    <select name="id">
-      {% for variant in product.variants %}
-        <option
-          value="{{ variant.id }}"
-          {% if variant == current_variant %}
-            selected="selected"
-          {% endif %}
+{% stylesheet %}
+  .product-area .product-image,
+  .product-area .product-image img {
+    height: 100%;
+  }
+  .product-area .product-image img {
+    border-radius: 8px;
+  }
+  .tab-btn.active {
+    border-bottom: 2px solid #1e6c44; /* green highlight */
+    color: #1e6c44;
+  }
+{% endstylesheet %}
+<div class="product-details-area py-9">
+  <div class="container !max-w-[1400px] mx-auto">
+    <div class="bradcramp">
+      <ul class="flex items-center gap-1 text-xl">
+        <li>
+          <a
+            href="{{routes.collections_url}}"
+            class="text-[#797375] capitalize  hover:text-primary transition-all duration-300"
+            >shop</a
+          >
+        </li>
         >
-          {{ variant.title }} - {{ variant.price | money }}
-        </option>
-      {% endfor %}
-    </select>
+        <li>
+          <span class="text-[#514849] font-medium capitalize">{{ product.title }}</span>
+        </li>
+      </ul>
+    </div>
+    <div class="product-area mt-10">
+      <div class="w-full">
+        <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap gap-4 items-center justify-between w-full">
+          <div class="w-full md:w-1/2 xl:w-5/12 order-2 md:order-1">
+            <div class="size-full lg:h-135.5 lg:w-110.5 shadow-[-8px_-10px_#FFC801] rounded-lg">
+              {% for image in product.images %}
+                {% render 'image', class: 'product-image', image: image %}
+              {% endfor %}
+            </div>
+          </div>
+          <div class="w-full md:w-1/2 xl:w-6/12 mb-8 md:mb-0 order-1 md:order-2">
+            <div class=" xl:mr-10">
+              <h4 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-green font-bold mb-4">
+                {{ product.title }}
+              </h4>
 
-    <input type="text" name="quantity" min="1" value="1">
+              <div class="text-base md:text-lg lg:text-xl font-poppins mb-5">
+                {% assign description_html = product.description %}
+                {% assign list_items = description_html | split: '<li>' %}
 
-    <input type="submit" value="Add to cart">
-    {{ form | payment_button }}
-  {% endform %}
+                {% assign only_paragraphs = description_html | remove: '<ul>' | remove: '</ul>' %}
+                {% for item in list_items %}
+                  {% if item contains '</li>' %}
+                    {% assign clean_li = '<li>' | append: item | split: '</li>' | first | append: '</li>' %}
+                    {% assign only_paragraphs = only_paragraphs | remove: clean_li %}
+                  {% endif %}
+                {% endfor %}
+
+                <div class="prose text-para lading-[160%] mb-4">
+                  {{ only_paragraphs }}
+                </div>
+
+                {% if list_items.size > 1 %}
+                  <ul class="mb-6 space-y-2 text-[#1E6C44] font-medium">
+                    {% for item in list_items %}
+                      {% if item contains '</li>' %}
+                        <li class="flex items-center gap-2">
+                          <svg
+                            width="25"
+                            height="25"
+                            viewBox="0 0 25 25"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M22.8262 11.5799V12.4999C22.8249 14.6563 22.1267 16.7545 20.8355 18.4817C19.5443 20.2088 17.7295 21.4723 15.6615 22.0838C13.5936 22.6952 11.3834 22.6218 9.36064 21.8744C7.33785 21.1271 5.61083 19.746 4.43713 17.9369C3.26344 16.1279 2.70596 13.9879 2.84785 11.8362C2.98973 9.68443 3.82338 7.63619 5.22445 5.99694C6.62552 4.35768 8.51896 3.21525 10.6224 2.74001C12.7258 2.26477 14.9264 2.4822 16.8962 3.35986M22.8262 4.49986L12.8262 14.5099L9.82618 11.5099" stroke="#1E6C44" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                          {{ item | split: '</li>' | first | strip }}
+                        </li>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </div>
+
+              <div class="mb-6">
+                <div class="flex items-center gap-4 mb-6">
+                  <div class="flex items-center border rounded-lg">
+                    <button type="button" onclick="changeQty(-1)" class="px-3 py-2">-</button>
+                    <input id="quantity" type="number" min="1" value="1" class="w-12 text-center border-x">
+                    <button type="button" onclick="changeQty(1)" class="px-3 py-2">+</button>
+                  </div>
+                  <p class="text-xl lg:text-[26px] font-semibold">{{ product.price | money }}</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-5 mt-3.5">
+                <a
+                  href="{{routes.cart_url}}/{{ product.selected_or_first_available_variant.id }}:1"
+                  class="btn flex items-center gap-3"
+                  >Shop Now
+                  <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+                <button
+                  class="inline-btn text-[#1F1904] hover:text-white add-to-cart-btn"
+                  data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                  data-product-title="{{ product.title }}"
+                >
+                  <span class="btn-text">Add to Cart</span>
+                  <span class="btn-loading hidden">
+                    <svg class="animate-spin h-4 w-4 inline-block" viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
+                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Adding...
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Tabs: Description + Reviews -->
+    <div class="mt-12">
+      <div class="border-b flex gap-8">
+        <button class="tab-btn active py-3 px-4 font-medium" data-tab="desc">Product Description</button>
+        <button class="tab-btn py-3 px-4 font-medium" data-tab="reviews">Customer Reviews</button>
+      </div>
+
+      <!-- Tab Content -->
+      <div class="tab-content mt-6">
+        <!-- Description -->
+        <div id="tab-desc" class="tab-pane active prose max-w-none">
+          {{ product.description }}
+        </div>
+
+        <!-- Reviews (Judge.me Widget) -->
+        <div id="tab-reviews" class="tab-pane hidden">
+          {% render 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: true %}
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% schema %}
@@ -49,3 +153,32 @@
   }
 }
 {% endschema %}
+<script>
+  function changeQty(amount) {
+    const qtyInput = document.getElementById('quantity');
+    let value = parseInt(qtyInput.value);
+    if (!isNaN(value)) {
+      value += amount;
+      if (value < 1) value = 1;
+      qtyInput.value = value;
+    }
+  }
+
+  // Tabs
+  document.addEventListener('DOMContentLoaded', function () {
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+
+    tabBtns.forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const target = this.getAttribute('data-tab');
+
+        tabBtns.forEach((b) => b.classList.remove('active'));
+        tabPanes.forEach((p) => p.classList.add('hidden'));
+
+        this.classList.add('active');
+        document.getElementById('tab-' + target).classList.remove('hidden');
+      });
+    });
+  });
+</script>
