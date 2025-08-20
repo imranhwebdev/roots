@@ -1,269 +1,147 @@
-<div id="signup-step">
-  {% form 'create_customer', id: 'signup-form' %}
-    <div class="register-page grid grid-cols-1 md:grid-cols-2 bg-[#1E6C44] min-h-screen">
-      <div class="overflow-auto py-25 max-h-screen">
-        <div class="w-full mx-auto px-5 min-w-full 2xl:min-w-164 lg:w-53.5 mb-7.5 lg:mb-9 xl:mb-11 2xl:mb-12.5">
-          <a href="{{ routes.root_url }}" class="w-31.5 mb-7.5 md:mb-9 lg:mb-11 xl:mb-12.5 block mx-auto">
-            <img src="{{ 'login-icon.png' | asset_url }}" class="size-full object-center" alt="">
-          </a>
-          <p class="text-white text-2xl lg:text-3xl xl:text-[32px] font-medium !leading-[1.25] font-poppins mb-1.4 lg:mb-3">
-            Sign Up
-          </p>
-          <p class="text-[#B7D6C6] text-base md:text-lg xl:text-xl !leading-[1.6]">
-            Fill your information below or register with your account.
-          </p>
+<div class="register-page grid grid-cols-1 md:grid-cols-2 bg-[#1E6C44] min-h-screen">
+  <div class="overflow-auto py-25 max-h-screen">
+    <div class="w-full mx-auto px-5 min-w-full 2xl:min-w-164 lg:w-53.5 mb-7.5 lg:mb-9 xl:mb-11 2xl:mb-12.5">
+      <a href="{{ routes.root_url }}" class="w-31.5 mb-7.5 md:mb-9 lg:mb-11 xl:mb-12.5 block mx-auto">
+        <img src="{{ 'login-icon.png' | asset_url }}" width="" height="" class="size-full object-center" alt="">
+      </a>
+      <p class="text-white text-2xl lg:text-3xl xl:text-[32px] font-medium !leading-[1.25] font-poppins mb-1.4 lg:mb-3">
+        Sign Up
+      </p>
+      <p class="text-[#B7D6C6] text-base md:text-lg xl:text-xl !leading-[1.6]">
+        Fill your information below or register with your account.
+      </p>
 
-          {{ form.errors | default_errors }}
+      <!-- Shopify Customer Register Form -->
+      {% form 'create_customer' %}
+        {{ form.errors | default_errors }}
 
-          <div class="flex flex-col lg:flex-row gap-4 lg:gap-5 lg:mb-5">
-            <div class="w-full mb-4 md:mb-0">
-              <label class="block text-white text-lg mb-2 font-medium font-poppins">First Name*</label>
-              <input
-                type="text"
-                name="customer[first_name]"
-                placeholder="Enter First Name"
-                required
-                class="w-full text-base text-[#B7D6C6] placeholder:text-[#B7D6C6] border border-[#B7D6C6] bg-[#2A7A51] py-4 px-5 rounded-lg"
-              >
-            </div>
-            <div class="w-full mb-4 lg:mb-0">
-              <label class="block text-white text-lg mb-2 font-medium font-poppins">Last Name*</label>
-              <input
-                type="text"
-                name="customer[last_name]"
-                placeholder="Enter Last Name"
-                required
-                class="w-full text-base text-[#B7D6C6] placeholder:text-[#B7D6C6] border border-[#B7D6C6] bg-[#2A7A51] py-4 px-5 rounded-lg"
-              >
-            </div>
-          </div>
-
-          <div class="w-full mb-4 lg:mb-5">
-            <label class="block text-white text-lg mb-2 font-medium font-poppins">Email*</label>
+        <div class="flex flex-col lg:flex-row gap-4 lg:gap-5 lg:mb-5">
+          <div class="w-full mb-4 md:mb-0">
+            <label class="block text-white text-lg mb-2 font-medium font-poppins">First Name*</label>
             <input
-              type="email"
-              name="customer[email]"
-              placeholder="Enter Email Address"
+              type="text"
+              name="customer[first_name]"
+              placeholder="Enter First Name"
               required
               class="w-full text-base text-[#B7D6C6] placeholder:text-[#B7D6C6] border border-[#B7D6C6] bg-[#2A7A51] py-4 px-5 rounded-lg"
             >
           </div>
-
-          <div class="w-full mb-4 lg:mb-5">
-            {% render 'password-input' %}
-          </div>
-
-          <div class="w-full mb-4 lg:mb-5">
-            <button
-              type="submit"
-              id="signup-button"
-              class="text-[#1F1904] text-base py-4 w-full cursor-pointer font-medium font-poppins text-center px-5 rounded-lg bg-[#FFC801]"
+          <div class="w-full mb-4 lg:mb-0">
+            <label class="block text-white text-lg mb-2 font-medium font-poppins">Last Name*</label>
+            <input
+              type="text"
+              name="customer[last_name]"
+              placeholder="Enter Last Name"
+              required
+              class="w-full text-base text-[#B7D6C6] placeholder:text-[#B7D6C6] border border-[#B7D6C6] bg-[#2A7A51] py-4 px-5 rounded-lg"
             >
-              Sign Up
-            </button>
           </div>
-
-          <p class="text-red-500 text-center mt-2" id="signup-error"></p>
         </div>
-      </div>
 
-      <div class="hidden md:flex bg-[#FFC801] justify-end py-13 h-screen">
-        <img class="w-full object-contain h-full" src="{{ 'login-img.png' | asset_url }}" alt="">
-      </div>
-    </div>
-  {% endform %}
-</div>
-
-<div id="verify-step" class="hidden">
-  <div class="register-page grid grid-cols-1 md:grid-cols-2 bg-[#1E6C44] min-h-screen">
-    <div class="overflow-auto py-25 max-h-screen">
-      <div class="w-full mx-auto px-5 min-w-full 2xl:min-w-164 lg:w-53.5 mb-7.5 lg:mb-9 xl:mb-11 2xl:mb-12.5">
-        <a href="{{ routes.root_url }}" class="w-31.5 mb-7.5 md:mb-9 lg:mb-11 xl:mb-12.5 block mx-auto">
-          <img src="{{ 'login-icon.png' | asset_url }}" class="size-full object-center" alt="">
-        </a>
-        <p class="text-white text-2xl lg:text-3xl font-medium mb-2 font-poppins">Verify Code</p>
-        <p class="text-[#B7D6C6] mb-1">Please enter the code we sent to</p>
-        <p class="text-[#FFC801] mb-4" id="verify-email"></p>
-
-        <div class="flex gap-2 justify-center mb-4">
+        <div class="w-full mb-4 lg:mb-5">
+          <label class="block text-white text-lg mb-2 font-medium font-poppins">Email*</label>
           <input
-            id="otp1"
-            maxlength="1"
-            data-otp-digit
-            class="w-12 h-12 text-center text-white bg-[#2A7A51] border border-[#B7D6C6] rounded"
-          >
-          <input
-            id="otp2"
-            maxlength="1"
-            data-otp-digit
-            class="w-12 h-12 text-center text-white bg-[#2A7A51] border border-[#B7D6C6] rounded"
-          >
-          <input
-            id="otp3"
-            maxlength="1"
-            data-otp-digit
-            class="w-12 h-12 text-center text-white bg-[#2A7A51] border border-[#B7D6C6] rounded"
-          >
-          <input
-            id="otp4"
-            maxlength="1"
-            data-otp-digit
-            class="w-12 h-12 text-center text-white bg-[#2A7A51] border border-[#B7D6C6] rounded"
-          >
-          <input
-            id="otp5"
-            maxlength="1"
-            data-otp-digit
-            class="w-12 h-12 text-center text-white bg-[#2A7A51] border border-[#B7D6C6] rounded"
-          >
-          <input
-            id="otp6"
-            maxlength="1"
-            data-otp-digit
-            class="w-12 h-12 text-center text-white bg-[#2A7A51] border border-[#B7D6C6] rounded"
+            type="email"
+            name="customer[email]"
+            placeholder="Enter Email Address"
+            required
+            class="w-full text-base text-[#B7D6C6] placeholder:text-[#B7D6C6] border border-[#B7D6C6] bg-[#2A7A51] py-4 px-5 rounded-lg"
           >
         </div>
 
-        <button
-          type="button"
-          id="verify-otp-button"
-          class="bg-[#FFC801] text-[#1F1904] font-medium font-poppins w-full py-3 rounded mb-4"
-        >
-          Verify
-        </button>
+        <div class="w-full mb-4 lg:mb-5">
+          {% render 'password-input' %}
+        </div>
 
-        <p class="text-center text-white mt-4">
-          Didn't receive code? <button type="button" id="resend-btn" class="text-[#FFC801] underline">Resend</button>
-        </p>
-        <p class="text-red-500 text-center mt-2" id="verify-error"></p>
+        <div class="w-full mb-4 lg:mb-5">
+          <button
+            type="submit"
+            class="text-[#1F1904] text-base py-4 w-full cursor-pointer font-medium font-poppins text-center px-5 rounded-lg bg-[#FFC801]"
+          >
+            Sign Up
+          </button>
+        </div>
+      {% endform %}
+
+      <div class="relative z-1 mb-6 lg:mb-8">
+        <div class="h-[1px] w-[35%] bg-[#B7D6C6] absolute left-0 top-1/2 -translate-y-1/2"></div>
+        <div class="h-[1px] w-[35%] bg-[#B7D6C6] absolute right-0 top-1/2 -translate-y-1/2"></div>
+        <p class="text-white text-base font-medium font-poppins text-center">Sign Up with</p>
       </div>
-    </div>
 
-    <div class="hidden md:flex bg-[#FFC801] justify-end py-13 h-screen">
-      <img class="w-full object-contain h-full" src="{{ 'login-img.png' | asset_url }}" alt="">
+      <!-- Google Signup Placeholder (custom app needed) -->
+      <button class="text-[#1E6C44] text-base py-4 w-full flex items-center justify-center gap-2 rounded-lg bg-white">
+        <span>G</span> Sign Up With Google
+      </button>
+
+      <p class="text-white text-base mt-10 text-center">
+        Already have an account? <a href="{{ routes.account_login_url }}" class="text-[#FFC801] underline">Sign In</a>
+      </p>
     </div>
   </div>
+
+  <div class="hidden md:flex bg-[#FFC801] justify-end py-13 h-screen">
+    <img class="w-full object-contain h-full" width="" height="" src="{{ 'login-img.png' | asset_url }}" alt="">
+  </div>
 </div>
-
 <script>
-  const signupForm = document.getElementById('signup-form');
-  const signupStep = document.getElementById('signup-step');
-  const verifyStep = document.getElementById('verify-step');
-  const signupError = document.getElementById('signup-error');
-  const verifyError = document.getElementById('verify-error');
-  const verifyEmailText = document.getElementById('verify-email');
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('signup-form');
+    const toast = document.getElementById('toast');
 
-  let formData = {};
-  let isVerified = false;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
 
-  // Prevent form submit until OTP verified
-  signupForm.addEventListener('submit', function (e) {
-    e.preventDefault(); // always prevent
+      const formData = new FormData(form);
 
-    if (!isVerified) {
-      // Store form data
-      formData = {
-        firstName: this.querySelector('[name="customer[first_name]"]').value,
-        lastName: this.querySelector('[name="customer[last_name]"]').value,
-        email: this.querySelector('[name="customer[email]"]').value,
-        password: this.querySelector('[name="customer[password]"]').value,
-      };
-
-      signupError.textContent = '';
-
-      // Send OTP
-      fetch('/apps/simplify-login/send-otp', {
+      fetch('/account', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: formData.email }),
+        body: formData,
       })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log('OTP response:', data);
-          if (data.success) {
-            signupStep.style.display = 'none';
-            verifyStep.style.display = 'block';
-            verifyEmailText.textContent = formData.email;
-            document.getElementById('otp1').focus();
+        .then((response) => response.text())
+        .then((html) => {
+          if (html.includes('account created') || html.includes('Welcome')) {
+            // Show toast
+            toast.classList.remove('opacity-0');
+            toast.classList.add('opacity-100');
+
+            // Hide toast after 3 seconds
+            setTimeout(() => {
+              toast.classList.remove('opacity-100');
+              toast.classList.add('opacity-0');
+            }, 3000);
+
+            // Redirect after 3 seconds
+            setTimeout(() => {
+              window.location.href = '/account';
+            }, 3000);
+
+            form.reset();
           } else {
-            signupError.textContent = data.message || 'Error sending OTP';
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const errors = doc.querySelector('.errors')?.textContent || 'Something went wrong!';
+
+            toast.textContent = errors;
+            toast.classList.remove('bg-green-500', 'opacity-0');
+            toast.classList.add('bg-red-500', 'opacity-100');
+
+            setTimeout(() => {
+              toast.classList.remove('opacity-100');
+              toast.classList.add('opacity-0');
+            }, 3000);
           }
         })
         .catch((err) => {
-          console.error(err);
-          signupError.textContent = 'Error sending OTP';
+          toast.textContent = 'Something went wrong. Please try again.';
+          toast.classList.remove('bg-green-500', 'opacity-0');
+          toast.classList.add('bg-red-500', 'opacity-100');
+
+          setTimeout(() => {
+            toast.classList.remove('opacity-100');
+            toast.classList.add('opacity-0');
+          }, 3000);
         });
-    }
-  });
-
-  // OTP input navigation
-  const otpInputs = document.querySelectorAll('[data-otp-digit]');
-  otpInputs.forEach((input, index) => {
-    input.addEventListener('input', function (e) {
-      if (e.target.value.length === 1 && index < otpInputs.length - 1) {
-        otpInputs[index + 1].focus();
-      }
     });
-    input.addEventListener('keydown', function (e) {
-      if (e.key === 'Backspace' && e.target.value === '' && index > 0) {
-        otpInputs[index - 1].focus();
-      }
-    });
-  });
-
-  // Verify OTP
-  document.getElementById('verify-otp-button').addEventListener('click', function () {
-    const otp = Array.from(otpInputs)
-      .map((i) => i.value)
-      .join('');
-    if (otp.length < 6) {
-      verifyError.textContent = 'Please enter complete 6-digit OTP.';
-      return;
-    }
-
-    fetch('/apps/simplify-login/verify-otp', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: formData.email, otp: otp }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log('Verify response:', data);
-        if (data.verified) {
-          isVerified = true;
-          // Fill form again
-          signupForm.querySelector('[name="customer[first_name]"]').value = formData.firstName;
-          signupForm.querySelector('[name="customer[last_name]"]').value = formData.lastName;
-          signupForm.querySelector('[name="customer[email]"]').value = formData.email;
-          signupForm.querySelector('[name="customer[password]"]').value = formData.password;
-
-          signupForm.submit(); // submit only after OTP verified
-        } else {
-          verifyError.textContent = 'Invalid OTP. Try again.';
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        verifyError.textContent = 'Error verifying OTP. Try again.';
-      });
-  });
-
-  // Resend OTP
-  document.getElementById('resend-btn').addEventListener('click', function () {
-    fetch('/apps/simplify-login/send-otp', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: formData.email }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          verifyError.textContent = 'OTP resent successfully.';
-          verifyError.style.color = 'green';
-        } else {
-          verifyError.textContent = data.message || 'Error resending OTP.';
-          verifyError.style.color = 'red';
-        }
-      });
   });
 </script>
