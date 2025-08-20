@@ -1,0 +1,95 @@
+<div class="complete-profile grid grid-cols-1 md:grid-cols-2 bg-[#1E6C44] min-h-screen">
+  <div class="max-h-screen overflow-auto py-12">
+    <div class="w-full px-5 mx-auto max-w-164">
+      <a href="{{routes.root_url}}" class="w-31.5 mb-7.5 md:mb-9 block lg:mb-11 xl:mb-12.5">
+        <img src="/assets/login-icon.png" class="size-full object-center" alt="" width="" height="">
+      </a>
+      <p class="text-white text-2xl lg:text-3xl xl:text-[32px] font-medium !leading-[1.25] font-poppins mb-1.4 lg:mb-3">
+        Complete Your Profile
+      </p>
+      <p class="text-[#B7D6C6] text-base md:text-lg xl:text-xl !leading-[1.6]">
+        Don't worry, only you can see your personal data.
+      </p>
+      <form method="#" action="#" class=" my-6 lg:my-8 xl:my-10">
+        <div class="">
+          <p class="text-white text-lg lg:text-[22px]  font-medium !leading-[1.25] mb-2">Profile Photo (Optional)</p>
+          <label
+            for="upload"
+            class="block cursor-pointer py-10 lg:py-11 text-center bg-[#2A7A51] rounded-lg border border-[#B7D6C6] mb-4 lg:mb-5"
+          >
+            <input type="file" name="" class="hidden" id="upload">
+            <div class="text-center">
+              <img
+                src="/assets/upload-icon.png"
+                class="size-15 lg:size-20 xl:size-25 mx-auto mb-5 lg:mb-6"
+                alt=""
+                width=""
+                height=""
+              >
+              <p class="text-white text-lg lg:text-[22px]  font-medium !leading-[1.25] md:mb-2">
+                Drag & drop your image, or
+              </p>
+              <p class="text-white text-lg lg:text-[22px]  font-medium !leading-[1.25]">
+                <span class="text-[#FFC801]">Browse </span>your computer
+              </p>
+            </div>
+          </label>
+        </div>
+        <div class="w-full mb-4 lg:mb-5">
+          <label class="block text-white text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25] font-poppins"
+            >Phone*
+          </label>
+          <input
+            placeholder="Enter Phone Number"
+            type="text"
+            class="w-full text-base md:text-lg lg:text-xl focus:outline-0 !leading-[1.2] text-[#B7D6C6] placeholder:text-[#B7D6C6] border font-poppins border-[#B7D6C6] bg-[#2A7A51] py-4 lg:py-5 px-5 lg:px-6 rounded-lg "
+          >
+        </div>
+        <div class="w-full mb-4 lg:mb-5 xl:mb-8">
+          <label
+            for="gender"
+            class="block text-white text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25] font-poppins"
+            >Gender*</label
+          >
+          <div class="relative">
+            <select
+              id="gender"
+              class="w-full appearance-none text-base md:text-lg lg:text-xl focus:outline-0 cursor-pointer !leading-[1.2] text-[#B7D6C6] placeholder:text-[#B7D6C6] border font-poppins border-[#B7D6C6] bg-[#2A7A51] py-4 lg:py-5 px-5 lg:px-6 rounded-lg "
+            >
+              <option class="text-base md:text-lg lg:text-xl text-[#B7D6C6]">Select Gender</option>
+              <option class="text-base md:text-lg lg:text-xl text-[#B7D6C6]">Male</option>
+              <option class="text-base md:text-lg lg:text-xl text-[#B7D6C6]">Female</option>
+              <option class="text-base md:text-lg lg:text-xl text-[#B7D6C6]">Other</option>
+            </select>
+
+            <!-- Custom dropdown arrow -->
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="size-4 lg:size-5 xl:size-6"
+                width="100%"
+                height="100%"
+                viewBox="0 0 24 25"
+                fill="none"
+              >
+                <path d="M21 9L12 16.7143L3 9" stroke="white" stroke-width="1.92857" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full mb-4 lg:mb-5">
+          <button
+            type="submit"
+            class="text-[#1F1904] text-base md:text-lg lg:text-xl py-4 lg:py-5 w-full cursor-pointer !leading-[1.2] font-medium font-poppins text-center px-5 rounded-lg bg-[#FFC801]"
+          >
+            Update Changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="hidden md:flex bg-[#FFC801] justify-end py-13 px-10 h-screen">
+    <img class="w-full object-contain h-full" src="/assets/login-img.png" alt="" width="100" height="100">
+  </div>
+</div>
