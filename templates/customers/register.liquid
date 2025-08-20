@@ -4,7 +4,7 @@
       <div class="overflow-auto py-25 max-h-screen">
         <div class="w-full mx-auto px-5 min-w-full 2xl:min-w-164 lg:w-53.5 mb-7.5 lg:mb-9 xl:mb-11 2xl:mb-12.5">
           <a href="{{ routes.root_url }}" class="w-31.5 mb-7.5 md:mb-9 lg:mb-11 xl:mb-12.5 block mx-auto">
-            <img src="{{ 'login-icon.png' | asset_url }}" width="" height="" class="size-full object-center" alt="">
+            <img src="{{ 'login-icon.png' | asset_url }}" class="size-full object-center" alt="">
           </a>
           <p class="text-white text-2xl lg:text-3xl xl:text-[32px] font-medium !leading-[1.25] font-poppins mb-1.4 lg:mb-3">
             Sign Up
@@ -64,21 +64,6 @@
           </div>
 
           <p class="text-red-500 text-center mt-2" id="signup-error"></p>
-
-          <div class="relative z-1 mb-6 lg:mb-8">
-            <div class="h-[1px] w-[35%] bg-[#B7D6C6] absolute left-0 top-1/2 -translate-y-1/2"></div>
-            <div class="h-[1px] w-[35%] bg-[#B7D6C6] absolute right-0 top-1/2 -translate-y-1/2"></div>
-            <p class="text-white text-base font-medium font-poppins text-center">Sign Up with</p>
-          </div>
-
-          <button class="text-[#1E6C44] text-base py-4 w-full flex items-center justify-center gap-2 rounded-lg bg-white">
-            Sign Up With Google
-          </button>
-
-          <p class="text-white text-base mt-10 text-center">
-            Already have an account?
-            <a href="{{ routes.account_login_url }}" class="text-[#FFC801] underline">Sign In</a>
-          </p>
         </div>
       </div>
 
@@ -89,13 +74,12 @@
   {% endform %}
 </div>
 
-<!-- OTP Verification Step -->
 <div id="verify-step" class="hidden">
   <div class="register-page grid grid-cols-1 md:grid-cols-2 bg-[#1E6C44] min-h-screen">
     <div class="overflow-auto py-25 max-h-screen">
       <div class="w-full mx-auto px-5 min-w-full 2xl:min-w-164 lg:w-53.5 mb-7.5 lg:mb-9 xl:mb-11 2xl:mb-12.5">
         <a href="{{ routes.root_url }}" class="w-31.5 mb-7.5 md:mb-9 lg:mb-11 xl:mb-12.5 block mx-auto">
-          <img src="{{ 'login-icon.png' | asset_url }}" width="" height="" class="size-full object-center" alt="">
+          <img src="{{ 'login-icon.png' | asset_url }}" class="size-full object-center" alt="">
         </a>
         <p class="text-white text-2xl lg:text-3xl font-medium mb-2 font-poppins">Verify Code</p>
         <p class="text-[#B7D6C6] mb-1">Please enter the code we sent to</p>
@@ -151,7 +135,6 @@
         <p class="text-center text-white mt-4">
           Didn't receive code? <button type="button" id="resend-btn" class="text-[#FFC801] underline">Resend</button>
         </p>
-
         <p class="text-red-500 text-center mt-2" id="verify-error"></p>
       </div>
     </div>
@@ -173,11 +156,11 @@
   let formData = {};
   let isVerified = false;
 
-  // Handle form submission
+  // Prevent form submit until OTP verified
   signupForm.addEventListener('submit', function (e) {
-    if (!isVerified) {
-      e.preventDefault();
+    e.preventDefault(); // always prevent
 
+    if (!isVerified) {
       // Store form data
       formData = {
         firstName: this.querySelector('[name="customer[first_name]"]').value,
@@ -186,44 +169,41 @@
         password: this.querySelector('[name="customer[password]"]').value,
       };
 
-      const email = formData.email;
       signupError.textContent = '';
 
-      // Send OTP using Simplify Login app
+      // Send OTP
       fetch('/apps/simplify-login/send-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email }),
+        body: JSON.stringify({ email: formData.email }),
       })
         .then((res) => res.json())
         .then((data) => {
+          console.log('OTP response:', data);
           if (data.success) {
-            // Show OTP step
             signupStep.style.display = 'none';
             verifyStep.style.display = 'block';
-            verifyEmailText.textContent = email;
+            verifyEmailText.textContent = formData.email;
             document.getElementById('otp1').focus();
           } else {
-            signupError.textContent = data.message || 'Error sending OTP. Try again.';
+            signupError.textContent = data.message || 'Error sending OTP';
           }
         })
         .catch((err) => {
           console.error(err);
-          signupError.textContent = 'Error sending OTP. Try again.';
+          signupError.textContent = 'Error sending OTP';
         });
     }
   });
 
-  // OTP input handling
+  // OTP input navigation
   const otpInputs = document.querySelectorAll('[data-otp-digit]');
-
   otpInputs.forEach((input, index) => {
     input.addEventListener('input', function (e) {
       if (e.target.value.length === 1 && index < otpInputs.length - 1) {
         otpInputs[index + 1].focus();
       }
     });
-
     input.addEventListener('keydown', function (e) {
       if (e.key === 'Backspace' && e.target.value === '' && index > 0) {
         otpInputs[index - 1].focus();
@@ -233,35 +213,31 @@
 
   // Verify OTP
   document.getElementById('verify-otp-button').addEventListener('click', function () {
-    const otp =
-      document.getElementById('otp1').value +
-      document.getElementById('otp2').value +
-      document.getElementById('otp3').value +
-      document.getElementById('otp4').value +
-      document.getElementById('otp5').value +
-      document.getElementById('otp6').value;
-
-    const email = formData.email;
+    const otp = Array.from(otpInputs)
+      .map((i) => i.value)
+      .join('');
+    if (otp.length < 6) {
+      verifyError.textContent = 'Please enter complete 6-digit OTP.';
+      return;
+    }
 
     fetch('/apps/simplify-login/verify-otp', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email, otp: otp }),
+      body: JSON.stringify({ email: formData.email, otp: otp }),
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log('Verify response:', data);
         if (data.verified) {
-          // OTP verified, now submit the form
           isVerified = true;
-
-          // Update form fields
+          // Fill form again
           signupForm.querySelector('[name="customer[first_name]"]').value = formData.firstName;
           signupForm.querySelector('[name="customer[last_name]"]').value = formData.lastName;
           signupForm.querySelector('[name="customer[email]"]').value = formData.email;
           signupForm.querySelector('[name="customer[password]"]').value = formData.password;
 
-          // Submit to Shopify
-          signupForm.submit();
+          signupForm.submit(); // submit only after OTP verified
         } else {
           verifyError.textContent = 'Invalid OTP. Try again.';
         }
@@ -274,12 +250,10 @@
 
   // Resend OTP
   document.getElementById('resend-btn').addEventListener('click', function () {
-    const email = formData.email;
-
     fetch('/apps/simplify-login/send-otp', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email }),
+      body: JSON.stringify({ email: formData.email }),
     })
       .then((res) => res.json())
       .then((data) => {
