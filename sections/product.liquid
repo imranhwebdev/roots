@@ -90,24 +90,23 @@
 <div class="product-details-area py-9">
   <div class="container !max-w-[1400px] mx-auto">
     <div class="bradcramp">
-      <ul class="flex items-center gap-1 text-xl">
-        <li>
-          <a
-            href="{{routes.collections_url}}"
-            class="text-[#797375] capitalize hover:text-primary transition-all duration-300"
-            >shop</a
-          >
-        </li>
-        <li>
-          <span class="text-[#514849] font-medium capitalize">{{ product.title }}</span>
+      <ul>
+        <li class="text-lg lg:text-xl text-[#797375] flex items-center ">
+          Shop
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M9.55556 17L14 12L9.55556 7" stroke="#797375" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="text-[#514849] font-medium">Product Details</span>
         </li>
       </ul>
     </div>
 
     <div class="product-area mt-10">
       <div class="w-full">
-        <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap gap-4 items-center justify-between w-full">
-          <div class="w-full md:w-1/2 xl:w-5/12 order-2 md:order-1">
+        <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap gap-6 items-center justify-between w-full">
+          <div class="w-full md:w-1/2 xl:w-5/12">
             <div class="size-full lg:h-135.5 lg:w-110.5 shadow-[-8px_-10px_#FFC801] rounded-lg">
               {% for image in product.images %}
                 {% render 'image', class: 'product-image', image: image %}
@@ -115,9 +114,12 @@
             </div>
           </div>
 
-          <div class="w-full md:w-1/2 xl:w-6/12 mb-8 md:mb-0 order-1 md:order-2">
+          <div class="w-full md:w-1/2 xl:w-6/12 mb-8 md:mb-0 ">
             <div class="xl:mr-10">
-              <h4 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-green font-bold mb-4">
+              <span class="text-xs md:text-base block !leading-[1.2] uppercase tracking-[1.92px] bg-[#B7D6C6] rounded-[50px] py-3 px-6 max-w-max mb-4"
+                >Order today and get 15% OFF</span
+              >
+              <h4 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-green font-bold mb-2 font-armany-bold !leading-[1.25]">
                 {{ product.title }}
               </h4>
 
@@ -133,7 +135,7 @@
                   {% endif %}
                 {% endfor %}
 
-                <div class="prose text-para lading-[160%] mb-4">
+                <div class="prose  text-[#514849] text-sm md:text-base lg:text-xl lading-[160%] mb-5">
                   {{ only_paragraphs }}
                 </div>
 
@@ -141,7 +143,7 @@
                   <ul class="mb-6 space-y-2 text-[#1E6C44] font-medium">
                     {% for item in list_items %}
                       {% if item contains '</li>' %}
-                        <li class="flex items-center gap-2">
+                        <li class="flex items-center gap-2 text-[#1E6C44] text-base lg:text-lg xl:text-[22px] !leading-[1.6] font-medium">
                           <svg
                             width="25"
                             height="25"
@@ -161,24 +163,58 @@
 
               <div class="mb-6">
                 <!-- Judge.me Product Rating Widget -->
-                <div class="jdgm-widget jdgm-preview-badge" data-id="{{ product.id }}">
+                <div
+                  class="jdgm-widget jdgm-preview-badge text-sm lg:text-base !leading-[1.6] text-[#797375]"
+                  data-id="{{ product.id }}"
+                >
                   {{ product.metafields.judgeme.badge }}
                 </div>
-
-                <div class="flex items-center gap-4 mb-6">
-                  <div class="flex items-center border rounded-lg">
-                    <button type="button" onclick="changeQty(-1)" class="px-3 py-2">-</button>
-                    <input id="quantity" type="number" min="1" value="1" class="w-12 text-center border-x">
-                    <button type="button" onclick="changeQty(1)" class="px-3 py-2">+</button>
+                <div class="flex items-center gap-4 mb-6 mt-4 xl:mb-8">
+                  <div class="flex items-center bg-[#F0F0F0] rounded-[90px] p-1.5">
+                    <button
+                      type="button"
+                      onclick="changeQty(-1)"
+                      class="size-9 lg:size-10 flex items-center justify-center rounded-full border border-[#EEEFEE] bg-white"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="size-4 lg:size-5"
+                        width="100%"
+                        height="100%"
+                        viewBox="0 0 21 20"
+                        fill="none"
+                      >
+                        <path d="M4.43457 10H16.1012" stroke="#858484" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </button>
+                    <input id="quantity" type="number" min="1" value="1" class="w-12 text-center pl-3">
+                    <button
+                      type="button"
+                      onclick="changeQty(1)"
+                      class="size-9 lg:size-10 flex items-center justify-center rounded-full border border-[#EEEFEE] bg-white"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="size-4 lg:size-5"
+                        width="100%"
+                        height="100%"
+                        viewBox="0 0 21 20"
+                        fill="none"
+                      >
+                        <path d="M10.6839 4.16602V15.8327M4.85059 9.99935H16.5173" stroke="#424242" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </button>
                   </div>
-                  <p class="text-xl lg:text-[26px] font-semibold">{{ product.price | money }}</p>
+                  <p class="text-xl lg:text-[26px] xl:text-3xl font-semibold !leading-[1.2]">
+                    {{ product.price | money }}
+                  </p>
                 </div>
               </div>
 
-              <div class="flex items-center gap-5 mt-3.5">
+              <div class="flex items-center gap-3 lg:gap-5">
                 <a
                   href="{{routes.cart_url}}/{{ product.selected_or_first_available_variant.id }}:1"
-                  class="btn flex items-center gap-3"
+                  class="btn flex items-center gap-3 !text-base lg:!text-lg xl:!text-xl"
                 >
                   Shop Now
                   <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -187,7 +223,7 @@
                 </a>
 
                 <button
-                  class="inline-btn text-[#1F1904] hover:text-white add-to-cart-btn"
+                  class="inline-btn text-[#1F1904] hover:text-white add-to-cart-btn !text-base lg:!text-lg xl:!text-xl"
                   data-variant-id="{{ product.selected_or_first_available_variant.id }}"
                   data-product-title="{{ product.title }}"
                 >
@@ -209,9 +245,9 @@
 
     <!-- Tabs: Description + Reviews -->
     <div class="mt-12">
-      <div class="border-b flex gap-8">
-        <button class="tab-btn active py-3 px-4 font-medium" data-tab="desc">Product Description</button>
-        <button class="tab-btn py-3 px-4 font-medium" data-tab="reviews">Customer Reviews</button>
+      <div class="border-b flex items-center border px-4 lg:px-5 lg:pt-4 border-[#B7D6C6] rounded-lg gap-6 lg:gap-9">
+        <button class="tab-btn active border pb-4 border-transparent text-[#514849] text-sm md:text-base lg:text-lg xl:text-xl !leading-[1.6] font-medium" data-tab="desc">Product Description</button>
+        <button class="tab-btn pb-4 border border-transparent text-[#514849] text-sm md:text-base lg:text-lg xl:text-xl !leading-[1.6] font-medium" data-tab="reviews">Customer Reviews</button>
       </div>
 
       <!-- Tab Content -->
