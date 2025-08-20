@@ -83,6 +83,11 @@
     <img class="w-full object-contain h-full" width="" height="" src="{{ 'login-img.png' | asset_url }}" alt="">
   </div>
 </div>
+<div
+  id="toast"
+  class="fixed bottom-5 right-5 bg-red-500 text-white px-5 py-3 rounded-lg shadow-lg opacity-0 transition-opacity duration-500 z-50"
+></div>
+
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('signup-form');
@@ -99,47 +104,52 @@
       })
         .then((response) => response.text())
         .then((html) => {
-          if (html.includes('account created') || html.includes('Welcome')) {
-            // Show toast
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+
+          const errorElement = doc.querySelector('.errors');
+          if (errorElement) {
+            const errorText = errorElement.textContent.trim();
+
+            // Check for "email already associated"
+            if (errorText.includes('already associated')) {
+              toast.textContent = '❌ This email is already registered. Please login or reset your password.';
+            } else {
+              toast.textContent = '❌ ' + errorText;
+            }
+
             toast.classList.remove('opacity-0');
             toast.classList.add('opacity-100');
 
-            // Hide toast after 3 seconds
             setTimeout(() => {
               toast.classList.remove('opacity-100');
               toast.classList.add('opacity-0');
-            }, 3000);
-
-            // Redirect after 3 seconds
-            setTimeout(() => {
-              window.location.href = '/account';
-            }, 3000);
-
-            form.reset();
-          } else {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            const errors = doc.querySelector('.errors')?.textContent || 'Something went wrong!';
-
-            toast.textContent = errors;
-            toast.classList.remove('bg-green-500', 'opacity-0');
-            toast.classList.add('bg-red-500', 'opacity-100');
-
-            setTimeout(() => {
-              toast.classList.remove('opacity-100');
-              toast.classList.add('opacity-0');
-            }, 3000);
+            }, 4000);
+            return;
           }
+
+          // Success
+          toast.textContent = '✅ Registration successful! Redirecting...';
+          toast.classList.remove('bg-red-500', 'opacity-0');
+          toast.classList.add('bg-green-500', 'opacity-100');
+
+          form.reset();
+
+          setTimeout(() => {
+            toast.classList.remove('opacity-100');
+            toast.classList.add('opacity-0');
+            window.location.href = '/account'; // Redirect to account page
+          }, 3000);
         })
         .catch((err) => {
-          toast.textContent = 'Something went wrong. Please try again.';
+          toast.textContent = '❌ Something went wrong. Please try again.';
           toast.classList.remove('bg-green-500', 'opacity-0');
           toast.classList.add('bg-red-500', 'opacity-100');
 
           setTimeout(() => {
             toast.classList.remove('opacity-100');
             toast.classList.add('opacity-0');
-          }, 3000);
+          }, 4000);
         });
     });
   });
