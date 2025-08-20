@@ -177,6 +177,10 @@
         e.stopPropagation();
         this.disabled = true;
         this.innerHTML = 'Processing...';
+
+        setTimeout(() => {
+          window.location.href = '/checkout';
+        }, 100);
       });
     }
   });
