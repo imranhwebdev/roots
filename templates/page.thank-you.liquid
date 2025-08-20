@@ -1,0 +1,74 @@
+<style>
+  .tnx-page {
+    padding: 60px 0;
+  }
+  .tnx-page h5 {
+    color: #fff;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  .tnx-page p {
+    color: #d1cdce;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .tnx-page .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #1e6c44;
+    font-weight: 600;
+    text-decoration: none;
+    margin: 5px;
+  }
+  .tnx-page .btn-outline {
+    border: 1px solid #b7d6c6;
+    background: transparent;
+    color: #fff;
+  }
+</style>
+
+<div class="tnx-page">
+  <div class="container">
+    <div
+      class="tnx-wrapper"
+      style="max-width:900px;margin:0 auto;text-align:center;border:2px solid #CAA000;background:#1E6C44;border-radius:16px;padding:40px;"
+    >
+      <h5>
+        Thank you for your purchase{% if checkout.customer %}, {{ checkout.customer.first_name }}{% endif %}!
+      </h5>
+      <p>Your order has been successfully processed. Here are the details:</p>
+
+      <p>
+        Order Number: <span style="color:#fff;">#{{ checkout.order_number }}</span>
+      </p>
+      <p>
+        Estimated delivery:
+        <span id="delivery-date" style="color:#fff;"></span>
+      </p>
+
+      <div style="margin-top:20px;">
+        <a href="{{ shop.url }}/account" class="btn">Track My Order</a>
+        <a href="{{ shop.url }}/collections/all" class="btn btn-outline">Continue Shopping</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Estimate delivery date: today + 7 days
+  document.addEventListener('DOMContentLoaded', function () {
+    const deliverySpan = document.getElementById('delivery-date');
+    if (deliverySpan) {
+      const today = new Date();
+      today.setDate(today.getDate() + 7);
+      deliverySpan.innerText = today.toLocaleDateString('en-US', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+      });
+    }
+  });
+</script>
