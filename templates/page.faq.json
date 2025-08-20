@@ -9,13 +9,6 @@
  */
 {
   "sections": {
-    "common_banner": {
-      "type": "common-banner",
-      "settings": {
-        "default_title": "FAQ",
-          "default_description": ""
-      }
-    },
     "main": {
       "type": "faq",
       "settings": {}
@@ -23,7 +16,6 @@
 
   },
   "order": [
-    "common_banner",
     "main",
   ]
 }
