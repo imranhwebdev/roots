@@ -134,7 +134,7 @@
         <!-- Description -->
         <div id="tab-desc" class="tab-pane active prose max-w-none">
           {% if product.metafields.custom.product_description != blank %}
-            {{ product.metafields.custom.product_description }}
+            {{ product.metafields.custom.product_description | metafield_tag }}
           {% else %}
             {{ product.description }}
           {% endif %}
