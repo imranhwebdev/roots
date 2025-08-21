@@ -428,6 +428,9 @@
   .mr-3 {
     margin-right: calc(var(--spacing) * 3);
   }
+  .-mb-6 {
+    margin-bottom: calc(var(--spacing) * -6);
+  }
   .mb-1 {
     margin-bottom: calc(var(--spacing) * 1);
   }
@@ -2144,6 +2147,11 @@
       margin-top: calc(var(--spacing) * 25);
     }
   }
+  .md\:-mb-7 {
+    @media (width >= 768px) {
+      margin-bottom: calc(var(--spacing) * -7);
+    }
+  }
   .md\:mb-0 {
     @media (width >= 768px) {
       margin-bottom: calc(var(--spacing) * 0);
@@ -2648,6 +2656,11 @@
   .lg\:mt-17 {
     @media (width >= 992px) {
       margin-top: calc(var(--spacing) * 17);
+    }
+  }
+  .lg\:-mb-8 {
+    @media (width >= 992px) {
+      margin-bottom: calc(var(--spacing) * -8);
     }
   }
   .lg\:mb-0 {
