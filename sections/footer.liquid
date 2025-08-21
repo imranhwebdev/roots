@@ -1,8 +1,8 @@
 <div class="footer bg-[#F0ECDC] pt-12.5 md:pt-16 lg:pt-20 xl:pt-25 pb-6 md:pb-7 lg:pb-8 relative z-1">
   <div class="container">
     <div class="flex flex-col md:flex-row justify-between flex-wrap gap-4 md:flex-nowrap mb-8 md:mb-10 lg:mb-14 xl:mb-16 2xl:mb-20">
-      <div class="w-full md:w-5/12 xl:w-3/12">
-        <div class="">
+      <div class="w-full md:w-5/12 xl:w-4/12">
+        <div class=" 2xl:pr-[8%] 3xl:pr-[15%]">
           <a href="{{routes.root_url}}">
             {% if section.settings.logo_image %}
               <img
@@ -153,7 +153,7 @@
   {% if section.settings.background_image %}
     <img
       src="{{ section.settings.background_image | img_url: '328x236' }}"
-      class="w-43 md:w-35 lg:w-50 xl:w-82 h-33 md:h-20 lg:h-30 xl:h-59 absolute bottom-[24%] md:bottom-0 right-0 md:left-[40%] lg:left-[30%] xl:left-[24%] -z-1"
+      class="w-40 md:w-35 lg:w-50 xl:w-82 h-30 md:h-20 lg:h-30 xl:h-59 absolute bottom-[24%] md:bottom-0 right-0 md:left-[40%] lg:left-[30%] xl:left-[26%] 2xl:left-[29%] -z-1"
       width="{{ section.settings.background_image.width }}"
       height="{{ section.settings.background_image.height }}"
       alt="{{ section.settings.background_image.alt | default: 'Footer Background' }}"
