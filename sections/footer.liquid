@@ -136,9 +136,9 @@
       <p class="text-[#797375)] md:text-[#514849] text-xl !leading-[1.2] md:!leading-normal order-2 md:order-1">
         © {{ 'now' | date: '%Y' }} Roots Organic Castor Oil.
       </p>
-      <div class="payment-method-icons">
+      <div class="payment-method-icons order-1 md:order-2">
         {% if shop.enabled_payment_types.size > 0 %}
-          <div class="flex items-center gap-3 lg:gap-2.5 mb-5 md:mb-0 order-1 md:order-2">
+          <div class="flex items-center gap-3 lg:gap-2.5 mb-5 md:mb-0">
             {% for type in shop.enabled_payment_types %}
               <div class="w-11.5 h-8 border-[.8px] border-[#D9D9D9] rounded-[5px]">
                 {{ type | payment_type_svg_tag: class: 'size-full rounded-[5px]' }}
@@ -146,7 +146,7 @@
             {% endfor %}
           </div>
         {% else %}
-          <ul>
+          <ul class="flex items-center gap-2.5">
             <li><img src="{{'PayPal.png' | asset_url}}" width="" height="" alt=""></li>
             <li><img src="{{'Visa.png' | asset_url}}" width="" height="" alt=""></li>
             <li><img src="{{'Mastercard.png' | asset_url}}" width="" height="" alt=""></li>
