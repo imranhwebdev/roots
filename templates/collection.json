@@ -27,16 +27,24 @@
     "why_choose_RWdhne": {
       "type": "why-choose",
       "blocks": {
+        "choose_item_hLKCD9": {
+          "type": "choose_item",
+          "settings": {
+            "icon_svg": "shopify://shop_images/why-choose-icon1.png",
+            "title": "Strengthens & Promotes Growth",
+            "description": "Our organic castor oil nourishes from scalp to tip, reducing breakage and promoting stronger, healthier growth."
+          }
+        },
         "choose_item_xFaYTa": {
           "type": "choose_item",
           "settings": {
-            "icon_svg": "",
             "title": "Strengthens & Promotes Growth",
             "description": "Our organic castor oil nourishes from scalp to tip, reducing breakage and promoting stronger, healthier growth."
           }
         }
       },
       "block_order": [
+        "choose_item_hLKCD9",
         "choose_item_xFaYTa"
       ],
       "name": "Why Choose Section",
