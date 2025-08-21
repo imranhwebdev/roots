@@ -1,18 +1,2 @@
-<ul class="flex items-center gap-4">
-  {% for block in section.blocks %}
-    {% if block.settings.payment_icon != blank %}
-      <li>
-        <img
-          src="{{ block.settings.payment_icon | image_url }}"
-          alt="payment icon"
-          loading="lazy"
-          class="h-8 w-auto"
-          width=""
-          height=""
-        >
-      </li>
-    {% endif %}
-  {% endfor %}
-</ul>
 
 

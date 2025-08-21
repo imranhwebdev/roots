@@ -146,7 +146,22 @@
             {% endfor %}
           </div>
         {% else %}
-          {%- render 'payment-icons' -%}
+          <ul class="flex items-center gap-4">
+            {% for block in section.blocks %}
+              {% if block.settings.payment_icon != blank %}
+                <li>
+                  <img
+                    src="{{ block.settings.payment_icon | image_url }}"
+                    alt="payment icon"
+                    loading="lazy"
+                    class="h-8 w-auto"
+                    width=""
+                    height=""
+                  >
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
         {% endif %}
       </div>
     </div>
@@ -270,6 +285,17 @@
 
   "blocks": [
     {
+      "type": "icon",
+      "name": "Payment Icon",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "payment_icon",
+          "label": "Upload Payment Icon"
+        }
+      ]
+    },
+    {
       "type": "social_link",
       "name": "Social Link",
       "settings": [
@@ -287,17 +313,6 @@
           "type": "image_picker",
           "id": "icon",
           "label": "Social Icon (for mobile)"
-        }
-      ]
-    },
-    {
-      "type": "icon",
-      "name": "Payment Icon",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "payment_icon",
-          "label": "Upload Payment Icon"
         }
       ]
     }
