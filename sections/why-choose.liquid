@@ -22,9 +22,15 @@
             <div class="text-center px-3 md:px-0 lg:px-2 2xl:px-5 3xl:px-11">
               {% if block.settings.icon_svg != blank %}
                 <span class="size-13 lg:size-17 flex items-center justify-center rounded-full bg-[#B7D6C6] mb-2.5 md:mb-4 lg:mb-7 xl:mb-8.5 mx-auto">
-                  {{ block.settings.icon_svg }}
+                  <img
+                    src="{{ block.settings.icon_svg |  img_url }}"
+                    width=""
+                    height=""
+                    alt="{{ block.settings.title }}"
+                  >
                 </span>
               {% endif %}
+
               {% if block.settings.title != blank %}
                 <h6 class="text-base md:text-lg xl:text-2xl text-green font-medium !leading-[1.6] mb-2 md:mb-3 lg:mb-4">
                   {{ block.settings.title }}
@@ -65,7 +71,7 @@
       "name": "Choose Item",
       "settings": [
         {
-          "type": "textarea",
+          "type": "image_picker",
           "id": "icon_svg",
           "label": "SVG Icon",
           "info": "Paste your SVG code here"
