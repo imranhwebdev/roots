@@ -38,14 +38,24 @@
         "choose_item_xFaYTa": {
           "type": "choose_item",
           "settings": {
-            "title": "Strengthens & Promotes Growth",
-            "description": "Our organic castor oil nourishes from scalp to tip, reducing breakage and promoting stronger, healthier growth."
+            "icon_svg": "shopify://shop_images/why-choose-icon2.png",
+            "title": "Enhances Natural Beauty",
+            "description": "From thicker lashes and brows to radiant skin, our multi-purpose oil works gently yet effectively without harsh chemicals."
+          }
+        },
+        "choose_item_aMnMdU": {
+          "type": "choose_item",
+          "settings": {
+            "icon_svg": "shopify://shop_images/why-choose-icon2.png",
+            "title": "Pure & Honest Care",
+            "description": "USDA Organic, cold-pressed, and hexane-freeevery drop is crafted for quality, transparency, and results you can trust."
           }
         }
       },
       "block_order": [
         "choose_item_hLKCD9",
-        "choose_item_xFaYTa"
+        "choose_item_xFaYTa",
+        "choose_item_aMnMdU"
       ],
       "name": "Why Choose Section",
       "settings": {
