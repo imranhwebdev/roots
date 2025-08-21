@@ -22,7 +22,12 @@
             <div class="text-center px-3 md:px-0 lg:px-2 2xl:px-5 3xl:px-11">
               {% if block.settings.icon_svg != blank %}
                 <span class="size-13 lg:size-17 flex items-center justify-center rounded-full bg-[#B7D6C6] mb-2.5 md:mb-4 lg:mb-7 xl:mb-8.5 mx-auto">
-                  <img src="{{ block.settings.icon_svg }}" width="" height="" alt="{{ block.settings.title }}">
+                  <img
+                    src="{{ block.settings.icon_svg |  img_url }}"
+                    width=""
+                    height=""
+                    alt="{{ block.settings.title }}"
+                  >
                 </span>
               {% endif %}
 
