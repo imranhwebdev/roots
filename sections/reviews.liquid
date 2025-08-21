@@ -77,8 +77,26 @@
   .jdgm-carousel--aligned-theme .jdgm-carousel-item {
     position: relative;
   }
+  /* .jdgm-carousel__arrows {
+    position: relative !important;
+    z-index: -1 !important;
+  } */
+  .jdgm-carousel__left-arrow {
+    position: relative !important;
+    z-index: -1 !important;
+  }
+  .jdgm-carousel__left-arrow::after {
+    position: absolute !important;
+    z-index: 1 !important;
+    content: '' !important;
+    width: 40px !important;
+    height: 40px !important;
+    background-color: red !important;
+    border-radius: 100% !important;
+    left: 90%;
+    top: 30%;
+  }
 
-  
   @media (max-width: 992px) {
     .jdgm-carousel--aligned-theme .jdgm-carousel-item {
       margin-inline: 10px;
@@ -93,7 +111,6 @@
     .jdgm-carousel--aligned-theme .jdgm-carousel-item__reviewer-name {
       font-size: 16px !important;
     }
-
   }
   @media (max-width: 767px) {
     .jdgm-carousel--aligned-theme .jdgm-carousel-item__product-image {
