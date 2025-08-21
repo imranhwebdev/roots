@@ -147,11 +147,12 @@
           </div>
         {% else %}
           <ul class="flex items-center gap-2.5">
-            <li><img src="{{'PayPal.png' | asset_url}}" width="" height="" alt=""></li>
-            <li><img src="{{'Visa.png' | asset_url}}" width="" height="" alt=""></li>
-            <li><img src="{{'Mastercard.png' | asset_url}}" width="" height="" alt=""></li>
-            <li><img src="{{'ApplePay.png' | asset_url}}" width="" height="" alt=""></li>
-            <li><img src="{{'GooglePay.png' | asset_url}}" width="" height="" alt=""></li>
+            <li><img src="{{'payPal.svg' | asset_url}}" width="" height="" alt=""></li>
+            <li><img src="{{'visa.svg' | asset_url}}" width="" height="" alt=""></li>
+            <li><img src="{{'mastercard.svg' | asset_url}}" width="" height="" alt=""></li>
+            <li><img src="{{'amex.svg' | asset_url}}" width="" height="" alt=""></li>
+            <li><img src="{{'applePay.svg' | asset_url}}" width="" height="" alt=""></li>
+            <li><img src="{{'googlePay.svg' | asset_url}}" width="" height="" alt=""></li>
           </ul>
         {% endif %}
       </div>
@@ -161,7 +162,7 @@
     {% if section.settings.background_image %}
       <img
         src="{{ section.settings.background_image | image_url }}"
-        class="w-40 md:w-35 lg:w-50 xl:w-82 h-30 md:h-20 lg:h-30 xl:h-59 absolute bottom-[24%] md:bottom-0 right-0 md:left-[40%] lg:left-[30%] xl:left-[26%] 2xl:left-[29%] -z-1 -mb-6 md:-mb-7 lg:-mb-8"
+        class="w-40 md:w-35 lg:w-50 xl:w-82 h-30 md:h-20 lg:h-30 xl:h-59 absolute bottom-[24%] md:bottom-0 right-0 md:left-[40%] lg:left-[30%] xl:left-[26%] 2xl:left-[27%] -z-1 -mb-6 md:-mb-7 lg:-mb-8"
         width="{{ section.settings.background_image.width }}"
         height="{{ section.settings.background_image.height }}"
         alt="{{ section.settings.background_image.alt | default: 'Footer Background' }}"
