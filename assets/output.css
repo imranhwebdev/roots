@@ -540,6 +540,10 @@
     width: calc(var(--spacing) * 5);
     height: calc(var(--spacing) * 5);
   }
+  .size-6 {
+    width: calc(var(--spacing) * 6);
+    height: calc(var(--spacing) * 6);
+  }
   .size-8 {
     width: calc(var(--spacing) * 8);
     height: calc(var(--spacing) * 8);
@@ -1663,6 +1667,9 @@
   .text-\[\#FFC801\] {
     color: #FFC801;
   }
+  .text-\[red\] {
+    color: red;
+  }
   .text-black {
     color: var(--color-black);
   }
@@ -1980,6 +1987,13 @@
     &:hover {
       @media (hover: hover) {
         color: var(--color-green) !important;
+      }
+    }
+  }
+  .hover\:\!text-primary {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-primary) !important;
       }
     }
   }
