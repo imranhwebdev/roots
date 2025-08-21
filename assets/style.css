@@ -1,37 +1,7 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100..900&display=swap');
 /* Custom Armany Fonts */
-@font-face {
-    font-family: 'armany-regular';
-    src: url("{{ 'armany-regular.woff2' | asset_url }}") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
 
-@font-face {
-    font-family: 'armany-medium';
-    src: url("{{ 'armany-medium.woff2' | asset_url }}") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'armany-semibold';
-    src: url("{{ 'armany-semibold.woff2' | asset_url }}") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'armany-bold';
-    src: url("{{ 'armany-bold.woff2' | asset_url }}") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
 
 
 /* Theme Variables */
