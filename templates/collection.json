@@ -12,13 +12,17 @@
     "banner": {
       "type": "common-banner",
       "settings": {
-        "default_title": "Roots Organic Castor Oil – 16 fl oz Details{{ collection.title }}",
-        "default_description": ""
+        "default_title": "Shop Roots Organic Castor Oil",
+        "default_description": "Pure, premium, USDA Organic castor oil crafted to nourish hair, lashes, brows, and skin naturally."
       }
     },
     "main": {
       "type": "collection",
-      "settings": {}
+      "settings": {
+        "layout_1_product": "",
+        "layout_2_product": "",
+        "layout_3_product": ""
+      }
     }
   },
   "order": [
