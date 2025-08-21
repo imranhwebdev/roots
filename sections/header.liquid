@@ -91,32 +91,81 @@
 
       <!-- Right Icons -->
       <div class="flex items-center gap-4">
-        <!-- Cart -->
-        <a
-          href="{{ routes.cart_url }}"
-          class="relative flex items-center gap-1 text-sm lg:text-lg font-poppins text-white hover:text-[#FFD500] transition"
-        >
-          <sup class="cart-count absolute -top-2 -right-2 bg-[#FFD500] text-black rounded-full text-xs px-1">
-            {{ cart.item_count }}
-          </sup>
-          {% render 'icon-cart' %} Cart
-        </a>
+        {% if customer %}
+          <!-- Search Icon -->
+          <!-- Search Icon -->
+          <div class="relative">
+            <button
+              id="searchToggle"
+              class="text-white cursor-pointer hover:text-primary hover:scale-[1.07] transition-all duration-300"
+            >
+              {% render 'icon-search' %}
+            </button>
 
-        <!-- Sign Up Button -->
-        <a
-          href="{{routes.account_register_url}}"
-          class="bg-primary text-[#1F1904] px-6 py-2.5 rounded-full font-poppins text-sm lg:text-lg font-medium hover:text-white transition-all duration-300"
-        >
-          Sign Up
-        </a>
+            <!-- Search Dropdown -->
+            <div
+              id="searchDropdown"
+              class="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-lg hidden z-50  cursor-pointer transition-all duration-300"
+            >
+              <input
+                type="text"
+                id="searchInput"
+                placeholder="Search products..."
+                class="w-full px-4 py-2 border-primary text-para bg-transparent focus:outline-none  cursor-pointer transition-all duration-300"
+              >
+              <ul id="searchResults" class="max-h-64 overflow-y-auto text-sm text-para"></ul>
+            </div>
+          </div>
 
-        <!-- Mobile Menu Toggle -->
-        <button id="menuToggle" class="md:hidden cursor-pointer hover:text-[#FFD500] transition">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="0.5" y="0.5" width="39" height="39" rx="11.5" stroke="#E3E2E0"/>
-            <path d="M11 20L29 20M11 26L29 26M17 14L29 14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
+          <!-- Wishlist Icon -->
+          <a
+            href="/pages/wishlist"
+            class="text-white hover:text-primary relative hover:scale-[1.07] transition-all duration-300"
+          >
+            {% render 'icon-heart' %}
+            <span class="wishlist-count absolute -top-2 -right-2 bg-primary text-black rounded-full text-xs px-1">
+              {{ wishlist.items_count | default: 0 }}
+            </span>
+          </a>
+
+          <!-- Cart -->
+          <a
+            href="{{ routes.cart_url }}"
+            class="relative text-white hover:text-primary hover:scale-[1.07] transition-all duration-300"
+          >
+            {% render 'icon-cart' %}
+            <sup class="cart-count absolute -top-2 -right-2 bg-primary text-black rounded-full text-xs px-1">
+              {{ cart.item_count }}
+            </sup>
+          </a>
+
+          <!-- User Account -->
+          <a
+            href="{{ routes.account_url }}"
+            class="text-white hover:text-primary hover:scale-[1.07] transition-all duration-300"
+          >
+            {% render 'icon-user' %}
+          </a>
+
+        {% else %}
+          <!-- Cart -->
+          <a
+            href="{{ routes.cart_url }}"
+            class="relative text-white hover:text-primary hover:scale-[1.07] transition-all duration-300"
+          >
+            {% render 'icon-cart' %}
+            <sup class="cart-count absolute -top-2 -right-2 bg-primary text-black rounded-full text-xs px-1">
+              {{ cart.item_count }}
+            </sup>
+          </a>
+          <!-- Sign Up Button -->
+          <a
+            href="{{ routes.account_register_url }}"
+            class="bg-primary text-[#1F1904] px-6 py-2.5 rounded-full font-poppins text-sm lg:text-lg font-medium hover:text-white transition-all duration-300"
+          >
+            Sign Up
+          </a>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -212,3 +261,67 @@
   "max_blocks": 10
 }
 {% endschema %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const searchToggle = document.getElementById('searchToggle');
+    const searchDropdown = document.getElementById('searchDropdown');
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+
+    // Toggle dropdown
+    searchToggle.addEventListener('click', () => {
+      searchDropdown.classList.toggle('hidden');
+      searchInput.focus();
+    });
+
+    // Shopify AJAX predictive search
+    let timeout;
+    searchInput.addEventListener('input', function () {
+      const query = this.value.trim();
+
+      clearTimeout(timeout);
+      if (query.length < 2) {
+        searchResults.innerHTML = '';
+        return;
+      }
+
+      timeout = setTimeout(() => {
+        fetch(`/search/suggest.json?q=${encodeURIComponent(query)}&resources[type]=product&resources[limit]=5`)
+          .then((res) => res.json())
+          .then((data) => {
+            const products = data.resources.results.products || [];
+            if (products.length === 0) {
+              searchResults.innerHTML = '<li class="px-4 py-2 text-gray-500">No products found</li>';
+              return;
+            }
+
+            searchResults.innerHTML = products
+              .map(
+                (product) => `
+            <li class="px-4 py-2 hover:bg-gray-100">
+              <a href="${product.url}" class="flex items-center gap-2">
+                <img src="${product.image || '/path-to-placeholder.png'}" alt="${
+                  product.title
+                }" class="w-10 h-10 object-cover rounded">
+                <span>${product.title}</span>
+              </a>
+            </li>
+          `
+              )
+              .join('');
+          })
+          .catch((err) => {
+            console.error(err);
+            searchResults.innerHTML = '<li class="px-4 py-2 text-red-500">Search failed</li>';
+          });
+      }, 300); // 300ms debounce
+    });
+
+    // Close dropdown if clicked outside
+    document.addEventListener('click', function (e) {
+      if (!searchDropdown.contains(e.target) && !searchToggle.contains(e.target)) {
+        searchDropdown.classList.add('hidden');
+      }
+    });
+  });
+</script>
