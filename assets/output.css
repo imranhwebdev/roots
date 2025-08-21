@@ -1274,6 +1274,18 @@
   .px-10 {
     padding-inline: calc(var(--spacing) * 10);
   }
+  .px-20 {
+    padding-inline: calc(var(--spacing) * 20);
+  }
+  .px-25 {
+    padding-inline: calc(var(--spacing) * 25);
+  }
+  .px-50 {
+    padding-inline: calc(var(--spacing) * 50);
+  }
+  .px-100 {
+    padding-inline: calc(var(--spacing) * 100);
+  }
   .\!py-3 {
     padding-block: calc(var(--spacing) * 3) !important;
   }
@@ -2808,6 +2820,11 @@
       width: calc(1/2 * 100%);
     }
   }
+  .lg\:w-1\/12 {
+    @media (width >= 992px) {
+      width: calc(1/12 * 100%);
+    }
+  }
   .lg\:w-3\/12 {
     @media (width >= 992px) {
       width: calc(3/12 * 100%);
@@ -2818,9 +2835,29 @@
       width: calc(4/12 * 100%);
     }
   }
+  .lg\:w-5\/12 {
+    @media (width >= 992px) {
+      width: calc(5/12 * 100%);
+    }
+  }
+  .lg\:w-6\/12 {
+    @media (width >= 992px) {
+      width: calc(6/12 * 100%);
+    }
+  }
   .lg\:w-7\/12 {
     @media (width >= 992px) {
       width: calc(7/12 * 100%);
+    }
+  }
+  .lg\:w-8\/2 {
+    @media (width >= 992px) {
+      width: calc(8/2 * 100%);
+    }
+  }
+  .lg\:w-8\/12 {
+    @media (width >= 992px) {
+      width: calc(8/12 * 100%);
     }
   }
   .lg\:w-9 {
@@ -4151,9 +4188,19 @@
       height: calc(var(--spacing) * 187.5);
     }
   }
+  .\33 xl\:w-11\/12 {
+    @media (width >= 1520px) {
+      width: calc(11/12 * 100%);
+    }
+  }
   .\33 xl\:w-74 {
     @media (width >= 1520px) {
       width: calc(var(--spacing) * 74);
+    }
+  }
+  .\33 xl\:gap-3 {
+    @media (width >= 1520px) {
+      gap: calc(var(--spacing) * 3);
     }
   }
   .\33 xl\:gap-5 {
@@ -4174,6 +4221,26 @@
   .\33 xl\:gap-30 {
     @media (width >= 1520px) {
       gap: calc(var(--spacing) * 30);
+    }
+  }
+  .\33 xl\:gap-32\.5 {
+    @media (width >= 1520px) {
+      gap: calc(var(--spacing) * 32.5);
+    }
+  }
+  .\33 xl\:gap-34\.5 {
+    @media (width >= 1520px) {
+      gap: calc(var(--spacing) * 34.5);
+    }
+  }
+  .\33 xl\:gap-37\.5 {
+    @media (width >= 1520px) {
+      gap: calc(var(--spacing) * 37.5);
+    }
+  }
+  .\33 xl\:gap-75 {
+    @media (width >= 1520px) {
+      gap: calc(var(--spacing) * 75);
     }
   }
   .\33 xl\:p-7\.5 {

@@ -4,11 +4,11 @@
   style="background-color: {{ section.settings.bg_color }}"
 >
   <div class="container">
-    <div class="w-full xl:w-11/12 mx-auto">
-      <div class="flex items-center flex-col md:flex-row flex-wrap gap-5 md:flex-nowrap">
+    <div class="mx-auto w-full 3xl:w-11/12">
+      <div class="flex  items-center flex-col md:flex-row flex-wrap gap-5 3xl:gap-37.5 md:flex-nowrap">
         <!-- Left Column - Text Section -->
-        <div class="w-full md:w-5/12 lg:w-1/2">
-          <div class="section-title text-center md:text-start w-full md:w-10/12 xl:w-8/12">
+        <div class="w-full md:w-5/12 lg:w-5/12">
+          <div class="section-title text-center md:text-start w-full ">
             <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-green !leading-[1.25] font-bold font-armany-bold mb-4">
               {{ section.settings.title }}
             </h2>
@@ -30,7 +30,7 @@
         </div>
 
         <!-- Right Column - Blog Posts -->
-        <div class="w-full md:w-7/12 lg:w-1/2">
+        <div class="w-full md:w-7/12 lg:w-7/12">
           {% assign selected_blog = blogs[section.settings.blog_handle] %}
           {% assign posts_count = section.settings.posts_count | default: 4 %}
 
