@@ -23,10 +23,32 @@
         "layout_2_product": "8-fl-oz-organic-castor-oil",
         "layout_3_product": "roots-organic-castor-oil-wellness-bundle"
       }
+    },
+    "why_choose_RWdhne": {
+      "type": "why-choose",
+      "blocks": {
+        "choose_item_xFaYTa": {
+          "type": "choose_item",
+          "settings": {
+            "icon_svg": "",
+            "title": "Strengthens & Promotes Growth",
+            "description": "Our organic castor oil nourishes from scalp to tip, reducing breakage and promoting stronger, healthier growth."
+          }
+        }
+      },
+      "block_order": [
+        "choose_item_xFaYTa"
+      ],
+      "name": "Why Choose Section",
+      "settings": {
+        "heading": "Why Choose Roots?",
+        "subheading": "Encourages natural volume, supporting thicker, healthier hair growth."
+      }
     }
   },
   "order": [
     "banner",
-    "main"
+    "main",
+    "why_choose_RWdhne"
   ]
 }
