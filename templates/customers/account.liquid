@@ -1,13 +1,14 @@
 <section class="customer-account">
+  <!-- Header -->
   {%- render 'account-banner' -%}
 
-  <div class="flex flex-col md:flex-row md:flex-nowrap flex-wrap xl:w-11/12 mx-auto gap-6 px-6 justify-between py-10 md:py-16 lg:py-20 xl:py-25">
+  <div class="flex flex-col md:flex-row md:flex-nowrap flex-wrap xl:w-11/12 mx-auto gap-6 px-6 justify-between ga-5 py-10 md:py-16 lg:py-20 xl:py-25">
     <!-- Sidebar Tabs -->
     <aside class="w-full md:w-4/12 xl:w-4/12">
       <ul class="space-y-2">
         <li>
           <button
-            class="tab-btn cursor-pointer w-full text-left py-4 px-5 font-medium border rounded-lg bg-[#1E6C44] text-white"
+            class="tab-btn cursor-pointer text-[#514849] w-full text-left text-lg md:text-xl lg:text-[26px] py-4 md:py-5 lg:py-5.5 px-5 md:px-6 lg:px-8 mb-2 md:mb-3 2xl:mb-4 font-medium !leading-[1.2] font-poppins border md:border-[1.2px] border-[#E3E2E0] rounded-lg bg-[#1E6C44] text-white"
             data-tab="info"
           >
             Personal Information
@@ -15,24 +16,24 @@
         </li>
         <li>
           <button
-            class="tab-btn cursor-pointer w-full text-left py-4 px-5 font-medium border rounded-lg"
             data-tab="orders"
+            class="tab-btn cursor-pointer text-[#514849] w-full text-left text-lg md:text-xl lg:text-[26px] py-4 md:py-5 lg:py-5.5 px-5 md:px-6 lg:px-8 mb-2 md:mb-3 2xl:mb-4 font-medium !leading-[1.2] font-poppins border md:border-[1.2px] border-[#E3E2E0] rounded-lg"
           >
             My Orders
           </button>
         </li>
         <li>
           <button
-            class="tab-btn cursor-pointer w-full text-left py-4 px-5 font-medium border rounded-lg"
             data-tab="address"
+            class="tab-btn cursor-pointer text-[#514849] w-full text-left text-lg md:text-xl lg:text-[26px] py-4 md:py-5 lg:py-5.5 px-5 md:px-6 lg:px-8 mb-2 md:mb-3 2xl:mb-4 font-medium !leading-[1.2] font-poppins border md:border-[1.2px] border-[#E3E2E0] rounded-lg"
           >
             Manage Address
           </button>
         </li>
         <li>
           <button
-            class="tab-btn cursor-pointer w-full text-left py-4 px-5 font-medium border rounded-lg"
             data-tab="password"
+            class="tab-btn cursor-pointer text-[#514849] w-full text-left text-lg md:text-xl lg:text-[26px] py-4 md:py-5 lg:py-5.5 px-5 md:px-6 lg:px-8 mb-2 md:mb-3 2xl:mb-4 font-medium !leading-[1.2] font-poppins border md:border-[1.2px] border-[#E3E2E0] rounded-lg"
           >
             Password Manager
           </button>
@@ -40,7 +41,7 @@
         <li>
           <a
             href="{{ routes.account_logout_url }}"
-            class="block w-full text-left py-4 px-5 font-medium border rounded-lg"
+            class="block cursor-pointer text-[#514849] w-full text-left text-lg md:text-xl lg:text-[26px] py-4 md:py-5 lg:py-5.5 px-5 md:px-6 lg:px-8 mb-2 md:mb-3 2xl:mb-4 font-medium !leading-[1.2] font-poppins border md:border-[1.2px] border-[#E3E2E0] rounded-lg"
           >
             Logout
           </a>
@@ -52,17 +53,34 @@
     <div class="w-full md:w-8/12 xl:w-7/12">
       <!-- Personal Information -->
       <div class="tab-content" id="info">
-        <div class="mb-8 w-32 h-32 relative">
+        <!-- Profile Picture Section -->
+        <div class="mb-5 md:mb-7 lg:mb-8 xl:mb-10 w-30 xl:w-40 h-30 xl:h-40 2xl:mb-11.5 relative z-1">
           <img
             id="profileImage"
-            src="{% if customer.metafields.custom.profile_image %}{{ customer.metafields.custom.profile_image | img_url: '200x200' }}{% else %}https://i.pravatar.cc/200?seed={{ customer.id }}{% endif %}"
-            class="rounded-xl object-cover w-full h-full"
+            src="{% if customer.metafields.custom.profile_image %}{{ customer.metafields.custom.profile_image | img_url: '200x200' }}{% endif %}"
+            class="size-full rounded-xl lg:rounded-[18px] object-cover"
+            width="200"
+            height="200"
             alt="Profile"
           >
-          <label for="profileImageInput" class="absolute -bottom-1 -right-1 cursor-pointer">
-            <img src="/assets/edit-icon.png" class="w-9 h-9" alt="Edit">
+          <label
+            for="profileImageInput"
+            class="absolute -bottom-1 -right-1 z-2 size-9 md:size-10 lg:size-11 cursor-pointer"
+          >
+            <img
+              src="/assets/edit-icon.png"
+              class="size-full"
+              width="36"
+              height="36"
+              alt="Edit Profile"
+            >
           </label>
-          <input type="file" id="profileImageInput" accept="image/*" class="hidden">
+          <input
+            type="file"
+            id="profileImageInput"
+            accept="image/*"
+            class="hidden"
+          >
         </div>
 
         {% form 'customer' %}
@@ -71,60 +89,76 @@
               {{ form.errors | default_errors }}
             </div>
           {% endif %}
+
           {% if form.posted_successfully? %}
             <div class="mb-4 p-4 bg-green-100 text-green-700 rounded">
               Your information has been updated successfully.
             </div>
           {% endif %}
 
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <label>First Name*</label>
+          <div class="grid grid-cols-2 gap-4 lg:gap-5 xl:gap-6">
+            <div class="col-span-2 lg:col-span-1">
+              <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+                >First Name*</label
+              >
               <input
                 name="customer[first_name]"
+                placeholder="First Name"
                 type="text"
                 value="{{ customer.first_name }}"
                 required
-                class="w-full border rounded-lg py-2 px-3"
+                class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
               >
             </div>
-            <div>
-              <label>Last Name*</label>
+            <div class="col-span-2 lg:col-span-1">
+              <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+                >Last Name*</label
+              >
               <input
                 name="customer[last_name]"
+                placeholder="Last Name"
                 type="text"
                 value="{{ customer.last_name }}"
                 required
-                class="w-full border rounded-lg py-2 px-3"
+                class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
               >
             </div>
             <div class="col-span-2">
-              <label>Email*</label>
+              <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Email*</label>
               <input
                 name="customer[email]"
+                placeholder="example@gmail.com"
                 type="email"
                 value="{{ customer.email }}"
                 required
-                class="w-full border rounded-lg py-2 px-3"
+                class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
               >
             </div>
             <div class="col-span-2">
-              <label>Phone</label>
+              <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Phone*</label>
               <input
                 name="customer[phone]"
-                type="tel"
                 id="phoneInput"
+                placeholder="+1234567890"
+                type="tel"
                 value="{{ customer.phone | default: '' }}"
-                class="w-full border rounded-lg py-2 px-3"
+                class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
               >
             </div>
-            <div class="col-span-2">
-              <label>Gender</label>
-              <select id="genderSelect" class="w-full border rounded-lg py-2 px-3">
+            <div class="col-span-2 relative z-1">
+              <span class="block w-3.5 h-2 rounded-full absolute right-5 lg:right-6 bottom-7">
+                <img src="/assets/arrow-down.svg" class="size-full" width="14" height="8" alt="Arrow">
+              </span>
+              <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Gender</label>
+              <select
+                name="customer[note][gender]"
+                id="genderSelect"
+                class="w-full border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 appearance-none rounded-lg text-[#797375] text-lg lg:text-xl !leading-[1.2] font-poppins"
+              >
                 <option value="">Select Gender</option>
                 <option
                   value="Male"
-                  {% if customer.tags contains 'gender_male' %}
+                  {% if customer.tags contains 'gender_male' or customer.note contains 'gender:Male' %}
                     selected
                   {% endif %}
                 >
@@ -132,7 +166,7 @@
                 </option>
                 <option
                   value="Female"
-                  {% if customer.tags contains 'gender_female' %}
+                  {% if customer.tags contains 'gender_female' or customer.note contains 'gender:Female' %}
                     selected
                   {% endif %}
                 >
@@ -140,7 +174,7 @@
                 </option>
                 <option
                   value="Other"
-                  {% if customer.tags contains 'gender_other' %}
+                  {% if customer.tags contains 'gender_other' or customer.note contains 'gender:Other' %}
                     selected
                   {% endif %}
                 >
@@ -148,7 +182,9 @@
                 </option>
                 <option
                   value="Prefer not to say"
-                  {% if customer.tags contains 'gender_prefer_not_to_say' %}
+                  {% if customer.tags contains 'gender_prefer_not_to_say'
+                    or customer.note contains 'gender:Prefer not to say'
+                  %}
                     selected
                   {% endif %}
                 >
@@ -157,115 +193,256 @@
               </select>
             </div>
             <div class="col-span-2">
-              <button type="submit" class="btn">Update Changes</button>
+              <button type="submit" class="btn" id="updateBtn">
+                <span class="btn-text">Update Changes</span>
+                <span class="btn-loading hidden">
+                  <svg
+                    class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Updating...
+                </span>
+              </button>
             </div>
           </div>
         {% endform %}
+
+        <!-- Separate form for profile image upload -->
+        <form id="profileImageForm" style="display: none;" enctype="multipart/form-data">
+          <input type="file" name="profile_image" id="hiddenImageInput" accept="image/*">
+        </form>
       </div>
 
       <!-- Orders -->
       <div class="tab-content hidden" id="orders">
-        <h2>My Orders ({{ customer.orders.size }})</h2>
+        <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap items-center justify-between gap-4 mb-5 md:mb-6 xl:mb-7.5">
+          <h2 class="text-[#21201E] text-2xl lg:text-3xl xl:text-[36px] font-medium !leading-[1.2] font-poppins">
+            My Orders ({{ customer.orders.size }})
+          </h2>
+        </div>
+
         {% if customer.orders.size > 0 %}
           {% for order in customer.orders %}
-            <div class="order-card mb-4 p-4 bg-gray-100 rounded-lg">
-              <div class="flex gap-4">
-                {% if order.line_items.first.image %}
-                  <img
-                    src="{{ order.line_items.first.image | img_url: '200x200' }}"
-                    class="w-24 h-24 rounded"
-                    alt="{{ order.line_items.first.title }}"
-                  >
-                {% else %}
-                  <img src="/assets/product-placeholder.png" class="w-24 h-24 rounded" alt="Product">
-                {% endif %}
-                <div>
-                  <h6>{{ order.line_items.first.title }}</h6>
-                  <p>Total: {{ order.total_price | money }}</p>
-                  <p>Quantity: {{ order.line_items.first.quantity }}</p>
-                  <p>Date: {{ order.created_at | date: '%B %d, %Y' }}</p>
-                  <p>Status: {{ order.financial_status }}</p>
-                  <a href="{{ order.status_url }}" class="btn mt-2">View Order</a>
+            <div class="rounded-xl lg:rounded-2xl bg-[#B7D6C6] p-4 lg:p-5 3xl:p-7.5 mb-8 md:mb-10 lg:mb-12 xl:mb-15">
+              <div class="flex flex-col xl:flex-row flex-wrap xl:flex-nowrap items-center gap-4 lg:gap-5 mb-4 lg:mb-5 xl:mb-6">
+                <div class="w-36.5 h-39">
+                  {% if order.line_items.first.image %}
+                    <img
+                      src="{{ order.line_items.first.image | img_url: '200x200' }}"
+                      class="size-full rounded-[10px]"
+                      width="200"
+                      height="200"
+                      alt="{{ order.line_items.first.title }}"
+                    >
+                  {% else %}
+                    <img
+                      src="/assets/product-placeholder.png"
+                      class="size-full rounded-[10px]"
+                      width="200"
+                      height="200"
+                      alt="Product"
+                    >
+                  {% endif %}
+                </div>
+                <div class="w-full">
+                  <div class="md:flex items-center justify-between gap-3 mb-5 md:mb-6 lg:mb-7.5 xl:mb-8.5">
+                    <h6 class="mb-4 md:mb-0 text-xl lg:text-2xl font-medium !leading-[#0D2E1D] text-green">
+                      {{ order.line_items.first.title }}
+                    </h6>
+                    <p class="text-lg lg:text-xl !leading-[1.2] text-[#514849]">
+                      Total: <span class="font-medium text-[#0D2E1D]">{{ order.total_price | money }}</span>
+                    </p>
+                  </div>
+                  <div class="md:flex items-center justify-between gap-3 mb-4 lg:mb-5 xl:mb-6">
+                    <p class="mb-4 md:mb-0 text-lg lg:text-xl !leading-[1.2] text-[#514849]">
+                      Quantity: <span class="font-medium text-[#0D2E1D]">{{ order.line_items.first.quantity }}</span>
+                    </p>
+                    <p class="text-lg lg:text-xl !leading-[1.2] text-[#514849]">
+                      Date: <span class="font-medium text-[#0D2E1D]">{{ order.created_at | date: '%B %d, %Y' }}</span>
+                    </p>
+                  </div>
+                  <div class="md:flex items-center justify-between gap-3">
+                    <p class="mb-4 md:mb-0 text-lg lg:text-xl !leading-[1.2] text-[#514849]">
+                      Status: <span class="font-medium text-[#0D2E1D]">{{ order.financial_status }}</span>
+                    </p>
+                    <p class="text-lg lg:text-xl !leading-[1.2] text-[#514849]">
+                      Order ID: <span class="font-medium text-[#0D2E1D]">{{ order.name }}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap md:items-center gap-4 lg:gap-5 mb-5 lg:mb-6 xl:mb-8">
+                <span class="md:block text-[#1E6C44] text-lg lg:text-xl max-w-max font-poppins border border-[#B7D6C6] rounded-3xl lg:rounded-[34px] bg-[rgba(30,108,68,0.10)] py-2 lg:py-2.5 px-3 lg:px-4">
+                  {{ order.fulfillment_status | default: 'Pending' }}
+                </span>
+              </div>
+              <div class="md:flex items-center justify-between gap-4 mb-4 md:mb-0">
+                <div class="flex-col md:flex-row flex-wrap md:flex-nowrap items-center gap-4 lg:gap-5 mb-4 md:mb-0">
+                  <a href="{{ order.status_url }}" class="btn w-full md:w-auto mb-4 md:mb-0">View Order</a>
                 </div>
               </div>
             </div>
           {% endfor %}
         {% else %}
-          <p>You haven't placed any orders yet.</p>
-          <a href="{{ routes.all_products_collection_url }}" class="btn mt-2">Start Shopping</a>
+          <div class="text-center py-8">
+            <p class="text-lg text-[#514849]">You haven't placed any orders yet.</p>
+            <a href="{{ routes.all_products_collection_url }}" class="btn mt-4">Start Shopping</a>
+          </div>
         {% endif %}
       </div>
 
-      <!-- Address -->
+      <!-- Addresses -->
       <div class="tab-content hidden" id="address">
         {% if customer.default_address %}
-          <div class="p-4 mb-4 border rounded-lg">
-            <p>
-              {{ customer.default_address.first_name }}
-              {{ customer.default_address.last_name }}
-            </p>
-            <p>
-              {{ customer.default_address.address1 }}
-              {% if customer.default_address.address2 %}, {{ customer.default_address.address2 }}{% endif %},
-              {{ customer.default_address.city }}, {{ customer.default_address.province }}
-              {{ customer.default_address.zip }}
-            </p>
+          <div class="rounded-lg border border-[#E3E2E0] bg-[#FCFBF7] p-5 md:p-6 lg:p-7 xl:p-8 3xl:p-10 mb-5 md:pb-6 lg:mb-7 xl:mb-8 3xl:mb-10">
+            <div class="flex flex-col lg:flex-row flex-wrap lg:flex-nowrap lg:items-center lg:justify-between gap-4 mb-5 md:pb-6 lg:mb-7 xl:mb-8 3xl:mb-10">
+              <div class="flex items-center gap-3">
+                <span class="size-13 lg:size-14.5 flex-[0_0_auto] border border-[#E3E2E0] rounded-full p-4 flex items-center justify-center">
+                  <img src="/assets/location.svg" class="size-full" alt="Location" width="24" height="24">
+                </span>
+                <div class="">
+                  <h6 class="text-[#21201E] text-lg lg:text-[22px] font-medium !leading-[1.25] font-poppins mb-2">
+                    {{ customer.default_address.first_name }}
+                    {{ customer.default_address.last_name }}
+                  </h6>
+                  <p class="text-[#797375] text-lg lg:text-xl !leading-[1.2]">
+                    {{ customer.default_address.address1 -}}
+                    {%- if customer.default_address.address2 %}, {{ customer.default_address.address2 }}{% endif %},
+                    {{ customer.default_address.city }}, {{ customer.default_address.province }}
+                    {{ customer.default_address.zip }}
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         {% endif %}
+
+        <h2 class="text-[#0D2E1D] text-xl lg:text-2xl xl:text-[32px] font-medium font-poppins !leading-[1.25] mb-5 lg:mb-6">
+          Add New Address
+        </h2>
+
         {% form 'customer_address', customer.new_address %}
-          <div class="grid grid-cols-2 gap-4">
-            <input
-              name="address[first_name]"
-              placeholder="First Name"
-              value="{{ form.first_name }}"
-              class="border rounded-lg py-2 px-3"
-            >
-            <input
-              name="address[last_name]"
-              placeholder="Last Name"
-              value="{{ form.last_name }}"
-              class="border rounded-lg py-2 px-3"
-            >
-            <input
-              name="address[address1]"
-              placeholder="Street Address"
-              value="{{ form.address1 }}"
-              class="border rounded-lg py-2 px-3 col-span-2"
-            >
-            <input name="address[city]" placeholder="City" value="{{ form.city }}" class="border rounded-lg py-2 px-3">
-            <input
-              name="address[zip]"
-              placeholder="Zip Code"
-              value="{{ form.zip }}"
-              class="border rounded-lg py-2 px-3"
-            >
-            <select name="address[province]" class="border rounded-lg py-2 px-3">
-              <option value="">Select Province</option>
-              {% for province in shop.provinces %}
-                <option
-                  value="{{ province.code }}"
-                  {% if form.province == province.code %}
-                    selected
-                  {% endif %}
-                >
-                  {{ province.name }}
-                </option>
-              {% endfor %}
-            </select>
-            <select name="address[country]" class="border rounded-lg py-2 px-3">
-              <option value="">Select Country</option>
-              {% for country in shop.countries %}
-                <option
-                  value="{{ country.code }}"
-                  {% if form.country == country.code %}
-                    selected
-                  {% endif %}
-                >
-                  {{ country.name }}
-                </option>
-              {% endfor %}
-            </select>
-            <button type="submit" class="btn col-span-2">Save Address</button>
+          {% if form.errors %}
+            <div class="mb-4 p-4 bg-red-100 text-red-700 rounded">
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
+
+          <div class="grid grid-cols-2 gap-4 lg:gap-5 xl:gap-6">
+            <div class="col-span-2 lg:col-span-1">
+              <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+                >First Name*</label
+              >
+              <input
+                name="address[first_name]"
+                placeholder="First Name"
+                type="text"
+                value="{{ form.first_name }}"
+                class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+              >
+            </div>
+            <div class="col-span-2 lg:col-span-1">
+              <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+                >Last Name*</label
+              >
+              <input
+                name="address[last_name]"
+                placeholder="Last Name"
+                type="text"
+                value="{{ form.last_name }}"
+                class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+              >
+            </div>
+            <div class="col-span-2">
+              <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+                >Street Address*</label
+              >
+              <input
+                name="address[address1]"
+                placeholder="Street Address"
+                type="text"
+                value="{{ form.address1 }}"
+                class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+              >
+            </div>
+            <div class="col-span-2 lg:col-span-1">
+              <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">City*</label>
+              <input
+                name="address[city]"
+                placeholder="City"
+                type="text"
+                value="{{ form.city }}"
+                class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+              >
+            </div>
+            <div class="col-span-2 lg:col-span-1">
+              <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+                >Zip Code*</label
+              >
+              <input
+                name="address[zip]"
+                placeholder="Zip Code"
+                type="text"
+                value="{{ form.zip }}"
+                class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+              >
+            </div>
+            <div class="col-span-2 lg:col-span-1 relative z-1">
+              <span class="w-3.5 h-2 rounded-full absolute right-5 lg:right-6 bottom-7">
+                <img src="/assets/arrow-down.svg" class="size-full" width="14" height="8" alt="Arrow">
+              </span>
+              <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+                >Province/State*</label
+              >
+              <select
+                name="address[province]"
+                class="w-full border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 appearance-none rounded-lg text-[#797375] text-lg lg:text-xl !leading-[1.2] font-poppins"
+              >
+                <option value="">Select Province</option>
+                {% for province in shop.provinces %}
+                  <option
+                    value="{{ province.code }}"
+                    {% if form.province == province.code %}
+                      selected
+                    {% endif %}
+                  >
+                    {{ province.name }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-span-2 lg:col-span-1 relative z-1">
+              <span class="w-3.5 h-2 rounded-full absolute right-5 lg:right-6 bottom-7">
+                <img src="/assets/arrow-down.svg" class="size-full" width="14" height="8" alt="Arrow">
+              </span>
+              <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+                >Country*</label
+              >
+              <select
+                name="address[country]"
+                class="w-full border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 appearance-none rounded-lg text-[#797375] text-lg lg:text-xl !leading-[1.2] font-poppins"
+              >
+                <option value="">Select Country</option>
+                {% for country in shop.countries %}
+                  <option
+                    value="{{ country.code }}"
+                    {% if form.country == country.code %}
+                      selected
+                    {% endif %}
+                  >
+                    {{ country.name }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-span-2">
+              <button type="submit" class="btn">Save Address</button>
+            </div>
           </div>
         {% endform %}
       </div>
@@ -273,25 +450,57 @@
       <!-- Password -->
       <div class="tab-content hidden" id="password">
         {% form 'change_customer_password' %}
-          <input
-            type="password"
-            name="customer[password]"
-            placeholder="Current Password"
-            class="border rounded-lg py-2 px-3 mb-2"
-          >
-          <input
-            type="password"
-            name="customer[new_password]"
-            placeholder="New Password"
-            class="border rounded-lg py-2 px-3 mb-2"
-          >
-          <input
-            type="password"
-            name="customer[new_password_confirmation]"
-            placeholder="Confirm New Password"
-            class="border rounded-lg py-2 px-3 mb-2"
-          >
-          <button type="submit" class="btn">Update Password</button>
+          {% if form.errors %}
+            <div class="mb-4 p-4 bg-red-100 text-red-700 rounded">
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
+
+          {% if form.posted_successfully? %}
+            <div class="mb-4 p-4 bg-green-100 text-green-700 rounded">Your password has been updated successfully.</div>
+          {% endif %}
+
+          <div class="grid grid-cols-1 gap-4 lg:gap-5 xl:gap-6">
+            <div class="relative z-1">
+              <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+                >Current Password*</label
+              >
+              <input
+                name="customer[password]"
+                placeholder="Enter Current Password"
+                type="password"
+                class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+                required
+              >
+            </div>
+            <div class="relative z-1">
+              <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+                >New Password*</label
+              >
+              <input
+                name="customer[new_password]"
+                placeholder="Enter New Password"
+                type="password"
+                class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+                required
+              >
+            </div>
+            <div class="relative z-1">
+              <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+                >Confirm New Password*</label
+              >
+              <input
+                name="customer[new_password_confirmation]"
+                placeholder="Confirm New Password"
+                type="password"
+                class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+                required
+              >
+            </div>
+            <div>
+              <button type="submit" class="btn !py-4 lg:!py-5 !px-7 lg:!px-8">Update Password</button>
+            </div>
+          </div>
         {% endform %}
       </div>
     </div>
@@ -299,72 +508,122 @@
 </section>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // Tabs
+  document.addEventListener('DOMContentLoaded', function () {
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
-    tabButtons.forEach((btn) =>
-      btn.addEventListener('click', () => {
-        tabButtons.forEach((b) => b.classList.remove('bg-[#1E6C44]', 'text-white'));
-        tabContents.forEach((c) => c.classList.add('hidden'));
-        btn.classList.add('bg-[#1E6C44]', 'text-white');
-        const target = document.getElementById(btn.dataset.tab);
-        if (target) target.classList.remove('hidden');
-      })
-    );
 
-    // Avatar preview
-    const profileInput = document.getElementById('profileImageInput');
-    const profileImg = document.getElementById('profileImage');
-    profileInput.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (ev) => (profileImg.src = ev.target.result);
-        reader.readAsDataURL(file);
-      }
+    tabButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        // Remove active classes from all tabs
+        tabButtons.forEach((b) => {
+          b.classList.remove('bg-[#1E6C44]', 'text-white');
+          b.classList.add('text-[#514849]');
+        });
+
+        // Add active classes to clicked tab
+        btn.classList.add('bg-[#1E6C44]', 'text-white');
+        btn.classList.remove('text-[#514849]');
+
+        // Hide all tab contents
+        tabContents.forEach((c) => c.classList.add('hidden'));
+
+        // Show selected tab content
+        const targetTab = document.getElementById(btn.dataset.tab);
+        if (targetTab) {
+          targetTab.classList.remove('hidden');
+        }
+      });
     });
 
-    // Phone number AJAX update
-    const customerForm = document.querySelector('form[action="/account"]');
-    if (customerForm) {
-      customerForm.addEventListener('submit', (e) => {
+    // Dropdown functionality
+    const dropdownBtn = document.getElementById('dropdownBtn');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const selectedText = document.getElementById('selectedText');
+    const dropdownItems = document.querySelectorAll('.dropdown-item');
+
+    if (dropdownBtn && dropdownMenu) {
+      dropdownBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        const formData = new FormData(customerForm);
-        fetch('/account', { method: 'POST', body: formData }).then(() => location.reload());
+        dropdownMenu.classList.toggle('hidden');
+      });
+
+      dropdownItems.forEach((item) => {
+        item.addEventListener('click', (e) => {
+          selectedText.textContent = e.target.textContent;
+          dropdownMenu.classList.add('hidden');
+        });
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+          dropdownMenu.classList.add('hidden');
+        }
       });
     }
 
-    // Gender update via tags
-    const genderSelect = document.getElementById('genderSelect');
-    if (genderSelect) {
-      genderSelect.addEventListener('change', () => {
-        const gender = genderSelect.value.toLowerCase().replace(/\s/g, '_');
-        fetch('/account', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: `customer[tags]=gender_${gender}`,
-        }).then(() => console.log('Gender updated'));
-      });
-    }
+    // Password visibility toggle
+    const passwordFields = document.querySelectorAll('input[type="password"]');
+    passwordFields.forEach((field) => {
+      const container = field.parentElement;
+      const toggleBtn = container.querySelector('button');
+
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+
+          if (field.type === 'password') {
+            field.type = 'text';
+            toggleBtn.innerHTML = '<img src="/assets/eye-slash-icon.svg" class="size-full" alt="" width="" height="">';
+          } else {
+            field.type = 'password';
+            toggleBtn.innerHTML = '<img src="/assets/eye-icon.svg" class="size-full" alt="" width="" height="">';
+          }
+        });
+      }
+    });
   });
 </script>
 
 <style>
   .btn {
-    background: #1e6c44;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
+    @apply bg-[#1E6C44] text-white py-4 lg:py-5 px-6 lg:px-8 rounded-lg font-medium text-lg lg:text-xl transition-colors duration-300 hover:bg-[#155a37] focus:outline-none focus:ring-2 focus:ring-[#1E6C44] focus:ring-offset-2;
   }
+
   .tab-btn:hover {
-    background: #155a37;
-    color: white;
+    @apply bg-gray-50;
   }
-  .tab-content {
-    display: block;
+
+  .tab-btn.active {
+    @apply bg-[#1E6C44] text-white;
   }
-  .tab-content.hidden {
-    display: none;
+
+  /* Custom dropdown styles */
+  #dropdownMenu {
+    @apply origin-top-right absolute right-0 mt-2 min-w-27 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50;
+  }
+
+  #dropdownMenu .dropdown-item:hover {
+    @apply bg-gray-100;
+  }
+
+  /* Form validation styles */
+  input:invalid:not(:placeholder-shown) {
+    @apply border-red-500;
+  }
+
+  input:valid:not(:placeholder-shown) {
+    @apply border-green-500;
+  }
+
+  /* Responsive improvements */
+  @media (max-width: 768px) {
+    .tab-content {
+      @apply px-4;
+    }
+
+    .btn {
+      @apply w-full text-center;
+    }
   }
 </style>
