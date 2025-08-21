@@ -1,0 +1,126 @@
+<div class="rounded-lg border  border-[#E3E2E0] bg-[#FCFBF7] p-5 md:p-6 lg:p-7 xl:p-8 3xl:p-10 mb-5 md:pb-6 lg:mb-7 xl:mb-8 3xl:mb-10">
+  <div class="flex flex-col lg:flex-row flex-wrap lg:flex-nowrap lg:items-center lg:justify-between gap-4 mb-5 md:pb-6 lg:mb-7 xl:mb-8 3xl:mb-10">
+    <div class="flex items-center gap-3">
+      <span class="size-13 lg:size-14.5 flex-[0_0_auto] border border-[#E3E2E0] rounded-full p-4 flex items-center justify-center"
+        ><img src="/assets/location.svg" class="size-full" alt="" width="" height=""
+      ></span>
+      <div class="">
+        <h6 class=" text-[#21201E] text-lg lg:text-[22px] font-medium !leading-[1.25] font-poppins mb-2">
+          Bessie Cooper
+        </h6>
+        <p class="text-[#797375] text-lg lg:text-xl !leading-[1.2]">2464 Royal Ln. Mesa, New Jersey 45463</p>
+      </div>
+    </div>
+    <div class=" max-w-max flex items-center gap-7 lg:gap-8 border border-[#E3E2E0] rounded-[150px] lg:rounded-[198px] py-3.5 lg:py-4.5 px-5.5 lg:px-6.5 relative z-1">
+      <span class="h-4 w-[1px] bg-[#E3E2E0] absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2"></span>
+      <a href="#" class=" size-5 lg:size-6 flex-[0_0_auto]"
+        ><img src="/assets/edit-icon.svg" class="size-full" alt="" width="" height=""
+      ></a>
+      <button class=" size-5 lg:size-6 flex-[0_0_auto] cursor-pointer">
+        <img src="/assets/delete-icon.svg" class="size-full" alt="" width="" height="">
+      </button>
+    </div>
+  </div>
+  <a href="#" class="btn">Add New Address</a>
+</div>
+<h2 class=" text-[#0D2E1D] text-xl lg:text-2xl xl:text-[32px] font-medium font-poppins !leading-[1.25] mb-5 lg:mb-6">
+  Add New Address
+</h2>
+<form method="post" action="/address" class="grid grid-cols-2 gap-4 lg:gap-5 xl:gap-6">
+  <div class="col-span-2 lg:col-span-1">
+    <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">First Name*</label>
+    <input
+      placeholder="First Name"
+      type="text"
+      value="{{ customer.first_name }}"
+      class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+    >
+  </div>
+  <div class="col-span-2 lg:col-span-1">
+    <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Last Name*</label>
+    <input
+      placeholder="Last Name"
+      type="text"
+      value="{{ customer.last_name }}"
+      class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+    >
+  </div>
+  <div class="col-span-2">
+    <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Email*</label>
+    <input
+      placeholder="example@gmail.com"
+      type="email"
+      value="{{ customer.email }}"
+      disabled
+      class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg "
+    >
+  </div>
+  <div class="col-span-2">
+    <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Street Address*</label>
+    <input
+      placeholder="example@gmail.com"
+      type="text"
+      value="{{ customer.address.street }}"
+      class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg "
+    >
+  </div>
+  <div class="col-span-2 lg:col-span-1">
+    <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Phone*</label>
+    <input
+      placeholder="+0123-456----"
+      type="tel"
+      value="{{ customer.phone }}"
+      class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+    >
+  </div>
+  <div class="col-span-2 lg:col-span-1">
+    <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Zip Code*</label>
+    <input
+      placeholder="Cooper"
+      type="text"
+      value="{{ customer.address.zip }}"
+      class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+    >
+  </div>
+  <div class="col-span-2 lg:col-span-1">
+    <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">City*</label>
+    <input
+      placeholder="City*"
+      type="text"
+      value="{{ customer.city }}"
+      class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+    >
+  </div>
+  <div class="col-span-2 lg:col-span-1 relative z-1">
+    <span class=" w-3.5 h-2 rounded-full absolute right-5 lg:right-6 bottom-7"
+      ><img src="/assets/arrow-down.svg" class="size-full" width="" height="" alt=""
+    ></span>
+    <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">State*</label>
+    <select class="w-full border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 appearance-none rounded-lg text-[#797375] text-lg lg:text-xl !leading-[1.2] font-poppins">
+      <option
+        {% if customer.tags contains 'Male' %}
+          selected
+        {% endif %}
+      >
+        Cooper
+      </option>
+      <option
+        {% if customer.tags contains 'Female' %}
+          selected
+        {% endif %}
+      >
+        Cooper
+      </option>
+      <option
+        {% if customer.tags contains 'Other' %}
+          selected
+        {% endif %}
+      >
+        Cooper
+      </option>
+    </select>
+  </div>
+  <div class="col-span-2">
+    <button type="submit" class="btn">Save Address</button>
+  </div>
+</form>

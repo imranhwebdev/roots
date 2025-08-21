@@ -1,0 +1,122 @@
+{% form 'customer' %}
+  {% if form.errors %}
+    <div class="mb-4 p-4 bg-red-100 text-red-700 rounded">
+      {{ form.errors | default_errors }}
+    </div>
+  {% endif %}
+
+  {% if form.posted_successfully? %}
+    <div class="mb-4 p-4 bg-green-100 text-green-700 rounded">Your information has been updated successfully.</div>
+  {% endif %}
+
+  <div class="grid grid-cols-2 gap-4 lg:gap-5 xl:gap-6">
+    <div class="col-span-2 lg:col-span-1">
+      <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">First Name*</label>
+      <input
+        name="customer[first_name]"
+        placeholder="First Name"
+        type="text"
+        value="{{ customer.first_name }}"
+        required
+        class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+      >
+    </div>
+    <div class="col-span-2 lg:col-span-1">
+      <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Last Name*</label>
+      <input
+        name="customer[last_name]"
+        placeholder="Last Name"
+        type="text"
+        value="{{ customer.last_name }}"
+        required
+        class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+      >
+    </div>
+    <div class="col-span-2">
+      <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Email*</label>
+      <input
+        name="customer[email]"
+        placeholder="example@gmail.com"
+        type="email"
+        value="{{ customer.email }}"
+        required
+        class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+      >
+    </div>
+    <div class="col-span-2">
+      <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Phone*</label>
+      <input
+        name="customer[phone]"
+        id="phoneInput"
+        placeholder="+1234567890"
+        type="tel"
+        value="{{ customer.phone | default: '' }}"
+        class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+      >
+    </div>
+    <div class="col-span-2 relative z-1">
+      <span class="block w-3.5 h-2 rounded-full absolute right-5 lg:right-6 bottom-7">
+        <img src="/assets/arrow-down.svg" class="size-full" width="14" height="8" alt="Arrow">
+      </span>
+      <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Gender</label>
+      <select
+        name="customer[note][gender]"
+        id="genderSelect"
+        class="w-full border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 appearance-none rounded-lg text-[#797375] text-lg lg:text-xl !leading-[1.2] font-poppins"
+      >
+        <option value="">Select Gender</option>
+        <option
+          value="Male"
+          {% if customer.tags contains 'gender_male' or customer.note contains 'gender:Male' %}
+            selected
+          {% endif %}
+        >
+          Male
+        </option>
+        <option
+          value="Female"
+          {% if customer.tags contains 'gender_female' or customer.note contains 'gender:Female' %}
+            selected
+          {% endif %}
+        >
+          Female
+        </option>
+        <option
+          value="Other"
+          {% if customer.tags contains 'gender_other' or customer.note contains 'gender:Other' %}
+            selected
+          {% endif %}
+        >
+          Other
+        </option>
+        <option
+          value="Prefer not to say"
+          {% if customer.tags contains 'gender_prefer_not_to_say'
+            or customer.note contains 'gender:Prefer not to say'
+          %}
+            selected
+          {% endif %}
+        >
+          Prefer not to say
+        </option>
+      </select>
+    </div>
+    <div class="col-span-2">
+      <button type="submit" class="btn" id="updateBtn">
+        <span class="btn-text">Update Changes</span>
+        <span class="btn-loading hidden">
+          <svg
+            class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Updating...
+        </span>
+      </button>
+    </div>
+  </div>
+{% endform %}
