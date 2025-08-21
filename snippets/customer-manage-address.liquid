@@ -1,73 +1,71 @@
 {% comment %}
-  Fixed Dynamic Address Management for Shopify
-  Now properly integrates with Shopify's address system
+  Dynamic Address Management for Shopify - Client Design
+  Clean and modern design with yellow accent colors
 {% endcomment %}
 
 <!-- Existing Addresses Display -->
 <div id="addressList">
   {% for address in customer.addresses %}
     <div
-      class="address-card rounded-lg border border-[#E3E2E0] bg-[#FCFBF7] p-5 md:p-6 lg:p-7 xl:p-8 3xl:p-10 mb-5 md:pb-6 lg:mb-7 xl:mb-8 3xl:mb-10"
+      class="address-card bg-gray-50 border border-gray-200 rounded-lg p-6 mb-4 hover:shadow-md transition-shadow duration-200"
       data-address-id="{{ address.id }}"
     >
-      <div class="flex flex-col lg:flex-row flex-wrap lg:flex-nowrap lg:items-center lg:justify-between gap-4 mb-5 md:pb-6 lg:mb-7 xl:mb-8 3xl:mb-10">
-        <div class="flex items-center gap-3">
-          <span class="size-13 lg:size-14.5 flex-[0_0_auto] border border-[#E3E2E0] rounded-full p-4 flex items-center justify-center">
-            <img src="/assets/location.svg" class="size-full" alt="" width="" height="">
-          </span>
-          <div class="">
-            <h6 class="text-[#21201E] text-lg lg:text-[22px] font-medium !leading-[1.25] font-poppins mb-2 flex items-center gap-2">
+      <div class="flex items-start justify-between">
+        <div class="flex items-start gap-4">
+          <div class="w-6 h-6 border-2 border-gray-400 rounded-full flex-shrink-0 mt-1 flex items-center justify-center">
+            <div class="w-2 h-2 bg-gray-400 rounded-full"></div>
+          </div>
+          <div>
+            <h3 class="font-semibold text-gray-900 text-lg mb-1">
               {{ address.first_name }}
               {{ address.last_name }}
               {% if address == customer.default_address %}
-                <span class="default-badge bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
-                  >Default</span
-                >
+                <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full ml-2">Default</span>
               {% endif %}
-            </h6>
-            <p class="text-[#797375] text-lg lg:text-xl !leading-[1.2]">
+            </h3>
+            <div class="text-gray-600 text-sm leading-relaxed">
               {{ address.address1 -}}
               {%- if address.address2 %}, {{ address.address2 }}{% endif -%}
               <br>
               {{ address.city }}, {{ address.province }}
               {{ address.zip -}}
               <br>
-              {{ address.country }}
-              {% if address.phone %}
-                <br>
-                Phone: {{ address.phone }}
-              {% endif %}
-            </p>
+              {% if address.phone %}{{ address.phone }}{% endif %}
+            </div>
           </div>
         </div>
-        <div class="max-w-max flex items-center gap-7 lg:gap-8 border border-[#E3E2E0] rounded-[150px] lg:rounded-[198px] py-3.5 lg:py-4.5 px-5.5 lg:px-6.5 relative z-1">
-          <span class="h-4 w-[1px] bg-[#E3E2E0] absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2"></span>
+        <div class="flex items-center gap-2">
           <button
-            class="size-5 lg:size-6 flex-[0_0_auto] edit-btn cursor-pointer"
+            class="edit-btn p-2 text-gray-400 hover:text-blue-600 transition-colors"
             data-action="edit"
             data-id="{{ address.id }}"
             data-first-name="{{ address.first_name }}"
             data-last-name="{{ address.last_name }}"
-            data-company="{{ address.company }}"
+            data-email="{{ customer.email }}"
             data-address1="{{ address.address1 }}"
-            data-address2="{{ address.address2 }}"
+            data-phone="{{ address.phone }}"
+            data-zip="{{ address.zip }}"
             data-city="{{ address.city }}"
             data-province="{{ address.province }}"
-            data-zip="{{ address.zip }}"
-            data-country="{{ address.country }}"
-            data-phone="{{ address.phone }}"
             data-default="{{ address == customer.default_address }}"
           >
-            <img src="/assets/edit-icon.svg" class="size-full" alt="Edit" width="" height="">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+            </svg>
           </button>
           <form method="post" action="{{ address.url }}" class="inline" onsubmit="return confirmDelete()">
             <input type="hidden" name="form_type" value="customer_address">
             <input type="hidden" name="_method" value="delete">
+            <input type="hidden" name="return_to" value="{{ request.path }}">
             <button
               type="submit"
-              class="size-5 lg:size-6 flex-[0_0_auto] delete-btn cursor-pointer bg-transparent border-0 p-0"
+              class="p-2 text-gray-400 hover:text-red-600 transition-colors"
             >
-              <img src="/assets/delete-icon.svg" class="size-full" alt="Delete" width="" height="">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3,6 5,6 21,6"/>
+                <path d="M19,6V20a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6M8,6V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2V6"/>
+              </svg>
             </button>
           </form>
         </div>
@@ -77,278 +75,291 @@
 </div>
 
 <!-- Add New Address Button -->
-<button id="addNewBtn" class="btn bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg mb-8">
+<button
+  id="addNewBtn"
+  class="bg-yellow-400 hover:bg-yellow-500 text-black font-medium px-6 py-3 rounded-lg transition-colors duration-200 mb-6"
+>
   Add New Address
 </button>
 
 <!-- Address Form -->
 <div id="addressFormContainer" class="hidden">
-  <h2
-    id="formTitle"
-    class="text-[#0D2E1D] text-xl lg:text-2xl xl:text-[32px] font-medium font-poppins !leading-[1.25] mb-5 lg:mb-6"
-  >
-    Add New Address
-  </h2>
+  <div class="bg-white border border-gray-200 rounded-lg p-6">
+    <h2
+      id="formTitle"
+      class="text-2xl font-semibold text-gray-900 mb-6"
+    >
+      Add New Address
+    </h2>
 
-  <form id="addressForm" method="post" action="/account/addresses" class="grid grid-cols-2 gap-4 lg:gap-5 xl:gap-6">
-    <input type="hidden" id="formType" name="form_type" value="customer_address">
-    <input type="hidden" id="addressId" name="address[id]" value="">
-    <input type="hidden" id="methodField" name="_method" value="">
+    <form id="addressForm" method="post" action="/account/addresses" class="space-y-4">
+      <input type="hidden" id="formType" name="form_type" value="customer_address">
+      <input type="hidden" id="addressId" name="address[id]" value="">
+      <input type="hidden" id="methodField" name="_method" value="">
+      <input type="hidden" name="return_to" value="{{ request.path }}">
 
-    <!-- First Name -->
-    <div class="col-span-2 lg:col-span-1">
-      <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">First Name*</label>
-      <input
-        id="firstName"
-        name="address[first_name]"
-        placeholder="First Name"
-        type="text"
-        value="{{ customer.first_name }}"
-        required
-        class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg focus:border-blue-500 focus:outline-none"
-      >
-    </div>
+      <!-- First Name & Last Name Row -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-gray-700 font-medium mb-2">First Name*</label>
+          <input
+            id="firstName"
+            name="address[first_name]"
+            type="text"
+            placeholder="Leslie"
+            value="{{ customer.first_name }}"
+            required
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-colors"
+          >
+        </div>
+        <div>
+          <label class="block text-gray-700 font-medium mb-2">Last Name*</label>
+          <input
+            id="lastName"
+            name="address[last_name]"
+            type="text"
+            placeholder="Cooper"
+            value="{{ customer.last_name }}"
+            required
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-colors"
+          >
+        </div>
+      </div>
 
-    <!-- Last Name -->
-    <div class="col-span-2 lg:col-span-1">
-      <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Last Name*</label>
-      <input
-        id="lastName"
-        name="address[last_name]"
-        placeholder="Last Name"
-        type="text"
-        value="{{ customer.last_name }}"
-        required
-        class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg focus:border-blue-500 focus:outline-none"
-      >
-    </div>
+      <!-- Email -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Email*</label>
+        <input
+          id="email"
+          name="address[email]"
+          type="email"
+          placeholder="example@gmail.com"
+          value="{{ customer.email }}"
+          required
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-colors"
+        >
+      </div>
 
-    <!-- Company -->
-    <div class="col-span-2">
-      <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Company</label>
-      <input
-        id="company"
-        name="address[company]"
-        placeholder="Company Name (Optional)"
-        type="text"
-        class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg focus:border-blue-500 focus:outline-none"
-      >
-    </div>
+      <!-- Street Address -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Street Address*</label>
+        <input
+          id="address1"
+          name="address[address1]"
+          type="text"
+          placeholder="2464 Royal Ln, Mesa, New Jersey 45463"
+          required
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-colors"
+        >
+      </div>
 
-    <!-- Street Address -->
-    <div class="col-span-2">
-      <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
-        >Street Address*</label
-      >
-      <input
-        id="address1"
-        name="address[address1]"
-        placeholder="Street Address"
-        type="text"
-        required
-        class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg focus:border-blue-500 focus:outline-none"
-      >
-    </div>
+      <!-- Phone & Zip Code Row -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-gray-700 font-medium mb-2">Phone*</label>
+          <input
+            id="phone"
+            name="address[phone]"
+            type="tel"
+            placeholder="+1234567890"
+            required
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-colors"
+          >
+        </div>
+        <div>
+          <label class="block text-gray-700 font-medium mb-2">Zip Code*</label>
+          <input
+            id="zip"
+            name="address[zip]"
+            type="text"
+            placeholder="45463"
+            required
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-colors"
+          >
+        </div>
+      </div>
 
-    <!-- Apartment/Suite -->
-    <div class="col-span-2">
-      <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
-        >Apartment, Suite, etc.</label
-      >
-      <input
-        id="address2"
-        name="address[address2]"
-        placeholder="Apartment, suite, unit, building, floor, etc."
-        type="text"
-        class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg focus:border-blue-500 focus:outline-none"
-      >
-    </div>
+      <!-- City & State Row -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-gray-700 font-medium mb-2">City*</label>
+          <input
+            id="city"
+            name="address[city]"
+            type="text"
+            placeholder="Mesa"
+            required
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-colors"
+          >
+        </div>
+        <div class="relative">
+          <label class="block text-gray-700 font-medium mb-2">State*</label>
+          <select
+            id="province"
+            name="address[province]"
+            required
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-colors appearance-none bg-white"
+          >
+            <option value="">Select State</option>
+            <option value="Alabama">Alabama</option>
+            <option value="Alaska">Alaska</option>
+            <option value="Arizona">Arizona</option>
+            <option value="Arkansas">Arkansas</option>
+            <option value="California">California</option>
+            <option value="Colorado">Colorado</option>
+            <option value="Connecticut">Connecticut</option>
+            <option value="Delaware">Delaware</option>
+            <option value="Florida">Florida</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Hawaii">Hawaii</option>
+            <option value="Idaho">Idaho</option>
+            <option value="Illinois">Illinois</option>
+            <option value="Indiana">Indiana</option>
+            <option value="Iowa">Iowa</option>
+            <option value="Kansas">Kansas</option>
+            <option value="Kentucky">Kentucky</option>
+            <option value="Louisiana">Louisiana</option>
+            <option value="Maine">Maine</option>
+            <option value="Maryland">Maryland</option>
+            <option value="Massachusetts">Massachusetts</option>
+            <option value="Michigan">Michigan</option>
+            <option value="Minnesota">Minnesota</option>
+            <option value="Mississippi">Mississippi</option>
+            <option value="Missouri">Missouri</option>
+            <option value="Montana">Montana</option>
+            <option value="Nebraska">Nebraska</option>
+            <option value="Nevada">Nevada</option>
+            <option value="New Hampshire">New Hampshire</option>
+            <option value="New Jersey">New Jersey</option>
+            <option value="New Mexico">New Mexico</option>
+            <option value="New York">New York</option>
+            <option value="North Carolina">North Carolina</option>
+            <option value="North Dakota">North Dakota</option>
+            <option value="Ohio">Ohio</option>
+            <option value="Oklahoma">Oklahoma</option>
+            <option value="Oregon">Oregon</option>
+            <option value="Pennsylvania">Pennsylvania</option>
+            <option value="Rhode Island">Rhode Island</option>
+            <option value="South Carolina">South Carolina</option>
+            <option value="South Dakota">South Dakota</option>
+            <option value="Tennessee">Tennessee</option>
+            <option value="Texas">Texas</option>
+            <option value="Utah">Utah</option>
+            <option value="Vermont">Vermont</option>
+            <option value="Virginia">Virginia</option>
+            <option value="Washington">Washington</option>
+            <option value="West Virginia">West Virginia</option>
+            <option value="Wisconsin">Wisconsin</option>
+            <option value="Wyoming">Wyoming</option>
+          </select>
+          <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none mt-8">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              class="text-gray-400"
+            >
+              <polyline points="6,9 12,15 18,9"/>
+            </svg>
+          </div>
+        </div>
+      </div>
 
-    <!-- City -->
-    <div class="col-span-2 lg:col-span-1">
-      <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">City*</label>
-      <input
-        id="city"
-        name="address[city]"
-        placeholder="City"
-        type="text"
-        required
-        class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg focus:border-blue-500 focus:outline-none"
-      >
-    </div>
+      <!-- Default Address Checkbox -->
+      <div class="flex items-center gap-3 pt-2">
+        <input
+          id="isDefault"
+          name="address[default]"
+          type="checkbox"
+          value="1"
+          class="w-4 h-4 text-yellow-400 border-gray-300 rounded focus:ring-yellow-400"
+        >
+        <label for="isDefault" class="text-gray-700 font-medium">Set as default address</label>
+      </div>
 
-    <!-- Zip Code -->
-    <div class="col-span-2 lg:col-span-1">
-      <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Zip Code*</label>
-      <input
-        id="zip"
-        name="address[zip]"
-        placeholder="Zip Code"
-        type="text"
-        required
-        class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg focus:border-blue-500 focus:outline-none"
-      >
-    </div>
-
-    <!-- State -->
-    <div class="col-span-2 lg:col-span-1 relative z-1">
-      <span class="w-3.5 h-2 rounded-full absolute right-5 lg:right-6 bottom-7 pointer-events-none">
-        <img src="/assets/arrow-down.svg" class="size-full" width="" height="" alt="">
-      </span>
-      <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">State*</label>
-      <select
-        id="province"
-        name="address[province]"
-        required
-        class="w-full border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 appearance-none rounded-lg text-[#797375] text-lg lg:text-xl !leading-[1.2] font-poppins focus:border-blue-500 focus:outline-none"
-      >
-        <option value="">Select State</option>
-        <option value="Alabama">Alabama</option>
-        <option value="Alaska">Alaska</option>
-        <option value="Arizona">Arizona</option>
-        <option value="Arkansas">Arkansas</option>
-        <option value="California">California</option>
-        <option value="Colorado">Colorado</option>
-        <option value="Connecticut">Connecticut</option>
-        <option value="Delaware">Delaware</option>
-        <option value="Florida">Florida</option>
-        <option value="Georgia">Georgia</option>
-        <option value="Hawaii">Hawaii</option>
-        <option value="Idaho">Idaho</option>
-        <option value="Illinois">Illinois</option>
-        <option value="Indiana">Indiana</option>
-        <option value="Iowa">Iowa</option>
-        <option value="Kansas">Kansas</option>
-        <option value="Kentucky">Kentucky</option>
-        <option value="Louisiana">Louisiana</option>
-        <option value="Maine">Maine</option>
-        <option value="Maryland">Maryland</option>
-        <option value="Massachusetts">Massachusetts</option>
-        <option value="Michigan">Michigan</option>
-        <option value="Minnesota">Minnesota</option>
-        <option value="Mississippi">Mississippi</option>
-        <option value="Missouri">Missouri</option>
-        <option value="Montana">Montana</option>
-        <option value="Nebraska">Nebraska</option>
-        <option value="Nevada">Nevada</option>
-        <option value="New Hampshire">New Hampshire</option>
-        <option value="New Jersey">New Jersey</option>
-        <option value="New Mexico">New Mexico</option>
-        <option value="New York">New York</option>
-        <option value="North Carolina">North Carolina</option>
-        <option value="North Dakota">North Dakota</option>
-        <option value="Ohio">Ohio</option>
-        <option value="Oklahoma">Oklahoma</option>
-        <option value="Oregon">Oregon</option>
-        <option value="Pennsylvania">Pennsylvania</option>
-        <option value="Rhode Island">Rhode Island</option>
-        <option value="South Carolina">South Carolina</option>
-        <option value="South Dakota">South Dakota</option>
-        <option value="Tennessee">Tennessee</option>
-        <option value="Texas">Texas</option>
-        <option value="Utah">Utah</option>
-        <option value="Vermont">Vermont</option>
-        <option value="Virginia">Virginia</option>
-        <option value="Washington">Washington</option>
-        <option value="West Virginia">West Virginia</option>
-        <option value="Wisconsin">Wisconsin</option>
-        <option value="Wyoming">Wyoming</option>
-      </select>
-    </div>
-
-    <!-- Country -->
-    <div class="col-span-2 lg:col-span-1 relative z-1">
-      <span class="w-3.5 h-2 rounded-full absolute right-5 lg:right-6 bottom-7 pointer-events-none">
-        <img src="/assets/arrow-down.svg" class="size-full" width="" height="" alt="">
-      </span>
-      <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Country*</label>
-      <select
-        id="country"
-        name="address[country]"
-        required
-        class="w-full border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 appearance-none rounded-lg text-[#797375] text-lg lg:text-xl !leading-[1.2] font-poppins focus:border-blue-500 focus:outline-none"
-      >
-        <option value="">Select Country</option>
-        <option value="United States">United States</option>
-        <option value="Canada">Canada</option>
-        <option value="Bangladesh">Bangladesh</option>
-        <option value="India">India</option>
-        <option value="United Kingdom">United Kingdom</option>
-        <option value="Australia">Australia</option>
-        <option value="Germany">Germany</option>
-        <option value="France">France</option>
-        <option value="Japan">Japan</option>
-        <option value="Other">Other</option>
-      </select>
-    </div>
-
-    <!-- Phone -->
-    <div class="col-span-2">
-      <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Phone</label>
-      <input
-        id="phone"
-        name="address[phone]"
-        placeholder="+1234567890"
-        type="tel"
-        class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg focus:border-blue-500 focus:outline-none"
-      >
-    </div>
-
-    <!-- Default Address -->
-    <div class="col-span-2">
-      <label class="flex items-center gap-3 cursor-pointer">
-        <input id="isDefault" name="address[default]" type="checkbox" class="w-5 h-5" value="1">
-        <span class="text-[#514849] text-lg font-medium">Set as default address</span>
-      </label>
-    </div>
-
-    <!-- Form Actions -->
-    <div class="col-span-2 flex gap-4">
-      <button type="submit" id="saveBtn" class="btn bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
-        <span id="saveText">Save Address</span>
-        <span id="saveLoading" class="hidden">Saving...</span>
-      </button>
-      <button type="button" id="cancelBtn" class="btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-300">
-        Cancel
-      </button>
-    </div>
-  </form>
+      <!-- Form Actions -->
+      <div class="flex gap-4 pt-4">
+        <button
+          type="submit"
+          id="saveBtn"
+          class="bg-yellow-400 hover:bg-yellow-500 text-black font-medium px-6 py-3 rounded-lg transition-colors duration-200 flex items-center gap-2"
+        >
+          <span id="saveText">Save Address</span>
+          <span id="saveLoading" class="hidden flex items-center gap-2">
+            <svg class="animate-spin w-4 h-4" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"/>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+            </svg>
+            Saving...
+          </span>
+        </button>
+        <button
+          type="button"
+          id="cancelBtn"
+          class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium px-6 py-3 rounded-lg transition-colors duration-200"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
 
 <!-- Success Message -->
-<div id="successMsg" class="hidden fixed top-4 right-4 bg-green-100 text-green-700 px-4 py-3 rounded-lg z-50 shadow-lg">
-  <span id="successText">Action completed successfully!</span>
+<div
+  id="successMsg"
+  class="hidden fixed top-4 right-4 bg-green-100 border border-green-200 text-green-700 px-4 py-3 rounded-lg z-50 shadow-lg"
+>
+  <div class="flex items-center gap-2">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="20,6 9,17 4,12"/>
+    </svg>
+    <span id="successText">Action completed successfully!</span>
+  </div>
 </div>
 
 <!-- Error Message -->
-<div id="errorMsg" class="hidden fixed top-4 right-4 bg-red-100 text-red-700 px-4 py-3 rounded-lg z-50 shadow-lg">
-  <span id="errorText">An error occurred. Please try again.</span>
+<div
+  id="errorMsg"
+  class="hidden fixed top-4 right-4 bg-red-100 border border-red-200 text-red-700 px-4 py-3 rounded-lg z-50 shadow-lg"
+>
+  <div class="flex items-center gap-2">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="10"/>
+      <line x1="15" y1="9" x2="9" y2="15"/>
+      <line x1="9" y1="9" x2="15" y2="15"/>
+    </svg>
+    <span id="errorText">An error occurred. Please try again.</span>
+  </div>
 </div>
 
 <style>
   .hidden {
     display: none;
   }
-  .btn {
-    transition: all 0.2s ease;
-    border: none;
-    cursor: pointer;
-    font-weight: 500;
-  }
+
   .address-card {
-    transition: transform 0.2s ease;
+    transition: all 0.2s ease;
   }
+
   .address-card:hover {
     transform: translateY(-1px);
   }
+
   .error-field {
     border-color: #ef4444 !important;
     background-color: #fef2f2 !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
   }
+
   #successMsg,
   #errorMsg {
     animation: slideIn 0.3s ease;
   }
+
   @keyframes slideIn {
     from {
       transform: translateX(100%);
@@ -359,9 +370,11 @@
       opacity: 1;
     }
   }
+
   .fade-out {
     animation: fadeOut 0.3s ease forwards;
   }
+
   @keyframes fadeOut {
     from {
       opacity: 1;
@@ -371,6 +384,28 @@
       opacity: 0;
       transform: scale(0.95);
     }
+  }
+
+  /* Custom select arrow positioning */
+  select {
+    background-image: none;
+  }
+
+  /* Focus states */
+  input:focus,
+  select:focus {
+    box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.1);
+  }
+
+  /* Loading spinner */
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin {
+    animation: spin 1s linear infinite;
   }
 </style>
 
@@ -418,7 +453,7 @@
             document.getElementById('addressId').value = '';
           }
 
-          // Scroll to form
+          // Smooth scroll to form
           formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
         } else {
           formContainer.classList.add('hidden');
@@ -434,6 +469,7 @@
         // Set default customer data
         document.getElementById('firstName').value = '{{ customer.first_name }}';
         document.getElementById('lastName').value = '{{ customer.last_name }}';
+        document.getElementById('email').value = '{{ customer.email }}';
         clearErrors();
       }
 
@@ -446,7 +482,7 @@
 
       // Validate form
       function validateForm() {
-        const required = ['firstName', 'lastName', 'address1', 'city', 'zip', 'province', 'country'];
+        const required = ['firstName', 'lastName', 'email', 'address1', 'phone', 'zip', 'city', 'province'];
         let isValid = true;
 
         required.forEach((id) => {
@@ -458,6 +494,14 @@
             field.classList.remove('error-field');
           }
         });
+
+        // Email validation
+        const emailField = document.getElementById('email');
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (emailField && !emailPattern.test(emailField.value)) {
+          emailField.classList.add('error-field');
+          isValid = false;
+        }
 
         return isValid;
       }
@@ -473,7 +517,7 @@
 
           setTimeout(() => {
             msgElement.classList.add('hidden');
-          }, 4000);
+          }, 5000);
         }
       }
 
@@ -481,14 +525,12 @@
       function populateForm(data) {
         document.getElementById('firstName').value = data.firstName || '';
         document.getElementById('lastName').value = data.lastName || '';
-        document.getElementById('company').value = data.company || '';
+        document.getElementById('email').value = data.email || '';
         document.getElementById('address1').value = data.address1 || '';
-        document.getElementById('address2').value = data.address2 || '';
-        document.getElementById('city').value = data.city || '';
-        document.getElementById('zip').value = data.zip || '';
-        document.getElementById('province').value = data.province || '';
-        document.getElementById('country').value = data.country || '';
         document.getElementById('phone').value = data.phone || '';
+        document.getElementById('zip').value = data.zip || '';
+        document.getElementById('city').value = data.city || '';
+        document.getElementById('province').value = data.province || '';
         document.getElementById('isDefault').checked = data.default === 'true';
       }
 
@@ -501,11 +543,12 @@
         toggleForm(false);
       });
 
-      // Form submission
+      // Form submission with AJAX to prevent redirect
       addressForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
         if (!validateForm()) {
-          e.preventDefault();
-          showMessage('Please fill in all required fields', true);
+          showMessage('Please fill in all required fields correctly', true);
           return;
         }
 
@@ -519,8 +562,62 @@
           saveLoading.classList.remove('hidden');
         }
 
-        // Let Shopify handle the form submission naturally
-        // The form will submit to Shopify's endpoint
+        // Prepare form data
+        const formData = new FormData(addressForm);
+
+        // Submit form via fetch (with fallback)
+        fetch(addressForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+          },
+        })
+          .then((response) => {
+            if (response.redirected || response.url.includes('/account')) {
+              // If Shopify redirects, follow the redirect but add success parameter
+              window.location.href = window.location.pathname + '?address_saved=true';
+              return;
+            }
+            if (response.ok) {
+              toggleForm(false);
+              showMessage(currentMode === 'add' ? 'Address added successfully!' : 'Address updated successfully!');
+              // Reload the page to show updated addresses
+              setTimeout(() => {
+                window.location.reload();
+              }, 2000);
+            } else {
+              throw new Error('Network response was not ok');
+            }
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+            // Fallback: submit form normally if AJAX fails
+            formData.append('return_to', window.location.pathname + '?address_saved=true');
+            const tempForm = document.createElement('form');
+            tempForm.method = 'POST';
+            tempForm.action = addressForm.action;
+            tempForm.style.display = 'none';
+
+            for (let [key, value] of formData.entries()) {
+              const input = document.createElement('input');
+              input.type = 'hidden';
+              input.name = key;
+              input.value = value;
+              tempForm.appendChild(input);
+            }
+
+            document.body.appendChild(tempForm);
+            tempForm.submit();
+          })
+          .finally(() => {
+            // Reset button state
+            if (saveText && saveLoading) {
+              saveBtn.disabled = false;
+              saveText.classList.remove('hidden');
+              saveLoading.classList.add('hidden');
+            }
+          });
       });
 
       // Edit button handler
@@ -534,14 +631,12 @@
         const data = {
           firstName: editBtn.dataset.firstName,
           lastName: editBtn.dataset.lastName,
-          company: editBtn.dataset.company,
+          email: editBtn.dataset.email,
           address1: editBtn.dataset.address1,
-          address2: editBtn.dataset.address2,
+          phone: editBtn.dataset.phone,
+          zip: editBtn.dataset.zip,
           city: editBtn.dataset.city,
           province: editBtn.dataset.province,
-          zip: editBtn.dataset.zip,
-          country: editBtn.dataset.country,
-          phone: editBtn.dataset.phone,
           default: editBtn.dataset.default,
         };
 
@@ -576,11 +671,77 @@
         // Clean URL
         window.history.replaceState({}, document.title, window.location.pathname);
       }
+      if (urlParams.get('address_deleted') === 'true') {
+        showMessage('Address deleted successfully!');
+        // Clean URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
       if (urlParams.get('address_error') === 'true') {
-        showMessage('Error saving address. Please try again.', true);
+        showMessage('Error with address operation. Please try again.', true);
         window.history.replaceState({}, document.title, window.location.pathname);
       }
     }
+
+    // Handle delete with AJAX
+    document.addEventListener('submit', function (e) {
+      if (e.target.querySelector('input[name="_method"][value="delete"]')) {
+        e.preventDefault();
+
+        if (!confirm('Are you sure you want to delete this address? This action cannot be undone.')) {
+          return;
+        }
+
+        const form = e.target;
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+          },
+        })
+          .then((response) => {
+            if (response.redirected || response.url.includes('/account')) {
+              // If Shopify redirects, go to current page with success message
+              window.location.href = window.location.pathname + '?address_deleted=true';
+              return;
+            }
+            if (response.ok) {
+              const addressCard = form.closest('.address-card');
+              if (addressCard) {
+                addressCard.classList.add('fade-out');
+                setTimeout(() => {
+                  addressCard.remove();
+                  showMessage('Address deleted successfully!');
+                }, 300);
+              }
+            } else {
+              throw new Error('Network response was not ok');
+            }
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+            // Fallback: submit form normally if AJAX fails
+            formData.append('return_to', window.location.pathname + '?address_deleted=true');
+            const tempForm = document.createElement('form');
+            tempForm.method = 'POST';
+            tempForm.action = form.action;
+            tempForm.style.display = 'none';
+
+            for (let [key, value] of formData.entries()) {
+              const input = document.createElement('input');
+              input.type = 'hidden';
+              input.name = key;
+              input.value = value;
+              tempForm.appendChild(input);
+            }
+
+            document.body.appendChild(tempForm);
+            tempForm.submit();
+          });
+      }
+    });
 
     // Global delete confirmation function
     window.confirmDelete = function () {
