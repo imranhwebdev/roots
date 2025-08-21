@@ -1,83 +1,146 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100..900&display=swap');
+@font-face {
+  font-family: "armany-regular";
+  src: url("https://cdn.shopify.com/s/files/1/0773/9739/3656/files/armany-regular.woff2?v=1755797432") format("woff2"),
+       url("https://cdn.shopify.com/s/files/1/0773/9739/3656/files/armany-regular.woff2?v=1755797432") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "armany-medium";
+  src: url("https://cdn.shopify.com/s/files/1/0773/9739/3656/files/armany-medium.woff2?v=1755797432") format("woff2"),
+       url("https://cdn.shopify.com/s/files/1/0773/9739/3656/files/armany-medium.woff2?v=1755797432") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "armany-semibold";
+  src: url("https://cdn.shopify.com/s/files/1/0773/9739/3656/files/armany-semibold.woff2?v=1755797432") format("woff2"),
+       url("https://cdn.shopify.com/s/files/1/0773/9739/3656/files/armany-semibold.woff2?v=1755797432") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "armany-bold";
+  src: url("https://cdn.shopify.com/s/files/1/0773/9739/3656/files/armany-bold.woff2?v=1755797432") format("woff2"),
+       url("https://cdn.shopify.com/s/files/1/0773/9739/3656/files/armany-bold.woff2?v=1755797432") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+/* Custom Armany Fonts */
+@font-face {
+    font-family: 'armany-regular';
+    src: url("{{ 'armany-regular.woff2' | asset_url }}") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
 
 @font-face {
-    font-family: 'Armany-regular';
-    src: url('{{ "ArmanyRegular.ttf" | asset_url }}') format('truetype');
+    font-family: 'armany-medium';
+    src: url("{{ 'armany-medium.woff2' | asset_url }}") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
+
 @font-face {
-    font-family: 'Armany-Medium';
-    src: url('{{ "ArmanyMedium.ttf" | asset_url }}') format('truetype');
+    font-family: 'armany-semibold';
+    src: url("{{ 'armany-semibold.woff2' | asset_url }}") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
+
 @font-face {
-    font-family: 'Armany-Semibold';
-    src: url('{{ "ArmanySemibold.ttf" | asset_url }}') format('truetype');
+    font-family: 'armany-bold';
+    src: url("{{ 'armany-bold.woff2' | asset_url }}") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
-@font-face {
-    font-family: 'Armany-Bold';
-    src: url('{{ "ArmanyBold.ttf" | asset_url }}') format('truetype');
-}
-@font-face {
-    font-family: 'Armany-regular';
-    src: url('/assets/ArmanyRegular.ttf') format('truetype');
-}
-@font-face {
-    font-family: 'Armany-Medium';
-    src: url('/assets/ArmanyMedium.ttf') format('truetype');
-}
-@font-face {
-    font-family: 'Armany-Semibold';
-    src: url('/assets/ArmanySemibold.ttf') format('truetype');
-}
-@font-face {
-    font-family: 'Armany-Bold';
-    src: url('/assets/ArmanyBold.ttf') format('truetype');
-}
+
+
+/* Theme Variables */
 @theme {
-    --color-primary: #FFC801;
-    --color-secondary: #797375;
-    --color-green: #0D2E1D;
-    --color-list: #1E6C44;
-    --color-stroke: #116091;
-    --color-para: #514849;
-    --color-btn: #1F1904;
-    --breakpoint-xs: 390px;
-    --breakpoint-sm: 414px;
-    --breakpoint-md: 768px;
-    --breakpoint-lg: 992px;
-    --breakpoint-xl: 1240px;
-    --breakpoint-2xl: 1400px;
-    --breakpoint-3xl: 1520px;
-    --font-poppins: "Poppins", sans-serif;
-    --font-armany-regular: 'Armany-regular', sans-serif;
-    --font-armany-medium: 'Armany-Medium', sans-serif;
-    --font-armany-semibold: 'Armany-Semibold', sans-serif;
-    --font-armany-bold: 'Armany-Bold', sans-serif;
+  --color-primary: #FFC801;
+  --color-secondary: #797375;
+  --color-green: #0D2E1D;
+  --color-list: #1E6C44;
+  --color-stroke: #116091;
+  --color-para: #514849;
+  --color-btn: #1F1904;
+
+  --breakpoint-xs: 390px;
+  --breakpoint-sm: 414px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1240px;
+  --breakpoint-2xl: 1400px;
+  --breakpoint-3xl: 1520px;
+
+  --font-poppins: "Poppins", sans-serif;
+  --font-armany-regular: 'armany-regular';
+  --font-armany-medium: 'armany-medium';
+  --font-armany-semibold: 'armany-semibold';
+  --font-armany-bold: 'armany-bold';
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
-    .btn {
-        @apply inline-flex items-center justify-center gap-2 rounded-[40px] !leading-tight px-8 min-h-16 bg-primary text-[#1F1904] text-xl font-poppins border border-solid border-primary hover:text-black transition-all duration-300 cursor-pointer hover:bg-white;
-    }
-    .inline-btn {
-        @apply inline-flex items-center justify-center gap-2 rounded-[40px] !leading-tight px-8 min-h-16 text-white text-xl font-poppins border border-solid border-[#B7D6C6] hover:text-black hover:bg-primary transition-all duration-300 hover:border-primary cursor-pointer;
-    }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-[40px] !leading-tight px-8 min-h-16 bg-primary text-[#1F1904] text-xl font-poppins border border-solid border-primary hover:text-black transition-all duration-300 cursor-pointer hover:bg-white;
+  }
+  .inline-btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-[40px] !leading-tight px-8 min-h-16 text-white text-xl font-poppins border border-solid border-[#B7D6C6] hover:text-black hover:bg-primary transition-all duration-300 hover:border-primary cursor-pointer;
+  }
 }
 
-.container{
-    max-width: 1648px;
-    margin-inline: auto;
-    padding-inline: 15px;
+/* Container */
+.container {
+  max-width: 1648px;
+  margin-inline: auto;
+  padding-inline: 15px;
 }
 
-body{
-     font-family: "Poppins", sans-serif;
+/* Global Font Setup */
+body {
+  font-family: var(--font-poppins); /* default */
 }
+
+/* Example usage of Armany */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-armany-bold);
+}
+
+.armany-regular {
+  font-family: var(--font-armany-regular);
+}
+.armany-medium {
+  font-family: var(--font-armany-medium);
+}
+.armany-semibold {
+  font-family: var(--font-armany-semibold);
+}
+.armany-bold {
+  font-family: var(--font-armany-bold);
+}
+
+/* Shopify challenge page */
 .i4DWM ._4QenE {
   background: #1e6c44 !important;
   color: #fff;
   border-radius: 12px;
   margin: 40px;
+}
+.shopify-challenge__container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 150px 0;
 }
