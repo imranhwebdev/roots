@@ -1,13 +1,13 @@
 <div class="footer bg-[#F0ECDC] pt-12.5 md:pt-16 lg:pt-20 xl:pt-25 pb-6 md:pb-7 lg:pb-8 relative z-1">
-  <div class="container">
+  <div class="container relative">
     <div class="flex flex-col md:flex-row justify-between flex-wrap gap-4 md:flex-nowrap mb-8 md:mb-10 lg:mb-14 xl:mb-16 2xl:mb-20">
       <div class="w-full md:w-5/12 xl:w-4/12">
-        <div class=" 2xl:pr-[8%] 3xl:pr-[15%]">
+        <div class="max-w-116">
           <a href="{{routes.root_url}}">
             {% if section.settings.logo_image %}
               <img
-                src="{{ section.settings.logo_image | img_url: '242x84' }}"
-                class="w-21 md:w-30 2xl:w-60.5 md:15  mb-5"
+                src="{{ section.settings.logo_image | image_url  }}"
+                class="w-full max-w-21 md:max-w-30 2xl:max-w-60.5 md:15  mb-5"
                 width="{{ section.settings.logo_image.width }}"
                 height="{{ section.settings.logo_image.height }}"
                 alt="{{ section.settings.logo_image.alt | default: shop.name }}"
@@ -136,29 +136,38 @@
       <p class="text-[#797375)] md:text-[#514849] text-xl !leading-[1.2] md:!leading-normal order-2 md:order-1">
         © {{ 'now' | date: '%Y' }} Roots Organic Castor Oil.
       </p>
-
-      {% if section.settings.show_payment_icons %}
-        <div class="flex items-center gap-3 lg:gap-2.5 mb-5 md:mb-0 order-1 md:order-2">
-          {% for type in shop.enabled_payment_types %}
-            <div class="w-11.5 h-8 border-[.8px] border-[#D9D9D9] rounded-[5px]">
-              {{ type | payment_type_svg_tag: class: 'size-full rounded-[5px]' }}
-            </div>
-          {% endfor %}
-        </div>
-      {% endif %}
+      <div class="payment-method-icons order-1 md:order-2">
+        {% if shop.enabled_payment_types.size > 0 %}
+          <div class="flex items-center gap-3 lg:gap-2.5 mb-5 md:mb-0">
+            {% for type in shop.enabled_payment_types %}
+              <div class="w-11.5 h-8 border-[.8px] border-[#D9D9D9] rounded-[5px]">
+                {{ type | payment_type_svg_tag: class: 'size-full rounded-[5px]' }}
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <ul class="flex items-center gap-2.5">
+            <li><img src="{{'PayPal.png' | asset_url}}" width="" height="" alt=""></li>
+            <li><img src="{{'Visa.png' | asset_url}}" width="" height="" alt=""></li>
+            <li><img src="{{'Mastercard.png' | asset_url}}" width="" height="" alt=""></li>
+            <li><img src="{{'ApplePay.png' | asset_url}}" width="" height="" alt=""></li>
+            <li><img src="{{'GooglePay.png' | asset_url}}" width="" height="" alt=""></li>
+          </ul>
+        {% endif %}
+      </div>
     </div>
-  </div>
 
-  <!-- Background Image -->
-  {% if section.settings.background_image %}
-    <img
-      src="{{ section.settings.background_image | img_url: '328x236' }}"
-      class="w-40 md:w-35 lg:w-50 xl:w-82 h-30 md:h-20 lg:h-30 xl:h-59 absolute bottom-[24%] md:bottom-0 right-0 md:left-[40%] lg:left-[30%] xl:left-[26%] 2xl:left-[29%] -z-1"
-      width="{{ section.settings.background_image.width }}"
-      height="{{ section.settings.background_image.height }}"
-      alt="{{ section.settings.background_image.alt | default: 'Footer Background' }}"
-    >
-  {% endif %}
+    <!-- Background Image -->
+    {% if section.settings.background_image %}
+      <img
+        src="{{ section.settings.background_image | image_url }}"
+        class="w-40 md:w-35 lg:w-50 xl:w-82 h-30 md:h-20 lg:h-30 xl:h-59 absolute bottom-[24%] md:bottom-0 right-0 md:left-[40%] lg:left-[30%] xl:left-[26%] 2xl:left-[29%] -z-1 -mb-6 md:-mb-7 lg:-mb-8"
+        width="{{ section.settings.background_image.width }}"
+        height="{{ section.settings.background_image.height }}"
+        alt="{{ section.settings.background_image.alt | default: 'Footer Background' }}"
+      >
+    {% endif %}
+  </div>
 </div>
 
 {% schema %}
