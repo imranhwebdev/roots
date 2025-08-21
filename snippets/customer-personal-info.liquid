@@ -260,7 +260,7 @@
 
         case 'phoneInput':
           if (value.trim()) {
-            const phoneRegex = /^[\+]?[1-9][\d\s\-\(\)]{7,20}$/;
+            const phoneRegex = /^[\+]?[1-9][\d\s\-\(\)]{7,23}$/;
             if (!phoneRegex.test(value.replace(/\s/g, ''))) {
               isValid = false;
               errorMessage = 'Please enter a valid phone number';
