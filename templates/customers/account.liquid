@@ -147,10 +147,10 @@
 
           if (field.type === 'password') {
             field.type = 'text';
-            toggleBtn.innerHTML = '<img src="/assets/eye-slash-icon.svg" class="size-full" alt="" width="" height="">';
+            toggleBtn.innerHTML = '<img src="{{ 'eye-slash-icon.svg' | asset_url }}" class="size-full" alt="" width="" height="">';
           } else {
             field.type = 'password';
-            toggleBtn.innerHTML = '<img src="/assets/eye-icon.svg" class="size-full" alt="" width="" height="">';
+            toggleBtn.innerHTML = '<img src="{{ 'eye-icon.svg' | asset_url }}" class="size-full" alt="" width="" height="">';
           }
         });
       }
