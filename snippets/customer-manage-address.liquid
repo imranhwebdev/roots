@@ -41,12 +41,14 @@
             data-id="{{ address.id }}"
             data-first-name="{{ address.first_name }}"
             data-last-name="{{ address.last_name }}"
-            data-email="{{ customer.email }}"
+            data-company="{{ address.company }}"
             data-address1="{{ address.address1 }}"
+            data-address2="{{ address.address2 }}"
             data-phone="{{ address.phone }}"
             data-zip="{{ address.zip }}"
             data-city="{{ address.city }}"
             data-province="{{ address.province }}"
+            data-country="{{ address.country }}"
             data-default="{{ address == customer.default_address }}"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -97,6 +99,7 @@
       <input type="hidden" id="addressId" name="address[id]" value="">
       <input type="hidden" id="methodField" name="_method" value="">
       <input type="hidden" name="return_to" value="{{ request.path }}">
+      <input type="hidden" name="utf8" value="✓">
 
       <!-- First Name & Last Name Row -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -126,16 +129,15 @@
         </div>
       </div>
 
-      <!-- Email -->
+      <!-- Email (Remove this as it's not part of Shopify address) -->
+      <!-- Company -->
       <div>
-        <label class="block text-gray-700 font-medium mb-2">Email*</label>
+        <label class="block text-gray-700 font-medium mb-2">Company</label>
         <input
-          id="email"
-          name="address[email]"
-          type="email"
-          placeholder="example@gmail.com"
-          value="{{ customer.email }}"
-          required
+          id="company"
+          name="address[company]"
+          type="text"
+          placeholder="Company Name (Optional)"
           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-colors"
         >
       </div>
@@ -147,8 +149,20 @@
           id="address1"
           name="address[address1]"
           type="text"
-          placeholder="2464 Royal Ln, Mesa, New Jersey 45463"
+          placeholder="2464 Royal Ln"
           required
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-colors"
+        >
+      </div>
+
+      <!-- Apartment/Suite -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Street Address*</label>
+        <input
+          id="address2"
+          name="address[address2]"
+          type="text"
+          placeholder="Street Address"
           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-colors"
         >
       </div>
@@ -156,13 +170,12 @@
       <!-- Phone & Zip Code Row -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label class="block text-gray-700 font-medium mb-2">Phone*</label>
+          <label class="block text-gray-700 font-medium mb-2">Phone</label>
           <input
             id="phone"
             name="address[phone]"
             type="tel"
             placeholder="+1234567890"
-            required
             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-colors"
           >
         </div>
@@ -200,6 +213,7 @@
             required
             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-colors appearance-none bg-white"
           >
+            <!-- United States -->
             <option value="">Select State</option>
             <option value="Alabama">Alabama</option>
             <option value="Alaska">Alaska</option>
@@ -469,7 +483,7 @@
         // Set default customer data
         document.getElementById('firstName').value = '{{ customer.first_name }}';
         document.getElementById('lastName').value = '{{ customer.last_name }}';
-        document.getElementById('email').value = '{{ customer.email }}';
+        document.getElementById('country').value = 'United States'; // Set default country
         clearErrors();
       }
 
@@ -482,7 +496,7 @@
 
       // Validate form
       function validateForm() {
-        const required = ['firstName', 'lastName', 'email', 'address1', 'phone', 'zip', 'city', 'province'];
+        const required = ['firstName', 'lastName', 'address1', 'city', 'zip', 'province', 'country'];
         let isValid = true;
 
         required.forEach((id) => {
@@ -494,14 +508,6 @@
             field.classList.remove('error-field');
           }
         });
-
-        // Email validation
-        const emailField = document.getElementById('email');
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (emailField && !emailPattern.test(emailField.value)) {
-          emailField.classList.add('error-field');
-          isValid = false;
-        }
 
         return isValid;
       }
@@ -525,12 +531,14 @@
       function populateForm(data) {
         document.getElementById('firstName').value = data.firstName || '';
         document.getElementById('lastName').value = data.lastName || '';
-        document.getElementById('email').value = data.email || '';
+        document.getElementById('company').value = data.company || '';
         document.getElementById('address1').value = data.address1 || '';
+        document.getElementById('address2').value = data.address2 || '';
         document.getElementById('phone').value = data.phone || '';
         document.getElementById('zip').value = data.zip || '';
         document.getElementById('city').value = data.city || '';
         document.getElementById('province').value = data.province || '';
+        document.getElementById('country').value = data.country || 'United States';
         document.getElementById('isDefault').checked = data.default === 'true';
       }
 
@@ -543,11 +551,10 @@
         toggleForm(false);
       });
 
-      // Form submission with AJAX to prevent redirect
+      // Form submission - Simple approach first
       addressForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-
         if (!validateForm()) {
+          e.preventDefault();
           showMessage('Please fill in all required fields correctly', true);
           return;
         }
@@ -562,62 +569,8 @@
           saveLoading.classList.remove('hidden');
         }
 
-        // Prepare form data
-        const formData = new FormData(addressForm);
-
-        // Submit form via fetch (with fallback)
-        fetch(addressForm.action, {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-          },
-        })
-          .then((response) => {
-            if (response.redirected || response.url.includes('/account')) {
-              // If Shopify redirects, follow the redirect but add success parameter
-              window.location.href = window.location.pathname + '?address_saved=true';
-              return;
-            }
-            if (response.ok) {
-              toggleForm(false);
-              showMessage(currentMode === 'add' ? 'Address added successfully!' : 'Address updated successfully!');
-              // Reload the page to show updated addresses
-              setTimeout(() => {
-                window.location.reload();
-              }, 2000);
-            } else {
-              throw new Error('Network response was not ok');
-            }
-          })
-          .catch((error) => {
-            console.error('Error:', error);
-            // Fallback: submit form normally if AJAX fails
-            formData.append('return_to', window.location.pathname + '?address_saved=true');
-            const tempForm = document.createElement('form');
-            tempForm.method = 'POST';
-            tempForm.action = addressForm.action;
-            tempForm.style.display = 'none';
-
-            for (let [key, value] of formData.entries()) {
-              const input = document.createElement('input');
-              input.type = 'hidden';
-              input.name = key;
-              input.value = value;
-              tempForm.appendChild(input);
-            }
-
-            document.body.appendChild(tempForm);
-            tempForm.submit();
-          })
-          .finally(() => {
-            // Reset button state
-            if (saveText && saveLoading) {
-              saveBtn.disabled = false;
-              saveText.classList.remove('hidden');
-              saveLoading.classList.add('hidden');
-            }
-          });
+        // Let the form submit naturally to Shopify
+        // Don't prevent default - let Shopify handle it
       });
 
       // Edit button handler
@@ -631,12 +584,14 @@
         const data = {
           firstName: editBtn.dataset.firstName,
           lastName: editBtn.dataset.lastName,
-          email: editBtn.dataset.email,
+          company: editBtn.dataset.company,
           address1: editBtn.dataset.address1,
+          address2: editBtn.dataset.address2,
           phone: editBtn.dataset.phone,
           zip: editBtn.dataset.zip,
           city: editBtn.dataset.city,
           province: editBtn.dataset.province,
+          country: editBtn.dataset.country,
           default: editBtn.dataset.default,
         };
 
@@ -755,4 +710,76 @@
       initAddressManager();
     }
   })();
+
+  const countryStates = {
+    'United States': [
+      'Alabama',
+      'Alaska',
+      'Arizona',
+      'Arkansas',
+      'California',
+      'Colorado',
+      'Connecticut',
+      'Delaware',
+      'Florida',
+      'Georgia',
+      'Hawaii',
+      'Idaho',
+      'Illinois',
+      'Indiana',
+      'Iowa',
+      'Kansas',
+      'Kentucky',
+      'Louisiana',
+      'Maine',
+      'Maryland',
+      'Massachusetts',
+      'Michigan',
+      'Minnesota',
+      'Mississippi',
+      'Missouri',
+      'Montana',
+      'Nebraska',
+      'Nevada',
+      'New Hampshire',
+      'New Jersey',
+      'New Mexico',
+      'New York',
+      'North Carolina',
+      'North Dakota',
+      'Ohio',
+      'Oklahoma',
+      'Oregon',
+      'Pennsylvania',
+      'Rhode Island',
+      'South Carolina',
+      'South Dakota',
+      'Tennessee',
+      'Texas',
+      'Utah',
+      'Vermont',
+      'Virginia',
+      'Washington',
+      'West Virginia',
+      'Wisconsin',
+      'Wyoming',
+    ],
+  };
+
+  const countrySelect = document.getElementById('country');
+  const provinceSelect = document.getElementById('province');
+
+  countrySelect.addEventListener('change', function () {
+    const selectedCountry = this.value;
+    provinceSelect.innerHTML = '<option value="">Select State</option>';
+
+    if (countryStates[selectedCountry]) {
+      countryStates[selectedCountry].forEach((state) => {
+        const option = document.createElement('option');
+        option.value = state;
+        option.textContent = state;
+        provinceSelect.appendChild(option);
+      });
+    }
+  });
 </script>
