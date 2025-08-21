@@ -19,7 +19,7 @@
       {% if section.blocks.size > 0 %}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8.5 lg:gap-8 w-full 2xl:w-11/12 mx-auto">
           {% for block in section.blocks %}
-            <div class="text-center px-3 md:px-0 lg:px-2 2xl:px-5 3xl:px-11">
+            <div class="text-center px-3 md:px-0 lg:px-2 2xl:px-5 3xl:px-8">
               {% if block.settings.icon_svg != blank %}
                 <span class="size-13 lg:size-17 flex items-center justify-center rounded-full bg-[#B7D6C6] mb-2.5 md:mb-4 lg:mb-7 xl:mb-8.5 mx-auto">
                   <img
@@ -32,7 +32,7 @@
               {% endif %}
 
               {% if block.settings.title != blank %}
-                <h6 class="text-base md:text-lg xl:text-2xl text-green font-medium !leading-[1.6] mb-2 md:mb-3 lg:mb-4">
+                <h6 class="text-base md:text-lg xl:text-2xl text-green font-semibold !leading-[1.6] mb-2 md:mb-3 lg:mb-4">
                   {{ block.settings.title }}
                 </h6>
               {% endif %}
