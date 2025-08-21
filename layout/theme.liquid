@@ -6,6 +6,7 @@
 
     {% # Load and preload the critical CSS %}
     {{ 'output.css' | asset_url | stylesheet_tag }}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
 
     {{ 'swiper-bundle-min.css' | asset_url | stylesheet_tag }}
 
