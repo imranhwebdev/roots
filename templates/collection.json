@@ -62,11 +62,30 @@
         "heading": "Why Choose Roots?",
         "subheading": "Encourages natural volume, supporting thicker, healthier hair growth."
       }
+    },
+    "join_roots_D7GAEa": {
+      "type": "join-roots",
+      "name": "Subscribe Section",
+      "settings": {
+        "title": "Join the Roots Family",
+        "description": "Be the first to know about exclusive offers, self-care tips, and new launches.",
+        "enable_newsletter": true,
+        "email_placeholder": "Enter your email address",
+        "success_message": "Thank you for subscribing! You'll hear from us soon.",
+        "button_text": "Subscribe Now",
+        "button_link": "",
+        "show_arrow": false,
+        "background_image": "shopify://shop_images/join.png",
+        "card_bg_color": "#1E6C44",
+        "title_color": "#FFFFFF",
+        "description_color": "#F5F5F5"
+      }
     }
   },
   "order": [
     "banner",
     "main",
-    "why_choose_RWdhne"
+    "why_choose_RWdhne",
+    "join_roots_D7GAEa"
   ]
 }
