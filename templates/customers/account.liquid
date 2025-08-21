@@ -1,12 +1,5 @@
-{% layout none %}
-
 <section class="customer-account">
-  <!-- Header -->
-  <div class="bg-green-800 text-center text-white py-8">
-    <h1 class="text-3xl font-bold mb-2">My Account</h1>
-    <p>Manage your details, track orders, and enjoy a seamless shopping experience.</p>
-  </div>
-
+  {%- render 'account-banner' -%}
   <div class="flex flex-col md:flex-row md:flex-nowrap flex-wrap  xl:w-11/12 mx-auto  gap-6 px-6 justify-between ga-5 py-10 md:py-16 lg:py-20 xl:py-25">
     <!-- Sidebar Tabs -->
     <aside class="w-full md:w-4/12 xl:w-4/12">
@@ -470,14 +463,6 @@
             <button type="submit" class="btn">Save Address</button>
           </div>
         </form>
-      </div>
-
-      <!-- Payment -->
-      <div class="tab-content hidden" id="payment">
-        <h2 class="text-xl font-semibold mb-4">Payment Methods</h2>
-        <p>
-          Shopify doesn’t allow storing card details directly. You can manage saved payment methods via your checkout.
-        </p>
       </div>
 
       <!-- Password -->

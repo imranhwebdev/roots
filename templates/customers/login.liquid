@@ -1,135 +1,101 @@
 <div class="login-page grid grid-cols-1 md:grid-cols-2 bg-[#1E6C44] min-h-screen">
   <div class="max-h-screen overflow-auto py-12">
     <div class="w-full px-5 mx-auto max-w-164">
-      <!-- Logo -->
-      <a href="{{ routes.root_url }}" class="w-31.5 mb-7.5 block">
-        <img src="/assets/login-icon.png" class="size-full object-center" alt="Login Icon">
+      <a href="{{ routes.root_url }}" class="w-31.5 mb-7.5 md:mb-9 block lg:mb-11 xl:mb-12.5">
+        <img src="/assets/login-icon.png" class="size-full object-center" alt="login">
       </a>
 
-      <!-- Login Form -->
+      <p class="text-white text-2xl lg:text-3xl xl:text-[32px] font-medium !leading-[1.25] font-poppins mb-1.4 lg:mb-3">
+        Sign In
+      </p>
+      <p class="text-[#B7D6C6] text-base md:text-lg xl:text-xl !leading-[1.6]">
+        Please fill your detail to access your account.
+      </p>
+
+      <!-- ✅ Dynamic Shopify Login Form -->
       {% form 'customer_login' %}
         {{ form.errors | default_errors }}
-
-        <p class="text-white text-2xl lg:text-3xl font-medium font-poppins mb-2">Sign In</p>
-        <p class="text-[#B7D6C6] mb-6">Please fill your detail to access your account.</p>
-
-        <div class="mb-4">
-          <label class="block text-white mb-2">Email*</label>
+        <div class="w-full mb-4 lg:mb-5">
           <input
             type="email"
             name="customer[email]"
-            placeholder="Enter Email"
-            class="w-full text-lg text-[#B7D6C6] border border-[#B7D6C6] bg-[#2A7A51] py-4 px-5 rounded-lg"
+            id="CustomerEmail"
+            autocomplete="email"
+            placeholder="Email"
+            class="w-full p-4 rounded-lg border border-gray-300"
             required
           >
         </div>
 
-        <div class="mb-4">
-          {%- render 'password-input', variable: value -%}
-        </div>
-
-        <div class="flex items-center justify-between mb-4">
-          <label class="flex items-center gap-2 text-white">
-            <input type="checkbox" name="remember" class="hidden peer">
-            <span class="w-[22px] h-[22px] border border-white bg-[#1E6C44] peer-checked:bg-white rounded-sm flex items-center justify-center">
-              <svg
-                class="w-4 h-4 text-white hidden peer-checked:block"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="3"
-                viewBox="0 0 24 24"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
-            </span>
-            Remember me
-          </label>
-          <a href="{{ routes.account_recover_url }}" class="underline text-white">Forgot Password?</a>
-        </div>
-
-        <button type="submit" class="bg-[#FFC801] text-[#1F1904] w-full py-4 rounded-lg font-medium">Sign In</button>
-      {% endform %}
-
-      <!-- Forgot Password Form -->
-      {% form 'recover_customer_password' %}
-        {{ form.errors | default_errors }}
-        {{ form.posted_successfully? | default_success }}
-
-        <p class="text-white text-2xl lg:text-3xl font-medium font-poppins mb-2 mt-10">Forgot Password?</p>
-        <p class="text-[#B7D6C6] mb-6">We'll send you reset instructions.</p>
-
-        <div class="mb-4">
-          <label class="block text-white mb-2">Email*</label>
-          <input
-            type="email"
-            name="email"
-            placeholder="Enter Email"
-            class="w-full text-lg text-[#B7D6C6] border border-[#B7D6C6] bg-[#2A7A51] py-4 px-5 rounded-lg"
-            required
-          >
-        </div>
-
-        <button type="submit" class="bg-[#FFC801] text-[#1F1904] w-full py-4 rounded-lg font-medium">Submit</button>
-      {% endform %}
-
-      <!-- Reset Password Form -->
-      {% if reset_password_token %}
-        {% form 'reset_customer_password' %}
-          {{ form.errors | default_errors }}
-
-          <p class="text-white text-2xl lg:text-3xl font-medium font-poppins mb-2 mt-10">Set New Password</p>
-          <p class="text-[#B7D6C6] mb-6">Must be at least 8 characters</p>
-
-          <div class="mb-4">
-            <label class="block text-white mb-2">New Password*</label>
+        <div class="w-full mb-4 lg:mb-5">
+          <div class="relative z-1 mb-3">
             <input
               type="password"
               name="customer[password]"
-              placeholder="Enter New Password"
-              class="w-full text-lg text-[#B7D6C6] border border-[#B7D6C6] bg-[#2A7A51] py-4 px-5 rounded-lg"
+              id="CustomerPassword"
+              autocomplete="current-password"
+              placeholder="Password"
+              class="w-full p-4 rounded-lg border border-gray-300"
               required
             >
           </div>
-
-          <div class="mb-4">
-            <label class="block text-white mb-2">Confirm Password*</label>
-            <input
-              type="password"
-              name="customer[password_confirmation]"
-              placeholder="Confirm Password"
-              class="w-full text-lg text-[#B7D6C6] border border-[#B7D6C6] bg-[#2A7A51] py-4 px-5 rounded-lg"
-              required
-            >
+          <div class="flex items-center justify-between">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" class="hidden peer">
+              <span class="w-[22px] h-[22px] border border-white bg-[#1E6C44] p-1 peer-checked:bg-white rounded-sm flex items-center justify-center">
+                <svg
+                  class="w-4 h-4 text-white hidden peer-checked:block"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  viewBox="0 0 24 24"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </span>
+              <p class="text-white text-base md:text-lg lg:text-xl font-poppins">Remember me</p>
+            </label>
+            <a href="{{ routes.account_recover_url }}" class="text-white text-sm md:text-base lg:text-lg underline">
+              Forgot Password?
+            </a>
           </div>
+        </div>
 
-          <button type="submit" class="bg-[#FFC801] text-[#1F1904] w-full py-4 rounded-lg font-medium">
-            Reset Password
+        <div class="w-full mb-4 lg:mb-5">
+          <button
+            type="submit"
+            class="text-[#1F1904] text-base md:text-lg lg:text-xl py-4 lg:py-5 w-full cursor-pointer font-medium font-poppins text-center px-5 rounded-lg bg-[#FFC801]"
+          >
+            Sign In
           </button>
-        {% endform %}
-      {% endif %}
+        </div>
+      {% endform %}
+      <!-- ✅ End Shopify Login Form -->
 
-      <!-- Signup Link -->
-      <p class="text-white mt-8 text-center">
-        Don't have an account?
-        <a href="{{ routes.account_register_url }}" class="text-[#FFC801] underline">Sign Up</a>
+      <div class="relative z-1 mb-6 lg:mb-8 xl:mb-10">
+        <div class="h-[1px] w-[35%] 2xl:w-[40%] bg-[#B7D6C6] absolute left-0 top-1/2 -translate-y-1/2"></div>
+        <div class="h-[1px] w-[35%] 2xl:w-[40%] bg-[#B7D6C6] absolute right-0 top-1/2 -translate-y-1/2"></div>
+        <p class="text-white text-base md:text-lg lg:text-xl font-medium font-poppins text-center">
+          Sign In with google
+        </p>
+      </div>
+
+      {% render 'sign-in-google-button' %}
+
+      <p class="text-white text-base md:text-lg lg:text-xl mt-10 lg:mt-12.5 text-center">
+        Don't have an account? <a href="{{ routes.account_register_url }}" class="text-[#FFC801] underline">Sign Up r</a>
       </p>
     </div>
   </div>
 
-  <!-- Right Image -->
   <div class="hidden md:flex bg-[#FFC801] justify-end py-13 px-10 h-screen">
-    <img class="w-full object-contain h-full" src="/assets/login-img.png" alt="Login Image">
+    <img class="w-full object-contain h-full" src="/assets/login-img.png" alt="login">
   </div>
 </div>
 
-<!-- Password Toggle JS -->
-<script>
-  const togglePassword = document.getElementById('togglePassword');
-  const passwordInput = document.getElementById('passwordInput');
-  if (togglePassword && passwordInput) {
-    togglePassword.addEventListener('click', () => {
-      const isPassword = passwordInput.type === 'password';
-      passwordInput.type = isPassword ? 'text' : 'password';
-    });
-  }
-</script>
+<!-- Redirect to homepage after login -->
+{% if customer %}
+  <script>
+    window.location.href = '/';
+  </script>
+{% endif %}
