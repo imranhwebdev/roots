@@ -53,22 +53,34 @@
     <div class="w-full md:w-8/12 xl:w-7/12">
       <!-- Personal Information -->
       <div class="tab-content" id="info">
+        <!-- Profile Picture Section -->
         <div class="mb-5 md:mb-7 lg:mb-8 xl:mb-10 w-30 xl:w-40 h-30 xl:h-40 2xl:mb-11.5 relative z-1">
           <img
-            src="https://i.pravatar.cc/100"
+            id="profileImage"
+            src="{% if customer.metafields.custom.profile_image %}{{ customer.metafields.custom.profile_image | img_url: '200x200' }}{% else %}https://i.pravatar.cc/200?seed={{ customer.id }}{% endif %}"
             class="size-full rounded-xl lg:rounded-[18px] object-cover"
-            width="100"
-            height="100"
+            width="200"
+            height="200"
             alt="Profile"
           >
-          <a href="#"
-            ><img
+          <label
+            for="profileImageInput"
+            class="absolute -bottom-1 -right-1 z-2 size-9 md:size-10 lg:size-11 cursor-pointer"
+          >
+            <img
               src="/assets/edit-icon.png"
-              class="absolute -bottom-1 -right-1 z-2 size-9 md:size-10 lg:size-11"
+              class="size-full"
               width="36"
               height="36"
-              alt="Edit"
-          ></a>
+              alt="Edit Profile"
+            >
+          </label>
+          <input
+            type="file"
+            id="profileImageInput"
+            accept="image/*"
+            class="hidden"
+          >
         </div>
 
         {% form 'customer' %}
@@ -94,6 +106,7 @@
                 placeholder="First Name"
                 type="text"
                 value="{{ customer.first_name }}"
+                required
                 class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
               >
             </div>
@@ -106,6 +119,7 @@
                 placeholder="Last Name"
                 type="text"
                 value="{{ customer.last_name }}"
+                required
                 class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
               >
             </div>
@@ -116,6 +130,7 @@
                 placeholder="example@gmail.com"
                 type="email"
                 value="{{ customer.email }}"
+                required
                 class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
               >
             </div>
@@ -123,17 +138,84 @@
               <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Phone*</label>
               <input
                 name="customer[phone]"
-                placeholder="+0123-456----"
+                id="phoneInput"
+                placeholder="+1234567890"
                 type="tel"
-                value="{{ customer.phone }}"
+                value="{{ customer.phone | default: '' }}"
                 class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
               >
             </div>
+            <div class="col-span-2 relative z-1">
+              <span class="block w-3.5 h-2 rounded-full absolute right-5 lg:right-6 bottom-7">
+                <img src="/assets/arrow-down.svg" class="size-full" width="14" height="8" alt="Arrow">
+              </span>
+              <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Gender</label>
+              <select
+                name="customer[note][gender]"
+                id="genderSelect"
+                class="w-full border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 appearance-none rounded-lg text-[#797375] text-lg lg:text-xl !leading-[1.2] font-poppins"
+              >
+                <option value="">Select Gender</option>
+                <option
+                  value="Male"
+                  {% if customer.tags contains 'gender_male' or customer.note contains 'gender:Male' %}
+                    selected
+                  {% endif %}
+                >
+                  Male
+                </option>
+                <option
+                  value="Female"
+                  {% if customer.tags contains 'gender_female' or customer.note contains 'gender:Female' %}
+                    selected
+                  {% endif %}
+                >
+                  Female
+                </option>
+                <option
+                  value="Other"
+                  {% if customer.tags contains 'gender_other' or customer.note contains 'gender:Other' %}
+                    selected
+                  {% endif %}
+                >
+                  Other
+                </option>
+                <option
+                  value="Prefer not to say"
+                  {% if customer.tags contains 'gender_prefer_not_to_say'
+                    or customer.note contains 'gender:Prefer not to say'
+                  %}
+                    selected
+                  {% endif %}
+                >
+                  Prefer not to say
+                </option>
+              </select>
+            </div>
             <div class="col-span-2">
-              <button type="submit" class="btn">Update Changes</button>
+              <button type="submit" class="btn" id="updateBtn">
+                <span class="btn-text">Update Changes</span>
+                <span class="btn-loading hidden">
+                  <svg
+                    class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Updating...
+                </span>
+              </button>
             </div>
           </div>
         {% endform %}
+
+        <!-- Separate form for profile image upload -->
+        <form id="profileImageForm" style="display: none;" enctype="multipart/form-data">
+          <input type="file" name="profile_image" id="hiddenImageInput" accept="image/*">
+        </form>
       </div>
 
       <!-- Orders -->
@@ -425,7 +507,6 @@
   </div>
 </section>
 
-<!-- Tab Switching Script -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const tabButtons = document.querySelectorAll('.tab-btn');
