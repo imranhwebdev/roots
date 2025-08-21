@@ -1,48 +1,76 @@
 {% form 'customer' %}
   {% if form.errors %}
-    <div class="mb-4 p-4 bg-red-100 text-red-700 rounded">
-      {{ form.errors | default_errors }}
+    <div class="mb-4 p-4 bg-red-100 text-red-700 rounded animate-fadeIn" id="errorAlert">
+      <div class="flex items-center">
+        <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+        </svg>
+        <span>{{ form.errors | default_errors }}</span>
+      </div>
     </div>
   {% endif %}
 
   {% if form.posted_successfully? %}
-    <div class="mb-4 p-4 bg-green-100 text-green-700 rounded">Your information has been updated successfully.</div>
+    <div class="mb-4 p-4 bg-green-100 text-green-700 rounded animate-fadeIn" id="successAlert">
+      <div class="flex items-center">
+        <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+        </svg>
+        <span>Your information has been updated successfully.</span>
+      </div>
+    </div>
   {% endif %}
 
   <div class="grid grid-cols-2 gap-4 lg:gap-5 xl:gap-6">
+    <!-- First Name -->
     <div class="col-span-2 lg:col-span-1">
       <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">First Name*</label>
       <input
         name="customer[first_name]"
+        id="firstName"
         placeholder="First Name"
         type="text"
         value="{{ customer.first_name }}"
         required
-        class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+        class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg transition-all duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
+        data-original-value="{{ customer.first_name }}"
       >
+      <div class="error-message text-red-500 text-sm mt-1 hidden" data-field="firstName"></div>
     </div>
+
+    <!-- Last Name -->
     <div class="col-span-2 lg:col-span-1">
       <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Last Name*</label>
       <input
         name="customer[last_name]"
+        id="lastName"
         placeholder="Last Name"
         type="text"
         value="{{ customer.last_name }}"
         required
-        class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+        class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg transition-all duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
+        data-original-value="{{ customer.last_name }}"
       >
+      <div class="error-message text-red-500 text-sm mt-1 hidden" data-field="lastName"></div>
     </div>
+
+    <!-- Email -->
     <div class="col-span-2">
       <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Email*</label>
       <input
         name="customer[email]"
+        id="email"
         placeholder="example@gmail.com"
         type="email"
         value="{{ customer.email }}"
         required
-        class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+        class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg transition-all duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
+        data-original-value="{{ customer.email }}"
       >
+      <div class="error-message text-red-500 text-sm mt-1 hidden" data-field="email"></div>
     </div>
+
+    <!-- Phone -->
     <div class="col-span-2">
       <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Phone*</label>
       <input
@@ -51,18 +79,26 @@
         placeholder="+1234567890"
         type="tel"
         value="{{ customer.phone | default: '' }}"
-        class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
+        class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg transition-all duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
+        data-original-value="{{ customer.phone | default: '' }}"
       >
+      <div class="error-message text-red-500 text-sm mt-1 hidden" data-field="phoneInput"></div>
     </div>
+
+    <!-- Gender -->
     <div class="col-span-2 relative z-1">
-      <span class="block w-3.5 h-2 rounded-full absolute right-5 lg:right-6 bottom-7">
-        <img src="/assets/arrow-down.svg" class="size-full" width="14" height="8" alt="Arrow">
+      <span
+        class="block w-3.5 h-2 rounded-full absolute right-5 lg:right-6 bottom-7 pointer-events-none transition-transform duration-200"
+        id="genderArrow"
+      >
+        <img src="{{'arrow-down.svg' |  asset_url}}" class="size-full" width="14" height="8" alt="Arrow">
       </span>
       <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Gender</label>
       <select
         name="customer[note][gender]"
         id="genderSelect"
-        class="w-full border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 appearance-none rounded-lg text-[#797375] text-lg lg:text-xl !leading-[1.2] font-poppins"
+        class="w-full border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 appearance-none rounded-lg text-[#797375] text-lg lg:text-xl !leading-[1.2] font-poppins transition-all duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none cursor-pointer"
+        data-original-value="{% if customer.tags contains 'gender_male' or customer.note contains 'gender:Male' %}Male{% elsif customer.tags contains 'gender_female' or customer.note contains 'gender:Female' %}Female{% elsif customer.tags contains 'gender_other' or customer.note contains 'gender:Other' %}Other{% elsif customer.tags contains 'gender_prefer_not_to_say' or customer.note contains 'gender:Prefer not to say' %}Prefer not to say{% endif %}"
       >
         <option value="">Select Gender</option>
         <option
@@ -101,8 +137,14 @@
         </option>
       </select>
     </div>
+
+    <!-- Submit Button -->
     <div class="col-span-2">
-      <button type="submit" class="btn" id="updateBtn">
+      <button
+        type="submit"
+        class="btn transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+        id="updateBtn"
+      >
         <span class="btn-text">Update Changes</span>
         <span class="btn-loading hidden">
           <svg
@@ -120,3 +162,282 @@
     </div>
   </div>
 {% endform %}
+
+<style>
+  .animate-fadeIn {
+    animation: fadeIn 0.5s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .error-field {
+    border-color: #ef4444 !important;
+    background-color: #fef2f2 !important;
+  }
+
+  .success-field {
+    border-color: #10b981 !important;
+    background-color: #f0fdf4 !important;
+  }
+
+  .field-changed {
+    border-color: #f59e0b !important;
+    background-color: #fffbeb !important;
+  }
+
+  #genderSelect:focus + #genderArrow {
+    transform: rotate(180deg);
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form[action*="customer"]');
+    const updateBtn = document.getElementById('updateBtn');
+    const btnText = updateBtn.querySelector('.btn-text');
+    const btnLoading = updateBtn.querySelector('.btn-loading');
+
+    // All form inputs
+    const firstName = document.getElementById('firstName');
+    const lastName = document.getElementById('lastName');
+    const email = document.getElementById('email');
+    const phoneInput = document.getElementById('phoneInput');
+    const genderSelect = document.getElementById('genderSelect');
+    const genderArrow = document.getElementById('genderArrow');
+
+    // Store original values
+    const originalValues = {
+      firstName: firstName.value,
+      lastName: lastName.value,
+      email: email.value,
+      phoneInput: phoneInput.value,
+      genderSelect: genderSelect.value,
+    };
+
+    // Validation functions
+    function validateField(field, value) {
+      const fieldName = field.id;
+      const errorDiv = document.querySelector(`[data-field="${fieldName}"]`);
+      let isValid = true;
+      let errorMessage = '';
+
+      // Remove previous styling
+      field.classList.remove('error-field', 'success-field');
+
+      switch (fieldName) {
+        case 'firstName':
+        case 'lastName':
+          if (!value.trim()) {
+            isValid = false;
+            errorMessage = 'This field is required';
+          } else if (value.trim().length < 2) {
+            isValid = false;
+            errorMessage = 'Must be at least 2 characters';
+          }
+          break;
+
+        case 'email':
+          if (!value.trim()) {
+            isValid = false;
+            errorMessage = 'Email is required';
+          } else {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(value)) {
+              isValid = false;
+              errorMessage = 'Please enter a valid email address';
+            }
+          }
+          break;
+
+        case 'phoneInput':
+          if (value.trim()) {
+            const phoneRegex = /^[\+]?[1-9][\d\s\-\(\)]{7,15}$/;
+            if (!phoneRegex.test(value.replace(/\s/g, ''))) {
+              isValid = false;
+              errorMessage = 'Please enter a valid phone number';
+            }
+          }
+          break;
+      }
+
+      // Show/hide error message
+      if (errorDiv) {
+        if (!isValid) {
+          errorDiv.textContent = errorMessage;
+          errorDiv.classList.remove('hidden');
+          field.classList.add('error-field');
+        } else {
+          errorDiv.classList.add('hidden');
+          field.classList.add('success-field');
+        }
+      }
+
+      return isValid;
+    }
+
+    // Check if form has changes
+    function checkForChanges() {
+      const hasChanges =
+        firstName.value !== originalValues.firstName ||
+        lastName.value !== originalValues.lastName ||
+        email.value !== originalValues.email ||
+        phoneInput.value !== originalValues.phoneInput ||
+        genderSelect.value !== originalValues.genderSelect;
+
+      // Update button state
+      if (hasChanges) {
+        updateBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+        updateBtn.classList.remove('bg-gray-400');
+      } else {
+        updateBtn.classList.add('bg-gray-400');
+        updateBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+      }
+
+      return hasChanges;
+    }
+
+    // Highlight changed fields
+    function highlightChangedFields() {
+      [firstName, lastName, email, phoneInput, genderSelect].forEach((field) => {
+        const fieldName = field.id;
+        field.classList.remove('field-changed');
+
+        if (field.value !== originalValues[fieldName]) {
+          field.classList.add('field-changed');
+        }
+      });
+    }
+
+    // Real-time validation and change detection
+    [firstName, lastName, email, phoneInput].forEach((field) => {
+      field.addEventListener('input', function () {
+        validateField(this, this.value);
+        checkForChanges();
+        highlightChangedFields();
+      });
+
+      field.addEventListener('blur', function () {
+        validateField(this, this.value);
+      });
+
+      field.addEventListener('focus', function () {
+        this.classList.remove('success-field', 'error-field');
+      });
+    });
+
+    // Gender select change
+    genderSelect.addEventListener('change', function () {
+      checkForChanges();
+      highlightChangedFields();
+    });
+
+    // Gender select focus effects
+    genderSelect.addEventListener('focus', function () {
+      genderArrow.style.transform = 'rotate(180deg)';
+    });
+
+    genderSelect.addEventListener('blur', function () {
+      genderArrow.style.transform = 'rotate(0deg)';
+    });
+
+    // Phone number formatting
+    phoneInput.addEventListener('input', function () {
+      let value = this.value.replace(/\D/g, '');
+      if (value.startsWith('1')) {
+        value = value.substring(1);
+      }
+
+      if (value.length >= 6) {
+        value = `+1 (${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6, 10)}`;
+      } else if (value.length >= 3) {
+        value = `+1 (${value.slice(0, 3)}) ${value.slice(3)}`;
+      } else if (value.length > 0) {
+        value = `+1 (${value}`;
+      }
+
+      this.value = value;
+    });
+
+    // Form submission
+    form.addEventListener('submit', function (e) {
+      let isFormValid = true;
+
+      // Validate all required fields
+      [firstName, lastName, email].forEach((field) => {
+        if (!validateField(field, field.value)) {
+          isFormValid = false;
+        }
+      });
+
+      // Validate phone if filled
+      if (phoneInput.value.trim()) {
+        if (!validateField(phoneInput, phoneInput.value)) {
+          isFormValid = false;
+        }
+      }
+
+      if (!isFormValid) {
+        e.preventDefault();
+        return;
+      }
+
+      // Show loading state
+      updateBtn.disabled = true;
+      btnText.classList.add('hidden');
+      btnLoading.classList.remove('hidden');
+      updateBtn.classList.add('opacity-75');
+    });
+
+    // Auto-hide alerts after 5 seconds
+    const alerts = document.querySelectorAll('#errorAlert, #successAlert');
+    alerts.forEach((alert) => {
+      setTimeout(() => {
+        alert.style.transition = 'opacity 0.3s ease';
+        alert.style.opacity = '0';
+        setTimeout(() => {
+          if (alert.parentNode) {
+            alert.parentNode.removeChild(alert);
+          }
+        }, 300);
+      }, 5000);
+    });
+
+    // Initialize form state
+    checkForChanges();
+
+    // Add smooth animations
+    const inputs = document.querySelectorAll('input, select');
+    inputs.forEach((input) => {
+      input.addEventListener('focus', function () {
+        this.style.transform = 'scale(1.02)';
+      });
+
+      input.addEventListener('blur', function () {
+        this.style.transform = 'scale(1)';
+      });
+    });
+
+    // Visual feedback for typing
+    [firstName, lastName, email, phoneInput].forEach((input) => {
+      let typingTimer;
+
+      input.addEventListener('input', function () {
+        clearTimeout(typingTimer);
+        this.classList.add('bg-blue-50');
+
+        typingTimer = setTimeout(() => {
+          this.classList.remove('bg-blue-50');
+        }, 500);
+      });
+    });
+  });
+</script>
