@@ -1,152 +1,135 @@
 <div class="login-page grid grid-cols-1 md:grid-cols-2 bg-[#1E6C44] min-h-screen">
   <div class="max-h-screen overflow-auto py-12">
     <div class="w-full px-5 mx-auto max-w-164">
-      <a href="{{routes.root_url}}" class="w-31.5 mb-7.5 md:mb-9 block lg:mb-11 xl:mb-12.5">
-        <img src="/assets/login-icon.png" class="size-full object-center" alt="" width="" height="">
+      <!-- Logo -->
+      <a href="{{ routes.root_url }}" class="w-31.5 mb-7.5 block">
+        <img src="/assets/login-icon.png" class="size-full object-center" alt="Login Icon">
       </a>
-      <p class="text-white text-2xl lg:text-3xl xl:text-[32px] font-medium !leading-[1.25] font-poppins mb-1.4 lg:mb-3">
-        Sign In
-      </p>
-      <p class="text-[#B7D6C6] text-base md:text-lg xl:text-xl !leading-[1.6]">
-        Please fill your detail to access your account.
-      </p>
-      <form method="post" action="#" class=" my-6 lg:my-8 xl:my-10">
-        <div class="w-full mb-4 lg:mb-5">
-          <label class="block text-white text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25] font-poppins"
-            >Email*</label
-          >
+
+      <!-- Login Form -->
+      {% form 'customer_login' %}
+        {{ form.errors | default_errors }}
+
+        <p class="text-white text-2xl lg:text-3xl font-medium font-poppins mb-2">Sign In</p>
+        <p class="text-[#B7D6C6] mb-6">Please fill your detail to access your account.</p>
+
+        <div class="mb-4">
+          <label class="block text-white mb-2">Email*</label>
           <input
-            placeholder="Enter Email Address"
             type="email"
-            class="w-full text-base md:text-lg lg:text-xl focus:outline-0 !leading-[1.2] text-[#B7D6C6] placeholder:text-[#B7D6C6] border font-poppins border-[#B7D6C6] bg-[#2A7A51] py-4 lg:py-5 px-5 lg:px-6 rounded-lg "
+            name="customer[email]"
+            placeholder="Enter Email"
+            class="w-full text-lg text-[#B7D6C6] border border-[#B7D6C6] bg-[#2A7A51] py-4 px-5 rounded-lg"
+            required
           >
         </div>
-        <div class="w-full mb-4 lg:mb-5 ">
-          
-          <div class="relative z-1 mb-3">
-          
-          {%  render 'password-input' %}
-          </div>
-          <div class="flex items-center justify-between">
-            <div class="flex items-center  gap-1.5 lg:gap-2">
-              <label class="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" class="hidden peer">
-                <span class="w-[22px] h-[22px] border border-white bg-[#1E6C44] p-1 peer-checked:bg-white rounded-sm flex items-center justify-center">
-                  <!-- check icon -->
-                  <svg
-                    class="w-4 h-4 text-white hidden peer-checked:block"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="3"
-                    viewBox="0 0 24 24"
-                  >
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                </span>
-                <p class="text-white text-base md:text-lg lg:text-xl font-poppins !leading-[1.2]">Remember me</p>
-              </label>
-            </div>
-            <a
-              href="{{routes.account_recover_url}}"
-              class="text-white text-sm md:text-base lg:text-lg !leading-[1.2] font-poppins !underline"
-              >Forgot Password?</a
+
+        <div class="mb-4">
+          {%- render 'password-input', variable: value -%}
+        </div>
+
+        <div class="flex items-center justify-between mb-4">
+          <label class="flex items-center gap-2 text-white">
+            <input type="checkbox" name="remember" class="hidden peer">
+            <span class="w-[22px] h-[22px] border border-white bg-[#1E6C44] peer-checked:bg-white rounded-sm flex items-center justify-center">
+              <svg
+                class="w-4 h-4 text-white hidden peer-checked:block"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </span>
+            Remember me
+          </label>
+          <a href="{{ routes.account_recover_url }}" class="underline text-white">Forgot Password?</a>
+        </div>
+
+        <button type="submit" class="bg-[#FFC801] text-[#1F1904] w-full py-4 rounded-lg font-medium">Sign In</button>
+      {% endform %}
+
+      <!-- Forgot Password Form -->
+      {% form 'recover_customer_password' %}
+        {{ form.errors | default_errors }}
+        {{ form.posted_successfully? | default_success }}
+
+        <p class="text-white text-2xl lg:text-3xl font-medium font-poppins mb-2 mt-10">Forgot Password?</p>
+        <p class="text-[#B7D6C6] mb-6">We'll send you reset instructions.</p>
+
+        <div class="mb-4">
+          <label class="block text-white mb-2">Email*</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter Email"
+            class="w-full text-lg text-[#B7D6C6] border border-[#B7D6C6] bg-[#2A7A51] py-4 px-5 rounded-lg"
+            required
+          >
+        </div>
+
+        <button type="submit" class="bg-[#FFC801] text-[#1F1904] w-full py-4 rounded-lg font-medium">Submit</button>
+      {% endform %}
+
+      <!-- Reset Password Form -->
+      {% if reset_password_token %}
+        {% form 'reset_customer_password' %}
+          {{ form.errors | default_errors }}
+
+          <p class="text-white text-2xl lg:text-3xl font-medium font-poppins mb-2 mt-10">Set New Password</p>
+          <p class="text-[#B7D6C6] mb-6">Must be at least 8 characters</p>
+
+          <div class="mb-4">
+            <label class="block text-white mb-2">New Password*</label>
+            <input
+              type="password"
+              name="customer[password]"
+              placeholder="Enter New Password"
+              class="w-full text-lg text-[#B7D6C6] border border-[#B7D6C6] bg-[#2A7A51] py-4 px-5 rounded-lg"
+              required
             >
           </div>
-        </div>
-        <div class="w-full mb-4 lg:mb-5">
-          <button
-            type="submit"
-            class="text-[#1F1904] text-base md:text-lg lg:text-xl py-4 lg:py-5 w-full cursor-pointer !leading-[1.2] font-medium font-poppins text-center px-5 rounded-lg bg-[#FFC801]"
-          >
-            Sign In
-          </button>
-        </div>
-      </form>
 
-      <div class="relative z-1 mb-6 lg:mb-8 xl:mb -10">
-        <div class="h-[1px] w-[35%] 2xl:w-[40%] bg-[#B7D6C6] absolute left-0 top-1/2 -translate-y-1/2 "></div>
-        <div class="h-[1px] w-[35%] 2xl:w-[40%] bg-[#B7D6C6] absolute right-0 top-1/2 -translate-y-1/2 "></div>
-        <p class=" text-white text-base md:text-lg lg:text-xl  !leading-[1.2] font-medium font-poppins text-center">
-          Sign In with
-        </p>
-      </div>
-      <button class="text-[#1E6C44] text-base md:text-lg lg:text-xl py-4 lg:py-5 w-full flex items-center justify-center gap-1.5 lg:gap-2 cursor-pointer !leading-[1.2] font-medium font-poppins text-center px-5 rounded-lg bg-white">
-        <span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="!size-4.5 lg:!size-6"
-            width="100%"
-            height="100%"
-            viewBox="0 0 24 25"
-            fill="none"
-          >
-            <g clip-path="url(#clip0_2074_5320)">
-              <path d="M8.36055 1.36805C5.96258 2.19992 3.89457 3.77886 2.46029 5.87292C1.026 7.96699 0.301037 10.4658 0.391883 13.0024C0.482728 15.5389 1.38459 17.9795 2.96501 19.9655C4.54543 21.9516 6.72109 23.3786 9.17243 24.0368C11.1598 24.5496 13.2419 24.5721 15.2399 24.1024C17.0499 23.6959 18.7233 22.8262 20.0962 21.5787C21.5251 20.2406 22.5622 18.5383 23.0962 16.6549C23.6765 14.6068 23.7798 12.4529 23.3981 10.3587H12.2381V14.988H18.7012C18.572 15.7264 18.2952 16.4311 17.8873 17.06C17.4795 17.6889 16.9489 18.229 16.3274 18.648C15.5382 19.1701 14.6485 19.5214 13.7156 19.6793C12.7798 19.8533 11.82 19.8533 10.8843 19.6793C9.93591 19.4832 9.03874 19.0918 8.24993 18.5299C6.98271 17.6329 6.0312 16.3585 5.53118 14.8887C5.02271 13.3913 5.02271 11.7679 5.53118 10.2705C5.8871 9.22095 6.47549 8.2653 7.25243 7.47492C8.14154 6.55382 9.26718 5.89541 10.5058 5.57194C11.7445 5.24846 13.0484 5.27242 14.2743 5.64117C15.232 5.93515 16.1078 6.4488 16.8318 7.14117C17.5606 6.41617 18.2881 5.6893 19.0143 4.96055C19.3893 4.56867 19.7981 4.19555 20.1674 3.7943C19.0622 2.76581 17.765 1.96553 16.3499 1.4393C13.7731 0.503652 10.9536 0.478507 8.36055 1.36805Z" fill="white"/>
-              <path d="M8.3607 1.367C10.9536 0.476861 13.7731 0.501343 16.3501 1.43638C17.7654 1.96619 19.062 2.77033 20.1657 3.80263C19.7907 4.20388 19.3951 4.57888 19.0126 4.96888C18.2851 5.69513 17.5582 6.41888 16.832 7.14013C16.1079 6.44776 15.2321 5.93411 14.2745 5.64013C13.0489 5.27008 11.7451 5.24474 10.5061 5.5669C9.26712 5.88905 8.14079 6.54624 7.2507 7.46638C6.47377 8.25676 5.88538 9.21241 5.52945 10.262L1.64258 7.25263C3.03384 4.49368 5.44273 2.3833 8.3607 1.367Z" fill="#E33629"/>
-              <path d="M0.611401 10.2352C0.820316 9.19977 1.16716 8.19708 1.64265 7.25391L5.52953 10.2708C5.02105 11.7682 5.02105 13.3915 5.52953 14.8889C4.23453 15.8889 2.9389 16.8939 1.64265 17.9039C0.452308 15.5345 0.0892746 12.8348 0.611401 10.2352Z" fill="#F8BD00"/>
-              <path d="M12.2381 10.3555H23.3981C23.7799 12.4497 23.6766 14.6036 23.0963 16.6517C22.5623 18.5351 21.5252 20.2374 20.0963 21.5755C18.8419 20.5967 17.5819 19.6255 16.3275 18.6467C16.9494 18.2272 17.4802 17.6865 17.8881 17.057C18.296 16.4274 18.5726 15.722 18.7013 14.983H12.2381C12.2363 13.4417 12.2381 11.8986 12.2381 10.3555Z" fill="#587DBD"/>
-              <path d="M1.64062 17.9037C2.93687 16.9037 4.2325 15.8987 5.5275 14.8887C6.02851 16.359 6.98138 17.6335 8.25 18.5299C9.04126 19.0892 9.94037 19.4774 10.89 19.6699C11.8257 19.8439 12.7855 19.8439 13.7212 19.6699C14.6542 19.512 15.5439 19.1607 16.3331 18.6387C17.5875 19.6174 18.8475 20.5887 20.1019 21.5674C18.7292 22.8157 17.0558 23.6859 15.2456 24.093C13.2476 24.5627 11.1655 24.5402 9.17812 24.0274C7.60632 23.6077 6.13814 22.8679 4.86562 21.8543C3.51874 20.785 2.41867 19.4374 1.64062 17.9037Z" fill="#319F43"/>
-            </g>
-            <defs>
-              <clipPath id="clip0_2074_5320">
-                <rect width="24" height="24" fill="white" transform="translate(0 0.578125)"/>
-              </clipPath>
-            </defs>
-          </svg>
-        </span>
-        Sign In With Google
-      </button>
-      <p class="text-white text-base md:text-lg lg:text-xl mt-10 lg:mt-12.5 text-center ">
-        Don't have an account? <a href="{{routes.account_register_url}}" class="text-[#FFC801] !underline">Sign Up</a>
+          <div class="mb-4">
+            <label class="block text-white mb-2">Confirm Password*</label>
+            <input
+              type="password"
+              name="customer[password_confirmation]"
+              placeholder="Confirm Password"
+              class="w-full text-lg text-[#B7D6C6] border border-[#B7D6C6] bg-[#2A7A51] py-4 px-5 rounded-lg"
+              required
+            >
+          </div>
+
+          <button type="submit" class="bg-[#FFC801] text-[#1F1904] w-full py-4 rounded-lg font-medium">
+            Reset Password
+          </button>
+        {% endform %}
+      {% endif %}
+
+      <!-- Signup Link -->
+      <p class="text-white mt-8 text-center">
+        Don't have an account?
+        <a href="{{ routes.account_register_url }}" class="text-[#FFC801] underline">Sign Up</a>
       </p>
     </div>
   </div>
+
+  <!-- Right Image -->
   <div class="hidden md:flex bg-[#FFC801] justify-end py-13 px-10 h-screen">
-    <img class="w-full object-contain h-full" src="/assets/login-img.png" alt="" width="100" height="100">
+    <img class="w-full object-contain h-full" src="/assets/login-img.png" alt="Login Image">
   </div>
 </div>
 
-{% comment %} Forgot Password? start--> {% endcomment %}
-{% render 'forgot-password' %}
-{% comment %} Forgot Password? end--> {% endcomment %}
-
-{% comment %} Verify Code start--> {% endcomment %}
-{% render 'verify-code' %}
-{% comment %} Verify Code end--> {% endcomment %}
-
-{% comment %} Set New Password start--> {% endcomment %}
-{% render 'set-new-password' %}
-{% comment %} Set New Password end--> {% endcomment %}
-
-{% comment %} Complete Your Profile start--> {% endcomment %}
-{% render 'complete-profile' %}
-{% comment %} Complete Your Profile end--> {% endcomment %}
-
+<!-- Password Toggle JS -->
 <script>
   const togglePassword = document.getElementById('togglePassword');
   const passwordInput = document.getElementById('passwordInput');
-  const eyeIcon = document.getElementById('eyeIcon');
-
-  togglePassword.addEventListener('click', () => {
-    const isPassword = passwordInput.type === 'password';
-    passwordInput.type = isPassword ? 'text' : 'password';
-
-    // Optional: change eye icon color or style
-    eyeIcon.setAttribute('fill', isPassword ? '#FFD700' : 'white');
-  });
-</script>
-
-{% comment %} login-page JS--> {% endcomment %}
-<script>
-  const togglePassword = document.getElementById('togglePassword2');
-  const passwordInput = document.getElementById('passwordInput2');
-  const eyeIcon = document.getElementById('eyeIcon2');
-
-  togglePassword.addEventListener('click', () => {
-    const isPassword = passwordInput.type === 'password';
-    passwordInput.type = isPassword ? 'text' : 'password';
-
-    // Optional: change eye icon color or style
-    eyeIcon2.setAttribute('fill', isPassword ? '#FFD700' : 'white');
-  });
+  if (togglePassword && passwordInput) {
+    togglePassword.addEventListener('click', () => {
+      const isPassword = passwordInput.type === 'password';
+      passwordInput.type = isPassword ? 'text' : 'password';
+    });
+  }
 </script>
