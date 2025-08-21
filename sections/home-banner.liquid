@@ -115,18 +115,19 @@
 
                 <div class="relative flex items-center justify-center lg:justify-start gap-4 lg:gap-5 z-1 max-w-full lg:max-w-max group mt-7.5">
                   {% if block.settings.button_link != blank and block.settings.button_text != blank %}
-                    <a href="{{ block.settings.button_link }}" class="btn">
+                    <a href="{{ block.settings.button_link }}" class="btn !text-base lg:text-lg xl:!text-xl !py-3 lg:!py-5 !px-5 lg:!px-9">
                       {{ block.settings.button_text }}
                       <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
                           <path d="M13.332 7.5L18.832 13M18.832 13L13.332 18.5M18.832 13L4.16536 13" stroke="#1F1904" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                       </span>
+                      
                     </a>
                   {% endif %}
 
                   {% if block.settings.button_link2 != blank and block.settings.button_text2 != blank %}
-                    <a href="{{ block.settings.button_link2 }}" class="inline-btn">
+                    <a href="{{ block.settings.button_link2 }}" class="inline-btn !text-base lg:text-lg xl:!text-xl !py-3 lg:!py-5 !px-5 lg:!px-9">
                       {{ block.settings.button_text2 }}
                     </a>
                   {% endif %}
