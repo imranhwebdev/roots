@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100..900&display=swap');
 /* Custom Armany Fonts */
 
 
@@ -45,29 +44,6 @@
   max-width: 1648px;
   margin-inline: auto;
   padding-inline: 15px;
-}
-
-/* Global Font Setup */
-body {
-  font-family: var(--font-poppins); /* default */
-}
-
-/* Example usage of Armany */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-armany-bold);
-}
-
-.armany-regular {
-  font-family: var(--font-armany-regular);
-}
-.armany-medium {
-  font-family: var(--font-armany-medium);
-}
-.armany-semibold {
-  font-family: var(--font-armany-semibold);
-}
-.armany-bold {
-  font-family: var(--font-armany-bold);
 }
 
 /* Shopify challenge page */

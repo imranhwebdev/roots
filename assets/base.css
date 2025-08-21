@@ -1,32 +1,38 @@
+@font-face {
+  font-family: "armany-regular";
+  src: url("https://cdn.shopify.com/s/files/1/0773/9739/3656/files/armany-regular.woff2?v=1755797432") format("woff2"),
+       url("https://cdn.shopify.com/s/files/1/0773/9739/3656/files/armany-regular.woff2?v=1755797432") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
-    font-family: 'armany-regular';
-    src: url("{{ 'armany-regular.woff2' | asset_url }}") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: "armany-medium";
+  src: url("https://cdn.shopify.com/s/files/1/0773/9739/3656/files/armany-medium.woff2?v=1755797432") format("woff2"),
+       url("https://cdn.shopify.com/s/files/1/0773/9739/3656/files/armany-medium.woff2?v=1755797432") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "armany-semibold";
+  src: url("https://cdn.shopify.com/s/files/1/0773/9739/3656/files/armany-semibold.woff2?v=1755797432") format("woff2"),
+       url("https://cdn.shopify.com/s/files/1/0773/9739/3656/files/armany-semibold.woff2?v=1755797432") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "armany-bold";
+  src: url("https://cdn.shopify.com/s/files/1/0773/9739/3656/files/armany-bold.woff2?v=1755797432") format("woff2"),
+       url("https://cdn.shopify.com/s/files/1/0773/9739/3656/files/armany-bold.woff2?v=1755797432") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
-@font-face {
-    font-family: 'armany-medium';
-    src: url("{{ 'armany-medium.woff2' | asset_url }}") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100..900&display=swap');
 
-@font-face {
-    font-family: 'armany-semibold';
-    src: url("{{ 'armany-semibold.woff2' | asset_url }}") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'armany-bold';
-    src: url("{{ 'armany-bold.woff2' | asset_url }}") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+body{
+    font-family:  "Poppins", sans-serif;;
 }
