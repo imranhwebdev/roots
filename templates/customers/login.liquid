@@ -1,33 +1,36 @@
 <div class="login-page grid grid-cols-1 md:grid-cols-2 bg-[#1E6C44] min-h-screen">
   <div class="max-h-screen overflow-auto py-12">
     <div class="w-full px-5 mx-auto max-w-164">
-      <a href="{{ routes.root_url }}" class="w-31.5 mb-7.5 md:mb-9 lg:mb-11 xl:mb-12.5 block mx-auto">
+      <a href="{{ routes.root_url }}" class="w-31.5 mb-7.5 md:mb-9 lg:mb-11 xl:mb-12.5 block ">
         <img src="{{ 'login-icon.png' | asset_url }}" width="" height="" class="size-full object-center" alt="">
       </a>
 
-      <p class="text-white text-2xl lg:text-3xl xl:text-[32px] font-medium !leading-[1.25] font-poppins mb-1.4 lg:mb-3">
-        Sign In
-      </p>
-      <p class="text-[#B7D6C6] text-base md:text-lg xl:text-xl !leading-[1.6]">
-        Please fill your detail to access your account.
-      </p>
+      <div class="mb-6 lg:mb-7 xl:mb-8 2xl:mb-10">
+        <p class="text-white text-2xl lg:text-3xl xl:text-[32px] font-medium !leading-[1.25] font-poppins mb-1.4 lg:mb-3">
+          Sign In
+        </p>
+        <p class="text-[#B7D6C6] text-base md:text-lg xl:text-xl !leading-[1.6]">
+          Please fill your detail to access your account.
+        </p>
+      </div>
 
-      <!-- ✅ Dynamic Shopify Login Form -->
       {% form 'customer_login' %}
         {{ form.errors | default_errors }}
         <div class="w-full mb-4 lg:mb-5">
+          <label class="block text-white text-lg lg:text-[22px] !leading-[1.25] mb-2">Email*</label>
           <input
             type="email"
             name="customer[email]"
             id="CustomerEmail"
             autocomplete="email"
             placeholder="Email"
-            class="w-full p-4 rounded-lg border border-gray-300"
+            class="w-full text-base lg:text-xl text-[#B7D6C6] placeholder:text-[#B7D6C6] border border-[#B7D6C6] bg-[#2A7A51] py-4 px-5 rounded-lg focus:outline-none focus:border-[#FFC801]"
             required
           >
         </div>
 
         <div class="w-full mb-4 lg:mb-5">
+            <label class="block text-white text-lg lg:text-[22px] !leading-[1.25] mb-2">Password**</label>
           <div class="relative z-1 mb-3">
             <input
               type="password"
@@ -35,7 +38,7 @@
               id="CustomerPassword"
               autocomplete="current-password"
               placeholder="Password"
-              class="w-full p-4 rounded-lg border border-gray-300"
+              class="w-full text-base lg:text-xl text-[#B7D6C6] placeholder:text-[#B7D6C6] border border-[#B7D6C6] bg-[#2A7A51] py-4 px-5 rounded-lg focus:outline-none focus:border-[#FFC801]"
               required
             >
           </div>
@@ -73,8 +76,8 @@
       <!-- ✅ End Shopify Login Form -->
 
       <div class="relative z-1 mb-6 lg:mb-8 xl:mb-10">
-        <div class="h-[1px] w-[35%] 2xl:w-[40%] bg-[#B7D6C6] absolute left-0 top-1/2 -translate-y-1/2"></div>
-        <div class="h-[1px] w-[35%] 2xl:w-[40%] bg-[#B7D6C6] absolute right-0 top-1/2 -translate-y-1/2"></div>
+        <div class="h-[1px] w-[22%] lg:w-[25%] xl:w-[32%]   bg-[#B7D6C6] absolute left-0 top-1/2 -translate-y-1/2"></div>
+        <div class="h-[1px] w-[22%] lg:w-[25%] xl:w-[32%]   bg-[#B7D6C6] absolute right-0 top-1/2 -translate-y-1/2"></div>
         <p class="text-white text-base md:text-lg lg:text-xl font-medium font-poppins text-center">
           Sign In with google
         </p>

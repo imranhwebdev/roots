@@ -16,29 +16,29 @@
       {% form 'create_customer', id: 'signup-form' %}
         <div class="flex flex-col lg:flex-row gap-4 lg:gap-5 lg:mb-5 mt-5 lg:mt-8">
           <div class="w-full mb-4 md:mb-0">
-            <label class="block text-white text-lg mb-2 font-medium font-poppins">First Name*</label>
+            <label class="block text-white text-lg lg:text-[22px] !leading-[1.25] mb-2  ">First Name*</label>
             <input
               type="text"
               name="customer[first_name]"
               placeholder="Enter First Name"
               required
-              class="w-full text-base text-[#B7D6C6] placeholder:text-[#B7D6C6] border border-[#B7D6C6] bg-[#2A7A51] py-4 px-5 rounded-lg focus:outline-none focus:border-[#FFC801]"
+              class="w-full text-base lg:text-xl text-[#B7D6C6] placeholder:text-[#B7D6C6] border border-[#B7D6C6] bg-[#2A7A51] py-4 px-5 rounded-lg focus:outline-none focus:border-[#FFC801]"
             >
           </div>
           <div class="w-full mb-4 lg:mb-0">
-            <label class="block text-white text-lg mb-2 font-medium font-poppins">Last Name*</label>
+            <label class="block text-white text-lg lg:text-[22px] !leading-[1.25] mb-2  ">Last Name*</label>
             <input
               type="text"
               name="customer[last_name]"
               placeholder="Enter Last Name"
               required
-              class="w-full text-base text-[#B7D6C6] placeholder:text-[#B7D6C6] border border-[#B7D6C6] bg-[#2A7A51] py-4 px-5 rounded-lg focus:outline-none focus:border-[#FFC801]"
+              class="w-full text-base lg:text-xl text-[#B7D6C6] placeholder:text-[#B7D6C6] border border-[#B7D6C6] bg-[#2A7A51] py-4 px-5 rounded-lg focus:outline-none focus:border-[#FFC801]"
             >
           </div>
         </div>
 
         <div class="w-full mb-4 lg:mb-5">
-          <label class="block text-white text-lg mb-2 font-medium font-poppins">Email*</label>
+          <label class="block text-white text-lg lg:text-[22px] !leading-[1.25] mb-2">Email*</label>
           <div class="relative">
             <input
               type="email"
@@ -46,7 +46,7 @@
               id="email-input"
               placeholder="Enter Email Address"
               required
-              class="w-full text-base text-[#B7D6C6] placeholder:text-[#B7D6C6] border border-[#B7D6C6] bg-[#2A7A51] py-4 px-5 rounded-lg focus:outline-none focus:border-[#FFC801]"
+              class="w-full text-base lg:text-xl text-[#B7D6C6] placeholder:text-[#B7D6C6] border border-[#B7D6C6] bg-[#2A7A51] py-4 px-5 rounded-lg focus:outline-none focus:border-[#FFC801]"
             >
             <!-- Loading spinner -->
             <div id="email-loading" class="absolute right-4 top-1/2 transform -translate-y-1/2 hidden">
@@ -67,6 +67,48 @@
 
         <div class="w-full mb-4 lg:mb-5">
           {% render 'password-input' %}
+          <div class="flex items-center justify-between mt-3 lg:mt-3">
+            <div class="flex items-center gap-1.5 lg:gap-2">
+              <label class="flex xl:items-center gap-2 cursor-pointer">
+                <input type="checkbox" class="hidden peer">
+                <span
+                  class="
+                    w-[22px] h-[22px] border border-white bg-[#1E6C44]  rounded-sm flex items-center justify-center
+                    peer-checked:bg-white peer-checked:border-green-600
+                  "
+                >
+                  <!-- check icon -->
+                  <svg
+                    class="w-4 h-4 hidden peer-checked:block"
+                    fill="none"
+                    stroke="green"
+                    stroke-width="3"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </span>
+                <div class="xl:flex items-center gap-1">
+                  <p
+                    class="text-white text-base md:text-lg lg:text-xl font-poppins !leading-[1.2] flex items-center gap-1"
+                  >
+                    Agree with
+                    <a href="#" class="text-[#FFC801] !underline">Terms & Condition</a> and
+                  </p>
+                  <a
+                    href="#"
+                    class="text-base md:text-lg lg:text-xl mt-2 lg:mt-0 block font-poppins !leading-[1.2] text-[#FFC801] !underline"
+                  >
+                    Privacy Policy</a
+                  >
+                </div>
+              </label>
+            </div>
+          </div>
         </div>
 
         <div class="w-full mb-4 lg:mb-5">
@@ -96,11 +138,11 @@
       <div class="relative z-1 mb-6 lg:mb-8">
         <div class="h-[1px] w-[35%] bg-[#B7D6C6] absolute left-0 top-1/2 -translate-y-1/2"></div>
         <div class="h-[1px] w-[35%] bg-[#B7D6C6] absolute right-0 top-1/2 -translate-y-1/2"></div>
-        <p class="text-white text-base font-medium font-poppins text-center">Sign Up with</p>
+        <p class="text-white text-base lg:text-xl font-medium font-poppins text-center">Sign Up with</p>
       </div>
       {% render 'sign-up-google-button' %}
 
-      <p class="text-white text-base mt-10 text-center">
+      <p class="text-white text-base lg:text-xl !leading-[1.2] mt-10 lg:mt-12.5 text-center">
         Already have an account?
         <a href="{{ routes.account_login_url }}" class="text-[#FFC801] underline hover:text-[#e6b301]">Sign In</a>
       </p>
