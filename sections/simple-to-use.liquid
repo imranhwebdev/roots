@@ -15,7 +15,9 @@
             <h5 class="text-xl lg:text-2xl text-green font-semibold !leading-[1.6] mb-4">
               {{ card.settings.card_title }}
             </h5>
-            <p class="3xl:px-13 text-[#514849] text-lg !leading-[1.6]">{{ card.settings.card_text }}</p>
+            <p class="{% if forloop.index == 2 or forloop.index == 3 %}max-w-60{% else %}max-w-75{% endif %} mx-auto text-[#514849] text-lg !leading-[1.6]">
+              {{ card.settings.card_text }}
+            </p>
           </div>
           <div class="w-full h-68 md:h-55 lg:h-55 xl:h-64 2xl:h-58 3xl:h-64 rounded-[10px]">
             {% if card.settings.card_image != blank %}
