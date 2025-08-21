@@ -689,9 +689,6 @@
   .max-h-64 {
     max-height: calc(var(--spacing) * 64);
   }
-  .max-h-\[80vh\] {
-    max-height: 80vh;
-  }
   .max-h-max {
     max-height: max-content;
   }
@@ -2006,13 +2003,6 @@
       }
     }
   }
-  .hover\:bg-red-700 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-red-700);
-      }
-    }
-  }
   .hover\:bg-white {
     &:hover {
       @media (hover: hover) {
@@ -2066,13 +2056,6 @@
     &:hover {
       @media (hover: hover) {
         color: var(--color-black);
-      }
-    }
-  }
-  .hover\:text-gray-600 {
-    &:hover {
-      @media (hover: hover) {
-        color: var(--color-gray-600);
       }
     }
   }
@@ -2133,11 +2116,6 @@
   .focus\:ring-blue-200 {
     &:focus {
       --tw-ring-color: var(--color-blue-200);
-    }
-  }
-  .focus\:ring-blue-500 {
-    &:focus {
-      --tw-ring-color: var(--color-blue-500);
     }
   }
   .focus\:outline-0 {
@@ -3670,6 +3648,16 @@
       height: calc(var(--spacing) * 130);
     }
   }
+  .xl\:h-140 {
+    @media (width >= 1240px) {
+      height: calc(var(--spacing) * 140);
+    }
+  }
+  .xl\:h-144 {
+    @media (width >= 1240px) {
+      height: calc(var(--spacing) * 144);
+    }
+  }
   .xl\:h-159\.5 {
     @media (width >= 1240px) {
       height: calc(var(--spacing) * 159.5);
@@ -4110,6 +4098,11 @@
   .\32 xl\:h-156\.5 {
     @media (width >= 1400px) {
       height: calc(var(--spacing) * 156.5);
+    }
+  }
+  .\32 xl\:h-159\.5 {
+    @media (width >= 1400px) {
+      height: calc(var(--spacing) * 159.5);
     }
   }
   .\32 xl\:w-6\/12 {
