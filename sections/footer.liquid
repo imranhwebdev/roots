@@ -146,21 +146,12 @@
             {% endfor %}
           </div>
         {% else %}
-          <ul class="flex items-center gap-4">
-            {% for block in section.blocks %}
-              {% if block.settings.payment_icon != blank %}
-                <li>
-                  <img
-                    src="{{ block.settings.payment_icon | image_url }}"
-                    alt="payment icon"
-                    loading="lazy"
-                    class="h-8 w-auto"
-                    width=""
-                    height=""
-                  >
-                </li>
-              {% endif %}
-            {% endfor %}
+          <ul>
+            <li><img src="{{'PayPal.png' | asset_url}}" width="" height="" alt=""></li>
+            <li><img src="{{'Visa.png' | asset_url}}" width="" height="" alt=""></li>
+            <li><img src="{{'Mastercard.png' | asset_url}}" width="" height="" alt=""></li>
+            <li><img src="{{'ApplePay.png' | asset_url}}" width="" height="" alt=""></li>
+            <li><img src="{{'GooglePay.png' | asset_url}}" width="" height="" alt=""></li>
           </ul>
         {% endif %}
       </div>
@@ -284,17 +275,6 @@
   ],
 
   "blocks": [
-    {
-      "type": "icon",
-      "name": "Payment Icon",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "payment_icon",
-          "label": "Upload Payment Icon"
-        }
-      ]
-    },
     {
       "type": "social_link",
       "name": "Social Link",
