@@ -59,7 +59,7 @@
 
 @layer base {
     .btn {
-        @apply inline-flex items-center justify-center gap-2 rounded-[40px] !leading-tight px-8 min-h-16 bg-primary text-[#1F1904] text-xl font-poppins border border-solid border-primary hover:text-white transition-all duration-300 cursor-pointer;
+        @apply inline-flex items-center justify-center gap-2 rounded-[40px] !leading-tight px-8 min-h-16 bg-primary text-[#1F1904] text-xl font-poppins border border-solid border-primary hover:text-black transition-all duration-300 cursor-pointer hover:bg-white;
     }
     .inline-btn {
         @apply inline-flex items-center justify-center gap-2 rounded-[40px] !leading-tight px-8 min-h-16 text-white text-xl font-poppins border border-solid border-[#B7D6C6] hover:bg-primary transition-all duration-300 hover:border-primary cursor-pointer;
