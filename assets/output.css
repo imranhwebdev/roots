@@ -470,6 +470,12 @@
   .mb-10 {
     margin-bottom: calc(var(--spacing) * 10);
   }
+  .mb-12 {
+    margin-bottom: calc(var(--spacing) * 12);
+  }
+  .mb-12\.5 {
+    margin-bottom: calc(var(--spacing) * 12.5);
+  }
   .mb-\[2px\] {
     margin-bottom: 2px;
   }
@@ -742,6 +748,12 @@
   .w-64 {
     width: calc(var(--spacing) * 64);
   }
+  .w-77 {
+    width: calc(var(--spacing) * 77);
+  }
+  .w-77\.5 {
+    width: calc(var(--spacing) * 77.5);
+  }
   .w-78 {
     width: calc(var(--spacing) * 78);
   }
@@ -780,6 +792,15 @@
   }
   .max-w-116 {
     max-width: calc(var(--spacing) * 116);
+  }
+  .max-w-155 {
+    max-width: calc(var(--spacing) * 155);
+  }
+  .max-w-157 {
+    max-width: calc(var(--spacing) * 157);
+  }
+  .max-w-157\.5 {
+    max-width: calc(var(--spacing) * 157.5);
   }
   .max-w-164 {
     max-width: calc(var(--spacing) * 164);
@@ -1231,6 +1252,10 @@
   }
   .from-green-600 {
     --tw-gradient-from: var(--color-green-600);
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+  .from-green-800 {
+    --tw-gradient-from: var(--color-green-800);
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
   }
   .to-green-800 {
@@ -2350,6 +2375,11 @@
   .md\:w-auto {
     @media (width >= 768px) {
       width: auto;
+    }
+  }
+  .md\:w-full {
+    @media (width >= 768px) {
+      width: 100%;
     }
   }
   .md\:max-w-30 {
@@ -3943,6 +3973,16 @@
       left: calc(var(--spacing) * 12);
     }
   }
+  .\32 xl\:left-\[27\%\] {
+    @media (width >= 1400px) {
+      left: 27%;
+    }
+  }
+  .\32 xl\:left-\[28\%\] {
+    @media (width >= 1400px) {
+      left: 28%;
+    }
+  }
   .\32 xl\:left-\[29\%\] {
     @media (width >= 1400px) {
       left: 29%;
@@ -4081,6 +4121,11 @@
   .\32 xl\:gap-16 {
     @media (width >= 1400px) {
       gap: calc(var(--spacing) * 16);
+    }
+  }
+  .\32 xl\:p-7\.5 {
+    @media (width >= 1400px) {
+      padding: calc(var(--spacing) * 7.5);
     }
   }
   .\32 xl\:p-8 {
