@@ -2,12 +2,12 @@
   <div class="container">
     <div class="flex flex-col md:flex-row justify-between flex-wrap gap-4 md:flex-nowrap mb-8 md:mb-10 lg:mb-14 xl:mb-16 2xl:mb-20">
       <div class="w-full md:w-5/12 xl:w-4/12">
-        <div class=" 2xl:pr-[8%] 3xl:pr-[15%]">
+        <div class="max-w-116">
           <a href="{{routes.root_url}}">
             {% if section.settings.logo_image %}
               <img
-                src="{{ section.settings.logo_image | img_url: '242x84' }}"
-                class="w-21 md:w-30 2xl:w-60.5 md:15  mb-5"
+                src="{{ section.settings.logo_image | image_url  }}"
+                class="w-full max-w-21 md:max-w-30 2xl:max-w-60.5 md:15  mb-5"
                 width="{{ section.settings.logo_image.width }}"
                 height="{{ section.settings.logo_image.height }}"
                 alt="{{ section.settings.logo_image.alt | default: shop.name }}"
