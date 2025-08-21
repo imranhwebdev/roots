@@ -19,9 +19,9 @@
     "main": {
       "type": "collection",
       "settings": {
-        "layout_1_product": "",
-        "layout_2_product": "",
-        "layout_3_product": ""
+        "layout_1_product": "16-fl-oz-organic-castor-oil",
+        "layout_2_product": "8-fl-oz-organic-castor-oil",
+        "layout_3_product": "roots-organic-castor-oil-wellness-bundle"
       }
     }
   },
