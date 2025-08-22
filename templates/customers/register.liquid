@@ -257,22 +257,22 @@
       if (!email) {
         signupBtn.disabled = true;
         signupBtn.className =
-          'text-[#1F1904] text-xl py-4 w-full font-medium font-poppins text-center px-5 rounded-lg bg-primary cursor-not-allowed transition-all duration-300';
+          'text-[#1F1904]  text-base lg:text-xl  py-4 w-full font-medium font-poppins text-center px-5 rounded-lg bg-primary cursor-not-allowed transition-all duration-300';
         btnText.textContent = 'Sign Up';
       } else if (!isValidEmail(email)) {
         signupBtn.disabled = true;
         signupBtn.className =
-          'text-[#1F1904] text-base py-4 w-full font-medium font-poppins text-center px-5 rounded-lg bg-red-500 cursor-not-allowed transition-all duration-300';
+          'text-[#1F1904]  text-base lg:text-xl  py-4 w-full font-medium font-poppins text-center px-5 rounded-lg bg-red-500 cursor-not-allowed transition-all duration-300';
         btnText.textContent = 'Invalid Email Format';
       } else if (!isEmailAvailable) {
         signupBtn.disabled = true;
         signupBtn.className =
-          'text-[#1F1904] text-base py-4 w-full font-medium font-poppins text-center px-5 rounded-lg bg-red-500 cursor-not-allowed transition-all duration-300';
+          'text-[#1F1904]  text-base lg:text-xl  py-4 w-full font-medium font-poppins text-center px-5 rounded-lg bg-red-500 cursor-not-allowed transition-all duration-300';
         btnText.textContent = 'Email Already Registered';
       } else {
         signupBtn.disabled = false;
         signupBtn.className =
-          'text-[#1F1904] text-base py-4 w-full font-medium font-poppins text-center px-5 rounded-lg bg-[#FFC801] hover:bg-[#e6b301] cursor-pointer transition-all duration-300';
+          'text-[#1F1904] text-base lg:text-xl py-4 w-full font-medium font-poppins text-center px-5 rounded-lg bg-[#FFC801] hover:bg-[#e6b301] cursor-pointer transition-all duration-300';
         btnText.textContent = 'Sign Up';
       }
     }
