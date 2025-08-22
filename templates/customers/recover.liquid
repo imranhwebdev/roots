@@ -26,15 +26,35 @@
           id="recover-email"
           name="email"
           type="email"
-          placeholder="Enter your email"
+          placeholder="Enter Email Here"
           class="w-full text-lg text-[#797375] placeholder:text-[#797375] border border-[#E3E2E0] py-3 px-4 rounded-lg"
           required
         >
       </div>
 
       <div>
-        <button type="submit" class="btn !py-3 !px-6 bg-[#1E6C44] text-white rounded-lg">Send Reset Link</button>
+        <button type="submit" class="btn !py-3 !px-6 bg-[#1E6C44] text-white rounded-lg">Submit</button>
       </div>
     </form>
   {% endif %}
 </div>
+<!-- Toast Notification -->
+<div
+  id="toast"
+  class="hidden fixed bottom-5 right-5 bg-green-600 text-white px-4 py-3 rounded-lg shadow-lg transition-opacity duration-300"
+>
+  ✅ Check your email for a reset link
+</div>
+
+<script>
+  document.getElementById('recover-form')?.addEventListener('submit', function () {
+    const toast = document.getElementById('toast');
+    toast.classList.remove('hidden');
+    toast.style.opacity = '1';
+
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => toast.classList.add('hidden'), 300);
+    }, 4000); // Hide after 4 seconds
+  });
+</script>
