@@ -21,6 +21,8 @@
     </div>
   {% endif %}
 
+  <input type="hidden" name="customer[note]" id="customerNote" value="{{ customer.note }}">
+
   <div class="grid grid-cols-2 gap-4 lg:gap-5 xl:gap-6">
     <!-- First Name -->
     <div class="col-span-2 lg:col-span-1">
@@ -95,10 +97,9 @@
       </span>
       <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Gender</label>
       <select
-        name="customer[note][gender]"
+        name="genderSelect"
         id="genderSelect"
         class="w-full border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 appearance-none rounded-lg text-[#797375] text-lg lg:text-xl !leading-[1.2] font-poppins transition-all duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none cursor-pointer"
-        data-original-value="{% if customer.tags contains 'gender_male' or customer.note contains 'gender:Male' %}Male{% elsif customer.tags contains 'gender_female' or customer.note contains 'gender:Female' %}Female{% elsif customer.tags contains 'gender_other' or customer.note contains 'gender:Other' %}Other{% elsif customer.tags contains 'gender_prefer_not_to_say' or customer.note contains 'gender:Prefer not to say' %}Prefer not to say{% endif %}"
       >
         <option value="">Select Gender</option>
         <option
@@ -163,42 +164,6 @@
   </div>
 {% endform %}
 
-<style>
-  .animate-fadeIn {
-    animation: fadeIn 0.5s ease-in;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .error-field {
-    border-color: #ef4444 !important;
-    background-color: #fef2f2 !important;
-  }
-
-  .success-field {
-    border-color: #10b981 !important;
-    background-color: #f0fdf4 !important;
-  }
-
-  .field-changed {
-    border-color: #f59e0b !important;
-    background-color: #fffbeb !important;
-  }
-
-  #genderSelect:focus + #genderArrow {
-    transform: rotate(180deg);
-  }
-</style>
-
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('form[action*="customer"]');
@@ -206,15 +171,14 @@
     const btnText = updateBtn.querySelector('.btn-text');
     const btnLoading = updateBtn.querySelector('.btn-loading');
 
-    // All form inputs
     const firstName = document.getElementById('firstName');
     const lastName = document.getElementById('lastName');
     const email = document.getElementById('email');
     const phoneInput = document.getElementById('phoneInput');
     const genderSelect = document.getElementById('genderSelect');
     const genderArrow = document.getElementById('genderArrow');
+    const customerNote = document.getElementById('customerNote');
 
-    // Store original values
     const originalValues = {
       firstName: firstName.value,
       lastName: lastName.value,
@@ -223,14 +187,11 @@
       genderSelect: genderSelect.value,
     };
 
-    // Validation functions
     function validateField(field, value) {
       const fieldName = field.id;
       const errorDiv = document.querySelector(`[data-field="${fieldName}"]`);
       let isValid = true;
       let errorMessage = '';
-
-      // Remove previous styling
       field.classList.remove('error-field', 'success-field');
 
       switch (fieldName) {
@@ -244,7 +205,6 @@
             errorMessage = 'Must be at least 2 characters';
           }
           break;
-
         case 'email':
           if (!value.trim()) {
             isValid = false;
@@ -257,7 +217,6 @@
             }
           }
           break;
-
         case 'phoneInput':
           if (value.trim()) {
             const phoneRegex = /^[\+]?[1-9][\d\s\-\(\)]{7,23}$/;
@@ -269,7 +228,6 @@
           break;
       }
 
-      // Show/hide error message
       if (errorDiv) {
         if (!isValid) {
           errorDiv.textContent = errorMessage;
@@ -280,11 +238,9 @@
           field.classList.add('success-field');
         }
       }
-
       return isValid;
     }
 
-    // Check if form has changes
     function checkForChanges() {
       const hasChanges =
         firstName.value !== originalValues.firstName ||
@@ -292,8 +248,6 @@
         email.value !== originalValues.email ||
         phoneInput.value !== originalValues.phoneInput ||
         genderSelect.value !== originalValues.genderSelect;
-
-      // Update button state
       if (hasChanges) {
         updateBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
         updateBtn.classList.remove('bg-gray-400');
@@ -301,104 +255,75 @@
         updateBtn.classList.add('bg-gray-400');
         updateBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
       }
-
       return hasChanges;
     }
 
-    // Highlight changed fields
     function highlightChangedFields() {
       [firstName, lastName, email, phoneInput, genderSelect].forEach((field) => {
         const fieldName = field.id;
         field.classList.remove('field-changed');
-
         if (field.value !== originalValues[fieldName]) {
           field.classList.add('field-changed');
         }
       });
     }
 
-    // Real-time validation and change detection
     [firstName, lastName, email, phoneInput].forEach((field) => {
       field.addEventListener('input', function () {
         validateField(this, this.value);
         checkForChanges();
         highlightChangedFields();
       });
-
       field.addEventListener('blur', function () {
         validateField(this, this.value);
       });
-
       field.addEventListener('focus', function () {
         this.classList.remove('success-field', 'error-field');
       });
     });
 
-    // Gender select change
     genderSelect.addEventListener('change', function () {
       checkForChanges();
       highlightChangedFields();
     });
-
-    // Gender select focus effects
     genderSelect.addEventListener('focus', function () {
       genderArrow.style.transform = 'rotate(180deg)';
     });
-
     genderSelect.addEventListener('blur', function () {
       genderArrow.style.transform = 'rotate(0deg)';
     });
 
-    // Phone number formatting
-    phoneInput.addEventListener('input', function () {
-      let value = this.value.replace(/\D/g, '');
-      if (value.startsWith('1')) {
-        value = value.substring(1);
-      }
-
-      if (value.length >= 6) {
-        value = `+1 (${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6, 10)}`;
-      } else if (value.length >= 3) {
-        value = `+1 (${value.slice(0, 3)}) ${value.slice(3)}`;
-      } else if (value.length > 0) {
-        value = `+1 (${value}`;
-      }
-
-      this.value = value;
-    });
-
-    // Form submission
     form.addEventListener('submit', function (e) {
       let isFormValid = true;
-
-      // Validate all required fields
-      [firstName, lastName, email].forEach((field) => {
-        if (!validateField(field, field.value)) {
+      [firstName, lastName, email].forEach((f) => {
+        if (!validateField(f, f.value)) {
           isFormValid = false;
         }
       });
-
-      // Validate phone if filled
-      if (phoneInput.value.trim()) {
-        if (!validateField(phoneInput, phoneInput.value)) {
-          isFormValid = false;
-        }
+      if (phoneInput.value.trim() && !validateField(phoneInput, phoneInput.value)) {
+        isFormValid = false;
       }
-
       if (!isFormValid) {
         e.preventDefault();
         return;
       }
 
-      // Show loading state
+      // Save gender in customer[note]
+      const existingNotes = customerNote.value
+        .split(';')
+        .filter(Boolean)
+        .map((n) => n.trim());
+      const filteredNotes = existingNotes.filter((n) => !n.startsWith('gender:'));
+      filteredNotes.push(`gender:${genderSelect.value}`);
+      customerNote.value = filteredNotes.join('; ');
+
       updateBtn.disabled = true;
       btnText.classList.add('hidden');
       btnLoading.classList.remove('hidden');
       updateBtn.classList.add('opacity-75');
     });
 
-    // Auto-hide alerts after 5 seconds
-    const alerts = document.querySelectorAll('#errorAlert, #successAlert');
+    const alerts = document.querySelectorAll('#errorAlert,#successAlert');
     alerts.forEach((alert) => {
       setTimeout(() => {
         alert.style.transition = 'opacity 0.3s ease';
@@ -411,33 +336,6 @@
       }, 5000);
     });
 
-    // Initialize form state
     checkForChanges();
-
-    // Add smooth animations
-    const inputs = document.querySelectorAll('input, select');
-    inputs.forEach((input) => {
-      input.addEventListener('focus', function () {
-        this.style.transform = 'scale(1.02)';
-      });
-
-      input.addEventListener('blur', function () {
-        this.style.transform = 'scale(1)';
-      });
-    });
-
-    // Visual feedback for typing
-    [firstName, lastName, email, phoneInput].forEach((input) => {
-      let typingTimer;
-
-      input.addEventListener('input', function () {
-        clearTimeout(typingTimer);
-        this.classList.add('bg-blue-50');
-
-        typingTimer = setTimeout(() => {
-          this.classList.remove('bg-blue-50');
-        }, 500);
-      });
-    });
   });
 </script>
