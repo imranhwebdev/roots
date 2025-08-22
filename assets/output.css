@@ -1995,6 +1995,13 @@
       }
     }
   }
+  .hover\:bg-green {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-green);
+      }
+    }
+  }
   .hover\:bg-green-700 {
     &:hover {
       @media (hover: hover) {
