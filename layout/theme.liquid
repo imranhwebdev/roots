@@ -58,14 +58,14 @@
   <body>
     {%- if template != 'customers/login'
       and template != 'customers/register'
-      and request.page_type != 'reset_password'
+      and template != 'customers/reset_password'
     -%}
       {% sections 'header-group' %}
     {%- endif -%}
     {{ content_for_layout }}
     {%- if template != 'customers/login'
       and template != 'customers/register'
-      and request.page_type != 'reset_password'
+      and template != 'customers/reset_password'
     -%}
       {% sections 'footer-group' %}
     {%- endif -%}
