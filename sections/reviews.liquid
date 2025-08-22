@@ -1,4 +1,4 @@
-{% stylesheet %}
+{% comment %} {% stylesheet %}
   .jdgm-carousel-wrapper {
     position: relative;
   }
@@ -77,10 +77,6 @@
   .jdgm-carousel--aligned-theme .jdgm-carousel-item {
     position: relative;
   }
-  /* .jdgm-carousel__arrows {
-    position: relative !important;
-    z-index: -1 !important;
-  } */
   .jdgm-carousel__left-arrow {
     position: relative !important;
     z-index: -1 !important;
@@ -145,13 +141,20 @@
     display: flex;
     align-items: center;
   }
-{% endstylesheet %}
+{% endstylesheet %} {% endcomment %}
 
 <div class="roots-customer-reviews pb-17.5 md:pb-20 lg:pb-25 xl:pb-30 2xl:pb-37.5">
   <div class="container">
     <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-green !leading-[1.25] font-bold font-armany-bold mb-5.5 md:mb-7 lg:mb-10 xl:mb-12.5 md:ms-3">
       Customer Reviews
     </h2>
-    {% render 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: true %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5 xl:gap-8 ">
+      <div class="border border-[#E3E2E0] bg-white rounded-xl p-5 lg:p-9">
+       <div class="flex items-center gap-1.5">
+        <span class="size-5 lg:size-6"><img src="{{'review-star.svg' |  asset_url}}"  alt="" width="" height=""></span>
+       </div>
+      </div>
+    </div>
+    {% comment %} {% render 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: true %} {% endcomment %}
   </div>
 </div>
