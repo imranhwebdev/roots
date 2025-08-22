@@ -21,7 +21,8 @@
     </div>
   {% endif %}
 
-  <input type="hidden" name="customer[note]" id="customerNote" value="{{ customer.note }}">
+  <!-- Hidden field to store customer note (including gender) -->
+  <input type="hidden" name="customer[note]" id="customerNote" value="{{ customer.note | escape }}">
 
   <div class="grid grid-cols-2 gap-4 lg:gap-5 xl:gap-6">
     <!-- First Name -->
@@ -35,7 +36,6 @@
         value="{{ customer.first_name }}"
         required
         class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg transition-all duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
-        data-original-value="{{ customer.first_name }}"
       >
       <div class="error-message text-red-500 text-sm mt-1 hidden" data-field="firstName"></div>
     </div>
@@ -51,7 +51,6 @@
         value="{{ customer.last_name }}"
         required
         class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg transition-all duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
-        data-original-value="{{ customer.last_name }}"
       >
       <div class="error-message text-red-500 text-sm mt-1 hidden" data-field="lastName"></div>
     </div>
@@ -67,14 +66,13 @@
         value="{{ customer.email }}"
         required
         class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg transition-all duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
-        data-original-value="{{ customer.email }}"
       >
       <div class="error-message text-red-500 text-sm mt-1 hidden" data-field="email"></div>
     </div>
 
     <!-- Phone -->
     <div class="col-span-2">
-      <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Phone*</label>
+      <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Phone</label>
       <input
         name="customer[phone]"
         id="phoneInput"
@@ -82,7 +80,6 @@
         type="tel"
         value="{{ customer.phone | default: '' }}"
         class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg transition-all duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
-        data-original-value="{{ customer.phone | default: '' }}"
       >
       <div class="error-message text-red-500 text-sm mt-1 hidden" data-field="phoneInput"></div>
     </div>
@@ -102,40 +99,10 @@
         class="w-full border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 appearance-none rounded-lg text-[#797375] text-lg lg:text-xl !leading-[1.2] font-poppins transition-all duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none cursor-pointer"
       >
         <option value="">Select Gender</option>
-        <option
-          value="Male"
-          {% if customer.tags contains 'gender_male' or customer.note contains 'gender:Male' %}
-            selected
-          {% endif %}
-        >
-          Male
-        </option>
-        <option
-          value="Female"
-          {% if customer.tags contains 'gender_female' or customer.note contains 'gender:Female' %}
-            selected
-          {% endif %}
-        >
-          Female
-        </option>
-        <option
-          value="Other"
-          {% if customer.tags contains 'gender_other' or customer.note contains 'gender:Other' %}
-            selected
-          {% endif %}
-        >
-          Other
-        </option>
-        <option
-          value="Prefer not to say"
-          {% if customer.tags contains 'gender_prefer_not_to_say'
-            or customer.note contains 'gender:Prefer not to say'
-          %}
-            selected
-          {% endif %}
-        >
-          Prefer not to say
-        </option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+        <option value="Prefer not to say">Prefer not to say</option>
       </select>
     </div>
 
@@ -179,6 +146,14 @@
     const genderArrow = document.getElementById('genderArrow');
     const customerNote = document.getElementById('customerNote');
 
+    // Populate gender from note if exists
+    const noteValue = customerNote.value;
+    const genderMatch = noteValue.match(/gender:([^\;]+)/);
+    if (genderMatch) {
+      genderSelect.value = genderMatch[1];
+    }
+
+    // Store original values
     const originalValues = {
       firstName: firstName.value,
       lastName: lastName.value,
@@ -187,60 +162,6 @@
       genderSelect: genderSelect.value,
     };
 
-    function validateField(field, value) {
-      const fieldName = field.id;
-      const errorDiv = document.querySelector(`[data-field="${fieldName}"]`);
-      let isValid = true;
-      let errorMessage = '';
-      field.classList.remove('error-field', 'success-field');
-
-      switch (fieldName) {
-        case 'firstName':
-        case 'lastName':
-          if (!value.trim()) {
-            isValid = false;
-            errorMessage = 'This field is required';
-          } else if (value.trim().length < 2) {
-            isValid = false;
-            errorMessage = 'Must be at least 2 characters';
-          }
-          break;
-        case 'email':
-          if (!value.trim()) {
-            isValid = false;
-            errorMessage = 'Email is required';
-          } else {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(value)) {
-              isValid = false;
-              errorMessage = 'Please enter a valid email address';
-            }
-          }
-          break;
-        case 'phoneInput':
-          if (value.trim()) {
-            const phoneRegex = /^[\+]?[1-9][\d\s\-\(\)]{7,23}$/;
-            if (!phoneRegex.test(value.replace(/\s/g, ''))) {
-              isValid = false;
-              errorMessage = 'Please enter a valid phone number';
-            }
-          }
-          break;
-      }
-
-      if (errorDiv) {
-        if (!isValid) {
-          errorDiv.textContent = errorMessage;
-          errorDiv.classList.remove('hidden');
-          field.classList.add('error-field');
-        } else {
-          errorDiv.classList.add('hidden');
-          field.classList.add('success-field');
-        }
-      }
-      return isValid;
-    }
-
     function checkForChanges() {
       const hasChanges =
         firstName.value !== originalValues.firstName ||
@@ -248,94 +169,30 @@
         email.value !== originalValues.email ||
         phoneInput.value !== originalValues.phoneInput ||
         genderSelect.value !== originalValues.genderSelect;
-      if (hasChanges) {
-        updateBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
-        updateBtn.classList.remove('bg-gray-400');
-      } else {
-        updateBtn.classList.add('bg-gray-400');
-        updateBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
-      }
+      updateBtn.disabled = !hasChanges;
       return hasChanges;
     }
 
-    function highlightChangedFields() {
-      [firstName, lastName, email, phoneInput, genderSelect].forEach((field) => {
-        const fieldName = field.id;
-        field.classList.remove('field-changed');
-        if (field.value !== originalValues[fieldName]) {
-          field.classList.add('field-changed');
-        }
-      });
-    }
-
-    [firstName, lastName, email, phoneInput].forEach((field) => {
-      field.addEventListener('input', function () {
-        validateField(this, this.value);
-        checkForChanges();
-        highlightChangedFields();
-      });
-      field.addEventListener('blur', function () {
-        validateField(this, this.value);
-      });
-      field.addEventListener('focus', function () {
-        this.classList.remove('success-field', 'error-field');
-      });
-    });
-
-    genderSelect.addEventListener('change', function () {
-      checkForChanges();
-      highlightChangedFields();
-    });
-    genderSelect.addEventListener('focus', function () {
-      genderArrow.style.transform = 'rotate(180deg)';
-    });
-    genderSelect.addEventListener('blur', function () {
-      genderArrow.style.transform = 'rotate(0deg)';
+    [firstName, lastName, email, phoneInput, genderSelect].forEach((f) => {
+      f.addEventListener('input', checkForChanges);
+      f.addEventListener('change', checkForChanges);
     });
 
     form.addEventListener('submit', function (e) {
-      let isFormValid = true;
-      [firstName, lastName, email].forEach((f) => {
-        if (!validateField(f, f.value)) {
-          isFormValid = false;
-        }
-      });
-      if (phoneInput.value.trim() && !validateField(phoneInput, phoneInput.value)) {
-        isFormValid = false;
-      }
-      if (!isFormValid) {
-        e.preventDefault();
-        return;
-      }
-
       // Save gender in customer[note]
       const existingNotes = customerNote.value
         .split(';')
         .filter(Boolean)
         .map((n) => n.trim());
       const filteredNotes = existingNotes.filter((n) => !n.startsWith('gender:'));
-      filteredNotes.push(`gender:${genderSelect.value}`);
+      if (genderSelect.value) {
+        filteredNotes.push(`gender:${genderSelect.value}`);
+      }
       customerNote.value = filteredNotes.join('; ');
 
       updateBtn.disabled = true;
       btnText.classList.add('hidden');
       btnLoading.classList.remove('hidden');
-      updateBtn.classList.add('opacity-75');
     });
-
-    const alerts = document.querySelectorAll('#errorAlert,#successAlert');
-    alerts.forEach((alert) => {
-      setTimeout(() => {
-        alert.style.transition = 'opacity 0.3s ease';
-        alert.style.opacity = '0';
-        setTimeout(() => {
-          if (alert.parentNode) {
-            alert.parentNode.removeChild(alert);
-          }
-        }, 300);
-      }, 5000);
-    });
-
-    checkForChanges();
   });
 </script>
