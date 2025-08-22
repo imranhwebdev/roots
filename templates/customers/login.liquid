@@ -37,8 +37,8 @@
             </div>
             <div class="flex items-center justify-between">
               <label class="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" class="hidden peer">
-                <span class="w-[22px] h-[22px] border border-white bg-[#1E6C44] p-1 peer-checked:bg-white rounded-sm flex items-center justify-center">
+                <input type="checkbox" id="rememberMe" class="sr-only peer">
+                <span class="w-[22px] h-[22px] border border-white bg-[#1E6C44] peer-checked:bg-white rounded-sm flex items-center justify-center">
                   <svg
                     class="w-4 h-4 text-white hidden peer-checked:block"
                     fill="none"
@@ -51,7 +51,10 @@
                 </span>
                 <p class="text-white text-base md:text-lg lg:text-xl font-poppins">Remember me</p>
               </label>
-              <a href="/account/login#recover" class="text-white text-sm md:text-base lg:text-lg underline">
+              <a
+                href="/account/login#recover"
+                class="text-white text-sm md:text-base lg:text-lg underline hover:text-primary transition-all duration-300"
+              >
                 Forgot Password?
               </a>
             </div>
@@ -60,7 +63,7 @@
           <div class="w-full mb-4 lg:mb-5">
             <button
               type="submit"
-              class="text-[#1F1904] text-base md:text-lg lg:text-xl py-4 lg:py-5 w-full cursor-pointer font-medium font-poppins text-center px-5 rounded-lg bg-[#FFC801]"
+              class="text-[#1F1904] text-base md:text-lg lg:text-xl py-4 lg:py-5 w-full cursor-pointer font-medium font-poppins text-center px-5 rounded-lg bg-primary border border-solid border-primary hover:bg-white"
             >
               Sign In
             </button>
@@ -114,15 +117,6 @@
       </div>
       <!-- ✅ End Recover Form -->
 
-      <div class="relative z-1 mb-6 lg:mb-8 xl:mb-10">
-        <div class="h-[1px] w-[22%] lg:w-[25%] xl:w-[32%] bg-[#B7D6C6] absolute left-0 top-1/2 -translate-y-1/2"></div>
-        <div class="h-[1px] w-[22%] lg:w-[25%] xl:w-[32%] bg-[#B7D6C6] absolute right-0 top-1/2 -translate-y-1/2"></div>
-        <p class="text-white text-base md:text-lg lg:text-xl font-medium font-poppins text-center">
-          Sign In with Google
-        </p>
-      </div>
-
-      {% render 'sign-in-google-button' %}
 
       <p class="text-white text-base md:text-lg lg:text-xl mt-10 lg:mt-12.5 text-center">
         Don't have an account?
@@ -132,7 +126,7 @@
   </div>
 
   <div class="hidden md:flex bg-[#FFC801] justify-end py-13 px-10 h-screen">
-    <img class="w-full object-contain h-full" src="{{ 'login-img.png' | asset_url }}" alt="">
+    <img class="w-full object-contain h-full" src="{{ 'login-img.png' | asset_url }}" width="" height="" alt="">
   </div>
 </div>
 
@@ -149,17 +143,33 @@
     const loginForm = document.getElementById('CustomerLoginForm');
     const recoverForm = document.getElementById('RecoverPasswordForm');
 
-    // যদি reload দিয়ে hash থাকে
     if (window.location.hash === '#recover') {
       loginForm.style.display = 'none';
       recoverForm.style.display = 'block';
     }
-
-    // Forgot Password এ click করলে সাথে সাথে toggle হবে
     document.querySelector("a[href='/account/login#recover']")?.addEventListener('click', function (e) {
       e.preventDefault();
       loginForm.style.display = 'none';
       recoverForm.style.display = 'block';
     });
+  });
+  document.querySelector('form').addEventListener('submit', function (e) {
+    const remember = document.getElementById('rememberMe').checked;
+    const email = document.querySelector('input[name="customer[email]"]').value;
+
+    if (remember) {
+      localStorage.setItem('shopifyRememberEmail', email);
+    } else {
+      localStorage.removeItem('shopifyRememberEmail');
+    }
+  });
+
+  // Auto-fill on page load
+  window.addEventListener('load', function () {
+    const savedEmail = localStorage.getItem('shopifyRememberEmail');
+    if (savedEmail) {
+      document.querySelector('input[name="customer[email]"]').value = savedEmail;
+      document.getElementById('rememberMe').checked = true;
+    }
   });
 </script>
