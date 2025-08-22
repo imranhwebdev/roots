@@ -20,7 +20,7 @@
     </div>
   {% endif %}
 
-  <form method="post" action="/account/recover" class="grid grid-cols-1 gap-4">
+  <form method="post" action="{{routes.account_recover_url}}" class="grid grid-cols-1 gap-4">
     <input type="hidden" name="form_type" value="recover_customer_password">
     <input type="hidden" name="utf8" value="✓">
 
@@ -42,6 +42,6 @@
   </form>
 
   <p class="mt-4 text-[#797375] text-sm">
-    Remember your password? <a href="/account/login" class="text-[#1E6C44] underline">Login</a>
+    Remember your password? <a href="{{routes.account_login_url}}" class="text-[#1E6C44] underline">Login</a>
   </p>
 </div>
