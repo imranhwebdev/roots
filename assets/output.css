@@ -539,6 +539,10 @@
     width: calc(var(--spacing) * 4.5) !important;
     height: calc(var(--spacing) * 4.5) !important;
   }
+  .size-3 {
+    width: calc(var(--spacing) * 3);
+    height: calc(var(--spacing) * 3);
+  }
   .size-4 {
     width: calc(var(--spacing) * 4);
     height: calc(var(--spacing) * 4);
@@ -1109,6 +1113,9 @@
   .\!border-\[\#1E6C44\] {
     border-color: #1E6C44 !important;
   }
+  .\!border-white {
+    border-color: var(--color-white) !important;
+  }
   .border-\[\#1E6C44\] {
     border-color: #1E6C44;
   }
@@ -1129,6 +1136,9 @@
   }
   .border-\[\#F0F0F0\] {
     border-color: #F0F0F0;
+  }
+  .border-\[red\] {
+    border-color: red;
   }
   .border-\[rgba\(255\,255\,255\,0\.12\)\] {
     border-color: rgba(255,255,255,0.12);
@@ -1222,6 +1232,9 @@
   }
   .bg-\[\#FFE380\] {
     background-color: #FFE380;
+  }
+  .bg-\[red\] {
+    background-color: red;
   }
   .bg-\[rgba\(30\,108\,68\,0\.10\)\] {
     background-color: rgba(30,108,68,0.10);
@@ -1932,6 +1945,21 @@
       color: #D1CDCE;
     }
   }
+  .checked\:block {
+    &:checked {
+      display: block;
+    }
+  }
+  .checked\:border-white {
+    &:checked {
+      border-color: var(--color-white);
+    }
+  }
+  .checked\:bg-green-500 {
+    &:checked {
+      background-color: var(--color-green-500);
+    }
+  }
   .hover\:scale-105 {
     &:hover {
       @media (hover: hover) {
@@ -2223,6 +2251,14 @@
   .focus\:ring-blue-200 {
     &:focus {
       --tw-ring-color: var(--color-blue-200);
+    }
+  }
+  .focus\:ring-green-500\/30 {
+    &:focus {
+      --tw-ring-color: color-mix(in srgb, oklch(72.3% 0.219 149.579) 30%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        --tw-ring-color: color-mix(in oklab, var(--color-green-500) 30%, transparent);
+      }
     }
   }
   .focus\:ring-yellow-400 {
@@ -2919,6 +2955,12 @@
       height: calc(var(--spacing) * 6) !important;
     }
   }
+  .lg\:size-4 {
+    @media (width >= 992px) {
+      width: calc(var(--spacing) * 4);
+      height: calc(var(--spacing) * 4);
+    }
+  }
   .lg\:size-5 {
     @media (width >= 992px) {
       width: calc(var(--spacing) * 5);
@@ -3594,6 +3636,11 @@
   .xl\:my-10 {
     @media (width >= 1240px) {
       margin-block: calc(var(--spacing) * 10);
+    }
+  }
+  .xl\:mt-8 {
+    @media (width >= 1240px) {
+      margin-top: calc(var(--spacing) * 8);
     }
   }
   .xl\:mt-10 {
@@ -4361,6 +4408,11 @@
   .\32 xl\:text-\[40px\] {
     @media (width >= 1400px) {
       font-size: 40px;
+    }
+  }
+  .\33 xl\:mt-10 {
+    @media (width >= 1520px) {
+      margin-top: calc(var(--spacing) * 10);
     }
   }
   .\33 xl\:mb-3\.5 {

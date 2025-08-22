@@ -7,23 +7,23 @@
 <div id="addressList">
   {% for address in customer.addresses %}
     <div
-      class="address-card bg-gray-50 border border-gray-200 rounded-lg p-6 mb-4 hover:shadow-md transition-shadow duration-200"
+      class="address-card rounded-lg border  border-[#E3E2E0] bg-[#FCFBF7] p-5 md:p-6 lg:p-7 xl:p-8 3xl:p-10 mb-5 md:pb-6 lg:mb-7 xl:mb-8 3xl:mb-10"
       data-address-id="{{ address.id }}"
     >
-      <div class="flex items-start justify-between">
-        <div class="flex items-start gap-4">
-          <div class="w-6 h-6 border-2 border-gray-400 rounded-full flex-shrink-0 mt-1 flex items-center justify-center">
-            <div class="w-2 h-2 bg-gray-400 rounded-full"></div>
-          </div>
+      <div class="flex flex-col lg:flex-row flex-wrap lg:flex-nowrap lg:items-center lg:justify-between gap-4 ">
+        <div class="flex items-start gap-3">
+          <span class="size-13 lg:size-14.5 flex-[0_0_auto] border border-[#E3E2E0] rounded-full p-4 flex items-center justify-center"
+            ><img src="{{'location.svg' |  asset_url}}" class="size-full" alt="" width="" height=""
+          ></span>
           <div>
-            <h3 class="font-semibold text-gray-900 text-lg mb-1">
+            <h3 class="text-[#21201E] text-lg lg:text-[22px] font-medium !leading-[1.25] font-poppins mb-2">
               {{ address.first_name }}
               {{ address.last_name }}
               {% if address == customer.default_address %}
                 <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full ml-2">Default</span>
               {% endif %}
             </h3>
-            <div class="text-gray-600 text-sm leading-relaxed">
+            <div class="text-[#797375] text-lg lg:text-xl !leading-[1.2]">
               {{ address.address1 -}}
               {%- if address.address2 %}, {{ address.address2 }}{% endif -%}
               <br>
@@ -34,9 +34,10 @@
             </div>
           </div>
         </div>
-        <div class="flex items-center gap-2">
+        <div class=" max-w-max flex items-center gap-7 lg:gap-8 border border-[#E3E2E0] rounded-[150px] lg:rounded-[198px] py-3.5 lg:py-4.5 px-5.5 lg:px-6.5 relative z-">
+          <span class="h-4 w-[1px] bg-[#E3E2E0] absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2"></span>
           <button
-            class="edit-btn p-2 text-gray-400 hover:text-blue-600 transition-colors"
+            class="edit-btn size-5 lg:size-6 flex-[0_0_auto]"
             data-action="edit"
             data-id="{{ address.id }}"
             data-first-name="{{ address.first_name }}"
@@ -51,10 +52,7 @@
             data-country="{{ address.country }}"
             data-default="{{ address == customer.default_address }}"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-            </svg>
+            <img src="{{'edit-icon.svg' |  asset_url}}" class="size-full" alt="" width="" height="">
           </button>
           <form method="post" action="{{ address.url }}" class="inline" onsubmit="return confirmDelete()">
             <input type="hidden" name="form_type" value="customer_address">
@@ -62,34 +60,30 @@
             <input type="hidden" name="return_to" value="{{ request.path }}">
             <button
               type="submit"
-              class="p-2 text-gray-400 hover:text-red-600 transition-colors"
+              class="size-5 lg:size-6 flex-[0_0_auto] cursor-pointer"
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="3,6 5,6 21,6"/>
-                <path d="M19,6V20a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6M8,6V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2V6"/>
-              </svg>
+              <img src="{{'delete-icon.svg' |  asset_url}}" class="size-full" alt="" width="" height="">
             </button>
           </form>
         </div>
       </div>
+      <!-- Add New Address Button -->
+      <button
+        id="addNewBtn"
+        class="btn mt-5 md:mt-6 lg:mt-7 xl:mt-8 3xl:mt-10"
+      >
+        Add New Address
+      </button>
     </div>
   {% endfor %}
 </div>
 
-<!-- Add New Address Button -->
-<button
-  id="addNewBtn"
-  class="bg-yellow-400 hover:bg-yellow-500 text-black font-medium px-6 py-3 rounded-lg transition-colors duration-200 mb-6"
->
-  Add New Address
-</button>
-
 <!-- Address Form -->
 <div id="addressFormContainer" class="hidden">
-  <div class="bg-white border border-gray-200 rounded-lg p-6">
+  <div>
     <h2
       id="formTitle"
-      class="text-2xl font-semibold text-gray-900 mb-6"
+      class=" text-[#0D2E1D] text-xl lg:text-2xl xl:text-[32px] font-medium font-poppins !leading-[1.25] mb-5 lg:mb-6"
     >
       Add New Address
     </h2>
@@ -104,7 +98,9 @@
       <!-- First Name & Last Name Row -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label class="block text-gray-700 font-medium mb-2">First Name*</label>
+          <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+            >First Name*</label
+          >
           <input
             id="firstName"
             name="address[first_name]"
@@ -112,11 +108,11 @@
             placeholder="Leslie"
             value="{{ customer.first_name }}"
             required
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-colors"
+            class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
           >
         </div>
         <div>
-          <label class="block text-gray-700 font-medium mb-2">Last Name*</label>
+          <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Last Name*</label>
           <input
             id="lastName"
             name="address[last_name]"
@@ -124,7 +120,7 @@
             placeholder="Cooper"
             value="{{ customer.last_name }}"
             required
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-colors"
+            class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
           >
         </div>
       </div>
@@ -132,62 +128,66 @@
       <!-- Email (Remove this as it's not part of Shopify address) -->
       <!-- Company -->
       <div>
-        <label class="block text-gray-700 font-medium mb-2">Company</label>
+        <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Company</label>
         <input
           id="company"
           name="address[company]"
           type="text"
           placeholder="Company Name (Optional)"
-          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-colors"
+          class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
         >
       </div>
 
       <!-- Street Address -->
       <div>
-        <label class="block text-gray-700 font-medium mb-2">Street Address*</label>
+        <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+          >Street Address*</label
+        >
         <input
           id="address1"
           name="address[address1]"
           type="text"
           placeholder="2464 Royal Ln"
           required
-          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-colors"
+          class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
         >
       </div>
 
       <!-- Apartment/Suite -->
       <div>
-        <label class="block text-gray-700 font-medium mb-2">Apartment, Suite, etc.</label>
+        <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]"
+          >Apartment, Suite, etc.</label
+        >
         <input
           id="address2"
           name="address[address2]"
           type="text"
           placeholder="Apartment, suite, unit, building, floor, etc."
-          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-colors"
+          class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
         >
       </div>
 
       <!-- Phone & Zip Code Row -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label class="block text-gray-700 font-medium mb-2">Phone</label>
+          <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Phone</label>
           <input
             id="phone"
             name="address[phone]"
             type="tel"
             placeholder="+1234567890"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-colors"
+            class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
           >
         </div>
         <div>
-          <label class="block text-gray-700 font-medium mb-2">Zip Code*</label>
+          <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Zip Code*</label>
           <input
             id="zip"
             name="address[zip]"
             type="text"
             placeholder="45463"
             required
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-colors"
+            class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
           >
         </div>
       </div>
@@ -195,23 +195,23 @@
       <!-- City & State Row -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label class="block text-gray-700 font-medium mb-2">City*</label>
+          <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">City*</label>
           <input
             id="city"
             name="address[city]"
             type="text"
             placeholder="Mesa"
             required
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-colors"
+            class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg"
           >
         </div>
         <div class="relative">
-          <label class="block text-gray-700 font-medium mb-2">State*</label>
+          <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">State*</label>
           <select
             id="province"
             name="address[province]"
             required
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-colors appearance-none bg-white"
+            class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375]  border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg appearance-none"
           >
             <!-- United States -->
             <option value="">Select State</option>
@@ -284,12 +284,12 @@
 
       <!-- Country -->
       <div>
-        <label class="block text-gray-700 font-medium mb-2">Country*</label>
+        <label class="block text-[#514849] text-lg lg:text-[22px] mb-2 font-medium !leading-[1.25]">Country*</label>
         <select
           id="country"
           name="address[country]"
           required
-          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-colors appearance-none bg-white"
+          class="w-full text-lg lg:text-xl !leading-[1.2] text-[#797375] placeholder:text-[#797375] border lg:border-[1.2px] border-[#E3E2E0] bg-[#FCFBF7] py-4 lg:py-5 px-5 lg:px-6 rounded-lg appearance-none"
         >
           <option value="">Select Country</option>
           <option value="United States" selected>United States</option>
@@ -304,17 +304,7 @@
         </select>
       </div>
 
-      <!-- Default Address Checkbox -->
-      <div class="flex items-center gap-3 pt-2">
-        <input
-          id="isDefault"
-          name="address[default]"
-          type="checkbox"
-          value="1"
-          class="w-4 h-4 text-yellow-400 border-gray-300 rounded focus:ring-yellow-400"
-        >
-        <label for="isDefault" class="text-gray-700 font-medium">Set as default address</label>
-      </div>
+
 
       <!-- Form Actions -->
       <div class="flex gap-4 pt-4">
