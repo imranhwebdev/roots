@@ -1,160 +1,397 @@
-{% comment %} {% stylesheet %}
-  .jdgm-carousel-wrapper {
-    position: relative;
+<style>
+  .swiper-button-next,
+  .swiper-button-prev {
+    z-index: 99;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
   }
-  .jdgm-carousel-wrapper .jdgm-widget.jdgm-carousel {
-    width: 100% !important;
+  .swiper-button-prev::after {
+    content: '';
   }
-  .jdgm-carousel-title-and-link {
+  .swiper-button-next::after {
+    content: '';
+  }
+  .swiper-button-next:hover,
+  .swiper-button-prev:hover {
+    background-color: #ffc801;
+  }
+  .swiper-button-prev {
+    /* transform: translateY(-50%);
+    margin-top: 35px; */
+  }
+  .swiper-button-next svg,
+  .swiper-button-prev svg {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+  }
+  .swiper-pagination-bullet {
     display: none;
   }
-  .jdgm-carousel--aligned-theme .jdgm-carousel-item {
-    border: 1px solid #e3e2e0;
-    padding: 36px !important;
-    margin-inline: 10px;
-    border-radius: 12px;
-    background: #fff;
+  .swiper {
   }
-  .jdgm-carousel-wrapper {
-    width: 100% !important;
-    margin: auto;
-    padding: 0 !important;
-  }
-  .jdgm-carousel__item-wrapper {
-    width: calc(100% - 60px) !important;
-    height: 313px !important;
-    white-space: nowrap;
-  }
-  .jdgm-carousel-item__review-title {
-    display: none !important;
-  }
-  .jdgm-carousel-item__review-body {
-    margin: 0;
-    margin-top: 15px !important;
-    color: #797375;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 160%;
-  }
-  .jdgm-carousel--aligned-theme .jdgm-carousel-item__review-wrapper {
-    width: 100% !important;
-  }
-  .jdgm-carousel--aligned-theme .jdgm-carousel-item__reviewer-name {
-    color: #0d2e1d;
-    font-size: 20px !important;
-    font-style: normal;
-    font-weight: 500 !important;
-    line-height: 150% !important;
-    font-family: 'Poppins', sans-serif !important;
-  }
-  .jdgm-carousel--aligned-theme .jdgm-carousel-item__product-image {
-    height: auto;
-    display: inline-block;
-    vertical-align: middle;
-    width: 44px !important;
-    height: 44px !important;
-    position: absolute;
-    bottom: 32px;
-    left: 40px;
-    border-radius: 50%;
-  }
-
-  .jdgm-carousel--aligned-theme .jdgm-carousel-item__reviewer-name-wrapper {
-    text-align: left;
-    padding-left: 50px;
-    margin: 0 !important;
-    margin-bottom: 15px !important;
-    margin-top: -15px !important;
-  }
-  .jdgm-carousel__arrows .jdgm-carousel__right-arrow.jdgm-carousel__right-arrow,
-  .jdgm-carousel__arrows .jdgm-carousel__left-arrow.jdgm-carousel__left-arrow {
-    display: inline-block;
-    position: absolute;
-    top: 80px;
-    right: 50px;
-  }
-  .jdgm-carousel--aligned-theme .jdgm-carousel-item {
-    position: relative;
-  }
-  .jdgm-carousel__left-arrow {
-    position: relative !important;
-    z-index: -1 !important;
-  }
-  .jdgm-carousel__left-arrow::after {
-    position: absolute !important;
-    z-index: 1 !important;
-    content: '' !important;
-    width: 40px !important;
-    height: 40px !important;
-    background-color: red !important;
-    border-radius: 100% !important;
-    left: 90%;
-    top: 30%;
-  }
-
-  @media (max-width: 992px) {
-    .jdgm-carousel--aligned-theme .jdgm-carousel-item {
-      margin-inline: 10px;
-    }
-    .jdgm-carousel__item-wrapper {
-      width: calc(100% - 40px) !important;
-    }
-    .jdgm-carousel-item__review-body {
-      font-size: 16px;
-    }
-
-    .jdgm-carousel--aligned-theme .jdgm-carousel-item__reviewer-name {
-      font-size: 16px !important;
-    }
-  }
-  @media (max-width: 767px) {
-    .jdgm-carousel--aligned-theme .jdgm-carousel-item__product-image {
-      bottom: 17px !important;
-      left: 30px !important;
-    }
-    .jdgm-carousel--aligned-theme .jdgm-carousel-item {
-      margin-inline: 0px;
-    }
-    .jdgm-carousel__item-wrapper {
-      width: 100% !important;
-    }
-    .jdgm-carousel__item-wrapper {
-      height: 250px !important;
-    }
-    .jdgm-carousel--aligned-theme .jdgm-carousel-item {
-      padding: 15px !important;
-    }
-    .jdgm-carousel--aligned-theme .jdgm-carousel-item__reviewer-name {
-      font-size: 16px !important;
-    }
-    .jdgm-carousel-item__review-body {
-      font-size: 14px;
-    }
-    .jdgm-carousel__left-arrow,
-    .jdgm-carousel__right-arrow {
-      top: 105px !important;
-    }
-  }
-  .jdgm-row-profile {
-    width: max-content;
-    display: flex;
-    align-items: center;
-  }
-{% endstylesheet %} {% endcomment %}
+</style>
 
 <div class="roots-customer-reviews pb-17.5 md:pb-20 lg:pb-25 xl:pb-30 2xl:pb-37.5">
   <div class="container">
     <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-green !leading-[1.25] font-bold font-armany-bold mb-5.5 md:mb-7 lg:mb-10 xl:mb-12.5 md:ms-3">
       Customer Reviews
     </h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5 xl:gap-8 ">
-      <div class="border border-[#E3E2E0] bg-white rounded-xl p-5 lg:p-9">
-       <div class="flex items-center gap-1.5">
-        <span class="size-5 lg:size-6"><img src="{{'review-star.svg' |  asset_url}}"  alt="" width="" height=""></span>
-       </div>
+    <div class=" relative z-1">
+      <div class="swiper review-slider">
+        <div class="swiper-wrapper ">
+          <div class="swiper-slide">
+            <div class="border border-[#E3E2E0] bg-white rounded-xl p-5 lg:p-9">
+              <div class="flex items-center gap-1.5 mb-3 lg:mb-4 xl:mb-5">
+                <span class="size-5 lg:size-6"
+                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
+                ></span>
+                <span class="size-5 lg:size-6"
+                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
+                ></span>
+                <span class="size-5 lg:size-6"
+                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
+                ></span>
+                <span class="size-5 lg:size-6"
+                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
+                ></span>
+                <span class="size-5 lg:size-6"
+                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
+                ></span>
+              </div>
+              <p class="text-sm lg:text-base xl:text-xl text-[#797375] !leading-[1.6] mb-3 md:mb-5 lg:mb-8 xl:mb-10 2xl:mb-12">
+                My hair feels thicker, my lashes fuller, and my scalp healthier. Pure, organic, and trustworthy Roots
+                Castor Oil truly delivers.
+              </p>
+              <div class="flex items-center gap-2">
+                <img
+                  src="{{'avator2.jpg' |  asset_url}}"
+                  class="size-10 lg:size-10 rounded-full"
+                  alt=""
+                  width=""
+                  height=""
+                >
+                <div>
+                  <p class="text-[#0D2E1D] text-base lg:text-lg xl:text-xl font-medium !leading-[1.5]">Sarah M</p>
+                  <p class="text-[#797375] text-xs lg:text-base !leading-[1.4] italic">Austin, TX</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="border border-[#E3E2E0] bg-white rounded-xl p-5 lg:p-9">
+              <div class="flex items-center gap-1.5 mb-3 lg:mb-4 xl:mb-5">
+                <span class="size-5 lg:size-6"
+                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
+                ></span>
+                <span class="size-5 lg:size-6"
+                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
+                ></span>
+                <span class="size-5 lg:size-6"
+                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
+                ></span>
+                <span class="size-5 lg:size-6"
+                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
+                ></span>
+                <span class="size-5 lg:size-6"
+                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
+                ></span>
+              </div>
+              <p class="text-sm lg:text-base xl:text-xl text-[#797375] !leading-[1.6] mb-3 md:mb-5 lg:mb-8 xl:mb-10 2xl:mb-12">
+                Applying nightly to brows and lashes, I noticed real fullness. Soft, hydrated skin and visible results
+                my go-to beauty essential
+              </p>
+              <div class="flex items-center gap-2">
+                <img
+                  src="{{'avator3.jpg' |  asset_url}}"
+                  class="size-10 lg:size-10 rounded-full"
+                  alt=""
+                  width=""
+                  height=""
+                >
+                <div>
+                  <p class="text-[#0D2E1D] text-base lg:text-lg xl:text-xl font-medium !leading-[1.5]">Olivia R.</p>
+                  <p class="text-[#797375] text-xs lg:text-base !leading-[1.4]">New York, NY</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="border border-[#E3E2E0] bg-white rounded-xl p-5 lg:p-9">
+              <div class="flex items-center gap-1.5 mb-3 lg:mb-4 xl:mb-5">
+                <span class="size-5 lg:size-6"
+                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
+                ></span>
+                <span class="size-5 lg:size-6"
+                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
+                ></span>
+                <span class="size-5 lg:size-6"
+                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
+                ></span>
+                <span class="size-5 lg:size-6"
+                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
+                ></span>
+                <span class="size-5 lg:size-6"
+                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
+                ></span>
+              </div>
+              <p class="text-sm lg:text-base xl:text-xl text-[#797375] !leading-[1.6] mb-3 md:mb-5 lg:mb-8 xl:mb-10 2xl:mb-12">
+                After switching from chemical products, my split ends vanished. Stronger hair, glowing skin, and natural
+                results make this worth it.
+              </p>
+              <div class="flex items-center gap-2">
+                <img
+                  src="{{'avator.jpg' |  asset_url}}"
+                  class="size-10 lg:size-10 rounded-full"
+                  alt=""
+                  width=""
+                  height=""
+                >
+                <div>
+                  <p class="text-[#0D2E1D] text-base lg:text-lg xl:text-xl font-medium !leading-[1.5]">Daniel K.</p>
+                  <p class="text-[#797375] text-xs lg:text-base !leading-[1.4]">Chicago, IL</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="border border-[#E3E2E0] bg-white rounded-xl p-5 lg:p-9">
+              <div class="flex items-center gap-1.5 mb-3 lg:mb-4 xl:mb-5">
+                <span class="size-5 lg:size-6"
+                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
+                ></span>
+                <span class="size-5 lg:size-6"
+                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
+                ></span>
+                <span class="size-5 lg:size-6"
+                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
+                ></span>
+                <span class="size-5 lg:size-6"
+                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
+                ></span>
+                <span class="size-5 lg:size-6"
+                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
+                ></span>
+              </div>
+              <p class="text-sm lg:text-base xl:text-xl text-[#797375] !leading-[1.6] mb-3 md:mb-5 lg:mb-8 xl:mb-10 2xl:mb-12">
+                Applying nightly to brows and lashes, I noticed real fullness. Soft, hydrated skin and visible results
+                my go-to beauty essential
+              </p>
+              <div class="flex items-center gap-2">
+                <img
+                  src="{{'avator3.jpg' |  asset_url}}"
+                  class="size-10 lg:size-10 rounded-full"
+                  alt=""
+                  width=""
+                  height=""
+                >
+                <div>
+                  <p class="text-[#0D2E1D] text-base lg:text-lg xl:text-xl font-medium !leading-[1.5]">Olivia R.</p>
+                  <p class="text-[#797375] text-xs lg:text-base !leading-[1.4]">New York, NY</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <!-- Navigation Arrows -->
+      </div>
+      <div class="absolute hidden md:block z-1 right-[5%] -top-[31%]  items-center gap-4">
+        <div class="swiper-button-prev bg-[#FFE380] !text-[#0D2E1D] hover:!text-black hidden md:block md:!size-14 rounded-full  items-center justify-center">
+          <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="swiper-button-next bg-[#FFE380] !text-[#0D2E1D] hover:!text-black hidden md:block md:!size-14 rounded-full  items-center justify-center">
+          <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.66797 1L1.16797 6.5M1.16797 6.5L6.66797 12M1.16797 6.5L15.8346 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
       </div>
     </div>
-    {% comment %} {% render 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: true %} {% endcomment %}
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const swiper = new Swiper('.review-slider', {
+      loop: true,
+      autoplay: false,
+      speed: 1200,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      scrollbar: false,
+      grabCursor: true,
+      effect: 'slide',
+
+      breakpoints: {
+        320: {
+          slidesPerView: 1.2,
+          spaceBetween: 10,
+        },
+        640: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+      },
+    });
+  });
+</script>
+
+{% comment %}
+  {% stylesheet %}
+    .jdgm-carousel-wrapper {
+      position: relative;
+    }
+    .jdgm-carousel-wrapper .jdgm-widget.jdgm-carousel {
+      width: 100% !important;
+    }
+    .jdgm-carousel-title-and-link {
+      display: none;
+    }
+    .jdgm-carousel--aligned-theme .jdgm-carousel-item {
+      border: 1px solid #e3e2e0;
+      padding: 36px !important;
+      margin-inline: 10px;
+      border-radius: 12px;
+      background: #fff;
+    }
+    .jdgm-carousel-wrapper {
+      width: 100% !important;
+      margin: auto;
+      padding: 0 !important;
+    }
+    .jdgm-carousel__item-wrapper {
+      width: calc(100% - 60px) !important;
+      height: 313px !important;
+      white-space: nowrap;
+    }
+    .jdgm-carousel-item__review-title {
+      display: none !important;
+    }
+    .jdgm-carousel-item__review-body {
+      margin: 0;
+      margin-top: 15px !important;
+      color: #797375;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 160%;
+    }
+    .jdgm-carousel--aligned-theme .jdgm-carousel-item__review-wrapper {
+      width: 100% !important;
+    }
+    .jdgm-carousel--aligned-theme .jdgm-carousel-item__reviewer-name {
+      color: #0d2e1d;
+      font-size: 20px !important;
+      font-style: normal;
+      font-weight: 500 !important;
+      line-height: 150% !important;
+      font-family: 'Poppins', sans-serif !important;
+    }
+    .jdgm-carousel--aligned-theme .jdgm-carousel-item__product-image {
+      height: auto;
+      display: inline-block;
+      vertical-align: middle;
+      width: 44px !important;
+      height: 44px !important;
+      position: absolute;
+      bottom: 32px;
+      left: 40px;
+      border-radius: 50%;
+    }
+
+    .jdgm-carousel--aligned-theme .jdgm-carousel-item__reviewer-name-wrapper {
+      text-align: left;
+      padding-left: 50px;
+      margin: 0 !important;
+      margin-bottom: 15px !important;
+      margin-top: -15px !important;
+    }
+    .jdgm-carousel__arrows .jdgm-carousel__right-arrow.jdgm-carousel__right-arrow,
+    .jdgm-carousel__arrows .jdgm-carousel__left-arrow.jdgm-carousel__left-arrow {
+      display: inline-block;
+      position: absolute;
+      top: 80px;
+      right: 50px;
+    }
+    .jdgm-carousel--aligned-theme .jdgm-carousel-item {
+      position: relative;
+    }
+    .jdgm-carousel__left-arrow {
+      position: relative !important;
+      z-index: -1 !important;
+    }
+    .jdgm-carousel__left-arrow::after {
+      position: absolute !important;
+      z-index: 1 !important;
+      content: '' !important;
+      width: 40px !important;
+      height: 40px !important;
+      background-color: red !important;
+      border-radius: 100% !important;
+      left: 90%;
+      top: 30%;
+    }
+
+    @media (max-width: 992px) {
+      .jdgm-carousel--aligned-theme .jdgm-carousel-item {
+        margin-inline: 10px;
+      }
+      .jdgm-carousel__item-wrapper {
+        width: calc(100% - 40px) !important;
+      }
+      .jdgm-carousel-item__review-body {
+        font-size: 16px;
+      }
+
+      .jdgm-carousel--aligned-theme .jdgm-carousel-item__reviewer-name {
+        font-size: 16px !important;
+      }
+    }
+    @media (max-width: 767px) {
+      .jdgm-carousel--aligned-theme .jdgm-carousel-item__product-image {
+        bottom: 17px !important;
+        left: 30px !important;
+      }
+      .jdgm-carousel--aligned-theme .jdgm-carousel-item {
+        margin-inline: 0px;
+      }
+      .jdgm-carousel__item-wrapper {
+        width: 100% !important;
+      }
+      .jdgm-carousel__item-wrapper {
+        height: 250px !important;
+      }
+      .jdgm-carousel--aligned-theme .jdgm-carousel-item {
+        padding: 15px !important;
+      }
+      .jdgm-carousel--aligned-theme .jdgm-carousel-item__reviewer-name {
+        font-size: 16px !important;
+      }
+      .jdgm-carousel-item__review-body {
+        font-size: 14px;
+      }
+      .jdgm-carousel__left-arrow,
+      .jdgm-carousel__right-arrow {
+        top: 105px !important;
+      }
+    }
+    .jdgm-row-profile {
+      width: max-content;
+      display: flex;
+      align-items: center;
+    }
+  {% endstylesheet %}
+{% endcomment %}
+{% comment %} {% render 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: true %} {% endcomment %}
