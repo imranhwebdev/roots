@@ -4091,6 +4091,11 @@
       margin-top: calc(var(--spacing) * 2.5);
     }
   }
+  .\32 xl\:mt-10 {
+    @media (width >= 1400px) {
+      margin-top: calc(var(--spacing) * 10);
+    }
+  }
   .\32 xl\:mt-20 {
     @media (width >= 1400px) {
       margin-top: calc(var(--spacing) * 20);

@@ -7,7 +7,7 @@
 
       <!-- ✅ Login Form -->
       <div id="CustomerLoginForm" class="mb-8">
-        <div class="mb-6 lg:mb-7 xl:mb-8 2xl:mb-10">
+        <div class="">
           <p class="text-white text-2xl lg:text-3xl xl:text-[32px] font-medium !leading-[1.25] font-poppins mb-1.4 lg:mb-3">
             Sign In
           </p>
@@ -18,7 +18,7 @@
 
         {% form 'customer_login' %}
           {{ form.errors | default_errors }}
-          <div class="w-full mb-4 lg:mb-5">
+          <div class="w-full mb-4 lg:mb-5 mt-6 lg:mt-7 xl:mt-8 2xl:mt-10">
             <label class="block text-white text-lg lg:text-[22px] !leading-[1.25] mb-2">Email*</label>
             <input
               type="email"
