@@ -6,7 +6,7 @@
       </a>
 
       <!-- ✅ Login Form -->
-      <div id="CustomerLoginForm">
+      <div id="CustomerLoginForm" class="mb-8">
         <div class="mb-6 lg:mb-7 xl:mb-8 2xl:mb-10">
           <p class="text-white text-2xl lg:text-3xl xl:text-[32px] font-medium !leading-[1.25] font-poppins mb-1.4 lg:mb-3">
             Sign In
@@ -37,18 +37,14 @@
             </div>
             <div class="flex items-center justify-between">
               <label class="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" id="rememberMe" class="sr-only peer">
-                <span class="w-[22px] h-[22px] border border-white bg-[#1E6C44] peer-checked:bg-white rounded-sm flex items-center justify-center">
-                  <svg
-                    class="w-4 h-4 text-white hidden peer-checked:block"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="3"
-                    viewBox="0 0 24 24"
-                  >
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                </span>
+                <div class="checkbox-wrapper-23">
+                  <input type="checkbox" id="rememberMe">
+                  <label for="rememberMe" style="--size: 22px">
+                    <svg viewBox="0,0,50,50">
+                      <path d="M5 30 L 20 45 L 45 5"></path>
+                    </svg>
+                  </label>
+                </div>
                 <p class="text-white text-base md:text-lg lg:text-xl font-poppins">Remember me</p>
               </label>
               <a
@@ -117,8 +113,13 @@
       </div>
       <!-- ✅ End Recover Form -->
 
+      <div class="relative z-1 mb-6 lg:m-4">
+        <div class="h-[1px] w-[35%] bg-[#B7D6C6] absolute left-0 top-1/2 -translate-y-1/2"></div>
+        <div class="h-[1px] w-[35%] bg-[#B7D6C6] absolute right-0 top-1/2 -translate-y-1/2"></div>
+        <p class="text-white text-base lg:text-xl font-medium font-poppins text-center">Sign Up</p>
+      </div>
 
-      <p class="text-white text-base md:text-lg lg:text-xl mt-10 lg:mt-12.5 text-center">
+      <p class="text-white text-base md:text-lg lg:text-xl mt-6 lg:mt-8 text-center">
         Don't have an account?
         <a href="{{ routes.account_register_url }}" class="text-[#FFC801] underline">Sign Up</a>
       </p>
