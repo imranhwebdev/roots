@@ -2109,6 +2109,13 @@
       }
     }
   }
+  .hover\:text-\[\#1E0D2E1D6C44\] {
+    &:hover {
+      @media (hover: hover) {
+        color: #1E0D2E1D6C44;
+      }
+    }
+  }
   .hover\:text-\[\#1E6C44\] {
     &:hover {
       @media (hover: hover) {
@@ -2790,6 +2797,16 @@
   .lg\:mt-3 {
     @media (width >= 992px) {
       margin-top: calc(var(--spacing) * 3);
+    }
+  }
+  .lg\:mt-4 {
+    @media (width >= 992px) {
+      margin-top: calc(var(--spacing) * 4);
+    }
+  }
+  .lg\:mt-6 {
+    @media (width >= 992px) {
+      margin-top: calc(var(--spacing) * 6);
     }
   }
   .lg\:mt-7 {
@@ -3588,6 +3605,11 @@
   .xl\:my-10 {
     @media (width >= 1240px) {
       margin-block: calc(var(--spacing) * 10);
+    }
+  }
+  .xl\:mt-5 {
+    @media (width >= 1240px) {
+      margin-top: calc(var(--spacing) * 5);
     }
   }
   .xl\:mt-8 {
