@@ -51,25 +51,25 @@
                   <div class="flex flex-col justify-between rounded-xl lg:rounded-2xl bg-white p-2.5 lg:px-2 lg:pt-2 lg:pb-5">
                     <div>
                       {% if article.image != blank %}
-                      <div class="w-full h-25 md:h-28 lg:h-35 2xl:h-52 mb-2.5 md:mb-4 xl:mb-5">
-                        <img
-                          src="{{ article.image | img_url: '1024x' }}"
-                          class="size-full rounded-xl object-cover"
-                          width="{{ article.image.width }}"
-                          height="{{ article.image.height }}"
-                          alt="{{ article.image.alt | default: article.title }}"
-                          loading="lazy"
-                        >
-                      </div>
-                    {% else %}
-                      <div class="w-full h-25 md:h-28 lg:h-35 2xl:h-52 mb-2.5 md:mb-4 xl:mb-5 bg-gray-200 rounded-xl flex items-center justify-center">
-                        <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                        </svg>
-                      </div>
-                    {% endif %}
+                        <div class="w-full h-25 md:h-28 lg:h-35 2xl:h-52 mb-2.5 md:mb-4 xl:mb-5">
+                          <img
+                            src="{{ article.image | img_url: '1024x' }}"
+                            class="size-full rounded-xl object-cover"
+                            width="{{ article.image.width }}"
+                            height="{{ article.image.height }}"
+                            alt="{{ article.image.alt | default: article.title }}"
+                            loading="lazy"
+                          >
+                        </div>
+                      {% else %}
+                        <div class="w-full h-25 md:h-28 lg:h-35 2xl:h-52 mb-2.5 md:mb-4 xl:mb-5 bg-gray-200 rounded-xl flex items-center justify-center">
+                          <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                          </svg>
+                        </div>
+                      {% endif %}
                     </div>
-                    <div class="lg:pl-2.5">
+                    <div class="lg:pl-2.5 flex flex-col justify-between">
                       <a href="{{article.url}}" class="group">
                         <h6 class="text-sm md:text-base lg:text-xl xl:text-2xl text-[#21201E] group-hover:text-primary font-medium !leading-[1.4] mb-2 lg:mb-3 font-poppins">
                           {{ article.title }}
