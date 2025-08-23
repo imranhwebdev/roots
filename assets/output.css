@@ -1026,6 +1026,9 @@
   .gap-8\.5 {
     gap: calc(var(--spacing) * 8.5);
   }
+  .gap-10 {
+    gap: calc(var(--spacing) * 10);
+  }
   .space-y-2 {
     :where(& > :not(:last-child)) {
       --tw-space-y-reverse: 0;
@@ -2075,6 +2078,13 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-gray-300);
+      }
+    }
+  }
+  .hover\:bg-gray-800 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-gray-800);
       }
     }
   }
@@ -3864,6 +3874,11 @@
   .xl\:h-59 {
     @media (width >= 1240px) {
       height: calc(var(--spacing) * 59);
+    }
+  }
+  .xl\:h-60 {
+    @media (width >= 1240px) {
+      height: calc(var(--spacing) * 60);
     }
   }
   .xl\:h-64 {
