@@ -109,18 +109,18 @@
       </nav>
       <!-- Right Icons + Mobile Menu Button -->
       <div class="flex items-center gap-4">
+        <a
+          href="{{ routes.cart_url }}"
+          class="relative text-white hover:text-primary transition-all duration-300 flex items-center gap-1.5"
+        >
+          {% render 'icon-cart' %}
+          <sup class="cart-count absolute -top-1 left-3 bg-primary text-black rounded-full text-xs px-1">
+            {{ cart.item_count }}
+          </sup>
+          Cart
+        </a>
         {% if customer %}
           <!-- Cart -->
-          <a
-            href="{{ routes.cart_url }}"
-            class="relative text-white hover:text-primary transition-all duration-300 flex items-center gap-1"
-          >
-            {% render 'icon-cart' %}
-            <sup class="cart-count absolute -top-1 left-3 bg-primary text-black rounded-full text-xs px-1">
-              {{ cart.item_count }}
-            </sup>
-            Cart
-          </a>
 
           <!-- User Account -->
           <a
@@ -132,16 +132,6 @@
           </a>
 
         {% else %}
-          <!-- Cart -->
-          <a
-            href="{{ routes.cart_url }}"
-            class="relative text-white hover:text-primary hover:scale-[1.07] transition-all duration-300"
-          >
-            {% render 'icon-cart' %}
-            <sup class="cart-count absolute -top-2 -right-2 bg-primary text-black rounded-full text-xs px-1">
-              {{ cart.item_count }}
-            </sup>
-          </a>
           <!-- Sign Up Button -->
           <a
             href="{{ routes.account_register_url }}"
