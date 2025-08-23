@@ -23,7 +23,7 @@
                 <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full ml-2">Default</span>
               {% endif %}
             </h3>
-            <div class="text-[#797375] text-lg lg:text-xl !leading-[1.2]">
+            <div class="text-[#797375] text-base lg:text-lg  !leading-[1.2]">
               {{ address.address1 -}}
               {%- if address.address2 %}, {{ address.address2 }}{% endif -%}
               <br>
@@ -37,7 +37,7 @@
         <div class=" max-w-max flex items-center gap-7 lg:gap-8 border border-[#E3E2E0] rounded-[150px] lg:rounded-[198px] py-3.5 lg:py-4.5 px-5.5 lg:px-6.5 relative z-">
           <span class="h-4 w-[1px] bg-[#E3E2E0] absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2"></span>
           <button
-            class="edit-btn size-5 lg:size-6 flex-[0_0_auto]"
+            class="edit-btn size-5 lg:size-6 flex-[0_0_auto] cursor-pointer"
             data-action="edit"
             data-id="{{ address.id }}"
             data-first-name="{{ address.first_name }}"
@@ -60,7 +60,7 @@
             <input type="hidden" name="return_to" value="{{ request.path }}">
             <button
               type="submit"
-              class="size-5 lg:size-6 flex-[0_0_auto] cursor-pointer"
+              class="size-5 lg:size-6 flex-[0_0_auto] cursor-pointer hover:scale-110 transform ease-in-out duration-300 "
             >
               <img src="{{'delete-icon.svg' |  asset_url}}" class="size-full" alt="" width="" height="">
             </button>
