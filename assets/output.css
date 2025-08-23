@@ -516,6 +516,12 @@
   .mb-12\.5 {
     margin-bottom: calc(var(--spacing) * 12.5);
   }
+  .mb-20 {
+    margin-bottom: calc(var(--spacing) * 20);
+  }
+  .mb-35 {
+    margin-bottom: calc(var(--spacing) * 35);
+  }
   .mb-\[2px\] {
     margin-bottom: 2px;
   }
@@ -1519,6 +1525,9 @@
   }
   .pb-25 {
     padding-bottom: calc(var(--spacing) * 25);
+  }
+  .pb-35 {
+    padding-bottom: calc(var(--spacing) * 35);
   }
   .pl-3 {
     padding-left: calc(var(--spacing) * 3);
@@ -3750,6 +3759,16 @@
   .xl\:mt-16 {
     @media (width >= 1240px) {
       margin-top: calc(var(--spacing) * 16);
+    }
+  }
+  .xl\:mt-25 {
+    @media (width >= 1240px) {
+      margin-top: calc(var(--spacing) * 25);
+    }
+  }
+  .xl\:mt-35 {
+    @media (width >= 1240px) {
+      margin-top: calc(var(--spacing) * 35);
     }
   }
   .xl\:mt-75 {
