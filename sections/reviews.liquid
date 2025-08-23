@@ -25,10 +25,32 @@
     height: 20px;
     fill: #fff;
   }
-  .swiper-pagination-bullet {
+  .swiper-pagination {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    justify-content: center;
+  }
+  .roots-customer-reviews .swiper-pagination-bullet {
     display: none;
+    background-color: #b7d6c6;
+    width: 18px !important;
+    height: 6px !important;
+    border-radius: 30px !important;
   }
   .swiper {
+  }
+  .roots-customer-reviews .swiper-wrapper {
+    padding-bottom: 35px !important;
+  }
+  .roots-customer-reviews .swiper-pagination-bullet-active {
+    background-color: #1e6c44 !important;
+  }
+
+  @media screen and (max-width: 768px) {
+    .roots-customer-reviews .swiper-pagination-bullet {
+      display: block;
+    }
   }
 </style>
 
@@ -38,8 +60,8 @@
       Customer Reviews
     </h2>
     <div class=" relative z-1">
-      <div class="swiper review-slider">
-        <div class="swiper-wrapper ">
+      <div class="swiper review-slider ">
+        <div class="swiper-wrapper">
           <div class="swiper-slide">
             <div class="border border-[#E3E2E0] bg-white rounded-xl p-5 lg:p-9">
               <div class="flex items-center gap-1.5 mb-3 lg:mb-4 xl:mb-5">
@@ -194,8 +216,9 @@
           </div>
         </div>
         <div class="swiper-pagination"></div>
-        <!-- Navigation Arrows -->
       </div>
+      <!-- Navigation Arrows -->
+
       <div class="absolute hidden md:block z-1 right-[5%] -top-[31%]  items-center gap-4">
         <div class="swiper-button-prev bg-[#FFE380] !text-[#0D2E1D] hover:!text-black hidden md:block md:!size-14 rounded-full  items-center justify-center">
           <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -216,7 +239,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     const swiper = new Swiper('.review-slider', {
       loop: true,
-      autoplay: false,
+      autoPlay: false,
       speed: 1200,
       pagination: {
         el: '.swiper-pagination',
@@ -247,4 +270,3 @@
     });
   });
 </script>
-

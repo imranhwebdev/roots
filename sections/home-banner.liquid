@@ -32,9 +32,18 @@
     height: 20px;
     fill: #fff;
   }
-  .swiper-pagination-bullet {
-    display: none;
+  .banner .swiper-pagination-bullet {
+    background-color: #b7d6c6;
+    width: 18px !important;
+    height: 6px !important;
+    border-radius: 30px !important;
   }
+  .swiper {
+  }
+  .banner .swiper-pagination-bullet-active {
+    background-color: #ffffff !important;
+  }
+
   @media screen and (max-width: 1280px) {
     .banner .swiper-horizontal > .swiper-pagination-bullets,
     .banner .swiper-pagination-bullets.swiper-pagination-horizontal,
@@ -53,7 +62,9 @@
       opacity: 1 !important;
     }
   }
-
+  .banner .swiper-pagination {
+    display: none;
+  }
   @media screen and (max-width: 768px) {
     .banner .swiper-horizontal > .swiper-pagination-bullets,
     .banner .swiper-pagination-bullets.swiper-pagination-horizontal,
@@ -69,6 +80,12 @@
     .swiper-button-nextt,
     .swiper-button-prevv {
       display: none;
+    }
+    .banner .swiper-pagination {
+      display: block;
+      display: flex;
+      gap: 6px;
+      align-items: center;
     }
   }
 
@@ -113,11 +130,11 @@
                   </p>
                 {% endif %}
 
-                <div class="relative flex items-center justify-center lg:justify-start gap-4 lg:gap-5 z-1 max-w-full lg:max-w-max group mt-7.5">
+                <div class="relative flex items-center flex-wrap justify-center lg:justify-start gap-4 lg:gap-5 z-1 max-w-full lg:max-w-max group mt-7.5">
                   {% if block.settings.button_link != blank and block.settings.button_text != blank %}
                     <a
                       href="{{ block.settings.button_link }}"
-                      class="btn !text-base lg:text-lg xl:!text-xl !py-3 lg:!py-5 !px-5 lg:!px-9"
+                      class="btn w-full  !text-base lg:text-lg xl:!text-xl !py-1 sm:!py-3 lg:!py-5 !px-3 sm:!px-5 lg:!px-9 "
                     >
                       {{ block.settings.button_text }}
                       <span>
@@ -131,7 +148,7 @@
                   {% if block.settings.button_link2 != blank and block.settings.button_text2 != blank %}
                     <a
                       href="{{ block.settings.button_link2 }}"
-                      class="inline-btn !text-base lg:text-lg xl:!text-xl !py-3 lg:!py-5 !px-5 lg:!px-9 hover:!border-white hover:!text-black hover:!bg-white"
+                      class="inline-btn whitespace-nowrap  w-full text-sm sm:!text-base lg:text-lg xl:!text-xl !py-1 sm:!py-3 lg:!py-5 px-3 sm:!px-5 lg:!px-9 hover:!border-white hover:!text-black hover:!bg-white "
                     >
                       {{ block.settings.button_text2 }}
                     </a>
