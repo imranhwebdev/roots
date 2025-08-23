@@ -42,6 +42,8 @@
               src="https://i.pravatar.cc/100"
               class="size-13 lg:size-15 rounded-full"
               alt="{{ article.author }}"
+              width=""
+              height=""
             >
             <div>
               {% if section.settings.show_author %}
@@ -164,6 +166,35 @@
     </div>
   </div>
 </div>
+<style>
+  .blog-details .prose h1 {
+    color: {{ section.settings.h1_color }};
+    font-size: {{ section.settings.h1_size_desktop }}px;
+    font-weight: {{ section.settings.h1_weight }};
+    margin-top: {{ section.settings.h1_margin_top }}px;
+    margin-bottom: {{ section.settings.h1_margin_bottom }}px;
+  }
+  .blog-details .prose h2 {
+    color: {{ section.settings.h2_color }};
+    font-size: {{ section.settings.h2_size_desktop }}px;
+    font-weight: {{ section.settings.h2_weight }};
+    margin-top: {{ section.settings.h2_margin_top }}px;
+    margin-bottom: {{ section.settings.h2_margin_bottom }}px;
+  }
+  /* H3–H6 + P same pattern */
+
+  @media screen and (max-width:1024px){
+    .blog-details .prose h1 { font-size: {{ section.settings.h1_size_tablet }}px; }
+    .blog-details .prose h2 { font-size: {{ section.settings.h2_size_tablet }}px; }
+    /* H3–H6 + P tablet sizes */
+  }
+
+  @media screen and (max-width:768px){
+    .blog-details .prose h1 { font-size: {{ section.settings.h1_size_mobile }}px; }
+    .blog-details .prose h2 { font-size: {{ section.settings.h2_size_mobile }}px; }
+    /* H3–H6 + P mobile sizes */
+  }
+</style>
 
 {% schema %}
 {
@@ -184,7 +215,145 @@
       "max": 6,
       "step": 1,
       "default": 3
-    }
+    },
+
+    // H1
+    { "type": "color", "id": "h1_color", "label": "H1 Color", "default": "#0D2E1D" },
+    { "type": "number", "id": "h1_size_desktop", "label": "H1 Size Desktop (px)", "default": 36 },
+    { "type": "number", "id": "h1_size_tablet", "label": "H1 Size Tablet (px)", "default": 30 },
+    { "type": "number", "id": "h1_size_mobile", "label": "H1 Size Mobile (px)", "default": 24 },
+    {
+      "type": "select",
+      "id": "h1_weight",
+      "label": "H1 Weight",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ],
+      "default": "600"
+    },
+    { "type": "number", "id": "h1_margin_top", "label": "H1 Margin Top (px)", "default": 20 },
+    { "type": "number", "id": "h1_margin_bottom", "label": "H1 Margin Bottom (px)", "default": 20 },
+
+    // H2
+    { "type": "color", "id": "h2_color", "label": "H2 Color", "default": "#0D2E1D" },
+    { "type": "number", "id": "h2_size_desktop", "label": "H2 Size Desktop (px)", "default": 32 },
+    { "type": "number", "id": "h2_size_tablet", "label": "H2 Size Tablet (px)", "default": 28 },
+    { "type": "number", "id": "h2_size_mobile", "label": "H2 Size Mobile (px)", "default": 24 },
+    {
+      "type": "select",
+      "id": "h2_weight",
+      "label": "H2 Weight",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ],
+      "default": "600"
+    },
+    { "type": "number", "id": "h2_margin_top", "label": "H2 Margin Top (px)", "default": 18 },
+    { "type": "number", "id": "h2_margin_bottom", "label": "H2 Margin Bottom (px)", "default": 18 },
+
+    // H3
+    { "type": "color", "id": "h3_color", "label": "H3 Color", "default": "#0D2E1D" },
+    { "type": "number", "id": "h3_size_desktop", "label": "H3 Size Desktop (px)", "default": 28 },
+    { "type": "number", "id": "h3_size_tablet", "label": "H3 Size Tablet (px)", "default": 24 },
+    { "type": "number", "id": "h3_size_mobile", "label": "H3 Size Mobile (px)", "default": 20 },
+    {
+      "type": "select",
+      "id": "h3_weight",
+      "label": "H3 Weight",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ],
+      "default": "600"
+    },
+    { "type": "number", "id": "h3_margin_top", "label": "H3 Margin Top (px)", "default": 16 },
+    { "type": "number", "id": "h3_margin_bottom", "label": "H3 Margin Bottom (px)", "default": 16 },
+
+    // H4–H6 (similar pattern)
+    { "type": "color", "id": "h4_color", "label": "H4 Color", "default": "#0D2E1D" },
+    { "type": "number", "id": "h4_size_desktop", "label": "H4 Size Desktop (px)", "default": 24 },
+    { "type": "number", "id": "h4_size_tablet", "label": "H4 Size Tablet (px)", "default": 20 },
+    { "type": "number", "id": "h4_size_mobile", "label": "H4 Size Mobile (px)", "default": 18 },
+    {
+      "type": "select",
+      "id": "h4_weight",
+      "label": "H4 Weight",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ],
+      "default": "600"
+    },
+    { "type": "number", "id": "h4_margin_top", "label": "H4 Margin Top (px)", "default": 14 },
+    { "type": "number", "id": "h4_margin_bottom", "label": "H4 Margin Bottom (px)", "default": 14 },
+
+    { "type": "color", "id": "h5_color", "label": "H5 Color", "default": "#0D2E1D" },
+    { "type": "number", "id": "h5_size_desktop", "label": "H5 Size Desktop (px)", "default": 20 },
+    { "type": "number", "id": "h5_size_tablet", "label": "H5 Size Tablet (px)", "default": 18 },
+    { "type": "number", "id": "h5_size_mobile", "label": "H5 Size Mobile (px)", "default": 16 },
+    {
+      "type": "select",
+      "id": "h5_weight",
+      "label": "H5 Weight",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ],
+      "default": "600"
+    },
+    { "type": "number", "id": "h5_margin_top", "label": "H5 Margin Top (px)", "default": 12 },
+    { "type": "number", "id": "h5_margin_bottom", "label": "H5 Margin Bottom (px)", "default": 12 },
+
+    { "type": "color", "id": "h6_color", "label": "H6 Color", "default": "#0D2E1D" },
+    { "type": "number", "id": "h6_size_desktop", "label": "H6 Size Desktop (px)", "default": 18 },
+    { "type": "number", "id": "h6_size_tablet", "label": "H6 Size Tablet (px)", "default": 16 },
+    { "type": "number", "id": "h6_size_mobile", "label": "H6 Size Mobile (px)", "default": 14 },
+    {
+      "type": "select",
+      "id": "h6_weight",
+      "label": "H6 Weight",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ],
+      "default": "600"
+    },
+    { "type": "number", "id": "h6_margin_top", "label": "H6 Margin Top (px)", "default": 10 },
+    { "type": "number", "id": "h6_margin_bottom", "label": "H6 Margin Bottom (px)", "default": 10 },
+
+    // Paragraph
+    { "type": "color", "id": "p_color", "label": "Paragraph Color", "default": "#514849" },
+    { "type": "number", "id": "p_size_desktop", "label": "Paragraph Size Desktop (px)", "default": 16 },
+    { "type": "number", "id": "p_size_tablet", "label": "Paragraph Size Tablet (px)", "default": 15 },
+    { "type": "number", "id": "p_size_mobile", "label": "Paragraph Size Mobile (px)", "default": 14 },
+    {
+      "type": "select",
+      "id": "p_weight",
+      "label": "Paragraph Weight",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ],
+      "default": "400"
+    },
+    { "type": "number", "id": "p_margin_top", "label": "Paragraph Margin Top (px)", "default": 10 },
+    { "type": "number", "id": "p_margin_bottom", "label": "Paragraph Margin Bottom (px)", "default": 10 }
   ]
 }
 {% endschema %}
