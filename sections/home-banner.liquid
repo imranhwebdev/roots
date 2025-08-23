@@ -109,11 +109,11 @@
     <div class="swiper-wrapper">
       {% for block in section.blocks %}
         <div class="swiper-slide">
-          <div class="pt-10 lg:pt-20 pb-25 relative z-1">
+          <div class="pt-10 lg:pt-20 pb-15 md:pb-25 relative z-1">
             <div class="container mx-auto flex flex-col md:flex-row flex-wrap justify-between items-center overflow-hidden">
-              <div class="w-full md:w-6/12 mt-5 md:mt-6 lg:mt-7 xl:mt-10 mb-4 md:mb-0 text-center lg:text-start">
+              <div class="w-full md:w-6/12 mt-5 md:mt-6 lg:mt-7 xl:mt-10 mb-4 md:mb-0 text-center md:text-start md:pe-[2%]">
                 {% if block.settings.tagline != blank %}
-                  <span class="text-xs md:text-base uppercase font-poppins leading-tight tracking-[1.92px] text-[#EEEFEE] bg-[rgba(255,255,255,0.10)] border border-solid border-[rgba(255,255,255,0.12)] rounded-[20px] py-2.5 px-4 mb-5 inline-block">
+                  <span class="text-xs lg:text-base uppercase font-poppins leading-tight tracking-[1.92px] text-[#EEEFEE] bg-[rgba(255,255,255,0.10)] border border-solid border-[rgba(255,255,255,0.12)] rounded-[20px] py-2.5 px-4 mb-5 inline-block">
                     {{ block.settings.tagline }}
                   </span>
                 {% endif %}
@@ -125,7 +125,7 @@
                 {% endif %}
 
                 {% if block.settings.des != blank %}
-                  <p class="text-[#B7D6C6] text-sm md:text-lg lg:text-xl font-light !leading-[1.6] max-w-[717px]">
+                  <p class="text-[#B7D6C6] text-sm md:text-base lg:text-xl font-light !leading-[1.6] max-w-[717px]">
                     {{ block.settings.des }}
                   </p>
                 {% endif %}
@@ -156,13 +156,13 @@
                 </div>
               </div>
 
-              <div class="w-full md:w-6/12 mt-10 lg:mt-0">
-                <div class="banner-image relative">
+              <div class="w-full md:w-6/12 mt-6 lg:mt-0">
+                <div class="banner-image relative ps-10">
                   {% if block.settings.slide_image != blank %}
-                    <div class="w-full h-full xl:h-130 2xl:h-144 3xl:h-159.5">
+                    <div class="w-full">
                       <img
                         src="{{ block.settings.slide_image | image_url }}"
-                        class="size-full"
+                        class="size-full rounded-lg md:rounded-[20px] border-2 md:border-4 border-solid border-white"
                         width=""
                         height=""
                         alt="{{ block.settings.heading }}"
@@ -170,7 +170,7 @@
                     </div>
                   {% endif %}
                   {% if block.settings.product_image != blank %}
-                    <div class="w-full max-w-57">
+                    <div class="w-full max-w-25 lg:max-w-35 xl:max-w-57 absolute bottom-3 md:bottom-10 left-0">
                       <img
                         src="{{ block.settings.product_image | image_url }}"
                         class="size-full"
