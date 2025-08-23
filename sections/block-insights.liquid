@@ -35,36 +35,43 @@
     <div class="tabs-wrapper grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-7 xl:gap-8">
       {% for article in blogs[section.settings.blog].articles %}
         <div
-          class="blog-post px-3 pt-3 pb-6 bg-white rounded-lg lg:rounded-[10px]"
+          class="blog-post px-3 pt-3 pb-6 bg-white rounded-lg lg:rounded-[10px] flex flex-col justify-between"
           data-tags="{{ article.tags | join: ' ' | handleize }}"
         >
           {% if article.image %}
             <div class="w-full h-53 md:h-60 lg:h-64 mb-4 md:mb-5 lg:mb-6">
-              {{ article.image | image_url: width: 500 | image_tag: class: 'size-full rounded-[10px]' }}
+              {{
+                article.image
+                | image_url: width: 500
+                | image_tag: class: 'size-full rounded-[10px] object-cover object-top'
+              }}
             </div>
           {% endif %}
-          <div class="px-3">
-            <div class="flex items-center gap-4 lg:gap-5 mb-2.5 lg:mb-3">
-              {% if article.tags.size > 0 %}
-                <span class="text-sm !leading-[1.2] tracking-[1.64px] uppercase font-poppins text-[#514849] rounded-2xl lg:rounded-[20px] py-2.5 px-4 block bg-[#F0F0F0] border border-[#F0F0F0] max-w-max">
-                  {{ article.tags.first }}
-                </span>
-              {% endif %}
-              {% assign words = article.content | strip_html | split: ' ' | size %}
-              {% assign minutes = words | divided_by: 150 %}
-              {% if minutes < 1 %}
-                {% assign minutes = 1 %}
-              {% endif %}
-              <p class="text-[#103C25] text-sm m !leading-[1.2] tracking-[1.64px] uppercase font-poppins">
-                {{ minutes }} min read
+          <div class="px-3 flex flex-col justify-between grow">
+            <div class="post-info">
+              <div class="flex items-center gap-4 lg:gap-5 mb-2.5 lg:mb-3">
+                {% if article.tags.size > 0 %}
+                  <span class="text-sm !leading-[1.2] tracking-[1.64px] uppercase font-poppins text-[#514849] rounded-2xl lg:rounded-[20px] py-2.5 px-4 block bg-[#F0F0F0] border border-[#F0F0F0] max-w-max">
+                    {{ article.tags.first }}
+                  </span>
+                {% endif %}
+                {% assign words = article.content | strip_html | split: ' ' | size %}
+                {% assign minutes = words | divided_by: 150 %}
+                {% if minutes < 1 %}
+                  {% assign minutes = 1 %}
+                {% endif %}
+                <p class="text-[#103C25] text-sm m !leading-[1.2] tracking-[1.64px] uppercase font-poppins">
+                  {{ minutes }} min read
+                </p>
+              </div>
+              <h6 class="text-[#0D2E1D] font-poppins text-xl lg:text-2xl font-medium !leading-[1.6] mb-4 lg:mb-5">
+                <a href="{{ article.url }}">{{ article.title }}</a>
+              </h6>
+              <p class="text-[#514849] text-base lg:text-lg !leading-[1.6] mb-3 lg:mb-4">
+                {{ article.excerpt | strip_html | truncate: 100 }}
               </p>
             </div>
-            <h6 class="text-[#0D2E1D] text-xl lg:text-xl font-medium !leading-[1.6] mb-4 lg:mb-5">
-              <a href="{{ article.url }}">{{ article.title }}</a>
-            </h6>
-            <p class="text-[#514849] text-base lg:text-lg !leading-[1.6] mb-3 lg:mb-4">
-              {{ article.excerpt | strip_html | truncate: 100 }}
-            </p>
+
             <a
               href="{{ article.url }}"
               class="text-[#967901] group text-lg lg:text-xl font-medium hover:text-green !leading-[1.2] font-poppins flex items-center gap-2 lg:gap-3"
