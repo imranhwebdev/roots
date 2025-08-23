@@ -8,7 +8,7 @@
       {%- assign first_article = blog.articles.first -%}
       {%- if first_article -%}
         <!-- Featured First Article -->
-        <div class="p-3 lg:p-4 bg-[#B7D6C6] rounded-lg lg:rounded-[10px]">
+        <div class="p-3 lg:p-4 bg-[#B7D6C6] rounded-lg lg:rounded-[10px] flex flex-col justify-between">
           <div class="mb-8 md:mb-10 lg:mb-12 xl:mb-14.5 mt-5 lg:mt-7 xl:mt-10">
             <div class="flex items-center gap-4 lg:gap-5 mb-2.5 lg:mb-3.5">
               {% if first_article.tags.size > 0 %}
@@ -18,7 +18,7 @@
               {% endif %}
               <p class="text-[#103C25] text-sm md:text-base !leading-[1.2] uppercase font-poppins">
                 {% assign words = article.content | strip_html | split: ' ' | size %}
-                {% assign minutes = words | divided_by: 150 %}
+                {% assign minutes = words | divided_by: 220 %}
                 {% if minutes < 1 %}
                   {% assign minutes = 1 %}
                 {% endif %}
