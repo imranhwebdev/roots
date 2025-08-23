@@ -1544,6 +1544,10 @@
     --tw-leading: 1.37 !important;
     line-height: 1.37 !important;
   }
+  .leading-\[1\.4\] {
+    --tw-leading: 1.4;
+    line-height: 1.4;
+  }
   .leading-\[160\%\] {
     --tw-leading: 160%;
     line-height: 160%;
