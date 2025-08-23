@@ -1422,6 +1422,9 @@
   .py-25 {
     padding-block: calc(var(--spacing) * 25);
   }
+  .ps-2 {
+    padding-inline-start: calc(var(--spacing) * 2);
+  }
   .ps-4 {
     padding-inline-start: calc(var(--spacing) * 4);
   }
@@ -2707,6 +2710,11 @@
   .md\:py-22 {
     @media (width >= 768px) {
       padding-block: calc(var(--spacing) * 22);
+    }
+  }
+  .md\:ps-4 {
+    @media (width >= 768px) {
+      padding-inline-start: calc(var(--spacing) * 4);
     }
   }
   .md\:pt-0 {
