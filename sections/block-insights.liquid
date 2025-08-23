@@ -4,263 +4,79 @@
       <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-start flex-[0_0_auto] text-green !leading-[1.25] font-bold font-armany-bold">
         {{ section.settings.heading }}
       </h2>
-
       <!-- Tabs Header -->
       <div class="overflow-auto">
         <div class="flex items-center gap-3 lg:gap-4 w-78 md:w-130 lg:w-auto">
-          <!-- All tab -->
           <button
-            class="tab-btn active-tab text-white bg-[#1E6C44] cursor-pointer ease-in-out duration-300 text-lg lg:text-xl font-medium !leading-[1.2] font-poppins py-3.5 lg:py-4.5 px-7 lg:px-8 rounded-3xl lg:rounded-[40px]"
+            class="tab-btn flex-[0_0_auto] active-tab text-white bg-[#1E6C44] cursor-pointer ease-in-out duration-300 text-lg lg:text-xl font-medium !leading-[1.2] font-poppins py-3.5 lg:py-4.5 px-7 lg:px-8 rounded-3xl lg:rounded-[40px]"
             data-tab="all"
           >
             All
           </button>
 
-          <!-- Generate Tags - Manual Collection Method -->
-          {% assign unique_tags = '' | split: '' %}
-          {% assign all_article_tags = '' | split: '' %}
-
-          {% if section.settings.blog %}
-            {% comment %} Collect ALL tags manually {% endcomment %}
-            {% for article in blogs[section.settings.blog].articles %}
-              {% if article.tags.size > 0 %}
-                {% for tag in article.tags %}
-                  {% assign all_article_tags = all_article_tags | push: tag %}
-                {% endfor %}
-              {% endif %}
-            {% endfor %}
-
-            {% comment %} Manual unique filtering {% endcomment %}
-            {% for tag in all_article_tags %}
-              {% assign is_duplicate = false %}
-              {% for unique_tag in unique_tags %}
-                {% if unique_tag == tag %}
-                  {% assign is_duplicate = true %}
-                  {% break %}
-                {% endif %}
-              {% endfor %}
-              {% unless is_duplicate %}
-                {% assign unique_tags = unique_tags | push: tag %}
+          {% assign all_tags = '' | split: ',' %}
+          {% for article in blogs[section.settings.blog].articles %}
+            {% for tag in article.tags %}
+              {% unless all_tags contains tag %}
+                {% assign all_tags = all_tags | push: tag %}
+                <button
+                  class="tab-btn flex-[0_0_auto] text-[#1E6C44] bg-white cursor-pointer ease-in-out duration-300 text-lg lg:text-xl font-medium !leading-[1.2] font-poppins py-3.5 lg:py-4.5 px-7 lg:px-8 rounded-3xl lg:rounded-[40px]"
+                  data-tab="{{ tag | handleize }}"
+                >
+                  {{ tag }}
+                </button>
               {% endunless %}
             {% endfor %}
-          {% endif %}
-
-          <!-- Sort tags -->
-          {% if section.settings.tag_sort == 'desc' %}
-            {% assign sorted_tags = unique_tags | sort | reverse %}
-          {% else %}
-            {% assign sorted_tags = unique_tags | sort %}
-          {% endif %}
-
-          <!-- Display tag buttons -->
-          {% for tag in sorted_tags %}
-            <button
-              class="tab-btn text-[#1E6C44] bg-white cursor-pointer ease-in-out duration-300 text-lg lg:text-xl font-medium !leading-[1.2] font-poppins py-3.5 lg:py-4.5 px-7 lg:px-8 rounded-3xl lg:rounded-[40px] hover:bg-[#1E6C44] hover:text-white"
-              data-tab="{{ tag | handle }}"
-            >
-              {{ tag }}
-            </button>
           {% endfor %}
         </div>
       </div>
     </div>
 
-    <!-- Posts per page setting -->
-    {% assign posts_per_page = section.settings.posts_per_page | default: 9 %}
-
-    <!-- Debug Panel - Remove this in production -->
-    <div
-      class="debug-panel"
-      style="background: #f8f8f8; padding: 15px; margin: 20px 0; border-radius: 8px; font-family: monospace; font-size: 12px; display: none;"
-    >
-      <h4 style="margin: 0 0 10px 0; color: #333;">🔍 Debug Information:</h4>
-      <p><strong>Selected Blog:</strong> {{ section.settings.blog }}</p>
-      <p><strong>Posts per page:</strong> {{ posts_per_page }}</p>
-      <p><strong>Tag sort:</strong> {{ section.settings.tag_sort }}</p>
-      {% if section.settings.blog %}
-        <p><strong>Blog exists:</strong> ✅ Yes</p>
-        <p><strong>Total articles:</strong> {{ blogs[section.settings.blog].articles.size }}</p>
-        <p><strong>All article tags collected:</strong> {{ all_article_tags.size }}</p>
-        <p><strong>Unique tags found:</strong> {{ unique_tags.size }}</p>
-        <p>
-          <strong>Tags:</strong>
-          {% for tag in sorted_tags %}
-            "{{ tag }}"{% unless forloop.last %}, {% endunless %}
-          {% endfor %}
-        </p>
-        <div style="margin-top: 10px; padding: 10px; background: #fff; border-radius: 4px;">
-          <strong>Sample article tags:</strong><br>
-          {% for article in blogs[section.settings.blog].articles limit: 3 %}
-            <div>
-              {{ article.title }}:
-              {% for tag in article.tags %}
-                {{ tag -}}
-                {%- unless forloop.last %}, {% endunless %}
-              {% endfor %}
-              ({{ article.tags.size }} tags)
-            </div>
-          {% endfor %}
-        </div>
-      {% else %}
-        <p><strong>Blog exists:</strong> ❌ No blog selected</p>
-      {% endif %}
-    </div>
-
-    <!-- Toggle Debug Button -->
-    <button
-      onclick="toggleDebug()"
-      style="background: #1E6C44; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; margin-bottom: 20px;"
-    >
-      Toggle Debug Info
-    </button>
-
-    <!-- Tabs Content -->
-    <div class="tabs-wrapper">
-      <!-- All Articles Tab -->
-      <div class="tab-content block" data-tab="all">
+    <!-- All posts (single container, filterable) -->
+    <div class="tabs-wrapper grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-7 xl:gap-8">
+      {% for article in blogs[section.settings.blog].articles %}
         <div
-          class="articles-grid grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-7 xl:gap-8"
-          data-posts-per-page="{{ posts_per_page }}"
+          class="blog-post px-3 pt-3 pb-6 bg-white rounded-lg lg:rounded-[10px]"
+          data-tags="{{ article.tags | join: ' ' | handleize }}"
         >
-          {% if section.settings.blog %}
-            {% for article in blogs[section.settings.blog].articles %}
-              <div
-                class="article-item px-3 pt-3 pb-6 bg-white rounded-lg lg:rounded-[10px]"
-                data-index="{{ forloop.index0 }}"
-              >
-                {% if article.image %}
-                  <div class="w-full h-53 md:h-60 lg:h-64 mb-4 md:mb-5 lg:mb-6">
-                    {{
-                      article.image
-                      | image_url: width: 500
-                      | image_tag: class: 'size-full rounded-[10px] object-cover object-top'
-                    }}
-                  </div>
-                {% endif %}
-                <div class="px-3">
-                  <div class="flex items-center gap-4 lg:gap-5 mb-2.5 lg:mb-3">
-                    {% if article.tags.size > 0 %}
-                      <span class="text-sm !leading-[1.2] tracking-[1.64px] uppercase font-poppins text-[#514849] rounded-2xl lg:rounded-[20px] py-2.5 px-4 block bg-[#F0F0F0] border border-[#F0F0F0] max-w-max">
-                        {{ article.tags.first }}
-                      </span>
-                    {% endif %}
-                    {% assign words = article.content | strip_html | split: ' ' | size %}
-                    {% assign minutes = words | divided_by: 150 %}
-                    {% if minutes < 1 %}
-                      {% assign minutes = 1 %}
-                    {% endif %}
-                    <p class="text-[#103C25] text-sm !leading-[1.2] tracking-[1.64px] uppercase font-poppins">
-                      {{ minutes }} min read
-                    </p>
-                  </div>
-                  <h6 class="text-[#0D2E1D] text-xl font-medium !leading-[1.6] mb-4 lg:mb-5">
-                    <a href="{{ article.url }}">{{ article.title }}</a>
-                  </h6>
-                  <p class="text-[#514849] text-base lg:text-lg !leading-[1.6] mb-3 lg:mb-4">
-                    {{ article.excerpt | strip_html | truncate: 100 }}
-                  </p>
-                  <a
-                    href="{{ article.url }}"
-                    class="text-[#967901] group text-lg lg:text-xl font-medium hover:text-green !leading-[1.2] font-poppins flex items-center gap-2 lg:gap-3"
-                  >
-                    Learn More
-                    <span class="group-hover:translate-x-1 transform ease-in-out duration-300">
-                      <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
-                    </span>
-                  </a>
-                </div>
-              </div>
-            {% endfor %}
-          {% else %}
-            <div class="col-span-full text-center py-12">
-              <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
-                <h3 class="text-lg font-medium text-yellow-800 mb-2">⚠️ No Blog Selected</h3>
-                <p class="text-yellow-700">Please go to Theme Settings and select a blog to display posts.</p>
-              </div>
+          {% if article.image %}
+            <div class="w-full h-53 md:h-60 lg:h-64 mb-4 md:mb-5 lg:mb-6">
+              {{ article.image | image_url: width: 500 | image_tag: class: 'size-full rounded-[10px]' }}
             </div>
           {% endif %}
-        </div>
-
-        <!-- Pagination for All tab -->
-        <div class="pagination-wrapper mt-8 flex justify-center" data-tab="all">
-          <!-- Pagination will be generated by JavaScript -->
-        </div>
-      </div>
-
-      <!-- Individual Tag Tabs -->
-      {% for tag in sorted_tags %}
-        <div class="tab-content hidden" data-tab="{{ tag | handle }}">
-          <div
-            class="articles-grid grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-7 xl:gap-8"
-            data-posts-per-page="{{ posts_per_page }}"
-          >
-            {% assign tag_article_count = 0 %}
-            {% if section.settings.blog %}
-              {% for article in blogs[section.settings.blog].articles %}
-                {% if article.tags contains tag %}
-                  <div
-                    class="article-item px-3 pt-3 pb-6 bg-white rounded-lg lg:rounded-[10px]"
-                    data-index="{{ tag_article_count }}"
-                  >
-                    {% if article.image %}
-                      <div class="w-full h-53 md:h-60 lg:h-64 mb-4 md:mb-5 lg:mb-6">
-                        {{
-                          article.image
-                          | image_url: width: 500
-                          | image_tag: class: 'size-full rounded-[10px] object-cover object-top'
-                        }}
-                      </div>
-                    {% endif %}
-                    <div class="px-3">
-                      <div class="flex items-center gap-4 lg:gap-5 mb-2.5 lg:mb-3">
-                        <span class="text-sm !leading-[1.2] tracking-[1.64px] uppercase font-poppins text-[#514849] rounded-2xl lg:rounded-[20px] py-2.5 px-4 block bg-[#F0F0F0] border border-[#F0F0F0] max-w-max">
-                          {{ tag }}
-                        </span>
-                        {% assign words = article.content | strip_html | split: ' ' | size %}
-                        {% assign minutes = words | divided_by: 150 %}
-                        {% if minutes < 1 %}
-                          {% assign minutes = 1 %}
-                        {% endif %}
-                        <p class="text-[#103C25] text-sm !leading-[1.2] tracking-[1.64px] uppercase font-poppins">
-                          {{ minutes }} min read
-                        </p>
-                      </div>
-                      <h6 class="text-[#0D2E1D] text-xl font-medium !leading-[1.6] mb-4 lg:mb-5">
-                        <a href="{{ article.url }}">{{ article.title }}</a>
-                      </h6>
-                      <p class="text-[#514849] text-base lg:text-lg !leading-[1.6] mb-3 lg:mb-4">
-                        {{ article.excerpt | strip_html | truncate: 100 }}
-                      </p>
-                      <a
-                        href="{{ article.url }}"
-                        class="text-[#967901] group text-lg lg:text-xl font-medium hover:text-green !leading-[1.2] font-poppins flex items-center gap-2 lg:gap-3"
-                      >
-                        Learn More
-                        <span class="group-hover:translate-x-1 transform ease-in-out duration-300">
-                          <svg
-                            width="17"
-                            height="13"
-                            viewBox="0 0 17 13"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                          </svg>
-                        </span>
-                      </a>
-                    </div>
-                  </div>
-                  {% assign tag_article_count = tag_article_count | plus: 1 %}
-                {% endif %}
-              {% endfor %}
-            {% endif %}
-          </div>
-
-          <!-- Pagination for this tag -->
-          <div class="pagination-wrapper mt-8 flex justify-center" data-tab="{{ tag | handle }}">
-            <!-- Pagination will be generated by JavaScript -->
+          <div class="px-3">
+            <div class="flex items-center gap-4 lg:gap-5 mb-2.5 lg:mb-3">
+              {% if article.tags.size > 0 %}
+                <span class="text-sm !leading-[1.2] tracking-[1.64px] uppercase font-poppins text-[#514849] rounded-2xl lg:rounded-[20px] py-2.5 px-4 block bg-[#F0F0F0] border border-[#F0F0F0] max-w-max">
+                  {{ article.tags.first }}
+                </span>
+              {% endif %}
+              {% assign words = article.content | strip_html | split: ' ' | size %}
+              {% assign minutes = words | divided_by: 150 %}
+              {% if minutes < 1 %}
+                {% assign minutes = 1 %}
+              {% endif %}
+              <p class="text-[#103C25] text-sm m !leading-[1.2] tracking-[1.64px] uppercase font-poppins">
+                {{ minutes }} min read
+              </p>
+            </div>
+            <h6 class="text-[#0D2E1D] text-xl lg:text-xl font-medium !leading-[1.6] mb-4 lg:mb-5">
+              <a href="{{ article.url }}">{{ article.title }}</a>
+            </h6>
+            <p class="text-[#514849] text-base lg:text-lg !leading-[1.6] mb-3 lg:mb-4">
+              {{ article.excerpt | strip_html | truncate: 100 }}
+            </p>
+            <a
+              href="{{ article.url }}"
+              class="text-[#967901] group text-lg lg:text-xl font-medium hover:text-green !leading-[1.2] font-poppins flex items-center gap-2 lg:gap-3"
+            >
+              Learn More
+              <span class="group-hover:translate-x-1 transform ease-in-out duration-300">
+                <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </a>
           </div>
         </div>
       {% endfor %}
@@ -270,271 +86,40 @@
 
 {% schema %}
 {
-  "name": "Blog Insights Section",
+  "name": "Blog Section",
   "tag": "section",
-  "class": "blog-insights-section",
   "settings": [
-    {
-      "type": "header",
-      "content": "Blog Settings"
-    },
-    {
-      "type": "blog",
-      "id": "blog",
-      "label": "Select Blog",
-      "info": "Choose which blog to display"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Section Heading",
-      "default": "Get insights from us",
-      "info": "Main heading for the section"
-    },
-    {
-      "type": "header",
-      "content": "Display Settings"
-    },
-    {
-      "type": "range",
-      "id": "posts_per_page",
-      "min": 3,
-      "max": 15,
-      "step": 3,
-      "default": 9,
-      "label": "Posts per page",
-      "info": "How many posts to show per page (affects pagination)"
-    },
-    {
-      "type": "select",
-      "id": "tag_sort",
-      "label": "Tag sorting order",
-      "options": [
-        {
-          "value": "asc",
-          "label": "A to Z (Ascending)"
-        },
-        {
-          "value": "desc",
-          "label": "Z to A (Descending)"
-        }
-      ],
-      "default": "asc",
-      "info": "How to sort the tag buttons in the tab menu"
-    }
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Our Blog" },
+    { "type": "blog", "id": "blog", "label": "Select Blog" }
   ],
-  "presets": [
-    {
-      "name": "Blog Insights Section",
-      "settings": {
-        "heading": "Get insights from us"
-      }
-    }
-  ]
+  "presets": [{ "name": "Blog Section", "category": "Blog" }]
 }
 {% endschema %}
 
 <script>
-  // Debug function
-  function toggleDebug() {
-    var debugPanel = document.querySelector('.debug-panel');
-    if (debugPanel) {
-      if (debugPanel.style.display === 'none' || debugPanel.style.display === '') {
-        debugPanel.style.display = 'block';
-      } else {
-        debugPanel.style.display = 'none';
-      }
-    }
-  }
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const allPosts = document.querySelectorAll('.blog-post');
 
-  document.addEventListener('DOMContentLoaded', function () {
-    // Wait for Shopify to fully render
-    setTimeout(function () {
-      var tabBtns = document.querySelectorAll('.tab-btn');
-      var tabContents = document.querySelectorAll('.tab-content');
+  tabBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach((b) => {
+        b.classList.remove('bg-[#1E6C44]', 'text-white');
+        b.classList.add('bg-white', 'text-[#1E6C44]');
+      });
 
-      console.log('🚀 Blog section loaded');
-      console.log('📊 Tab buttons found:', tabBtns.length);
-      console.log('📝 Tab contents found:', tabContents.length);
+      btn.classList.add('bg-[#1E6C44]', 'text-white');
+      btn.classList.remove('bg-white', 'text-[#1E6C44]');
 
-      // List all tabs for debugging
-      for (var i = 0; i < tabBtns.length; i++) {
-        console.log('Tab ' + (i + 1) + ':', tabBtns[i].dataset.tab, '|', tabBtns[i].textContent.trim());
-      }
+      const filter = btn.dataset.tab;
 
-      // Pagination functionality
-      function createPagination(tabId) {
-        var tabContent = document.querySelector('[data-tab="' + tabId + '"]');
-        if (!tabContent) {
-          console.log('❌ Tab content not found for:', tabId);
-          return;
+      allPosts.forEach((post) => {
+        const postTags = post.dataset.tags.split(' ');
+        if (filter === 'all' || postTags.includes(filter)) {
+          post.style.display = 'block';
+        } else {
+          post.style.display = 'none';
         }
-
-        var articlesGrid = tabContent.querySelector('.articles-grid');
-        var articles = articlesGrid.querySelectorAll('.article-item');
-        var postsPerPage = parseInt(articlesGrid.dataset.postsPerPage) || 6;
-        var totalPages = Math.ceil(articles.length / postsPerPage);
-
-        console.log(
-          '📄 Tab "' + tabId + '":',
-          articles.length,
-          'articles,',
-          totalPages,
-          'pages,',
-          postsPerPage,
-          'per page'
-        );
-
-        var paginationWrapper = tabContent.querySelector('.pagination-wrapper');
-
-        if (totalPages <= 1) {
-          if (paginationWrapper) paginationWrapper.style.display = 'none';
-          // Show all articles if only one page
-          for (var i = 0; i < articles.length; i++) {
-            articles[i].style.display = 'block';
-          }
-          return;
-        }
-
-        var currentPage = 1;
-
-        function showPage(page) {
-          var startIndex = (page - 1) * postsPerPage;
-          var endIndex = startIndex + postsPerPage;
-
-          for (var i = 0; i < articles.length; i++) {
-            if (i >= startIndex && i < endIndex) {
-              articles[i].style.display = 'block';
-            } else {
-              articles[i].style.display = 'none';
-            }
-          }
-
-          updatePaginationButtons(page);
-        }
-
-        function createPaginationButtons() {
-          if (!paginationWrapper) return;
-
-          var paginationHTML = '<div class="pagination flex items-center justify-center gap-2 flex-wrap">';
-
-          // Previous button
-          paginationHTML +=
-            '<button class="prev-btn px-3 md:px-4 py-2 text-sm md:text-base text-[#1E6C44] bg-white border border-[#1E6C44] rounded-lg hover:bg-[#1E6C44] hover:text-white transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"';
-          if (currentPage === 1) paginationHTML += ' disabled';
-          paginationHTML += '>← Previous</button>';
-
-          // Page numbers
-          for (var i = 1; i <= Math.min(totalPages, 5); i++) {
-            var isActive = i === currentPage;
-            paginationHTML += '<button class="page-btn px-3 py-2 text-sm md:text-base ';
-            if (isActive) {
-              paginationHTML += 'bg-[#1E6C44] text-white';
-            } else {
-              paginationHTML += 'text-[#1E6C44] bg-white border border-[#1E6C44]';
-            }
-            paginationHTML +=
-              ' rounded-lg hover:bg-[#1E6C44] hover:text-white transition-colors duration-300" data-page="' +
-              i +
-              '">' +
-              i +
-              '</button>';
-          }
-
-          if (totalPages > 5) {
-            paginationHTML += '<span class="px-2 text-[#1E6C44]">... ' + totalPages + '</span>';
-          }
-
-          // Next button
-          paginationHTML +=
-            '<button class="next-btn px-3 md:px-4 py-2 text-sm md:text-base text-[#1E6C44] bg-white border border-[#1E6C44] rounded-lg hover:bg-[#1E6C44] hover:text-white transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"';
-          if (currentPage === totalPages) paginationHTML += ' disabled';
-          paginationHTML += '>Next →</button>';
-
-          paginationHTML += '</div>';
-          paginationWrapper.innerHTML = paginationHTML;
-          paginationWrapper.style.display = 'flex';
-
-          // Add event listeners
-          var prevBtn = paginationWrapper.querySelector('.prev-btn');
-          var nextBtn = paginationWrapper.querySelector('.next-btn');
-          var pageButtons = paginationWrapper.querySelectorAll('.page-btn');
-
-          if (prevBtn) {
-            prevBtn.addEventListener('click', function () {
-              if (currentPage > 1) {
-                currentPage--;
-                showPage(currentPage);
-              }
-            });
-          }
-
-          if (nextBtn) {
-            nextBtn.addEventListener('click', function () {
-              if (currentPage < totalPages) {
-                currentPage++;
-                showPage(currentPage);
-              }
-            });
-          }
-
-          for (var i = 0; i < pageButtons.length; i++) {
-            pageButtons[i].addEventListener('click', function () {
-              currentPage = parseInt(this.dataset.page);
-              showPage(currentPage);
-            });
-          }
-        }
-
-        function updatePaginationButtons() {
-          createPaginationButtons(); // Recreate with updated state
-        }
-
-        // Initialize
-        createPaginationButtons();
-        showPage(1);
-      }
-
-      // Tab switching functionality
-      for (var i = 0; i < tabBtns.length; i++) {
-        tabBtns[i].addEventListener('click', function (e) {
-          e.preventDefault();
-          var tab = this.dataset.tab;
-
-          console.log('🔄 Switching to tab:', tab);
-
-          // Update button states
-          for (var j = 0; j < tabBtns.length; j++) {
-            tabBtns[j].classList.remove('bg-[#1E6C44]', 'text-white', 'active-tab');
-            tabBtns[j].classList.add('bg-white', 'text-[#1E6C44]');
-          }
-
-          this.classList.add('bg-[#1E6C44]', 'text-white', 'active-tab');
-          this.classList.remove('bg-white', 'text-[#1E6C44]');
-
-          // Update content visibility
-          for (var j = 0; j < tabContents.length; j++) {
-            tabContents[j].classList.add('hidden');
-            tabContents[j].classList.remove('block');
-          }
-
-          var targetTab = document.querySelector('[data-tab="' + tab + '"]');
-          if (targetTab) {
-            targetTab.classList.remove('hidden');
-            targetTab.classList.add('block');
-
-            // Initialize pagination for this tab
-            setTimeout(function () {
-              createPagination(tab);
-            }, 100);
-          } else {
-            console.log('❌ Target tab not found:', tab);
-          }
-        });
-      }
-
-      // Initialize the default tab
-      createPagination('all');
-    }, 1000); // Increased wait time
+      });
+    });
   });
 </script>
