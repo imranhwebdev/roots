@@ -75,8 +75,8 @@
         "p_size_tablet": 15,
         "p_size_mobile": 14,
         "p_weight": "400",
-        "p_margin_top": 10,
-        "p_margin_bottom": 10
+        "p_margin_top": 0,
+        "p_margin_bottom": 0
       }
     },
     "join_roots_Jzhppf": {
