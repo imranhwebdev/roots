@@ -246,6 +246,17 @@
   .visible {
     visibility: visible;
   }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
   .absolute {
     position: absolute;
   }
@@ -285,6 +296,9 @@
   .top-5 {
     top: calc(var(--spacing) * 5);
   }
+  .top-9 {
+    top: calc(var(--spacing) * 9);
+  }
   .top-\[56\%\] {
     top: 56%;
   }
@@ -314,6 +328,9 @@
   }
   .bottom-2 {
     bottom: calc(var(--spacing) * 2);
+  }
+  .bottom-5 {
+    bottom: calc(var(--spacing) * 5);
   }
   .bottom-7 {
     bottom: calc(var(--spacing) * 7);
@@ -389,6 +406,9 @@
   }
   .my-6 {
     margin-block: calc(var(--spacing) * 6);
+  }
+  .\!mt-5 {
+    margin-top: calc(var(--spacing) * 5) !important;
   }
   .mt-1 {
     margin-top: calc(var(--spacing) * 1);
@@ -590,6 +610,9 @@
     width: 100%;
     height: 100%;
   }
+  .h-1 {
+    height: calc(var(--spacing) * 1);
+  }
   .h-2 {
     height: calc(var(--spacing) * 2);
   }
@@ -728,6 +751,9 @@
   .w-12 {
     width: calc(var(--spacing) * 12);
   }
+  .w-20 {
+    width: calc(var(--spacing) * 20);
+  }
   .w-30 {
     width: calc(var(--spacing) * 30);
   }
@@ -790,6 +816,12 @@
   }
   .max-w-21 {
     max-width: calc(var(--spacing) * 21);
+  }
+  .max-w-31 {
+    max-width: calc(var(--spacing) * 31);
+  }
+  .max-w-31\.5 {
+    max-width: calc(var(--spacing) * 31.5);
   }
   .max-w-60 {
     max-width: calc(var(--spacing) * 60);
@@ -1256,6 +1288,9 @@
   .bg-green-500 {
     background-color: var(--color-green-500);
   }
+  .bg-green-600 {
+    background-color: var(--color-green-600);
+  }
   .bg-green-800 {
     background-color: var(--color-green-800);
   }
@@ -1623,6 +1658,9 @@
   .\!text-red-500 {
     color: var(--color-red-500) !important;
   }
+  .\!text-red-700 {
+    color: var(--color-red-700) !important;
+  }
   .\!text-white {
     color: var(--color-white) !important;
   }
@@ -1706,6 +1744,9 @@
   }
   .text-para {
     color: var(--color-para);
+  }
+  .text-primary {
+    color: var(--color-primary);
   }
   .text-red-400 {
     color: var(--color-red-400);
@@ -1810,6 +1851,11 @@
   }
   .transition-colors {
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .transition-opacity {
+    transition-property: opacity;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
@@ -1975,6 +2021,13 @@
       }
     }
   }
+  .hover\:bg-\[\#145533\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #145533;
+      }
+    }
+  }
   .hover\:bg-\[\#e6b301\] {
     &:hover {
       @media (hover: hover) {
@@ -2000,6 +2053,13 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-gray-300);
+      }
+    }
+  }
+  .hover\:bg-green {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-green);
       }
     }
   }
@@ -2700,6 +2760,11 @@
       grid-column: span 1 / span 1;
     }
   }
+  .lg\:m-4 {
+    @media (width >= 992px) {
+      margin: calc(var(--spacing) * 4);
+    }
+  }
   .lg\:my-8 {
     @media (width >= 992px) {
       margin-block: calc(var(--spacing) * 8);
@@ -2713,6 +2778,11 @@
   .lg\:mt-3 {
     @media (width >= 992px) {
       margin-top: calc(var(--spacing) * 3);
+    }
+  }
+  .lg\:mt-5 {
+    @media (width >= 992px) {
+      margin-top: calc(var(--spacing) * 5);
     }
   }
   .lg\:mt-7 {
@@ -4047,6 +4117,11 @@
   .\32 xl\:mt-2\.5 {
     @media (width >= 1400px) {
       margin-top: calc(var(--spacing) * 2.5);
+    }
+  }
+  .\32 xl\:mt-10 {
+    @media (width >= 1400px) {
+      margin-top: calc(var(--spacing) * 10);
     }
   }
   .\32 xl\:mt-20 {

@@ -93,7 +93,6 @@
       <div class="flex items-center gap-4">
         {% if customer %}
           <!-- Search Icon -->
-          <!-- Search Icon -->
           <div class="relative">
             <button
               id="searchToggle"
@@ -286,7 +285,7 @@
       }
 
       timeout = setTimeout(() => {
-        fetch(`/search/suggest.json?q=${encodeURIComponent(query)}&resources[type]=product&resources[limit]=5`)
+        fetch(/search/suggest.json?q=${encodeURIComponent(query)}&resources[type]=product&resources[limit]=5)
           .then((res) => res.json())
           .then((data) => {
             const products = data.resources.results.products || [];
@@ -323,5 +322,5 @@
         searchDropdown.classList.add('hidden');
       }
     });
-  });
+});
 </script>

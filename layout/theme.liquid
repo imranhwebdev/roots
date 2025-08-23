@@ -56,11 +56,17 @@
   </head>
 
   <body>
-    {%- if template != 'customers/login' and template != 'customers/register' -%}
+    {%- if template != 'customers/login'
+      and template != 'customers/register'
+      and template != 'customers/reset_password'
+    -%}
       {% sections 'header-group' %}
     {%- endif -%}
     {{ content_for_layout }}
-    {%- if template != 'customers/login' and template != 'customers/register' -%}
+    {%- if template != 'customers/login'
+      and template != 'customers/register'
+      and template != 'customers/reset_password'
+    -%}
       {% sections 'footer-group' %}
     {%- endif -%}
   </body>

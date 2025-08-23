@@ -1,86 +1,125 @@
 <div class="login-page grid grid-cols-1 md:grid-cols-2 bg-[#1E6C44] min-h-screen">
-  <div class="max-h-screen overflow-auto py-12">
+  <div class="max-h-screen overflow-auto  py-12 flex flex-col justify-center items-center">
     <div class="w-full px-5 mx-auto max-w-164">
       <a href="{{ routes.root_url }}" class="w-31.5 mb-7.5 md:mb-9 lg:mb-11 xl:mb-12.5 block ">
         <img src="{{ 'login-icon.png' | asset_url }}" width="" height="" class="size-full object-center" alt="">
       </a>
 
-      <div class="mb-6 lg:mb-7 xl:mb-8 2xl:mb-10">
-        <p class="text-white text-2xl lg:text-3xl xl:text-[32px] font-medium !leading-[1.25] font-poppins mb-1.4 lg:mb-3">
-          Sign In
-        </p>
-        <p class="text-[#B7D6C6] text-base md:text-lg xl:text-xl !leading-[1.6]">
-          Please fill your detail to access your account.
-        </p>
-      </div>
-
-      {% form 'customer_login' %}
-        {{ form.errors | default_errors }}
-        <div class="w-full mb-4 lg:mb-5">
-          <label class="block text-white text-lg lg:text-[22px] !leading-[1.25] mb-2">Email*</label>
-          <input
-            type="email"
-            name="customer[email]"
-            id="CustomerEmail"
-            autocomplete="email"
-            placeholder="Email"
-            class="w-full text-base lg:text-xl text-[#B7D6C6] placeholder:text-[#B7D6C6] border border-[#B7D6C6] bg-[#2A7A51] py-4 px-5 rounded-lg focus:outline-none focus:border-[#FFC801]"
-            required
-          >
-        </div>
-
-        <div class="w-full mb-4 lg:mb-5">
-          <div class="relative z-1 mb-3">
-            {%- render 'password-input' -%}
-          </div>
-          <div class="flex items-center justify-between">
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" class="hidden peer">
-              <span class="w-[22px] h-[22px] border border-white bg-[#1E6C44] p-1 peer-checked:bg-white rounded-sm flex items-center justify-center">
-                <svg
-                  class="w-4 h-4 text-white hidden peer-checked:block"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="3"
-                  viewBox="0 0 24 24"
-                >
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-              </span>
-              <p class="text-white text-base md:text-lg lg:text-xl font-poppins">Remember me</p>
-            </label>
-            <a href="{{ routes.account_recover_url }}" class="text-white text-sm md:text-base lg:text-lg underline">
-              Forgot Password?
-            </a>
-          </div>
-        </div>
-
-        <div class="w-full mb-4 lg:mb-5">
-          <button
-            type="submit"
-            class="text-[#1F1904] text-base md:text-lg lg:text-xl py-4 lg:py-5 w-full cursor-pointer font-medium font-poppins text-center px-5 rounded-lg bg-[#FFC801]"
-          >
+      <!-- ✅ Login Form -->
+      <div id="CustomerLoginForm" class="mb-8">
+        <div class="">
+          <p class="text-white text-2xl lg:text-3xl xl:text-[32px] font-medium !leading-[1.25] font-poppins mb-1.4 lg:mb-3">
             Sign In
-          </button>
+          </p>
+          <p class="text-[#B7D6C6] text-base md:text-lg xl:text-xl !leading-[1.6]">
+            Please fill your detail to access your account.
+          </p>
         </div>
-      {% endform %}
-      <!-- ✅ End Shopify Login Form -->
 
-      <div class="relative z-1 mb-6 lg:mb-8 xl:mb-10">
-        <div
-          class="h-[1px] w-[22%] lg:w-[25%] xl:w-[32%]   bg-[#B7D6C6] absolute left-0 top-1/2 -translate-y-1/2"
-        ></div>
-        <div
-          class="h-[1px] w-[22%] lg:w-[25%] xl:w-[32%]   bg-[#B7D6C6] absolute right-0 top-1/2 -translate-y-1/2"
-        ></div>
-        <p class="text-white text-base md:text-lg lg:text-xl font-medium font-poppins text-center">
-          Sign In with google
+        {% form 'customer_login' %}
+          <p class="!text-red-700 mt-2">{{ form.errors | default_errors }}</p>
+          <div class="w-full mb-4 lg:mb-5 mt-6 lg:mt-7 xl:mt-8 2xl:mt-10">
+            <label class="block text-white text-lg lg:text-[22px] !leading-[1.25] mb-2">Email*</label>
+            <input
+              type="email"
+              name="customer[email]"
+              id="CustomerEmail"
+              autocomplete="email"
+              placeholder="Enter Email Address"
+              class="w-full text-base lg:text-xl text-[#B7D6C6] placeholder:text-[#B7D6C6] border border-[#B7D6C6] bg-[#2A7A51] py-4 px-5 rounded-lg focus:outline-none focus:border-[#FFC801]"
+              required
+            >
+          </div>
+
+          <div class="w-full mb-4 lg:mb-5">
+            <div class="relative z-1 mb-3">
+              {%- render 'password-input' -%}
+            </div>
+            <div class="flex items-center justify-between">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <div class="checkbox-wrapper-23">
+                  <input type="checkbox" id="rememberMe">
+                  <label for="rememberMe" style="--size: 22px">
+                    <svg viewBox="0,0,50,50">
+                      <path d="M5 30 L 20 45 L 45 5"></path>
+                    </svg>
+                  </label>
+                </div>
+                <p class="text-white text-base md:text-lg lg:text-xl font-poppins">Remember me</p>
+              </label>
+              <a
+                href="/account/login#recover"
+                class="text-white text-sm md:text-base lg:text-lg underline hover:text-primary transition-all duration-300"
+              >
+                Forgot Password?
+              </a>
+            </div>
+          </div>
+
+          <div class="w-full mb-4 lg:mb-5">
+            <button
+              type="submit"
+              class="text-[#1F1904] text-base md:text-lg lg:text-xl py-4 lg:py-5 w-full cursor-pointer font-medium font-poppins text-center px-5 rounded-lg bg-primary border border-solid border-primary hover:bg-white transition-all duration-300"
+            >
+              Sign In
+            </button>
+          </div>
+        {% endform %}
+      </div>
+      <!-- ✅ End Login Form -->
+
+      <!-- ✅ Recover Password Form -->
+      <div id="RecoverPasswordForm" style="display:none;">
+        <div class="mb-6 lg:mb-7 xl:mb-8 2xl:mb-10">
+          <p class="text-white text-2xl lg:text-3xl xl:text-[32px] font-medium !leading-[1.25] font-poppins mb-1.4 lg:mb-3">
+            Reset Password
+          </p>
+          <p class="text-[#B7D6C6] text-base md:text-lg xl:text-xl !leading-[1.6]">
+            Enter your email to receive a reset link.
+          </p>
+        </div>
+
+        {% form 'recover_customer_password' %}
+          {{ form.errors | default_errors }}
+          {% if form.posted_successfully? %}
+            <p class="text-green-400 mb-4">We’ve sent you an email with a link to reset your password.</p>
+          {% endif %}
+
+          <div class="w-full mb-4 lg:mb-5">
+            <label class="block text-white text-lg lg:text-[22px] !leading-[1.25] mb-2">Email*</label>
+            <input
+              type="email"
+              name="email"
+              id="RecoverEmail"
+              placeholder="Email"
+              class="w-full text-base lg:text-xl text-[#B7D6C6] placeholder:text-[#B7D6C6] border border-[#B7D6C6] bg-[#2A7A51] py-4 px-5 rounded-lg focus:outline-none focus:border-[#FFC801]"
+              required
+            >
+          </div>
+
+          <div class="w-full mb-4 lg:mb-5">
+            <button
+              type="submit"
+              class="text-[#1F1904] text-base md:text-lg lg:text-xl py-4 lg:py-5 w-full cursor-pointer font-medium font-poppins text-center px-5 rounded-lg bg-[#FFC801]"
+            >
+              Send Reset Link
+            </button>
+          </div>
+        {% endform %}
+
+        <p class="text-white text-base md:text-lg lg:text-xl mt-6">
+          <a href="/account/login" class="underline">Back to login</a>
         </p>
       </div>
+      <!-- ✅ End Recover Form -->
 
-      {% render 'sign-in-google-button' %}
+      <div class="relative z-1 mb-6 lg:m-4">
+        <div class="h-[1px] w-[35%] bg-[#B7D6C6] absolute left-0 top-1/2 -translate-y-1/2"></div>
+        <div class="h-[1px] w-[35%] bg-[#B7D6C6] absolute right-0 top-1/2 -translate-y-1/2"></div>
+        <p class="text-white text-base lg:text-xl font-medium font-poppins text-center">Sign Up</p>
+      </div>
 
-      <p class="text-white text-base md:text-lg lg:text-xl mt-10 lg:mt-12.5 text-center">
+      <p class="text-white text-base md:text-lg lg:text-xl mt-6 lg:mt-8 text-center">
         Don't have an account?
         <a href="{{ routes.account_register_url }}" class="text-[#FFC801] underline">Sign Up</a>
       </p>
@@ -88,13 +127,55 @@
   </div>
 
   <div class="hidden md:flex bg-[#FFC801] justify-end py-13 px-10 h-screen">
-    <img class="w-full object-contain h-full" width="" height="" src="{{ 'login-img.png' | asset_url }}" alt="">
+    <img class="w-full object-contain h-full" src="{{ 'login-img.png' | asset_url }}" width="" height="" alt="">
   </div>
 </div>
 
-<!-- Redirect to homepage after login -->
+<!-- ✅ Redirect to homepage after login -->
 {% if customer %}
   <script>
     window.location.href = '/';
   </script>
 {% endif %}
+
+<!-- ✅ Toggle Recover Form -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const loginForm = document.getElementById('CustomerLoginForm');
+    const recoverForm = document.getElementById('RecoverPasswordForm');
+
+    if (window.location.hash === '#recover') {
+      loginForm.style.display = 'none';
+      recoverForm.style.display = 'block';
+    }
+    document.querySelector("a[href='/account/login#recover']")?.addEventListener('click', function (e) {
+      e.preventDefault();
+      loginForm.style.display = 'none';
+      recoverForm.style.display = 'block';
+    });
+  });
+  document.querySelector('form').addEventListener('submit', function (e) {
+    const remember = document.getElementById('rememberMe').checked;
+    const email = document.querySelector('input[name="customer[email]"]').value;
+
+    if (remember) {
+      localStorage.setItem('shopifyRememberEmail', email);
+    } else {
+      localStorage.removeItem('shopifyRememberEmail');
+    }
+  });
+
+  // Auto-fill on page load
+  window.addEventListener('load', function () {
+    const savedEmail = localStorage.getItem('shopifyRememberEmail');
+    if (savedEmail) {
+      document.querySelector('input[name="customer[email]"]').value = savedEmail;
+      document.getElementById('rememberMe').checked = true;
+    }
+  });
+</script>
+<style>
+  .errors li {
+    color: red !important;
+  }
+</style>
