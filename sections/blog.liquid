@@ -26,10 +26,10 @@
               </p>
             </div>
             <h6 class="text-[#0D2E1D] text-2xl lg:text-3xl xl:text-[32px] font-medium !leading-[1.4] mb-4 lg:mb-5">
-              <a href="{{ first_article.url }}">{{ first_article.title }}</a>
+              <a href="{{ first_article.url}}">{{ first_article.title | strip_html | truncate: 76 }}</a>
             </h6>
             <p class="text-[#514849] text-base lg:text-lg !leading-[1.6] mb-5 lg:mb-6 xl:mb-8">
-              {{ first_article.excerpt | strip_html | truncate: 120 }}
+              {{ first_article.excerpt | strip_html | truncate: 230 }}
             </p>
             <a
               href="{{ first_article.url }}"
