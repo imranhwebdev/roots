@@ -2,9 +2,9 @@
 <div class="404 page py-10 md:py-16 lg:py-20 xl:py-25 2xl:py-30">
   <div class="container">
     <div class="w-full md:w-10/12 xl:w-7/12 mx-auto relative z-1 pt-32 md:pt-55 lg:pt-65">
-      {% if settings.page404_image != blank %}
+      {% if section.settings.page404 != blank %}
         <img
-          src="{% if settings.page404_image != blank %}{{ settings.page404_image | img_url: '1024x' }}{% else %}{{ fallback_image }}{% endif %}"
+          src="{{'page404.png' |  asset_url}}"
           class="size-55 md:size-70 lg:size-80 left-1/2 -translate-x-1/2 top-0 -z-1 absolute"
           alt="404 Image"
           width=""
@@ -24,7 +24,7 @@
           }}
         </p>
 
-        <a href="{{ settings.page404_button_link | default: routes.collections_url }}" class="btn !text-[#1F1904]">
+        <a href="{{ routes.root_url }}" class="btn !text-[#1F1904]">
           {{ settings.page404_button_text | default: 'Return to Home' }}
         </a>
       </div>
@@ -37,7 +37,7 @@
   "settings": [
     {
       "type": "image_picker",
-      "id": "page404_image",
+      "id": "page404",
       "label": "404 Page Image"
     },
     {

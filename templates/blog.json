@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "common_banner": {
@@ -9,15 +18,37 @@
     },
     "main": {
       "type": "blog",
-      "settings": {}
+      "settings": {
+        "blog": "",
+        "heading": "Take a look at the latest articles"
+      }
     },
     "block_insights": {
       "type": "block-insights",
-      "settings": {}
+      "settings": {
+        "heading": "Get insights from us",
+        "blog": "news",
+        "tab_1": "Indulge",
+        "tab_2": "Revitalize",
+        "tab_3": "Define",
+        "tab_4": "Glow"
+      }
     },
     "join_roots": {
       "type": "join-roots",
-      "settings": {}
+      "settings": {
+        "title": "Join the Roots Family",
+        "description": "Be the first to know about exclusive offers, self-care tips, and new launches.",
+        "enable_newsletter": true,
+        "email_placeholder": "Enter your email address",
+        "success_message": "Thank you for subscribing! You'll hear from us soon.",
+        "button_text": "Subscribe Now",
+        "button_link": "",
+        "show_arrow": false,
+        "card_bg_color": "#1e6c44",
+        "title_color": "#ffffff",
+        "description_color": "#f5f5f5"
+      }
     }
   },
   "order": [

@@ -12,10 +12,10 @@
     "main": {
       "type": "404",
       "settings": {
-        "page404_image": "shopify://shop_images/page404.png",
+        "page404": "shopify://shop_images/page404.png",
         "page404_heading": "Oops! This Page Got Lost in the Roots.",
         "page404_text": "It might have been moved, renamed, or doesn’t exist anymore. But don’t worry, your journey to natural beauty doesn’t have to end here.",
-        "page404_button_link": "shopify://collections",
+        "page404_button_link": "/",
         "page404_button_text": "Return to Home"
       }
     }

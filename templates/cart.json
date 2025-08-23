@@ -13,7 +13,7 @@
       "type": "common-banner",
       "name": "Common Banner",
       "settings": {
-        "default_title": "Payment",
+        "default_title": "Your Shopping Cart",
         "default_description": ""
       }
     },

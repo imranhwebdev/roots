@@ -11,7 +11,7 @@
     >
   {% else %}
     <!-- Fallback background -->
-     <img src="{{'join.png' |  asset_url}}" class="size-full absolute -z-1 left-0 top-0" alt="" width="" height="">
+    <img src="{{'join.png' |  asset_url}}" class="size-full absolute -z-1 left-0 top-0" alt="" width="" height="">
   {% endif %}
 
   <div class="container">
@@ -39,7 +39,7 @@
             <div class="max-w-full md:max-w-lg mx-auto">
               {% form 'customer' %}
                 {% if form.posted_successfully? %}
-                  <div class="mb-4 p-3 bg-green-100 border border-primary text-white rounded">
+                  <div class="mb-4 p-3 bg-white border border-white text-[#0D2E1D] rounded">
                     <p>{{ section.settings.success_message }}</p>
                   </div>
                 {% endif %}
