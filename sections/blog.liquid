@@ -1,29 +1,3 @@
-{% comment %} <style>
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 কলামের গ্রিড */
-    gap: 20px;
-  }
-
-  /* Card-1 (প্রথম child) → পুরো বাম দিক */
-  .cards .card:nth-child(1) {
-    grid-row: span 2; /* ২টা row জুড়ে থাকবে */
-    grid-column: 1; /* বাম কলাম */
-  }
-
-  /* Card-2 (দ্বিতীয় child) → ডান কলামের উপরে */
-  .cards .card:nth-child(2) {
-    grid-column: 2;
-    grid-row: 1;
-  }
-
-  /* Card-3 (তৃতীয় child) → ডান কলামের নিচে */
-  .cards .card:nth-child(3) {
-    grid-column: 2;
-    grid-row: 2;
-  }
-</style> {% endcomment %}
-
 <div class="blog py-17.5 md:py-20 lg:py-25 xl:py-30 2xl:pb-35">
   <div class="container">
     <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-center text-green !leading-[1.25] font-bold font-armany-bold mb-5 md:mb-6 lg:mb-9 xl:mb-12.5 px-5">
@@ -58,16 +32,28 @@
           </a>
         </div>
         <div class="w-full h-80 md:h-105">
-          <img src="/assets/blog5.png" class="size-full object-cover rounded-[10px]" width="" height="" alt="">
+          <img
+            src="{{'blog5.png' |  asset_url}}"
+            class="size-full object-cover rounded-[10px]"
+            width=""
+            height=""
+            alt=""
+          >
         </div>
       </div>
       <div class="">
         <div class="p-3 lg:p-4 bg-[#B7D6C6] h-auto xl:h-101 flex flex-col md:flex-row flex-wrap md:flex-nowrap items-center gap-4 lg:gap-5 xl:gap-6 rounded-lg lg:rounded-[10px] mb-4 md:mb-6 xl:mb-8">
           <div class="w-full md:w-70 xl:w-68 h-70 3xl:w-74 xl:h-full 3xl:h-93 flex-[0_0_auto]">
-            <img src="/assets/blog6.png" class="size-full object-cover rounded-[10px]" width="" height="" alt="">
+            <img
+              src="{{'blog6.png' |  asset_url}}"
+              class="size-full object-cover rounded-[10px]"
+              width=""
+              height=""
+              alt=""
+            >
           </div>
           <div class="">
-            <div class="flex flex items-center  gap-2 3xl:gap-5 mb-2 lg:mb-3 3xl:mb-3.5">
+            <div class="flex items-center  gap-2 3xl:gap-5 mb-2 lg:mb-3 3xl:mb-3.5">
               <span class="text-sm md:text-base !leading-[1.2] tracking-[1.92px] uppercase font-poppins text-white rounded-2xl lg:rounded-[20px] py-2.5 px-4 block bg-[#669F7F] border border-[rgba(255,_255,_255,_0.12)] max-w-max"
                 >Nourish</span
               >
@@ -95,7 +81,13 @@
         </div>
         <div class="p-3 lg:p-4 bg-[#B7D6C6] h-auto xl:h-101 flex flex-col md:flex-row flex-wrap md:flex-nowrap items-center gap-4 lg:gap-5 xl:gap-6 rounded-lg lg:rounded-[10px]">
           <div class="w-full md:w-70 xl:w-68 h-70 3xl:w-74 xl:h-full 3xl:h-93 flex-[0_0_auto]">
-            <img src="/assets/blog6.png" class="size-full object-cover rounded-[10px]" width="" height="" alt="">
+            <img
+              src="{{'blog7.png' |  asset_url}}"
+              class="size-full object-cover rounded-[10px]"
+              width=""
+              height=""
+              alt=""
+            >
           </div>
           <div class="">
             <div class="flex  items-center  gap-2 3xl:gap-5 mb-2 lg:mb-3 3xl:mb-3.5">
@@ -125,13 +117,7 @@
           </div>
         </div>
       </div>
-      {% comment %} card2 {% endcomment %}
     </div>
-    {% comment %} <div class="cards">
-      <div class="card">Card-1</div>
-      <div class="card">Card-2</div>
-      <div class="card">Card-3</div>
-    </div> {% endcomment %}
   </div>
 </div>
 
