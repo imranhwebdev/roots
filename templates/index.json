@@ -22,7 +22,8 @@
             "button_text": "Shop Now",
             "button_link2": "shopify://pages/about-us",
             "button_text2": "Discover Our Story",
-            "slide_image": "shopify://shop_images/banner-slider-img1.jpg"
+            "slide_image": "shopify://shop_images/banner-slider-img1.jpg",
+            "product_image": "shopify://shop_images/banner-product-img1-0.png"
           }
         },
         "slide_tERyTX": {
