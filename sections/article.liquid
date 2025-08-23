@@ -181,17 +181,53 @@
     margin-top: {{ section.settings.h2_margin_top }}px;
     margin-bottom: {{ section.settings.h2_margin_bottom }}px;
   }
+  .blog-details .prose h3 {
+    color: {{ section.settings.h3_color }};
+    font-size: {{ section.settings.h3_size_desktop }}px;
+    font-weight: {{ section.settings.h3_weight }};
+    margin-top: {{ section.settings.h3_margin_top }}px;
+    margin-bottom: {{ section.settings.h3_margin_bottom }}px;
+  }
+  .blog-details .prose h4 {
+    color: {{ section.settings.h4_color }};
+    font-size: {{ section.settings.h4_size_desktop }}px;
+    font-weight: {{ section.settings.h4_weight }};
+    margin-top: {{ section.settings.h4_margin_top }}px;
+    margin-bottom: {{ section.settings.h4_margin_bottom }}px;
+  }
+  .blog-details .prose h5 {
+    color: {{ section.settings.h5_color }};
+    font-size: {{ section.settings.h5_size_desktop }}px;
+    font-weight: {{ section.settings.h5_weight }};
+    margin-top: {{ section.settings.h5_margin_top }}px;
+    margin-bottom: {{ section.settings.h5_margin_bottom }}px;
+  }
+  .blog-details .prose p {
+    color: {{ section.settings.p_color }};
+    font-size: {{ section.settings.p_size_desktop }}px;
+    font-weight: {{ section.settings.p_weight }};
+    margin-top: {{ section.settings.p_margin_top }}px;
+    margin-bottom: {{ section.settings.p_margin_bottom }}px;
+  }
   /* H3–H6 + P same pattern */
 
   @media screen and (max-width:1024px){
     .blog-details .prose h1 { font-size: {{ section.settings.h1_size_tablet }}px; }
     .blog-details .prose h2 { font-size: {{ section.settings.h2_size_tablet }}px; }
+    .blog-details .prose h3 { font-size: {{ section.settings.h3_size_tablet }}px; }
+    .blog-details .prose h4 { font-size: {{ section.settings.h4_size_tablet }}px; }
+    .blog-details .prose h5 { font-size: {{ section.settings.h5_size_tablet }}px; }
+    .blog-details .prose p { font-size: {{ section.settings.p_size_tablet }}px; }
     /* H3–H6 + P tablet sizes */
   }
 
   @media screen and (max-width:768px){
     .blog-details .prose h1 { font-size: {{ section.settings.h1_size_mobile }}px; }
     .blog-details .prose h2 { font-size: {{ section.settings.h2_size_mobile }}px; }
+    .blog-details .prose h3 { font-size: {{ section.settings.h3_size_mobile }}px; }
+    .blog-details .prose h4 { font-size: {{ section.settings.h4_size_mobile }}px; }
+    .blog-details .prose h5 { font-size: {{ section.settings.h5_size_mobile }}px; }
+    .blog-details .prose 0 { font-size: {{ section.settings.p_size_mobile }}px; }
     /* H3–H6 + P mobile sizes */
   }
 </style>
