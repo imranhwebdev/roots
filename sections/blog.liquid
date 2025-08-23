@@ -12,7 +12,7 @@
           <div class="mb-8 md:mb-10 lg:mb-12 xl:mb-14.5 mt-5 lg:mt-7 xl:mt-10">
             <div class="flex items-center gap-4 lg:gap-5 mb-2.5 lg:mb-3.5">
               {% if first_article.tags.size > 0 %}
-                <span class="text-sm md:text-base !leading-[1.2] tracking-[1.92px] uppercase font-poppins text-white rounded-2xl lg:rounded-[20px] py-2.5 px-4 block bg-[#669F7F] max-w-max">
+                <span class="text-sm md:text-base !leading-[1.2] tracking-[1.92px] uppercase font-poppins text-white rounded-full lg:rounded-[20px] py-2.5 px-4 block bg-[#669F7F] max-w-max">
                   {{ first_article.tags.first }}
                 </span>
               {% endif %}
@@ -67,7 +67,7 @@
             <div>
               <div class="flex items-center gap-2 mb-2 lg:mb-3">
                 {% if article.tags.size > 0 %}
-                  <span class="text-sm md:text-base uppercase font-poppins text-white rounded-2xl py-2.5 px-4 block bg-[#669F7F] max-w-max">
+                  <span class="text-sm md:text-base uppercase font-poppins text-white rounded-full py-2.5 px-4 block bg-[#669F7F] max-w-max">
                     {{ article.tags.first }}
                   </span>
                 {% endif %}
