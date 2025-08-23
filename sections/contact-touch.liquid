@@ -15,16 +15,6 @@
           {% form 'contact' %}
             {% if form.posted_successfully? %}
               <p class="p-4 bg-[#1E6C44] text-white rounded-xl mb-4">Thank you! Your message has been sent.</p>
-              <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                  const successMsg = document.getElementById("contact-success-msg");
-                  if (successMsg) {
-                    setTimeout(() => {
-                      successMsg.style.display = "none";
-                    }, 5000); // 5000ms = 5 seconds
-                  }
-                });
-              </script>
             {% endif %}
 
             {% if form.errors %}
@@ -131,19 +121,19 @@
       </div>
     </div>
   </div>
-{% if section.settings.map_url != blank %}
-  <div class="google-map-area w-full h-75 md:h-100 lg:h-110 xl:h-170 mt-10 lg:mt-17 md:mt-25">
-    <iframe
-      src="{{ section.settings.map_url }}"
-      class="size-full"
-      style="border:0;"
-      allowfullscreen=""
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
-    ></iframe>
-  </div>
+  {% if section.settings.map_url != blank %}
+    <div class="google-map-area w-full h-75 md:h-100 lg:h-110 xl:h-170 mt-10 lg:mt-17 md:mt-25">
+      <iframe
+        src="{{ section.settings.map_url }}"
+        class="size-full"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+  {% endif %}
 </div>
-{% endif %}
 
 {% schema %}
 {
@@ -190,3 +180,13 @@
   "presets": [{ "name": "Contact Us" }]
 }
 {% endschema %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const successMsg = document.getElementById('contact-success-msg');
+    if (successMsg) {
+      setTimeout(() => {
+        successMsg.style.display = 'none';
+      }, 3000);
+    }
+  });
+</script>
