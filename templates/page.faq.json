@@ -19,7 +19,85 @@
     },
     "main": {
       "type": "faq",
-      "settings": {}
+      "blocks": {
+        "faq_fDUm9f": {
+          "type": "faq",
+          "settings": {
+            "question": "What makes Roots Organic Castor Oil different from others?",
+            "answer": "Absolutely. Our oil is pure and chemical-free, making it safe for most skin types. However, we always recommend performing a patch test on a small area before applying to larger areas."
+          }
+        },
+        "faq_q8MCcT": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I use castor oil for hair growth?",
+            "answer": "Sample answer"
+          }
+        },
+        "faq_WxUbEV": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it safe for sensitive skin?",
+            "answer": "Absolutely. Our oil is pure and chemical-free, making it safe for most skin types. However, we always recommend performing a patch test on a small area before applying to larger areas."
+          }
+        },
+        "faq_CcmeVX": {
+          "type": "faq",
+          "settings": {
+            "question": "How should I store my castor oil?",
+            "answer": "Sample answer"
+          }
+        },
+        "faq_AhhCAr": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does one bottle last?",
+            "answer": "Sample answer"
+          }
+        },
+        "faq_aFVJfe": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you ship internationally?",
+            "answer": "Sample answer"
+          }
+        },
+        "faq_wzQMHE": {
+          "type": "faq",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "Sample answer"
+          }
+        },
+        "faq_mXffrJ": {
+          "type": "faq",
+          "settings": {
+            "question": "Is your packaging eco-friendly?",
+            "answer": "Sample answer"
+          }
+        },
+        "faq_ygCxUi": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I subscribe for regular deliveries?",
+            "answer": "Sample answer"
+          }
+        }
+      },
+      "block_order": [
+        "faq_fDUm9f",
+        "faq_q8MCcT",
+        "faq_WxUbEV",
+        "faq_CcmeVX",
+        "faq_AhhCAr",
+        "faq_aFVJfe",
+        "faq_wzQMHE",
+        "faq_mXffrJ",
+        "faq_ygCxUi"
+      ],
+      "settings": {
+        "heading": "Frequently Asked Questions"
+      }
     }
   },
   "order": [
