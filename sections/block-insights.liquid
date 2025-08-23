@@ -8,7 +8,7 @@
       <div class="overflow-auto">
         <div class="flex items-center gap-3 lg:gap-4 w-78 md:w-130 lg:w-auto">
           <button
-            class="tab-btn flex-[0_0_auto] active-tab text-[#1E6C44] bg-[#1E6C44] text-white cursor-pointer ease-in-out duration-300 text-lg lg:text-xl font-medium !leading-[1.2] font-poppins py-3.5 lg:py-4.5 px-7 lg:px-8 rounded-3xl lg:rounded-[40px]"
+            class="tab-btn flex-[0_0_auto] active-tab text-[#1E6C44] bg-[#1E6C44] cursor-pointer ease-in-out duration-300 text-lg lg:text-xl font-medium !leading-[1.2] font-poppins py-3.5 lg:py-4.5 px-7 lg:px-8 rounded-3xl lg:rounded-[40px]"
             data-tab="all"
           >
             All
@@ -92,8 +92,12 @@
               {% if article.tags contains tag %}
                 <div class="px-3 pt-3 pb-6 bg-white rounded-lg lg:rounded-[10px]">
                   {% if article.image %}
-                    <div class="w-full h-53 md:h-60 lg:h-64 mb-4 md:mb-5 lg:mb-6">
-                      {{ article.image | image_url: width: 500 | image_tag: class: 'size-full rounded-[10px]' }}
+                    <div class="w-full h-53 md:h-60 lg:h-64 mb-4 md:mb-5 lg:mb-6 object-cover object-top">
+                      {{
+                        article.image
+                        | image_url
+                        | image_tag: class: 'size-full rounded-[10px] object-cover object-top'
+                      }}
                     </div>
                   {% endif %}
                   <div class="px-3">
