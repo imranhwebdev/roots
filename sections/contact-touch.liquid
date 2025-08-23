@@ -14,7 +14,17 @@
         <div>
           {% form 'contact' %}
             {% if form.posted_successfully? %}
-              <p class="p-4 bg-green-100 text-green-700 rounded mb-4">Thank you! Your message has been sent.</p>
+              <p class="p-4 bg-[#1E6C44] text-white rounded-xl mb-4">Thank you! Your message has been sent.</p>
+              <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                  const successMsg = document.getElementById("contact-success-msg");
+                  if (successMsg) {
+                    setTimeout(() => {
+                      successMsg.style.display = "none";
+                    }, 5000); // 5000ms = 5 seconds
+                  }
+                });
+              </script>
             {% endif %}
 
             {% if form.errors %}
