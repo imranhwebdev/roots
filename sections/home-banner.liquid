@@ -157,17 +157,30 @@
               </div>
 
               <div class="w-full md:w-6/12 mt-10 lg:mt-0">
-                {% if block.settings.slide_image != blank %}
-                  <div class="w-full h-full xl:h-130 2xl:h-144 3xl:h-159.5">
-                    <img
-                      src="{{ block.settings.slide_image | image_url }}"
-                      class="size-full"
-                      width=""
-                      height=""
-                      alt="{{ block.settings.heading }}"
-                    >
-                  </div>
-                {% endif %}
+                <div class="banner-image relative">
+                  {% if block.settings.slide_image != blank %}
+                    <div class="w-full h-full xl:h-130 2xl:h-144 3xl:h-159.5">
+                      <img
+                        src="{{ block.settings.slide_image | image_url }}"
+                        class="size-full"
+                        width=""
+                        height=""
+                        alt="{{ block.settings.heading }}"
+                      >
+                    </div>
+                  {% endif %}
+                  {% if block.settings.product_image != blank %}
+                    <div class="w-full max-w-57">
+                      <img
+                        src="{{ block.settings.product_image | image_url }}"
+                        class="size-full"
+                        width=""
+                        height=""
+                        alt="{{ block.settings.heading }}"
+                      >
+                    </div>
+                  {% endif %}
+                </div>
               </div>
             </div>
           </div>
@@ -261,6 +274,11 @@
           "type": "image_picker",
           "id": "slide_image",
           "label": "Slide Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "product_image",
+          "label": "Product Image"
         }
       ]
     }
