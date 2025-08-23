@@ -1633,6 +1633,9 @@
   .text-\[\#FFC801\] {
     color: #FFC801;
   }
+  .text-\[\#v\] {
+    color: #v;
+  }
   .text-black {
     color: var(--color-black);
   }
