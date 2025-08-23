@@ -93,13 +93,20 @@
 
       {% assign main_menu = section.settings.menu | default: linklists['main-menu'] %}
       <nav class="hidden md:!flex gap-5 lg:gap-10">
+        {% assign current_path = request.path %}
         {% for link in main_menu.links %}
-          <a href="{{ link.url }}" class="text-lg text-white font-poppins hover:text-[#FFD500] transition">
+          {% assign link_path = link.url | split: '?' | first %}
+          <a
+            href="{{ link.url }}"
+            class="
+              menu-link text-lg text-white font-poppins relative z-1 hover:text-[#FFD500] transition duration-300  before:absolute before:w-full before:h-[2px] before:rounded-3xl before:bg-primary before:-bottom-2 before:left-0 before:opacity-0
+              {% if current_path == link_path %} active before:opacity-100  {% endif %}
+            "
+          >
             {{ link.title }}
           </a>
         {% endfor %}
       </nav>
-
       <!-- Right Icons + Mobile Menu Button -->
       <div class="flex items-center gap-4">
         {% if customer %}
@@ -242,41 +249,62 @@
 }
 {% endschema %}
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const menuToggle = document.getElementById('menuToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const menuPanel = document.getElementById('mobileMenuPanel');
-    const menuClose = document.getElementById('menuClose');
+    document.addEventListener('DOMContentLoaded', function () {
+      const menuToggle = document.getElementById('menuToggle');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const menuPanel = document.getElementById('mobileMenuPanel');
+      const menuClose = document.getElementById('menuClose');
 
-    // --- 📱 Mobile Menu (with animation fix) ---
-    function openMenu() {
-      mobileMenu.classList.remove('hidden');
-      setTimeout(() => {
-        mobileMenu.classList.remove('opacity-0');
-        menuPanel.classList.remove('-translate-x-full');
-      }, 20);
-    }
+      // --- 📱 Mobile Menu (with animation fix) ---
+      function openMenu() {
+        mobileMenu.classList.remove('hidden');
+        setTimeout(() => {
+          mobileMenu.classList.remove('opacity-0');
+          menuPanel.classList.remove('-translate-x-full');
+        }, 20);
+      }
 
-    function closeMenu() {
-      mobileMenu.classList.add('opacity-0');
-      menuPanel.classList.add('-translate-x-full');
-      setTimeout(() => {
-        mobileMenu.classList.add('hidden');
-      }, 300);
-    }
+      function closeMenu() {
+        mobileMenu.classList.add('opacity-0');
+        menuPanel.classList.add('-translate-x-full');
+        setTimeout(() => {
+          mobileMenu.classList.add('hidden');
+        }, 300);
+      }
 
-    if (menuToggle) {
-      menuToggle.addEventListener('click', openMenu);
-    }
-    if (menuClose) {
-      menuClose.addEventListener('click', closeMenu);
-    }
-    if (mobileMenu) {
-      mobileMenu.addEventListener('click', (e) => {
-        if (e.target === mobileMenu) {
-          closeMenu();
+      if (menuToggle) {
+        menuToggle.addEventListener('click', openMenu);
+      }
+      if (menuClose) {
+        menuClose.addEventListener('click', closeMenu);
+      }
+      if (mobileMenu) {
+        mobileMenu.addEventListener('click', (e) => {
+          if (e.target === mobileMenu) {
+            closeMenu();
+          }
+        });
+      }
+    });
+  <nav id="desktopMenu" class="hidden md:!flex gap-5 lg:gap-10">
+    {% for link in main_menu.links %}
+      <a
+        href="{{ link.url }}"
+        class="menu-link text-lg font-poppins transition">
+        {{ link.title }}
+      </a>
+    {% endfor %}
+  </nav>
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const links = document.querySelectorAll("#desktopMenu .menu-link");
+      const currentPath = window.location.pathname.replace(/\/$/, "");
+
+      links.forEach(link => {
+        const linkPath = link.getAttribute("href").replace(/\/$/, "");
+        if (currentPath === linkPath) {
+          link.classList.add("active");
         }
       });
-    }
-  });
+    });
 </script>
