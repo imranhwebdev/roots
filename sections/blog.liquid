@@ -1,3 +1,29 @@
+{% comment %} <style>
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 কলামের গ্রিড */
+    gap: 20px;
+  }
+
+  /* Card-1 (প্রথম child) → পুরো বাম দিক */
+  .cards .card:nth-child(1) {
+    grid-row: span 2; /* ২টা row জুড়ে থাকবে */
+    grid-column: 1; /* বাম কলাম */
+  }
+
+  /* Card-2 (দ্বিতীয় child) → ডান কলামের উপরে */
+  .cards .card:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  /* Card-3 (তৃতীয় child) → ডান কলামের নিচে */
+  .cards .card:nth-child(3) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+</style> {% endcomment %}
+
 <div class="blog py-17.5 md:py-20 lg:py-25 xl:py-30 2xl:pb-35">
   <div class="container">
     <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-center text-green !leading-[1.25] font-bold font-armany-bold mb-5 md:mb-6 lg:mb-9 xl:mb-12.5 px-5">
@@ -8,7 +34,7 @@
         <div class="mb-8 md:mb-10 lg:mb-12 xl:mb-14.5 mt-5 lg:mt-7 xl:mt-10">
           <div class="flex items-center  gap-4 lg:gap-5 mb-2.5 lg:mb-3.5">
             <span class="text-sm md:text-base !leading-[1.2] tracking-[1.92px] uppercase font-poppins text-white rounded-2xl lg:rounded-[20px] py-2.5 px-4 block bg-[#669F7F] border border-[rgba(255,_255,_255,_0.12)] max-w-max"
-              >Nourish</span
+              >Nouris</span
             >
             <p class="text-[#103C25] text-sm md:text-base !leading-[1.2] tracking-[1.92px] uppercase font-poppins">
               12 min read
@@ -28,8 +54,8 @@
               <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              </span>
-            </a>
+            </span>
+          </a>
         </div>
         <div class="w-full h-80 md:h-105">
           <img src="/assets/blog5.png" class="size-full object-cover rounded-[10px]" width="" height="" alt="">
@@ -56,13 +82,13 @@
               Discover castor oil’s benefits for health, beauty, and wellness through nature’s pure healing power.
             </p>
             <a
-            href="#"
-            class=" text-[#967901] text-lg lg:text-xl font-medium hover:!underline group hover:text-[#514849] !leading-[1.2] font-poppins flex items-center gap-2 lg:gap-3"
-            >Learn More
-            <span class="group-hover:translate-x-1 transition-transform duration-300">
-              <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+              href="#"
+              class=" text-[#967901] text-lg lg:text-xl font-medium hover:!underline group hover:text-[#514849] !leading-[1.2] font-poppins flex items-center gap-2 lg:gap-3"
+              >Learn More
+              <span class="group-hover:translate-x-1 transition-transform duration-300">
+                <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
               </span>
             </a>
           </div>
@@ -86,22 +112,26 @@
             <p class="text-[#514849] text-base lg:text-lg !leading-[1.6] mb-4 lg:mb-5 3xl:mb-8">
               Discover castor oil’s benefits for health, beauty, and wellness through nature’s pure healing power.
             </p>
-           <a
-            href="#"
-            class=" text-[#967901] text-lg lg:text-xl font-medium hover:!underline group hover:text-[#514849] !leading-[1.2] font-poppins flex items-center gap-2 lg:gap-3"
-            >Learn More
-            <span class="group-hover:translate-x-1 transition-transform duration-300">
-              <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+            <a
+              href="#"
+              class=" text-[#967901] text-lg lg:text-xl font-medium hover:!underline group hover:text-[#514849] !leading-[1.2] font-poppins flex items-center gap-2 lg:gap-3"
+              >Learn More
+              <span class="group-hover:translate-x-1 transition-transform duration-300">
+                <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
               </span>
             </a>
           </div>
         </div>
       </div>
-
       {% comment %} card2 {% endcomment %}
     </div>
+    {% comment %} <div class="cards">
+      <div class="card">Card-1</div>
+      <div class="card">Card-2</div>
+      <div class="card">Card-3</div>
+    </div> {% endcomment %}
   </div>
 </div>
 
