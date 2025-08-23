@@ -16,79 +16,114 @@
             All
           </button>
 
-          <!-- Generate unique tags - Fixed approach -->
-          {% comment %} First, collect all unique tags {% endcomment %}
-          {% assign all_tags = '' %}
-          {% assign tag_count = 0 %}
+          <!-- Generate Tags - Manual Collection Method -->
+          {% assign unique_tags = '' | split: '' %}
+          {% assign all_article_tags = '' | split: '' %}
 
-          {% if section.settings.blog != blank %}
-            {% for article in blog[section.settings.blog].articles limit: 50 %}
-              {% for tag in article.tags %}
-                {% assign tag_slug = tag | handleize %}
-                {% unless all_tags contains tag_slug %}
-                  {% if tag_count == 0 %}
-                    {% assign all_tags = tag %}
-                  {% else %}
-                    {% assign all_tags = all_tags | append: ',' | append: tag %}
-                  {% endif %}
-                  {% assign tag_count = tag_count | plus: 1 %}
-                {% endunless %}
+          {% if section.settings.blog %}
+            {% comment %} Collect ALL tags manually {% endcomment %}
+            {% for article in blogs[section.settings.blog].articles %}
+              {% if article.tags.size > 0 %}
+                {% for tag in article.tags %}
+                  {% assign all_article_tags = all_article_tags | push: tag %}
+                {% endfor %}
+              {% endif %}
+            {% endfor %}
+
+            {% comment %} Manual unique filtering {% endcomment %}
+            {% for tag in all_article_tags %}
+              {% assign is_duplicate = false %}
+              {% for unique_tag in unique_tags %}
+                {% if unique_tag == tag %}
+                  {% assign is_duplicate = true %}
+                  {% break %}
+                {% endif %}
               {% endfor %}
+              {% unless is_duplicate %}
+                {% assign unique_tags = unique_tags | push: tag %}
+              {% endunless %}
             {% endfor %}
           {% endif %}
 
-          {% comment %} Split tags and sort them {% endcomment %}
-          {% assign tags_array = all_tags | split: ',' %}
-
+          <!-- Sort tags -->
           {% if section.settings.tag_sort == 'desc' %}
-            {% assign sorted_tags = tags_array | reverse %}
+            {% assign sorted_tags = unique_tags | sort | reverse %}
           {% else %}
-            {% assign sorted_tags = tags_array | sort %}
+            {% assign sorted_tags = unique_tags | sort %}
           {% endif %}
 
-          <!-- Render tag buttons -->
+          <!-- Display tag buttons -->
           {% for tag in sorted_tags %}
-            {% if tag != blank %}
-              <button
-                class="tab-btn text-[#1E6C44] bg-white cursor-pointer ease-in-out duration-300 text-lg lg:text-xl font-medium !leading-[1.2] font-poppins py-3.5 lg:py-4.5 px-7 lg:px-8 rounded-3xl lg:rounded-[40px] hover:bg-[#1E6C44] hover:text-white"
-                data-tab="{{ tag | handleize }}"
-              >
-                {{ tag }}
-              </button>
-            {% endif %}
+            <button
+              class="tab-btn text-[#1E6C44] bg-white cursor-pointer ease-in-out duration-300 text-lg lg:text-xl font-medium !leading-[1.2] font-poppins py-3.5 lg:py-4.5 px-7 lg:px-8 rounded-3xl lg:rounded-[40px] hover:bg-[#1E6C44] hover:text-white"
+              data-tab="{{ tag | handle }}"
+            >
+              {{ tag }}
+            </button>
           {% endfor %}
         </div>
       </div>
     </div>
 
     <!-- Posts per page setting -->
-    {% assign posts_per_page = section.settings.posts_per_page %}
-    {% if posts_per_page == blank %}
-      {% assign posts_per_page = 9 %}
-    {% endif %}
+    {% assign posts_per_page = section.settings.posts_per_page | default: 9 %}
 
-    <!-- Debug info (remove in production) -->
-    {% comment %}
-      <div style="background: #f0f0f0; padding: 10px; margin: 10px 0; font-size: 12px;">
-        <strong>Debug Info:</strong><br>
-        Blog ID: {{ section.settings.blog }}<br>
-        Posts per page: {{ posts_per_page }}<br>
-        Tag sort: {{ section.settings.tag_sort }}<br>
-        Tags found: {{ tags_array.size }}<br>
-        Tags: {{ all_tags }}
-      </div>
-    {% endcomment %}
+    <!-- Debug Panel - Remove this in production -->
+    <div
+      class="debug-panel"
+      style="background: #f8f8f8; padding: 15px; margin: 20px 0; border-radius: 8px; font-family: monospace; font-size: 12px; display: none;"
+    >
+      <h4 style="margin: 0 0 10px 0; color: #333;">🔍 Debug Information:</h4>
+      <p><strong>Selected Blog:</strong> {{ section.settings.blog }}</p>
+      <p><strong>Posts per page:</strong> {{ posts_per_page }}</p>
+      <p><strong>Tag sort:</strong> {{ section.settings.tag_sort }}</p>
+      {% if section.settings.blog %}
+        <p><strong>Blog exists:</strong> ✅ Yes</p>
+        <p><strong>Total articles:</strong> {{ blogs[section.settings.blog].articles.size }}</p>
+        <p><strong>All article tags collected:</strong> {{ all_article_tags.size }}</p>
+        <p><strong>Unique tags found:</strong> {{ unique_tags.size }}</p>
+        <p>
+          <strong>Tags:</strong>
+          {% for tag in sorted_tags %}
+            "{{ tag }}"{% unless forloop.last %}, {% endunless %}
+          {% endfor %}
+        </p>
+        <div style="margin-top: 10px; padding: 10px; background: #fff; border-radius: 4px;">
+          <strong>Sample article tags:</strong><br>
+          {% for article in blogs[section.settings.blog].articles limit: 3 %}
+            <div>
+              {{ article.title }}:
+              {% for tag in article.tags %}
+                {{ tag -}}
+                {%- unless forloop.last %}, {% endunless %}
+              {% endfor %}
+              ({{ article.tags.size }} tags)
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p><strong>Blog exists:</strong> ❌ No blog selected</p>
+      {% endif %}
+    </div>
+
+    <!-- Toggle Debug Button -->
+    <button
+      onclick="toggleDebug()"
+      style="background: #1E6C44; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; margin-bottom: 20px;"
+    >
+      Toggle Debug Info
+    </button>
 
     <!-- Tabs Content -->
     <div class="tabs-wrapper">
-      <!-- All Articles -->
+      <!-- All Articles Tab -->
       <div class="tab-content block" data-tab="all">
         <div
           class="articles-grid grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-7 xl:gap-8"
           data-posts-per-page="{{ posts_per_page }}"
         >
-          {% if section.settings.blog != blank %}
-            {% for article in blog[section.settings.blog].articles %}
+          {% if section.settings.blog %}
+            {% for article in blogs[section.settings.blog].articles %}
               <div
                 class="article-item px-3 pt-3 pb-6 bg-white rounded-lg lg:rounded-[10px]"
                 data-index="{{ forloop.index0 }}"
@@ -118,7 +153,7 @@
                       {{ minutes }} min read
                     </p>
                   </div>
-                  <h6 class="text-[#0D2E1D] text-xl lg:text-xl font-medium !leading-[1.6] mb-4 lg:mb-5">
+                  <h6 class="text-[#0D2E1D] text-xl font-medium !leading-[1.6] mb-4 lg:mb-5">
                     <a href="{{ article.url }}">{{ article.title }}</a>
                   </h6>
                   <p class="text-[#514849] text-base lg:text-lg !leading-[1.6] mb-3 lg:mb-4">
@@ -139,8 +174,11 @@
               </div>
             {% endfor %}
           {% else %}
-            <div class="col-span-full text-center py-8">
-              <p class="text-gray-500">Please select a blog from the theme settings.</p>
+            <div class="col-span-full text-center py-12">
+              <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+                <h3 class="text-lg font-medium text-yellow-800 mb-2">⚠️ No Blog Selected</h3>
+                <p class="text-yellow-700">Please go to Theme Settings and select a blog to display posts.</p>
+              </div>
             </div>
           {% endif %}
         </div>
@@ -151,82 +189,80 @@
         </div>
       </div>
 
-      <!-- Articles by tag -->
+      <!-- Individual Tag Tabs -->
       {% for tag in sorted_tags %}
-        {% if tag != blank %}
-          <div class="tab-content hidden" data-tab="{{ tag | handleize }}">
-            <div
-              class="articles-grid grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-7 xl:gap-8"
-              data-posts-per-page="{{ posts_per_page }}"
-            >
-              {% assign tag_article_count = 0 %}
-              {% if section.settings.blog != blank %}
-                {% for article in blog[section.settings.blog].articles %}
-                  {% if article.tags contains tag %}
-                    {% assign tag_article_count = tag_article_count | plus: 1 %}
-                    <div
-                      class="article-item px-3 pt-3 pb-6 bg-white rounded-lg lg:rounded-[10px]"
-                      data-index="{{ tag_article_count | minus: 1 }}"
-                    >
-                      {% if article.image %}
-                        <div class="w-full h-53 md:h-60 lg:h-64 mb-4 md:mb-5 lg:mb-6">
-                          {{
-                            article.image
-                            | image_url: width: 500
-                            | image_tag: class: 'size-full rounded-[10px] object-cover object-top'
-                          }}
-                        </div>
-                      {% endif %}
-                      <div class="px-3">
-                        <div class="flex items-center gap-4 lg:gap-5 mb-2.5 lg:mb-3">
-                          <span class="text-sm !leading-[1.2] tracking-[1.64px] uppercase font-poppins text-[#514849] rounded-2xl lg:rounded-[20px] py-2.5 px-4 block bg-[#F0F0F0] border border-[#F0F0F0] max-w-max">
-                            {{ tag }}
-                          </span>
-                          {% assign words = article.content | strip_html | split: ' ' | size %}
-                          {% assign minutes = words | divided_by: 150 %}
-                          {% if minutes < 1 %}
-                            {% assign minutes = 1 %}
-                          {% endif %}
-                          <p class="text-[#103C25] text-sm !leading-[1.2] tracking-[1.64px] uppercase font-poppins">
-                            {{ minutes }} min read
-                          </p>
-                        </div>
-                        <h6 class="text-[#0D2E1D] text-xl lg:text-xl font-medium !leading-[1.6] mb-4 lg:mb-5">
-                          <a href="{{ article.url }}">{{ article.title }}</a>
-                        </h6>
-                        <p class="text-[#514849] text-base lg:text-lg !leading-[1.6] mb-3 lg:mb-4">
-                          {{ article.excerpt | strip_html | truncate: 100 }}
-                        </p>
-                        <a
-                          href="{{ article.url }}"
-                          class="text-[#967901] group text-lg lg:text-xl font-medium hover:text-green !leading-[1.2] font-poppins flex items-center gap-2 lg:gap-3"
-                        >
-                          Learn More
-                          <span class="group-hover:translate-x-1 transform ease-in-out duration-300">
-                            <svg
-                              width="17"
-                              height="13"
-                              viewBox="0 0 17 13"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                          </span>
-                        </a>
+        <div class="tab-content hidden" data-tab="{{ tag | handle }}">
+          <div
+            class="articles-grid grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-7 xl:gap-8"
+            data-posts-per-page="{{ posts_per_page }}"
+          >
+            {% assign tag_article_count = 0 %}
+            {% if section.settings.blog %}
+              {% for article in blogs[section.settings.blog].articles %}
+                {% if article.tags contains tag %}
+                  <div
+                    class="article-item px-3 pt-3 pb-6 bg-white rounded-lg lg:rounded-[10px]"
+                    data-index="{{ tag_article_count }}"
+                  >
+                    {% if article.image %}
+                      <div class="w-full h-53 md:h-60 lg:h-64 mb-4 md:mb-5 lg:mb-6">
+                        {{
+                          article.image
+                          | image_url: width: 500
+                          | image_tag: class: 'size-full rounded-[10px] object-cover object-top'
+                        }}
                       </div>
+                    {% endif %}
+                    <div class="px-3">
+                      <div class="flex items-center gap-4 lg:gap-5 mb-2.5 lg:mb-3">
+                        <span class="text-sm !leading-[1.2] tracking-[1.64px] uppercase font-poppins text-[#514849] rounded-2xl lg:rounded-[20px] py-2.5 px-4 block bg-[#F0F0F0] border border-[#F0F0F0] max-w-max">
+                          {{ tag }}
+                        </span>
+                        {% assign words = article.content | strip_html | split: ' ' | size %}
+                        {% assign minutes = words | divided_by: 150 %}
+                        {% if minutes < 1 %}
+                          {% assign minutes = 1 %}
+                        {% endif %}
+                        <p class="text-[#103C25] text-sm !leading-[1.2] tracking-[1.64px] uppercase font-poppins">
+                          {{ minutes }} min read
+                        </p>
+                      </div>
+                      <h6 class="text-[#0D2E1D] text-xl font-medium !leading-[1.6] mb-4 lg:mb-5">
+                        <a href="{{ article.url }}">{{ article.title }}</a>
+                      </h6>
+                      <p class="text-[#514849] text-base lg:text-lg !leading-[1.6] mb-3 lg:mb-4">
+                        {{ article.excerpt | strip_html | truncate: 100 }}
+                      </p>
+                      <a
+                        href="{{ article.url }}"
+                        class="text-[#967901] group text-lg lg:text-xl font-medium hover:text-green !leading-[1.2] font-poppins flex items-center gap-2 lg:gap-3"
+                      >
+                        Learn More
+                        <span class="group-hover:translate-x-1 transform ease-in-out duration-300">
+                          <svg
+                            width="17"
+                            height="13"
+                            viewBox="0 0 17 13"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </span>
+                      </a>
                     </div>
-                  {% endif %}
-                {% endfor %}
-              {% endif %}
-            </div>
-
-            <!-- Pagination for this tag -->
-            <div class="pagination-wrapper mt-8 flex justify-center" data-tab="{{ tag | handleize }}">
-              <!-- Pagination will be generated by JavaScript -->
-            </div>
+                  </div>
+                  {% assign tag_article_count = tag_article_count | plus: 1 %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
           </div>
-        {% endif %}
+
+          <!-- Pagination for this tag -->
+          <div class="pagination-wrapper mt-8 flex justify-center" data-tab="{{ tag | handle }}">
+            <!-- Pagination will be generated by JavaScript -->
+          </div>
+        </div>
       {% endfor %}
     </div>
   </div>
@@ -234,18 +270,30 @@
 
 {% schema %}
 {
-  "name": "Insights Blog Section",
+  "name": "Blog Insights Section",
+  "tag": "section",
+  "class": "blog-insights-section",
   "settings": [
+    {
+      "type": "header",
+      "content": "Blog Settings"
+    },
     {
       "type": "blog",
       "id": "blog",
-      "label": "Select Blog"
+      "label": "Select Blog",
+      "info": "Choose which blog to display"
     },
     {
       "type": "text",
       "id": "heading",
       "label": "Section Heading",
-      "default": "Get insights from us"
+      "default": "Get insights from us",
+      "info": "Main heading for the section"
+    },
+    {
+      "type": "header",
+      "content": "Display Settings"
     },
     {
       "type": "range",
@@ -255,7 +303,7 @@
       "step": 3,
       "default": 9,
       "label": "Posts per page",
-      "info": "Number of posts to show per page"
+      "info": "How many posts to show per page (affects pagination)"
     },
     {
       "type": "select",
@@ -272,200 +320,221 @@
         }
       ],
       "default": "asc",
-      "info": "How to sort the tag buttons"
+      "info": "How to sort the tag buttons in the tab menu"
     }
   ],
   "presets": [
     {
-      "name": "Blog Insights Section"
+      "name": "Blog Insights Section",
+      "settings": {
+        "heading": "Get insights from us"
+      }
     }
   ]
 }
 {% endschema %}
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // Wait for page to fully load
-    setTimeout(function () {
-      const tabBtns = document.querySelectorAll('.tab-btn');
-      const tabContents = document.querySelectorAll('.tab-content');
+  // Debug function
+  function toggleDebug() {
+    var debugPanel = document.querySelector('.debug-panel');
+    if (debugPanel) {
+      if (debugPanel.style.display === 'none' || debugPanel.style.display === '') {
+        debugPanel.style.display = 'block';
+      } else {
+        debugPanel.style.display = 'none';
+      }
+    }
+  }
 
-      console.log('Tab buttons found:', tabBtns.length);
-      console.log('Tab contents found:', tabContents.length);
+  document.addEventListener('DOMContentLoaded', function () {
+    // Wait for Shopify to fully render
+    setTimeout(function () {
+      var tabBtns = document.querySelectorAll('.tab-btn');
+      var tabContents = document.querySelectorAll('.tab-content');
+
+      console.log('🚀 Blog section loaded');
+      console.log('📊 Tab buttons found:', tabBtns.length);
+      console.log('📝 Tab contents found:', tabContents.length);
+
+      // List all tabs for debugging
+      for (var i = 0; i < tabBtns.length; i++) {
+        console.log('Tab ' + (i + 1) + ':', tabBtns[i].dataset.tab, '|', tabBtns[i].textContent.trim());
+      }
 
       // Pagination functionality
       function createPagination(tabId) {
-        const tabContent = document.querySelector(`[data-tab="${tabId}"]`);
+        var tabContent = document.querySelector('[data-tab="' + tabId + '"]');
         if (!tabContent) {
-          console.log('Tab content not found for:', tabId);
+          console.log('❌ Tab content not found for:', tabId);
           return;
         }
 
-        const articlesGrid = tabContent.querySelector('.articles-grid');
-        const articles = articlesGrid.querySelectorAll('.article-item');
-        const postsPerPage = parseInt(articlesGrid.dataset.postsPerPage) || 9;
-        const totalPages = Math.ceil(articles.length / postsPerPage);
+        var articlesGrid = tabContent.querySelector('.articles-grid');
+        var articles = articlesGrid.querySelectorAll('.article-item');
+        var postsPerPage = parseInt(articlesGrid.dataset.postsPerPage) || 6;
+        var totalPages = Math.ceil(articles.length / postsPerPage);
 
-        console.log(`Tab ${tabId}: ${articles.length} articles, ${totalPages} pages`);
+        console.log(
+          '📄 Tab "' + tabId + '":',
+          articles.length,
+          'articles,',
+          totalPages,
+          'pages,',
+          postsPerPage,
+          'per page'
+        );
+
+        var paginationWrapper = tabContent.querySelector('.pagination-wrapper');
 
         if (totalPages <= 1) {
-          // Hide pagination if only one page
-          const paginationWrapper = tabContent.querySelector('.pagination-wrapper');
           if (paginationWrapper) paginationWrapper.style.display = 'none';
+          // Show all articles if only one page
+          for (var i = 0; i < articles.length; i++) {
+            articles[i].style.display = 'block';
+          }
           return;
         }
 
-        let currentPage = 1;
+        var currentPage = 1;
 
         function showPage(page) {
-          const startIndex = (page - 1) * postsPerPage;
-          const endIndex = startIndex + postsPerPage;
+          var startIndex = (page - 1) * postsPerPage;
+          var endIndex = startIndex + postsPerPage;
 
-          articles.forEach((article, index) => {
-            if (index >= startIndex && index < endIndex) {
-              article.style.display = 'block';
+          for (var i = 0; i < articles.length; i++) {
+            if (i >= startIndex && i < endIndex) {
+              articles[i].style.display = 'block';
             } else {
-              article.style.display = 'none';
+              articles[i].style.display = 'none';
             }
-          });
+          }
 
           updatePaginationButtons(page);
         }
 
         function createPaginationButtons() {
-          const paginationWrapper = tabContent.querySelector('.pagination-wrapper');
           if (!paginationWrapper) return;
 
-          let paginationHTML = '<div class="pagination flex items-center justify-center gap-2 flex-wrap">';
+          var paginationHTML = '<div class="pagination flex items-center justify-center gap-2 flex-wrap">';
 
           // Previous button
-          paginationHTML += `
-          <button class="prev-btn px-3 md:px-4 py-2 text-sm md:text-base text-[#1E6C44] bg-white border border-[#1E6C44] rounded-lg hover:bg-[#1E6C44] hover:text-white transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed" ${
-            currentPage === 1 ? 'disabled' : ''
-          }>
-            Previous
-          </button>
-        `;
+          paginationHTML +=
+            '<button class="prev-btn px-3 md:px-4 py-2 text-sm md:text-base text-[#1E6C44] bg-white border border-[#1E6C44] rounded-lg hover:bg-[#1E6C44] hover:text-white transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"';
+          if (currentPage === 1) paginationHTML += ' disabled';
+          paginationHTML += '>← Previous</button>';
 
-          // Page numbers (show max 5 pages)
-          let startPage = Math.max(1, currentPage - 2);
-          let endPage = Math.min(totalPages, startPage + 4);
-          startPage = Math.max(1, endPage - 4);
-
-          if (startPage > 1) {
-            paginationHTML += `<button class="page-btn px-3 py-2 text-sm md:text-base text-[#1E6C44] bg-white border border-[#1E6C44] rounded-lg hover:bg-[#1E6C44] hover:text-white transition-colors duration-300" data-page="1">1</button>`;
-            if (startPage > 2) {
-              paginationHTML += `<span class="px-2 text-[#1E6C44]">...</span>`;
+          // Page numbers
+          for (var i = 1; i <= Math.min(totalPages, 5); i++) {
+            var isActive = i === currentPage;
+            paginationHTML += '<button class="page-btn px-3 py-2 text-sm md:text-base ';
+            if (isActive) {
+              paginationHTML += 'bg-[#1E6C44] text-white';
+            } else {
+              paginationHTML += 'text-[#1E6C44] bg-white border border-[#1E6C44]';
             }
+            paginationHTML +=
+              ' rounded-lg hover:bg-[#1E6C44] hover:text-white transition-colors duration-300" data-page="' +
+              i +
+              '">' +
+              i +
+              '</button>';
           }
 
-          for (let i = startPage; i <= endPage; i++) {
-            const isActive = i === currentPage;
-            paginationHTML += `
-            <button class="page-btn px-3 py-2 text-sm md:text-base ${
-              isActive ? 'bg-[#1E6C44] text-white' : 'text-[#1E6C44] bg-white border border-[#1E6C44]'
-            } rounded-lg hover:bg-[#1E6C44] hover:text-white transition-colors duration-300" data-page="${i}">
-              ${i}
-            </button>
-          `;
-          }
-
-          if (endPage < totalPages) {
-            if (endPage < totalPages - 1) {
-              paginationHTML += `<span class="px-2 text-[#1E6C44]">...</span>`;
-            }
-            paginationHTML += `<button class="page-btn px-3 py-2 text-sm md:text-base text-[#1E6C44] bg-white border border-[#1E6C44] rounded-lg hover:bg-[#1E6C44] hover:text-white transition-colors duration-300" data-page="${totalPages}">${totalPages}</button>`;
+          if (totalPages > 5) {
+            paginationHTML += '<span class="px-2 text-[#1E6C44]">... ' + totalPages + '</span>';
           }
 
           // Next button
-          paginationHTML += `
-          <button class="next-btn px-3 md:px-4 py-2 text-sm md:text-base text-[#1E6C44] bg-white border border-[#1E6C44] rounded-lg hover:bg-[#1E6C44] hover:text-white transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed" ${
-            currentPage === totalPages ? 'disabled' : ''
-          }>
-            Next
-          </button>
-        `;
+          paginationHTML +=
+            '<button class="next-btn px-3 md:px-4 py-2 text-sm md:text-base text-[#1E6C44] bg-white border border-[#1E6C44] rounded-lg hover:bg-[#1E6C44] hover:text-white transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"';
+          if (currentPage === totalPages) paginationHTML += ' disabled';
+          paginationHTML += '>Next →</button>';
 
           paginationHTML += '</div>';
           paginationWrapper.innerHTML = paginationHTML;
           paginationWrapper.style.display = 'flex';
 
           // Add event listeners
-          const prevBtn = paginationWrapper.querySelector('.prev-btn');
-          const nextBtn = paginationWrapper.querySelector('.next-btn');
-          const pageButtons = paginationWrapper.querySelectorAll('.page-btn');
+          var prevBtn = paginationWrapper.querySelector('.prev-btn');
+          var nextBtn = paginationWrapper.querySelector('.next-btn');
+          var pageButtons = paginationWrapper.querySelectorAll('.page-btn');
 
-          prevBtn?.addEventListener('click', () => {
-            if (currentPage > 1) {
-              currentPage--;
-              showPage(currentPage);
-            }
-          });
+          if (prevBtn) {
+            prevBtn.addEventListener('click', function () {
+              if (currentPage > 1) {
+                currentPage--;
+                showPage(currentPage);
+              }
+            });
+          }
 
-          nextBtn?.addEventListener('click', () => {
-            if (currentPage < totalPages) {
-              currentPage++;
-              showPage(currentPage);
-            }
-          });
+          if (nextBtn) {
+            nextBtn.addEventListener('click', function () {
+              if (currentPage < totalPages) {
+                currentPage++;
+                showPage(currentPage);
+              }
+            });
+          }
 
-          pageButtons.forEach((btn) => {
-            btn.addEventListener('click', () => {
-              currentPage = parseInt(btn.dataset.page);
+          for (var i = 0; i < pageButtons.length; i++) {
+            pageButtons[i].addEventListener('click', function () {
+              currentPage = parseInt(this.dataset.page);
               showPage(currentPage);
             });
-          });
+          }
         }
 
         function updatePaginationButtons() {
-          createPaginationButtons(); // Recreate buttons with updated state
+          createPaginationButtons(); // Recreate with updated state
         }
 
-        // Initialize pagination
+        // Initialize
         createPaginationButtons();
         showPage(1);
       }
 
-      // Tab functionality
-      tabBtns.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const tab = btn.dataset.tab;
-          console.log('Tab clicked:', tab);
+      // Tab switching functionality
+      for (var i = 0; i < tabBtns.length; i++) {
+        tabBtns[i].addEventListener('click', function (e) {
+          e.preventDefault();
+          var tab = this.dataset.tab;
 
-          // Remove active class from all buttons
-          tabBtns.forEach((b) => {
-            b.classList.remove('bg-[#1E6C44]', 'text-white', 'active-tab');
-            b.classList.add('bg-white', 'text-[#1E6C44]');
-          });
+          console.log('🔄 Switching to tab:', tab);
 
-          // Add active class to clicked button
-          btn.classList.add('bg-[#1E6C44]', 'text-white', 'active-tab');
-          btn.classList.remove('bg-white', 'text-[#1E6C44]');
+          // Update button states
+          for (var j = 0; j < tabBtns.length; j++) {
+            tabBtns[j].classList.remove('bg-[#1E6C44]', 'text-white', 'active-tab');
+            tabBtns[j].classList.add('bg-white', 'text-[#1E6C44]');
+          }
 
-          // Hide all tab contents
-          tabContents.forEach((content) => {
-            content.classList.add('hidden');
-            content.classList.remove('block');
-          });
+          this.classList.add('bg-[#1E6C44]', 'text-white', 'active-tab');
+          this.classList.remove('bg-white', 'text-[#1E6C44]');
 
-          // Show clicked tab content
-          const targetTab = document.querySelector(`.tab-content[data-tab="${tab}"]`);
+          // Update content visibility
+          for (var j = 0; j < tabContents.length; j++) {
+            tabContents[j].classList.add('hidden');
+            tabContents[j].classList.remove('block');
+          }
+
+          var targetTab = document.querySelector('[data-tab="' + tab + '"]');
           if (targetTab) {
             targetTab.classList.remove('hidden');
             targetTab.classList.add('block');
 
             // Initialize pagination for this tab
-            setTimeout(() => {
+            setTimeout(function () {
               createPagination(tab);
             }, 100);
           } else {
-            console.log('Target tab not found:', tab);
+            console.log('❌ Target tab not found:', tab);
           }
         });
-      });
+      }
 
-      // Initialize pagination for the active tab (All)
+      // Initialize the default tab
       createPagination('all');
-    }, 500); // Wait 500ms for Shopify to fully render
+    }, 1000); // Increased wait time
   });
 </script>
