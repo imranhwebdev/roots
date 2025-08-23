@@ -1,160 +1,114 @@
 <div class="blog py-17.5 md:py-20 lg:py-25 xl:py-30 2xl:pb-35">
   <div class="container">
     <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-center text-green !leading-[1.25] font-bold font-armany-bold mb-5 md:mb-6 lg:mb-9 xl:mb-12.5 px-5">
-      Take a look at thelatest articles
+      Take a look at the latest articles
     </h2>
+
     <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 md:gap-6 xl:gap-8">
-      <div class="p-3 lg:p-4 bg-[#B7D6C6] rounded-lg lg:rounded-[10px] ">
-        <div class="mb-8 md:mb-10 lg:mb-12 xl:mb-14.5 mt-5 lg:mt-7 xl:mt-10">
-          <div class="flex items-center  gap-4 lg:gap-5 mb-2.5 lg:mb-3.5">
-            <span class="text-sm md:text-base !leading-[1.2] tracking-[1.92px] uppercase font-poppins text-white rounded-2xl lg:rounded-[20px] py-2.5 px-4 block bg-[#669F7F] border border-[rgba(255,_255,_255,_0.12)] max-w-max"
-              >Nouris</span
-            >
-            <p class="text-[#103C25] text-sm md:text-base !leading-[1.2] tracking-[1.92px] uppercase font-poppins">
-              12 min read
-            </p>
-          </div>
-          <h6 class="text-[#0D2E1D] text-2xl lg:text-3xl xl:text-[32px] font-medium !leading-[1.6] mb-4 lg:mb-5">
-            Discover 5 amazing castor oil benefits for health, beauty, wellness.
-          </h6>
-          <p class="text-[#514849] text-base lg:text-lg !leading-[1.6] mb-5 lg:mb-6 xl:mb-8">
-            Discover castor oil’s benefits for health, beauty, and wellness through nature’s pure healing power.
-          </p>
-          <a
-            href="#"
-            class=" text-[#967901] text-lg lg:text-xl font-medium hover:!underline group hover:text-[#514849] !leading-[1.2] font-poppins flex items-center gap-2 lg:gap-3"
-            >Learn More
-            <span class="group-hover:translate-x-1 transition-transform duration-300">
-              <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-          </a>
-        </div>
-        <div class="w-full h-80 md:h-105">
-          <img
-            src="{{'blog5.png' |  asset_url}}"
-            class="size-full object-cover rounded-[10px]"
-            width=""
-            height=""
-            alt=""
-          >
-        </div>
-      </div>
-      <div class="">
-        <div class="p-3 lg:p-4 bg-[#B7D6C6] h-auto xl:h-101 flex flex-col md:flex-row flex-wrap md:flex-nowrap items-center gap-4 lg:gap-5 xl:gap-6 rounded-lg lg:rounded-[10px] mb-4 md:mb-6 xl:mb-8">
-          <div class="w-full md:w-70 xl:w-68 h-70 3xl:w-74 xl:h-full 3xl:h-93 flex-[0_0_auto]">
-            <img
-              src="{{'blog6.png' |  asset_url}}"
-              class="size-full object-cover rounded-[10px]"
-              width=""
-              height=""
-              alt=""
-            >
-          </div>
-          <div class="">
-            <div class="flex items-center  gap-2 3xl:gap-5 mb-2 lg:mb-3 3xl:mb-3.5">
-              <span class="text-sm md:text-base !leading-[1.2] tracking-[1.92px] uppercase font-poppins text-white rounded-2xl lg:rounded-[20px] py-2.5 px-4 block bg-[#669F7F] border border-[rgba(255,_255,_255,_0.12)] max-w-max"
-                >Nourish</span
-              >
-              <p class="text-[#103C25] text-sm md:text-base !leading-[1.2] tracking-[1.92px] uppercase font-poppins">
-                12 min read
+      {%- assign first_article = blog.articles.first -%}
+      {%- if first_article -%}
+        <!-- Featured First Article -->
+        <div class="p-3 lg:p-4 bg-[#B7D6C6] rounded-lg lg:rounded-[10px]">
+          <div class="mb-8 md:mb-10 lg:mb-12 xl:mb-14.5 mt-5 lg:mt-7 xl:mt-10">
+            <div class="flex items-center gap-4 lg:gap-5 mb-2.5 lg:mb-3.5">
+              {% if first_article.tags.size > 0 %}
+                <span class="text-sm md:text-base !leading-[1.2] tracking-[1.92px] uppercase font-poppins text-white rounded-2xl lg:rounded-[20px] py-2.5 px-4 block bg-[#669F7F] max-w-max">
+                  {{ first_article.tags.first }}
+                </span>
+              {% endif %}
+              <p class="text-[#103C25] text-sm md:text-base !leading-[1.2] uppercase font-poppins">
+                {{ first_article.reading_time | default: '5' }} min read
               </p>
             </div>
-            <h6 class="text-[#0D2E1D] text-xl lg:text-2xl 3xl:text-[32px] font-medium 3xl:!leading-[1.6] mb-3 3xl:mb-5">
-              Discover 5 amazing castor oil benefits for health, beauty, wellness.
+            <h6 class="text-[#0D2E1D] text-2xl lg:text-3xl xl:text-[32px] font-medium !leading-[1.6] mb-4 lg:mb-5">
+              <a href="{{ first_article.url }}">{{ first_article.title }}</a>
             </h6>
-            <p class="text-[#514849] text-base lg:text-lg !leading-[1.6] mb-4 lg:mb-5 3xl:mb-8">
-              Discover castor oil’s benefits for health, beauty, and wellness through nature’s pure healing power.
+            <p class="text-[#514849] text-base lg:text-lg !leading-[1.6] mb-5 lg:mb-6 xl:mb-8">
+              {{ first_article.excerpt | strip_html | truncate: 120 }}
             </p>
             <a
-              href="#"
-              class=" text-[#967901] text-lg lg:text-xl font-medium hover:!underline group hover:text-[#514849] !leading-[1.2] font-poppins flex items-center gap-2 lg:gap-3"
-              >Learn More
+              href="{{ first_article.url }}"
+              class="text-[#967901] text-lg lg:text-xl font-medium hover:!underline group hover:text-[#514849] flex items-center gap-2 lg:gap-3"
+            >
+              Learn More
               <span class="group-hover:translate-x-1 transition-transform duration-300">
-                <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="17" height="13" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </span>
             </a>
           </div>
-        </div>
-        <div class="p-3 lg:p-4 bg-[#B7D6C6] h-auto xl:h-101 flex flex-col md:flex-row flex-wrap md:flex-nowrap items-center gap-4 lg:gap-5 xl:gap-6 rounded-lg lg:rounded-[10px]">
-          <div class="w-full md:w-70 xl:w-68 h-70 3xl:w-74 xl:h-full 3xl:h-93 flex-[0_0_auto]">
-            <img
-              src="{{'blog7.png' |  asset_url}}"
-              class="size-full object-cover rounded-[10px]"
-              width=""
-              height=""
-              alt=""
-            >
-          </div>
-          <div class="">
-            <div class="flex  items-center  gap-2 3xl:gap-5 mb-2 lg:mb-3 3xl:mb-3.5">
-              <span class="text-sm md:text-base !leading-[1.2] tracking-[1.92px] uppercase font-poppins text-white rounded-2xl lg:rounded-[20px] py-2.5 px-4 block bg-[#669F7F] border border-[rgba(255,_255,_255,_0.12)] max-w-max"
-                >Nourish</span
-              >
-              <p class="text-[#103C25] text-sm md:text-base !leading-[1.2] tracking-[1.92px] uppercase font-poppins">
-                12 min read
-              </p>
+          {% if first_article.image %}
+            <div class="w-full h-80 md:h-105">
+              {{
+                first_article.image
+                | image_url: width: 800
+                | image_tag: class: 'size-full object-cover rounded-[10px]'
+              }}
             </div>
-            <h6 class="text-[#0D2E1D] text-xl lg:text-2xl 3xl:text-[32px] font-medium 3xl:!leading-[1.6] mb-3 3xl:mb-5">
-              Discover 5 amazing castor oil benefits for health, beauty, wellness.
-            </h6>
-            <p class="text-[#514849] text-base lg:text-lg !leading-[1.6] mb-4 lg:mb-5 3xl:mb-8">
-              Discover castor oil’s benefits for health, beauty, and wellness through nature’s pure healing power.
-            </p>
-            <a
-              href="#"
-              class=" text-[#967901] text-lg lg:text-xl font-medium hover:!underline group hover:text-[#514849] !leading-[1.2] font-poppins flex items-center gap-2 lg:gap-3"
-              >Learn More
-              <span class="group-hover:translate-x-1 transition-transform duration-300">
-                <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-            </a>
-          </div>
+          {% endif %}
         </div>
+      {%- endif -%}
+
+      <!-- Other Articles -->
+      <div>
+        {% for article in blog.articles offset: 1 limit: 2 %}
+          <div class="p-3 lg:p-4 bg-[#B7D6C6] h-auto xl:h-101 flex flex-col md:flex-row items-center gap-4 lg:gap-5 xl:gap-6 rounded-lg lg:rounded-[10px] {% unless forloop.last %}mb-4 md:mb-6 xl:mb-8{% endunless %}">
+            {% if article.image %}
+              <div class="w-full md:w-70 xl:w-68 h-70 xl:h-full flex-[0_0_auto]">
+                {{ article.image | image_url: width: 500 | image_tag: class: 'size-full object-cover rounded-[10px]' }}
+              </div>
+            {% endif %}
+            <div>
+              <div class="flex items-center gap-2 mb-2 lg:mb-3">
+                {% if article.tags.size > 0 %}
+                  <span class="text-sm md:text-base uppercase font-poppins text-white rounded-2xl py-2.5 px-4 block bg-[#669F7F] max-w-max">
+                    {{ article.tags.first }}
+                  </span>
+                {% endif %}
+                <p class="text-[#103C25] text-sm md:text-base uppercase font-poppins">
+                  {% assign words = article.content | strip_html | split: ' ' | size %}
+                  {% assign minutes = words | divided_by: 20 %}
+                  {% if minutes < 1 %}
+                    {% assign minutes = 1 %}
+                  {% endif %}
+                  {{ minutes }} min read
+                </p>
+              </div>
+              <h6 class="text-[#0D2E1D] text-xl lg:text-2xl font-medium mb-3">
+                <a href="{{ article.url }}">{{ article.title }}</a>
+              </h6>
+              <p class="text-[#514849] text-base lg:text-lg !leading-[1.6] mb-4">
+                {{ article.excerpt | strip_html | truncate: 100 }}
+              </p>
+              <a
+                href="{{ article.url }}"
+                class="text-[#967901] text-lg lg:text-xl font-medium hover:!underline group hover:text-[#514849] flex items-center gap-2"
+              >
+                Learn More
+                <span class="group-hover:translate-x-1 transition-transform duration-300">
+                  <svg width="17" height="13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+        {% endfor %}
       </div>
     </div>
   </div>
 </div>
 
-{% comment %}
-  This section is used in the blog template to render the blog page listing all
-  articles within a blog.
-
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/blog
-{% endcomment %}
-
-{% comment %} <h1>{{ blog.title }}</h1> {% endcomment %}
-
-{% comment %}
-  {% paginate blog.articles by 5 %}
-    {% for article in blog.articles %}
-      <div>
-        {% if article.image %}
-          {{ article.image | image_url: width: 1000 | image_tag }}
-        {% endif %}
-        <h2>
-          {{ article.title | link_to: article.url }}
-        </h2>
-        {% assign date = article.published_at | time_tag: format: 'date' %}
-        <p>{{ 'blog.article_metadata_html' | t: date: date, author: article.author }}</p>
-        <p>{{ article.excerpt }}</p>
-      </div>
-    {% endfor %}
-
-    {%- if paginate.pages > 1 -%}
-      {{- paginate | default_pagination -}}
-    {%- endif -%}
-  {% endpaginate %}
-{% endcomment %}
-
 {% schema %}
 {
-  "name": "t:general.blog",
-  "settings": []
+  "name": "Featured Blog",
+  "settings": [
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Select blog"
+    }
+  ]
 }
 {% endschema %}
