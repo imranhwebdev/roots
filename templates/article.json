@@ -11,10 +11,37 @@
   "sections": {
     "main": {
       "type": "article",
-      "settings": {}
+      "settings": {
+        "show_author": true,
+        "show_date": true,
+        "date_format": "%B %d, %Y",
+        "show_tags": true,
+        "show_featured_image": true,
+        "enable_share": true,
+        "enable_related": true,
+        "related_limit": 3
+      }
     },
+    "join_roots_Jzhppf": {
+      "type": "join-roots",
+      "name": "Subscribe Section",
+      "settings": {
+        "title": "Join the Roots Family",
+        "description": "Be the first to know about exclusive offers, self-care tips, and new launches.",
+        "enable_newsletter": true,
+        "email_placeholder": "Enter your email address",
+        "success_message": "Thank you for subscribing! You'll hear from us soon.",
+        "button_text": "Subscribe Now",
+        "button_link": "",
+        "show_arrow": false,
+        "card_bg_color": "#1E6C44",
+        "title_color": "#FFFFFF",
+        "description_color": "#F5F5F5"
+      }
+    }
   },
   "order": [
     "main",
+    "join_roots_Jzhppf"
   ]
 }
