@@ -7,39 +7,46 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
-
 {
   "sections": {
     "banner": {
       "type": "common-banner",
       "settings": {
-        "default_title": "ABOUT US",
+        "default_title": "About Us",
         "default_description": "Roots creates pure, organic castor oil, nurturing natural beauty with clean, effective care for hair, skin, and wellness."
       }
     },
     "our_story": {
       "type": "about-our-story",
-      "settings": {
-      },
+      "settings": {}
     },
     "our_mission": {
       "type": "our-mission",
-      "settings": {
-      },
+      "settings": {}
     },
     "our_vision": {
       "type": "our-vision",
-      "settings": {
-      },
+      "settings": {}
     },
     "why_roots": {
       "type": "about-roots",
-      "settings": {
-      },
-    },
-      "join_roots": {
-      "type": "join-roots",
       "settings": {}
+    },
+    "join_roots": {
+      "type": "join-roots",
+      "settings": {
+        "title": "Join the Roots Family",
+        "description": "Be the first to know about exclusive offers, self-care tips, and new launches.",
+        "enable_newsletter": true,
+        "email_placeholder": "Enter your email address",
+        "success_message": "Thank you for subscribing! You'll hear from us soon.",
+        "button_text": "Subscribe Now",
+        "button_link": "",
+        "show_arrow": false,
+        "card_bg_color": "#1e6c44",
+        "title_color": "#ffffff",
+        "description_color": "#f5f5f5"
+      }
     }
   },
   "order": [
@@ -49,6 +56,5 @@
     "our_vision",
     "why_roots",
     "join_roots"
-
   ]
 }
