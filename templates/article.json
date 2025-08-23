@@ -19,6 +19,9 @@
     },
     "main": {
       "type": "article",
+      "custom_css": [
+        "br{display: none}"
+      ],
       "settings": {
         "show_author": true,
         "show_date": true,
