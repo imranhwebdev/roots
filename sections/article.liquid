@@ -58,18 +58,21 @@
           </div>
         {% endif %}
 
-        {% if section.settings.show_tags %}
-          <div class="flex items-center gap-3">
-            {% if article.tags.size > 0 %}
-              <p class="text-sm lg:text-base text-[#514849] uppercase tracking-[1.92px] bg-[#F0F0F0] py-2 px-4 rounded-xl">
-                {{ article.tags.first }}
-              </p>
-            {% endif %}
-            <p class="text-base lg:text-lg text-[#797375]">
-              {{ article.content | strip_html | split: ' ' | size | divided_by: 200 }} min read
-            </p>
-          </div>
-        {% endif %}
+        <div class="flex items-center gap-2 lg:gap-3">
+          {% if article.tags.size > 0 %}
+            <span class="text-sm !leading-[1.2] tracking-[1.64px] uppercase font-poppins text-[#514849] rounded-2xl lg:rounded-[20px] py-2.5 px-4 block bg-[#F0F0F0] border border-[#F0F0F0] max-w-max">
+              {{ article.tags.first }}
+            </span>
+          {% endif %}
+          {% assign words = article.content | strip_html | split: ' ' | size %}
+          {% assign minutes = words | divided_by: 50 %}
+          {% if minutes < 1 %}
+            {% assign minutes = 1 %}
+          {% endif %}
+          <p class="text-[#103C25] text-sm m !leading-[1.2] tracking-[1.64px] uppercase font-poppins">
+            {{ minutes }} min read
+          </p>
+        </div>
 
         {% if section.settings.enable_share %}
           <!-- Share -->
@@ -127,6 +130,8 @@
                             src="{{ post.image | img_url: '400x' }}"
                             class="size-full rounded-[10px]"
                             alt="{{ post.title }}"
+                            width=""
+                            height=""
                           >
                         </div>
                       {% endif %}
