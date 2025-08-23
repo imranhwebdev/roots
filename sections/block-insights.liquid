@@ -7,27 +7,33 @@
       <!-- Tabs Header -->
       <div class="overflow-auto">
         <div class="flex items-center gap-3 lg:gap-4 w-78 md:w-130 lg:w-auto">
+          <!-- All tab -->
           <button
-            class="tab-btn flex-[0_0_auto] active-tab text-[#1E6C44] bg-[#1E6C44] cursor-pointer ease-in-out duration-300 text-lg lg:text-xl font-medium !leading-[1.2] font-poppins py-3.5 lg:py-4.5 px-7 lg:px-8 rounded-3xl lg:rounded-[40px]"
+            class="tab-btn flex-[0_0_auto] active-tab text-white bg-[#1E6C44] cursor-pointer ease-in-out duration-300 text-lg lg:text-xl font-medium !leading-[1.2] font-poppins py-3.5 lg:py-4.5 px-7 lg:px-8 rounded-3xl lg:rounded-[40px]"
             data-tab="all"
           >
             All
           </button>
+
           {% assign all_tags = '' | split: ',' %}
           {% for article in blogs[section.settings.blog].articles %}
             {% for tag in article.tags %}
-              {% unless all_tags contains tag %}
+              {% assign tag_exists = false %}
+              {% for t in all_tags %}
+                {% if t == tag %}
+                  {% assign tag_exists = true %}
+                {% endif %}
+              {% endfor %}
+              {% if tag_exists == false %}
                 {% assign all_tags = all_tags | push: tag %}
-              {% endunless %}
+                <button
+                  class="tab-btn flex-[0_0_auto] text-[#1E6C44] bg-white cursor-pointer ease-in-out duration-300 text-lg lg:text-xl font-medium !leading-[1.2] font-poppins py-3.5 lg:py-4.5 px-7 lg:px-8 rounded-3xl lg:rounded-[40px]"
+                  data-tab="{{ tag }}"
+                >
+                  {{ tag }}
+                </button>
+              {% endif %}
             {% endfor %}
-          {% endfor %}
-          {% for tag in all_tags %}
-            <button
-              class="tab-btn flex-[0_0_auto] text-[#1E6C44] bg-white hover:bg-[#1E6C44] hover:text-white cursor-pointer ease-in-out duration-300 text-lg lg:text-xl font-medium !leading-[1.2] font-poppins py-3.5 lg:py-4.5 px-7 lg:px-8 rounded-3xl lg:rounded-[40px]"
-              data-tab="{{ tag }}"
-            >
-              {{ tag }}
-            </button>
           {% endfor %}
         </div>
       </div>
@@ -148,32 +154,17 @@
 
   tabBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-      tabBtns.forEach((b) => b.classList.remove('bg-[#1E6C44]', 'text-white'), b.classList.add('bg-white','text-[#1E6C44']));
-      tabContents.forEach((c) => c.classList.add('hidden'));
+      tabBtns.forEach((b) => {
+        b.classList.remove('bg-[#1E6C44]', 'text-white');
+        b.classList.add('bg-white', 'text-[#1E6C44]');
+      });
 
       btn.classList.add('bg-[#1E6C44]', 'text-white');
-      btn.classList.remove('bg-white','text-[#1E6C44]');
+      btn.classList.remove('bg-white', 'text-[#1E6C44]');
+
       const tab = btn.dataset.tab;
-      document.querySelectorAll(`.tab-content[data-tab="${tab}"]`).forEach(c => c.classList.remove('hidden'));
+      tabContents.forEach((c) => c.classList.add('hidden'));
+      document.querySelectorAll(`.tab-content[data-tab="${tab}"]`).forEach((c) => c.classList.remove('hidden'));
     });
   });
 </script>
-
-{% schema %}
-{
-  "name": "Insights Blog Section",
-  "settings": [
-    {
-      "type": "blog",
-      "id": "blog",
-      "label": "Select blog"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Section Heading",
-      "default": "Get insights from us"
-    }
-  ]
-}
-{% endschema %}
