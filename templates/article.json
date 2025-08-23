@@ -9,6 +9,14 @@
  */
 {
   "sections": {
+    "common_banner_AzrLqH": {
+      "type": "common-banner",
+      "name": "Common Banner",
+      "settings": {
+        "default_title": "Welcome to Our Blog",
+        "default_description": "Discover in-depth insights, tips, and stories designed to inspire your lifestyle."
+      }
+    },
     "main": {
       "type": "article",
       "settings": {
@@ -41,6 +49,7 @@
     }
   },
   "order": [
+    "common_banner_AzrLqH",
     "main",
     "join_roots_Jzhppf"
   ]
