@@ -18,28 +18,12 @@
           "type": "social",
           "settings": {
             "platform": "instagram",
-            "url": "#"
-          }
-        },
-        "social_em4GMM": {
-          "type": "social",
-          "settings": {
-            "platform": "twitter",
-            "url": "#"
-          }
-        },
-        "social_eAT6iw": {
-          "type": "social",
-          "settings": {
-            "platform": "facebook",
-            "url": "#"
+            "url": "https://www.instagram.com/chooseroots/"
           }
         }
       },
       "block_order": [
-        "social_qpTdPK",
-        "social_em4GMM",
-        "social_eAT6iw"
+        "social_qpTdPK"
       ],
       "settings": {
         "offer_text": "Sign up get 20% Off for all collection",
