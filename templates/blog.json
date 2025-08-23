@@ -26,10 +26,12 @@
     "block_insights": {
       "type": "block-insights",
       "settings": {
-        "blog": "news",
         "heading": "Get insights from us",
-        "posts_per_page": 6,
-        "tag_sort": "asc"
+        "blog": "news",
+        "tab_1": "Indulge",
+        "tab_2": "Tag 2",
+        "tab_3": "Tag 3",
+        "tab_4": "Tag 4"
       }
     },
     "join_roots": {
