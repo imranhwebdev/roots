@@ -3,13 +3,13 @@
     max-width: 18px;
   }
 {% endstylesheet %}
-<div class="topbar bg-[#FFD500] text-black text-sm py-2 px-2 lg:px-6">
+
+<div class="topbar bg-[#FFD500] text-black text-sm py-2 px-0 lg:px-6">
   <div class="container">
     <div class="topbar-inner flex justify-between items-center">
       <!-- Left: Social -->
       <div class="flex items-center gap-2">
         <span class="text-[#21201E] text-sm lg:text-lg leading-normal">Follow Us</span>
-
         {% for block in section.blocks %}
           {% if block.type == 'social' %}
             <a
@@ -18,18 +18,18 @@
               aria-label="{{ block.settings.platform }}"
             >
               {% case block.settings.platform %}
-                {% when 'instagram' %}
-                  {% render 'icon-instagram' %}
-                {% when 'twitter' %}
-                  {% render 'icon-twitter' %}
-                {% when 'facebook' %}
-                  {% render 'icon-facebook' %}
-                {% when 'youtube' %}
-                  {% render 'icon-youtube' %}
-                {% when 'linkedin' %}
-                  {% render 'icon-linkedin' %}
-                {% when 'tiktok' %}
-                  {% render 'icon-tiktok' %}
+                {% when 'instagram' -%}
+                  {%- render 'icon-instagram' %}
+                {% when 'twitter' -%}
+                  {%- render 'icon-twitter' %}
+                {% when 'facebook' -%}
+                  {%- render 'icon-facebook' %}
+                {% when 'youtube' -%}
+                  {%- render 'icon-youtube' %}
+                {% when 'linkedin' -%}
+                  {%- render 'icon-linkedin' %}
+                {% when 'tiktok' -%}
+                  {%- render 'icon-tiktok' %}
               {% endcase %}
             </a>
           {% endif %}
@@ -50,10 +50,7 @@
             href="tel:{{ section.settings.phone_number -}}"
             class="flex items-center gap-1 text-[#21201E] text-xs lg:text-lg font-poppins"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <path d="M16.4775 13.7475C16.4775 14.0175 16.4175 14.295 16.29 14.565C16.1625 14.835 15.9975 15.09 15.78 15.33C15.4125 15.735 15.0075 16.0275 14.55 16.215C14.1 16.4025 13.6125 16.5 13.0875 16.5C12.3225 16.5 11.505 16.32 10.6425 15.9525C9.78 15.585 8.9175 15.09 8.0625 14.4675C7.2 13.8375 6.3825 13.14 5.6025 12.3675C4.83 11.5875 4.1325 10.77 3.51 9.915C2.895 9.06 2.4 8.205 2.04 7.3575C1.68 6.5025 1.5 5.685 1.5 4.905C1.5 4.395 1.59 3.9075 1.77 3.4575C1.95 3 2.235 2.58 2.6325 2.205C3.1125 1.7325 3.6375 1.5 4.1925 1.5C4.4025 1.5 4.6125 1.545 4.8 1.635C4.995 1.725 5.1675 1.86 5.3025 2.055L7.0425 4.5075C7.1775 4.695 7.275 4.8675 7.3425 5.0325C7.41 5.19 7.4475 5.3475 7.4475 5.49C7.4475 5.67 7.395 5.85 7.29 6.0225C7.1925 6.195 7.05 6.375 6.87 6.555L6.3 7.1475C6.2175 7.23 6.18 7.3275 6.18 7.4475C6.18 7.5075 6.1875 7.56 6.2025 7.62C6.225 7.68 6.2475 7.725 6.2625 7.77C6.3975 8.0175 6.63 8.34 6.96 8.73C7.2975 9.12 7.6575 9.5175 8.0475 9.915C8.4525 10.3125 8.8425 10.68 9.24 11.0175C9.63 11.3475 9.9525 11.5725 10.2075 11.7075C10.245 11.7225 10.29 11.745 10.3425 11.7675C10.4025 11.79 10.4625 11.7975 10.53 11.7975C10.6575 11.7975 10.755 11.7525 10.8375 11.67L11.4075 11.1075C11.595 10.92 11.775 10.7775 11.9475 10.6875C12.12 10.5825 12.2925 10.53 12.48 10.53C12.6225 10.53 12.7725 10.56 12.9375 10.6275C13.1025 10.695 13.275 10.7925 13.4625 10.92L15.945 12.6825C16.14 12.8175 16.275 12.975 16.3575 13.1625C16.4325 13.35 16.4775 13.5375 16.4775 13.7475Z" stroke="#21201E" stroke-width="1.5" stroke-miterlimit="10"/>
-              <path d="M15.0023 3H11.4023M15.0023 3V6.6V3Z" stroke="#21201E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            {% render 'icon-phone' %}
             {{ section.settings.phone_number -}}
           </a>
         </div>
@@ -63,7 +60,7 @@
 </div>
 
 <!-- Main Header -->
-<header class="main-header bg-[#1E6B43] text-white py-4 px-2 lg:px-6">
+<header class="main-header bg-[#1E6B43] text-white py-4 px-0 md:px-2 lg:px-6 z-10">
   <div class="container">
     <div class="header-inner flex justify-between items-center">
       <!-- Mobile Menu Toggle -->
@@ -72,11 +69,9 @@
         class="md:hidden text-white text-2xl cursor-pointer hover:scale-105 transition-all duration-300"
         aria-label="Open Menu"
       >
-        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="0.5" y="0.5" width="39" height="39" rx="11.5" stroke="#E3E2E0"/>
-          <path d="M11 20L29 20M11 26L29 26M17 14L29 14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        {% render 'icon-hamburger' %}
       </button>
+
       <!-- Logo -->
       <div class="site-logo">
         <a href="{{ routes.root_url }}">
@@ -84,9 +79,9 @@
             <img
               src="{{ section.settings.logo | image_url: width: 200 }}"
               alt="{{ shop.name }}"
+              class="w-full max-w-20 lg:max-w-44"
               width=""
               height=""
-              class="w-full max-w-20 lg:max-w-44"
             >
           {% else %}
             <span class="text-lg lg:text-3xl font-bold font-serif tracking-wide">Roots</span>
@@ -94,24 +89,21 @@
         </a>
       </div>
 
+      <!-- Desktop Menu -->
       {% assign main_menu = section.settings.menu | default: linklists['main-menu'] %}
-      <nav class="hidden md:!flex gap-5 lg:gap-10">
-        {% assign current_path = request.path %}
+      <nav id="desktopMenu" class="hidden md:!flex gap-5 lg:gap-10">
         {% for link in main_menu.links %}
-          {% assign link_path = link.url | split: '?' | first %}
           <a
             href="{{ link.url }}"
-            class="
-              menu-link text-lg text-white font-poppins relative z-1 hover:text-[#FFD500] transition duration-300  before:absolute before:w-full before:h-[2px] before:rounded-3xl before:bg-primary before:-bottom-2 before:left-0 before:opacity-0
-              {% if current_path == link_path %} active before:opacity-100  {% endif %}
-            "
+            class="menu-link text-lg text-white font-poppins relative z-1 hover:text-[#FFD500] transition duration-300 before:absolute before:w-full before:h-[2px] before:rounded-3xl before:bg-primary before:-bottom-2 before:left-0 before:opacity-0"
           >
             {{ link.title }}
           </a>
         {% endfor %}
       </nav>
-      <!-- Right Icons + Mobile Menu Button -->
-      <div class="flex items-center gap-4">
+
+      <!-- Right Icons -->
+      <div class="flex items-center gap-2 md:gap-4">
         <a
           href="{{ routes.cart_url }}"
           class="relative text-white hover:text-primary transition-all duration-300 flex items-center gap-1.5"
@@ -123,9 +115,6 @@
           Cart
         </a>
         {% if customer %}
-          <!-- Cart -->
-
-          <!-- User Account -->
           <a
             href="{{ routes.account_url }}"
             class="text-white transition-all duration-300 flex items-center gap-1 border border-solid border-[#929090] rounded-full p-2 pr-3 hover:border-primary"
@@ -133,12 +122,10 @@
             {% render 'icon-user' %}
             Account
           </a>
-
         {% else %}
-          <!-- Sign Up Button -->
           <a
             href="{{ routes.account_register_url }}"
-            class="bg-primary text-[#1F1904] px-6 py-2.5 rounded-full font-poppins text-sm lg:text-lg font-medium transition-all duration-300 hover:bg-white"
+            class="bg-primary text-[#1F1904] px-3 md:px-6 py-2.5 rounded-full font-poppins text-sm lg:text-lg font-medium transition-all duration-300 hover:bg-white"
           >
             Sign Up
           </a>
@@ -153,21 +140,14 @@
   id="mobileMenu"
   class="fixed inset-0 bg-black/50 left-0 top-0 hidden z-50 cursor-pointer opacity-0 transition-opacity duration-300"
 >
-  <!-- Menu Content -->
   <div
     id="mobileMenuPanel"
-    class="bg-white w-64 h-full p-6 flex flex-col  transform -translate-x-full transition-transform duration-300"
+    class="bg-white w-64 h-full p-6 flex flex-col transform -translate-x-full transition-transform duration-300"
   >
     <div class="site-logo absolute left-4 top-5">
       <a href="{{ routes.root_url }}">
         {% if section.settings.logo != blank %}
-          <img
-            src="{{ section.settings.logo | image_url: width: 200 }}"
-            alt="{{ shop.name }}"
-            width=""
-            height=""
-            class="max-h-12 w-auto"
-          >
+          <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" class="max-h-12 w-auto">
         {% else %}
           <span class="text-3xl font-bold font-serif tracking-wide">Roots</span>
         {% endif %}
@@ -188,28 +168,10 @@
 {
   "name": "Header Top & Bottom",
   "settings": [
-    {
-      "type": "text",
-      "id": "offer_text",
-      "label": "Offer text",
-      "default": "Sign up get 20% Off for all collection"
-    },
-    {
-      "type": "text",
-      "id": "phone_number",
-      "label": "Phone number",
-      "default": "1 (100) 234-5678"
-    },
-    {
-      "type": "link_list",
-      "id": "menu",
-      "label": "Navigation Menu"
-    },
-    {
-      "type": "image_picker",
-      "id": "logo",
-      "label": "Logo"
-    }
+    { "type": "text", "id": "offer_text", "label": "Offer text", "default": "Sign up get 20% Off for all collection" },
+    { "type": "text", "id": "phone_number", "label": "Phone number", "default": "1 (100) 234-5678" },
+    { "type": "link_list", "id": "menu", "label": "Navigation Menu" },
+    { "type": "image_picker", "id": "logo", "label": "Logo" }
   ],
   "blocks": [
     {
@@ -230,74 +192,53 @@
           ],
           "default": "instagram"
         },
-        {
-          "type": "url",
-          "id": "url",
-          "label": "Profile URL"
-        }
+        { "type": "url", "id": "url", "label": "Profile URL" }
       ]
     }
   ],
   "max_blocks": 10
 }
 {% endschema %}
+
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const menuToggle = document.getElementById('menuToggle');
-      const mobileMenu = document.getElementById('mobileMenu');
-      const menuPanel = document.getElementById('mobileMenuPanel');
-      const menuClose = document.getElementById('menuClose');
+  document.addEventListener('DOMContentLoaded', function () {
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuPanel = document.getElementById('mobileMenuPanel');
+    const menuClose = document.getElementById('menuClose');
 
-      // --- 📱 Mobile Menu (with animation fix) ---
-      function openMenu() {
-        mobileMenu.classList.remove('hidden');
-        setTimeout(() => {
-          mobileMenu.classList.remove('opacity-0');
-          menuPanel.classList.remove('-translate-x-full');
-        }, 20);
-      }
+    function openMenu() {
+      mobileMenu.classList.remove('hidden');
+      setTimeout(() => {
+        mobileMenu.classList.remove('opacity-0');
+        menuPanel.classList.remove('-translate-x-full');
+      }, 20);
+    }
 
-      function closeMenu() {
-        mobileMenu.classList.add('opacity-0');
-        menuPanel.classList.add('-translate-x-full');
-        setTimeout(() => {
-          mobileMenu.classList.add('hidden');
-        }, 300);
-      }
+    function closeMenu() {
+      mobileMenu.classList.add('opacity-0');
+      menuPanel.classList.add('-translate-x-full');
+      setTimeout(() => {
+        mobileMenu.classList.add('hidden');
+      }, 300);
+    }
 
-      if (menuToggle) {
-        menuToggle.addEventListener('click', openMenu);
-      }
-      if (menuClose) {
-        menuClose.addEventListener('click', closeMenu);
-      }
-      if (mobileMenu) {
-        mobileMenu.addEventListener('click', (e) => {
-          if (e.target === mobileMenu) {
-            closeMenu();
-          }
-        });
-      }
-    });
-  <nav id="desktopMenu" class="hidden md:!flex gap-5 lg:gap-10">
-    {% for link in main_menu.links %}
-      <a
-        href="{{ link.url }}"
-        class="menu-link text-lg font-poppins transition">
-        {{ link.title }}
-      </a>
-    {% endfor %}
-  </nav>
-
-    document.addEventListener("DOMContentLoaded", function () {
-      const links = document.querySelectorAll("#desktopMenu .menu-link");
-      const currentPath = window.location.pathname.replace(/\/$/, "");
-
-      links.forEach(link => {
-        const linkPath = link.getAttribute("href").replace(/\/$/, "");
-        if (currentPath === linkPath) {
-          link.classList.add("active");
-        }
+    if (menuToggle) menuToggle.addEventListener('click', openMenu);
+    if (menuClose) menuClose.addEventListener('click', closeMenu);
+    if (mobileMenu) {
+      mobileMenu.addEventListener('click', (e) => {
+        if (e.target === mobileMenu) closeMenu();
       });
+    }
+
+    // Desktop active menu highlight
+    const links = document.querySelectorAll('#desktopMenu .menu-link');
+    const currentPath = window.location.pathname.replace(/\/$/, '');
+    links.forEach((link) => {
+      const linkPath = link.getAttribute('href').replace(/\/$/, '');
+      if (currentPath === linkPath) {
+        link.classList.add('active', 'before:opacity-100');
+      }
     });
+  });
 </script>
