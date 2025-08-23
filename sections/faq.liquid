@@ -1,64 +1,83 @@
-<div class="faq py-17.5 md:py-20 lg:py-25 xl:py-30 2xl:py-37.5">
+<div class="faq py-15 md:py-20 lg:py-25 xl:py-30 2xl:py-37.5">
   <div class="container">
     {% if section.settings.heading != blank %}
-      <h1 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-green text-center px-5 !leading-[1.25] font-bold font-armany-bold mb-6 md:mb-8 lg:mb-10 xl:mb-12 2lx:mb-15">
+      <h1 class="text-3xl lg:text-4xl xl:text-[44px] text-green text-center px-5 !leading-[1.25] font-bold font-armany-bold mb-6 md:mb-8 lg:mb-10 xl:mb-12 2lx:mb-15">
         {{ section.settings.heading }}
       </h1>
     {% endif %}
 
-    <div class="faq-area max-w-267.5 mx-auto">
-      <div class="space-y-5 lg:space-y-6 xl:space-y-7.5">
-        {% for block in section.blocks %}
-          <div class="faq-item overflow-hidden rounded-lg border border-[#E3E2E0]">
-            <button
-              class="faq-btn cursor-pointer flex justify-between items-center w-full text-xl lg:text-2xl p-4 lg:p-5 font-medium !leading-[1.2] bg-[#FCFBF7] text-[#0D2E1D] transition-all duration-300 text-left"
-            >
-              <span>{{ block.settings.question }}</span>
-              <span class="icon transition-transform duration-300 cursor-pointer">
-                <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M1.16537 1.48083L6.9987 6.66602L12.832 1.48083" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-            </button>
-            <div
-              class="faq-content max-h-0 px-4 lg:px-5 overflow-hidden transition-all duration-300 ease-in-out bg-[#1E6C44]"
-            >
-              <p class="text-[#E3E2E0] text-lg lg:text-xl !leading-[1.6] mb-4 lg:mb-5">
-                {{ block.settings.answer }}
-              </p>
-            </div>
+    <div class="faq-area max-w-267.5 mx-auto space-y-5">
+      {% for block in section.blocks %}
+        <div class="faq-item rounded-2xl border border-solid border-[#E3E2E0] overflow-hidden">
+          <button
+            class="faq-btn flex justify-between items-center w-full text-left  p-4 lg:p-5 text-xl lg:text-2xl font-medium bg-[#FCFBF7] text-[#0D2E1D] cursor-pointer transition-all duration-300"
+            data-accordion-btn
+          >
+            <span>{{ block.settings.question }}</span>
+            <span class="icon transition-transform duration-300">
+              <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.16537 1.48083L6.9987 6.66602L12.832 1.48083" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </button>
+          <div
+            class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-[#1E6C44]"
+            data-accordion-content
+          >
+            <p class="px-4 lg:px-5 py-4 pt-1 text-[#E3E2E0] text-base md:text-lg lg:text-xl leading-relaxed">
+              {{ block.settings.answer }}
+            </p>
           </div>
-        {% endfor %}
-      </div>
+        </div>
+      {% endfor %}
     </div>
   </div>
 </div>
 
 <script>
-  const faqBtns = document.querySelectorAll('.faq-btn');
+  const faqBtns = document.querySelectorAll('[data-accordion-btn]');
 
   faqBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-      faqBtns.forEach((el) => {
-        el.classList.remove('bg-[#1E6C44]', 'text-white', 'rounded-t-lg', 'border-0');
-        el.classList.add('bg-[#FCFBF7]', 'text-[#0D2E1D]');
-        el.nextElementSibling.style.maxHeight = null;
-        el.querySelector('.icon').classList.remove('rotate-180');
+      const content = btn.nextElementSibling;
+      const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+
+      // সব বন্ধ করো
+      document.querySelectorAll('[data-accordion-content]').forEach((c) => {
+        c.style.maxHeight = null;
+        c.previousElementSibling.querySelector('.icon').classList.remove('rotate-180');
+        c.previousElementSibling.classList.remove('bg-[#1E6C44]', 'text-white');
+        c.previousElementSibling.classList.add('bg-[#FCFBF7]', 'text-[#0D2E1D]');
       });
 
-      btn.classList.remove('bg-[#FCFBF7]', 'text-[#0D2E1D]');
-      btn.classList.add('bg-[#1E6C44]', 'text-white', 'rounded-t-lg', 'border-0');
-
-      const content = btn.nextElementSibling;
-      content.style.maxHeight = content.scrollHeight + 'px';
-
-      btn.querySelector('.icon').classList.add('rotate-180');
+      // শুধু ক্লিক করা item খুলো
+      if (!isOpen) {
+        content.style.maxHeight = content.scrollHeight + 'px';
+        btn.querySelector('.icon').classList.add('rotate-180');
+        btn.classList.add('bg-[#1E6C44]', 'text-white');
+        btn.classList.remove('bg-[#FCFBF7]', 'text-[#0D2E1D]');
+      }
     });
   });
 
+  // ডিফল্টে প্রথমটা খোলা
   if (faqBtns.length > 0) {
-    faqBtns[0].click();
+    const firstBtn = faqBtns[0];
+    const firstContent = firstBtn.nextElementSibling;
+    firstContent.style.maxHeight = firstContent.scrollHeight + 'px';
+    firstBtn.querySelector('.icon').classList.add('rotate-180');
+    firstBtn.classList.add('bg-[#1E6C44]', 'text-white');
+    firstBtn.classList.remove('bg-[#FCFBF7]', 'text-[#0D2E1D]');
   }
+
+  // responsive এ window resize হলে height re-calc
+  window.addEventListener('resize', () => {
+    document.querySelectorAll('[data-accordion-content]').forEach((c) => {
+      if (c.style.maxHeight && c.style.maxHeight !== '0px') {
+        c.style.maxHeight = c.scrollHeight + 'px';
+      }
+    });
+  });
 </script>
 
 {% schema %}

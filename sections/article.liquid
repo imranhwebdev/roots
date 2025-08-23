@@ -1,214 +1,190 @@
 <div class="blog-details pt-9 pb-10 md:pb-16 lg:pb-20 2xl:pb-25">
   <div class="container">
+    <!-- Breadcrumb -->
     <p class="text-lg lg:text-xl text-[#797375] flex items-center mb-5 lg:mb-6 xl:mb-8.5">
-      Blog
+      <a href="{{ blog.url }}" class="hover:underline">Blog</a>
       <span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
           <path d="M9.55556 17L14 12L9.55556 7" stroke="#797375" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </span>
-      <span class="text-[#514849] font-medium ">Blog Details</span>
+      <span class="text-[#514849] font-medium ">{{ article.title }}</span>
     </p>
+
     <div class="blog-details-all">
-      <div class="relative z-1 bg-[linear-gradient(180deg,_rgba(34,30,13,0.00)_66.54%,_rgba(34,30,13,0.60)_100%)] rounded-xl md:rounded-2xl lg:rounded-[20px] mb-5 lg:mb-6 xl:mb-8">
-        <h1 class="blog-title md:pr-[15%] lg:pr-[22%] 2xl:pr-[30%] 3xl:pr-[35%] text-white text-lg md:text-3xl lg:text-4xl xl:text-5xl absolute z-2 bottom-2 md:bottom-4 xl:bottom-6 left-2 md:left-5 lg:left-10 2xl:left-12  font-medium !leading-[1.4]">
-          Discover 5 amazing castor oil benefits for health, beauty, wellness.
-        </h1>
-        <img
-          src="/assets/details1.jpg"
-          class="w-full aspect-[1/.455] rounded-xl md:rounded-2xl lg:rounded-[20px]"
-          alt=""
-          width=""
-          height=""
+      <!-- Featured Image + Title -->
+      {% if section.settings.show_featured_image and article.image %}
+        <div
+          class="
+            relative
+            before:absolute before:w-full before:h-full before:left-0 before:bottom-0 before:bg-[linear-gradient(180deg,rgba(34,30,13,0.00)_66.54%,rgba(34,30,13,0.60)_100%)] before:z-1 overflow-hidden z-1 bg-[linear-gradient(180deg,_rgba(34,30,13,0.00)_66.54%,_rgba(34,30,13,0.60)_100%)] rounded-xl md:rounded-2xl lg:rounded-[20px] mb-5 lg:mb-6 xl:mb-8
+          "
         >
-      </div>
+          <h1 class="blog-title text-white text-lg max-w-275 pr-[2%] md:text-3xl lg:text-4xl xl:text-5xl absolute z-2 bottom-2 md:bottom-4 xl:bottom-6 left-2 md:left-5 lg:left-10 2xl:left-12 font-medium !leading-[1.4]">
+            {{ article.title | strip_html | truncate: 70 }}
+          </h1>
+          <img
+            src="{{ article.image | img_url: 'master' }}"
+            class="              w-full aspect-[1/.455] rounded-xl md:rounded-2xl lg:rounded-[20px]"
+            width=""
+            height=""
+            alt="{{ article.image.alt | escape }}"
+            loading="lazy"
+          >
+        </div>
+      {% endif %}
+
+      <!-- Meta Info -->
       <div class="flex flex-col md:flex-row md:flex-nowrap flex-wrap md:items-center md:justify-between gap-5 pb-4 lg:pb-5 xl:pb-6 border-b border-b-[#E3E2E0]">
-        <div class="flex items-center gap-3">
-          <img
-            src="https://i.pravatar.cc/100"
-            class="size-13 lg:size-15 rounded-full flex-[0_0_auto]"
-            alt=""
-            width=""
-            height=""
-          >
+        {% if section.settings.show_author or section.settings.show_date %}
+          <div class="flex items-center gap-3">
+            <img
+              src="https://i.pravatar.cc/100"
+              class="size-13 lg:size-15 rounded-full"
+              alt="{{ article.author }}"
+            >
+            <div>
+              {% if section.settings.show_author %}
+                <p class="text-lg lg:text-xl font-medium mb-1 text-[#0D2E1D]">{{ article.author }}</p>
+              {% endif %}
+              {% if section.settings.show_date %}
+                <p class="text-base xl:text-lg text-[#797375]">
+                  {{ article.published_at | date: section.settings.date_format }}
+                </p>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if section.settings.show_tags %}
+          <div class="flex items-center gap-3">
+            {% if article.tags.size > 0 %}
+              <p class="text-sm lg:text-base text-[#514849] uppercase tracking-[1.92px] bg-[#F0F0F0] py-2 px-4 rounded-xl">
+                {{ article.tags.first }}
+              </p>
+            {% endif %}
+            <p class="text-base lg:text-lg text-[#797375]">
+              {{ article.content | strip_html | split: ' ' | size | divided_by: 200 }} min read
+            </p>
+          </div>
+        {% endif %}
+
+        {% if section.settings.enable_share %}
+          <!-- Share -->
           <div>
-            <p class="text-lg lg:text-xl font-medium !leading-[1.2] mb-1 text-[#0D2E1D]">Ariel Van Houten</p>
-            <p class="text-base xl:text-lg text-[#797375] !leading-[1.5]">August 15, 2025</p>
+            <p class="text-base lg:text-xl font-medium mb-3 lg:mb-4">Share this post</p>
+            <div class="flex items-center gap-2">
+              {% assign share_url = article.url | prepend: shop.url %}
+              <a
+                href="https://www.instagram.com/?url={{ share_url | url_encode }}"
+                target="_blank"
+                class="flex items-center justify-center size-8 lg:size-9 rounded-full bg-[#F0F0F0] p-2"
+              >
+                <img src="{{ 'Instagram.png' | asset_url }}" alt="Instagram">
+              </a>
+              <a
+                href="https://twitter.com/share?url={{ share_url | url_encode }}&text={{ article.title | url_encode }}"
+                target="_blank"
+                class="flex items-center justify-center size-8 lg:size-9 rounded-full bg-[#F0F0F0] p-2"
+              >
+                <img src="{{ 'x.png' | asset_url }}" alt="Twitter">
+              </a>
+              <a
+                href="https://www.facebook.com/sharer/sharer.php?u={{ share_url | url_encode }}"
+                target="_blank"
+                class="flex items-center justify-center size-8 lg:size-9 rounded-full bg-[#F0F0F0] p-2"
+              >
+                <img src="{{ 'Facebook.png' | asset_url }}" alt="Facebook">
+              </a>
+            </div>
           </div>
-        </div>
-        <div class="flex items-center gap-3">
-          <p class="text-sm lg:text-base !leading-[1.2] text-[#514849] uppercase tracking-[1.92px] bg-[#F0F0F0] py-2 lg:py-2.5 px-4 lg:px-4 border border-[#F0F0F0)] rounded-xl lg:rounded-2xl xl:rounded-[20px] border-[rgba(255,255,255,0.12)] ">
-            Nourish
-          </p>
-          <p class="text-base lg:text-lg !leading-[1.5]  text-[#797375] ">12 min read</p>
-        </div>
-        <div class="">
-          <p class="text-base lg:text-xl font-medium !leading-[1.5]  text-[#0D2E1D] mb-3 lg:mb-4">Share this post</p>
-          <div class="flex items-center gap-2">
-            <a
-              href="#"
-              class="flex items-center hover:bg-primary transform ease-in-out duration-300 justify-center size-8 lg:size-9 rounded-full bg-[#F0F0F0] p-2 lg:p-2.5"
-              ><img src="/assets/Instagram.png" class="size-full" alt="" width="" height=""
-            ></a>
-            <a
-              href="#"
-              class="flex items-center hover:bg-primary transform ease-in-out duration-300 justify-center size-8 lg:size-9 rounded-full bg-[#F0F0F0] p-2 lg:p-2.5"
-              ><img src="/assets/x.png" class="size-full" alt="" width="" height=""
-            ></a>
-            <a
-              href="#"
-              class="flex items-center hover:bg-primary transform ease-in-out duration-300 justify-center size-8 lg:size-9 rounded-full bg-[#F0F0F0] p-2 lg:p-2.5"
-              ><img src="/assets/Facebook.png" class="size-full" alt="" width="" height=""
-            ></a>
-          </div>
-        </div>
+        {% endif %}
       </div>
-      <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap gap-5 mt-8 md:mt-10 lg:mt-12 xl:mt-16 2xl:mt-20 justify-between">
+
+      <!-- Article Content + Sidebar -->
+      <div class="flex flex-col md:flex-row gap-5 mt-8 md:mt-10">
         <div class="w-full md:w-8/12">
-          <div class="mb-8 md:mb-10 lg:mb-12 xl:mb-14 2xl:mb-15">
-            <h5 class="text-[#0D2E1D] text-2xl lg:text-3xl xl:text-4xl font-medium !leading-[1.37] mb-3 lg:mb-4">
-              What are 5 amazing castor oil benefits for health, beauty, and wellness?
-            </h5>
-            <p class="text-[#797375] text-base md:text-lg lg:text-xl !leading-[1.6]">
-              Castor oil, treasured for centuries, is a natural powerhouse for health, beauty, and wellness. Packed with
-              fatty acids, vitamin E, and antioxidants, it deeply nourishes skin, promoting softness and reducing
-              dryness. For hair, it supports growth, adds shine, and helps combat dandruff. Its anti-inflammatory
-              properties can soothe sore muscles and joints, while aiding digestion when used properly. Additionally,
-              castor oil strengthens nails and conditions cuticles, making it a versatile addition to any self-care
-              routine for radiant skin, healthy hair, and overall vitality.
-            </p>
-          </div>
-          <div class="mb-5 md:mb-6 xl:mb-7.5">
-            <h5 class="text-[#0D2E1D] text-xl lg:text-2xl xl:text-[28px] font-medium !leading-[1.4] mb-3 lg:mb-4">
-              Deeply Moisturizes Dry Skin
-            </h5>
-            <p class="text-[#797375] text-base md:text-lg lg:text-xl !leading-[1.6]">
-              Castor oil penetrates deeply into the skin, locking in moisture and preventing dryness. Applying a few
-              drops before bedtime provides intense overnight hydration, leaving skin soft, supple, and rejuvenated by
-              morning, making it an excellent natural remedy for dryness.
-            </p>
-          </div>
-          <div class="mb-5 md:mb-6 xl:mb-7.5">
-            <h5 class="text-[#0D2E1D] text-xl lg:text-2xl xl:text-[28px] font-medium !leading-[1.4] mb-3 lg:mb-4">
-              Promotes Healthy Hair Growth
-            </h5>
-            <p class="text-[#797375] text-base md:text-lg lg:text-xl !leading-[1.6]">
-              Castor oil’s rich nutrients and fatty acids nourish the scalp and stimulate hair follicles, encouraging
-              thicker, stronger hair growth. Massaging it into your scalp twice a week improves circulation, strengthens
-              roots, reduces breakage, and helps combat dryness, leaving hair healthier, shinier, and more resilient
-              over time.
-            </p>
-          </div>
-          <div class="mb-5 md:mb-6 xl:mb-7.5">
-            <h5 class="text-[#0D2E1D] text-xl lg:text-2xl xl:text-[28px] font-medium !leading-[1.4] mb-3 lg:mb-4">
-              Strengthens Nails and Cuticles
-            </h5>
-            <p class="text-[#797375] text-base md:text-lg lg:text-xl !leading-[1.6]">
-              Regular use of castor oil helps restore brittle, weak nails by deeply moisturizing and strengthening them.
-              Its rich vitamin E content nourishes the nail bed and keeps cuticles soft and healthy. Apply directly with
-              a cotton swab daily for stronger nails and well-conditioned cuticles over time.
-            </p>
-          </div>
-          <div class="mb-5 md:mb-6 xl:mb-7.5 ">
-            <h5 class="text-[#0D2E1D] text-xl lg:text-2xl xl:text-[28px] font-medium !leading-[1.4] mb-3 lg:mb-4">
-              Reduces Skin Inflammation
-            </h5>
-            <p class="text-[#797375] text-base md:text-lg lg:text-xl !leading-[1.6]">
-              Castor oil’s natural anti-inflammatory compounds help calm redness, swelling, and irritation, making it
-              ideal for sensitive skin or mild rashes. Its gentle, soothing action reduces discomfort while promoting
-              healing. Apply a thin layer to affected areas to protect the skin and restore comfort without harsh
-              chemicals or synthetic ingredients.
-            </p>
-          </div>
-          <img
-            src="/assets/details2.jpg"
-            class="w-full aspect-[1/.55 ] rounded-lg lg:rounded-[14px] 2xl:mt-2.5 mb-5 md:mb-6 xl:mb-7.5 2xl:mb-10"
-            alt=""
-            width=""
-            height=""
-          >
-          <div class="mb-5 md:mb-6 xl:mb-7.5">
-            <h5 class="text-[#0D2E1D] text-xl lg:text-2xl xl:text-[28px] font-medium !leading-[1.4] mb-3 lg:mb-4">
-              Strengthens Nails and Cuticles
-            </h5>
-            <p class="text-[#797375] text-base md:text-lg lg:text-xl !leading-[1.6]">
-              Regular use of castor oil helps restore brittle, weak nails by deeply moisturizing and strengthening them.
-              Its rich vitamin E content nourishes the nail bed and keeps cuticles soft and healthy. Apply directly with
-              a cotton swab daily for stronger nails and well-conditioned cuticles over time.
-            </p>
-          </div>
-          <div class="p-5 lg:p-6 xl:p-7.5 rounded-xl md:rounded-2xl lg:rounded-[20px] border border-[#C6CEC8] bg-[#B7D6C6]">
-            <p class="text-[#0D2E1D] text-xl lg:text-2xl xl:text-[28px] font-semibold mb-4 lg:mb-5">Remember</p>
-            <p class="text-[#514849] text-base md:text-lg lg:text-xl font-medium !leading-[1.6]">
-              Consistency is key with natural skincare. Give your routine at least 4-6 weeks to show results, as natural
-              ingredients work gently and gradually to improve your skin's health.
-            </p>
+          <div class="prose max-w-none">
+            {{ article.content }}
           </div>
         </div>
-        <div class="w-full md:w-4/12 lg:w-3/12">
-          <h5 class="text-[#0D2E1D] text-2xl lg:text-3xl xl:text-4xl font-medium !leading-[1.37] mb-6 lg:mb-8 xl:mb-12 2xl:mb-12.5">
-            Popular Post
-          </h5>
-          <div class="card-area">
-            <div class="pb-5 md:pb-6 lg:pb-8 xl:pb-12 2xl:pb-12.5 border-b border-b-[#F0F0F0] mb-5 md:mb-6 lg:mb-8 xl:mb-12 2xl:mb-12.5 ">
-              <div class="px-3 pt-3 pb-6 bg-white  rounded-lg lg:rounded-[10px] ">
-                <div class="w-full aspect-[1/.68] mb-4 md:mb-5 ">
-                  <img src="/assets/blog8.png" class="size-full rounded-[10px]" height="" width="" alt="">
-                </div>
-                <div class="px-1">
-                  <p class=" text-[#797375] text-sm  !leading-[1.2] tracking-[1.64px] uppercase mb-2.5">
-                    25 august, 2025. <span class="text-[#103C25]">BY john wright</span>
-                  </p>
-                  <h6 class="text-[#0D2E1D] text-lg lg:text-[22px]  font-medium !leading-[1.5] mb-3">
-                    How to Create a Weekly Castor Oil Spa Night
-                  </h6>
-                  <p class="text-[#514849] text-sm lg:text-base !leading-[1.6] mb-3 lg:mb-4 xl:mb-5">
-                    Enjoy a relaxing weekly spa night using castor oil for beauty.
-                  </p>
-                  <a
-                    href="#"
-                    class=" text-[#967901] group text-sm lg:text-base font-medium hover:text-[#0D2E1D] transform ease-in-out duration-300 !leading-[1.2] font-poppins flex items-center gap-2 lg:gap-3"
-                    >Learn More
-                    <span class="group-hover:translate-x-1 transform ease-in-out duration-300 ">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="13" viewBox="0 0 17 13" fill="none">
-                        <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg></span
-                  ></a>
-                </div>
-              </div>
+
+        <!-- Sidebar Popular posts -->
+        {% if section.settings.enable_related %}
+          <div class="w-full md:w-4/12 lg:w-3/12">
+            <h5 class="text-[#0D2E1D] text-2xl lg:text-3xl xl:text-4xl font-medium mb-6 lg:mb-8">Popular Post</h5>
+            <div class="card-area">
+              {% assign count = 0 %}
+              {% for post in blog.articles %}
+                {% if post.id != article.id %}
+                  <div class="mb-8 border-b border-[#F0F0F0] pb-6">
+                    <div class="px-3 pt-3 pb-6 bg-white rounded-lg">
+                      {% if post.image %}
+                        <div class="w-full aspect-[1/.68] mb-4">
+                          <img
+                            src="{{ post.image | img_url: '400x' }}"
+                            class="size-full rounded-[10px]"
+                            alt="{{ post.title }}"
+                          >
+                        </div>
+                      {% endif %}
+                      <div class="px-1">
+                        <p class="text-[#797375] text-sm uppercase mb-2.5">
+                          {{ post.published_at | date: '%d %B, %Y' }}
+                          <span class="text-[#103C25]">BY {{ post.author }}</span>
+                        </p>
+                        <h6 class="text-[#0D2E1D] text-lg font-medium mb-3">
+                          {{ post.title | strip_html | truncate: 55 }}
+                        </h6>
+                        <p class="text-[#514849] text-sm mb-4">
+                          {{ post.excerpt | strip_html | truncatewords: 15 }}
+                        </p>
+                        <a
+                          href="{{ post.url }}"
+                          class="text-[#967901] text-sm font-medium hover:text-[#0D2E1D] flex items-center gap-2"
+                        >
+                          Learn More
+                          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="13" fill="none">
+                            <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  {% assign count = count | plus: 1 %}
+                  {% if count >= section.settings.related_limit %}
+                    {% break %}
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
             </div>
-            <div class="">
-              <div class="px-3 pt-3 pb-6 bg-white  rounded-lg lg:rounded-[10px] ">
-                <div class="w-full aspect-[1/.68] mb-4 md:mb-5 ">
-                  <img src="/assets/blog8.png" class="size-full rounded-[10px]" height="" width="" alt="">
-                </div>
-                <div class="px-1">
-                  <p class=" text-[#797375] text-sm  !leading-[1.2] tracking-[1.64px] uppercase mb-2.5">
-                    25 august, 2025. <span class="text-[#103C25]">BY john wright</span>
-                  </p>
-                  <h6 class="text-[#0D2E1D] text-lg lg:text-[22px]  font-medium !leading-[1.5] mb-3">
-                    How to Create a Weekly Castor Oil Spa Night
-                  </h6>
-                  <p class="text-[#514849] text-sm lg:text-base !leading-[1.6] mb-3 lg:mb-4 xl:mb-5">
-                    Enjoy a relaxing weekly spa night using castor oil for beauty.
-                  </p>
-                  <a
-                    href="#"
-                    class=" text-[#967901] group text-sm lg:text-base font-medium hover:text-[#0D2E1D] transform ease-in-out duration-300 !leading-[1.2] font-poppins flex items-center gap-2 lg:gap-3"
-                    >Learn More
-                    <span class="group-hover:translate-x-1 transform ease-in-out duration-300 ">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="13" viewBox="0 0 17 13" fill="none">
-                        <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg></span
-                  ></a>
-                </div>
-              </div>
-            </div>
-           
           </div>
-        </div>
+        {% endif %}
       </div>
     </div>
-    
   </div>
 </div>
+
+{% schema %}
+{
+  "name": "Article Details",
+  "settings": [
+    { "type": "checkbox", "id": "show_author", "label": "Show Author", "default": true },
+    { "type": "checkbox", "id": "show_date", "label": "Show Date", "default": true },
+    { "type": "text", "id": "date_format", "label": "Date Format", "default": "%B %d, %Y" },
+    { "type": "checkbox", "id": "show_tags", "label": "Show Tags", "default": true },
+    { "type": "checkbox", "id": "show_featured_image", "label": "Show Featured Image", "default": true },
+    { "type": "checkbox", "id": "enable_share", "label": "Enable Share Buttons", "default": true },
+    { "type": "checkbox", "id": "enable_related", "label": "Show Related Articles", "default": true },
+    {
+      "type": "range",
+      "id": "related_limit",
+      "label": "Number of Related Articles",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    }
+  ]
+}
+{% endschema %}

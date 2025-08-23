@@ -13,18 +13,8 @@
       "type": "article",
       "settings": {}
     },
-    "block_insights": {
-      "type": "block-insights",
-      "settings": {}
-    },
-    "join_roots": {
-      "type": "join-roots",
-      "settings": {}
-    }
   },
   "order": [
     "main",
-    "block_insights",
-    "join_roots"
   ]
 }
