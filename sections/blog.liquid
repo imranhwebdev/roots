@@ -17,7 +17,12 @@
                 </span>
               {% endif %}
               <p class="text-[#103C25] text-sm md:text-base !leading-[1.2] uppercase font-poppins">
-                {{ first_article.reading_time | default: '5' }} min read
+                {% assign words = article.content | strip_html | split: ' ' | size %}
+                {% assign minutes = words | divided_by: 150 %}
+                {% if minutes < 1 %}
+                  {% assign minutes = 1 %}
+                {% endif %}
+                {{ minutes }} min read
               </p>
             </div>
             <h6 class="text-[#0D2E1D] text-2xl lg:text-3xl xl:text-[32px] font-medium !leading-[1.6] mb-4 lg:mb-5">
@@ -68,7 +73,7 @@
                 {% endif %}
                 <p class="text-[#103C25] text-sm md:text-base uppercase font-poppins">
                   {% assign words = article.content | strip_html | split: ' ' | size %}
-                  {% assign minutes = words | divided_by: 20 %}
+                  {% assign minutes = words | divided_by: 150 %}
                   {% if minutes < 1 %}
                     {% assign minutes = 1 %}
                   {% endif %}
