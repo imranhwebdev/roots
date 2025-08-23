@@ -9,13 +9,21 @@
  */
 {
   "sections": {
+    "common_banner_9pzkVe": {
+      "type": "common-banner",
+      "name": "Common Banner",
+      "settings": {
+        "default_title": "{{ page.title }}",
+        "default_description": ""
+      }
+    },
     "main": {
       "type": "faq",
       "settings": {}
-    },
-
+    }
   },
   "order": [
-    "main",
+    "common_banner_9pzkVe",
+    "main"
   ]
 }
