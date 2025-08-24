@@ -210,6 +210,36 @@
             "avatar": "shopify://shop_images/avator2.jpg"
           }
         },
+        "review_VrJfEH": {
+          "type": "review",
+          "settings": {
+            "name": "Olivia R.",
+            "location": "New York, NY",
+            "review_text": "Applying nightly to brows and lashes, I noticed real fullness. Soft, hydrated skin and visible results my go-to beauty essential",
+            "stars": 5,
+            "avatar": "shopify://shop_images/avator3.jpg"
+          }
+        },
+        "review_ALMXNy": {
+          "type": "review",
+          "settings": {
+            "name": "Sarah M",
+            "location": "Austin, TX",
+            "review_text": "My hair feels thicker, my lashes fuller, and my scalp healthier. Pure, organic, and trustworthy Roots Castor Oil truly delivers.",
+            "stars": 5,
+            "avatar": "shopify://shop_images/avator2.jpg"
+          }
+        },
+        "review_mG3xcr": {
+          "type": "review",
+          "settings": {
+            "name": "Daniel K.",
+            "location": "Chicago, IL",
+            "review_text": "After switching from chemical products, my split ends vanished. Stronger hair, glowing skin, and natural results make this worth it.",
+            "stars": 5,
+            "avatar": "shopify://shop_images/avator.jpg"
+          }
+        },
         "review_GVYLJ7": {
           "type": "review",
           "settings": {
@@ -220,7 +250,7 @@
             "avatar": "shopify://shop_images/avator3.jpg"
           }
         },
-        "review_mG3xcr": {
+        "review_EdUcBn": {
           "type": "review",
           "settings": {
             "name": "Daniel K.",
@@ -233,8 +263,11 @@
       },
       "block_order": [
         "review_kXHekQ",
+        "review_VrJfEH",
+        "review_ALMXNy",
+        "review_mG3xcr",
         "review_GVYLJ7",
-        "review_mG3xcr"
+        "review_EdUcBn"
       ],
       "settings": {
         "heading": "Customer Reviews"
