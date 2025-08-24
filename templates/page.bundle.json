@@ -20,10 +20,68 @@
         "default_title": "Complete Care, One Bundle",
         "default_description": "Our bundle pairs 16 oz for home rituals and 8 oz for travel, keeping hair, skin, lashes, and brows nourished."
       }
+    },
+    "why_choose_DxxCcg": {
+      "type": "why-choose",
+      "blocks": {
+        "choose_item_CdmHzC": {
+          "type": "choose_item",
+          "settings": {
+            "icon_svg": "shopify://shop_images/why-choose-icon1.svg",
+            "title": "Strengthens & Promotes Growth",
+            "description": "Our organic castor oil nourishes from scalp to tip, reducing breakage and promoting stronger, healthier growth."
+          }
+        },
+        "choose_item_NhgRC3": {
+          "type": "choose_item",
+          "settings": {
+            "icon_svg": "shopify://shop_images/why-choose-icon2.svg",
+            "title": "Enhances Natural Beauty",
+            "description": "From thicker lashes and brows to radiant skin, our multi-purpose oil works gently yet effectively without harsh chemicals."
+          }
+        },
+        "choose_item_F7fUjz": {
+          "type": "choose_item",
+          "settings": {
+            "icon_svg": "shopify://shop_images/why-choose-icon3.svg",
+            "title": "Pure & Honest Care",
+            "description": "USDA Organic, cold-pressed, and hexane-freeevery drop is crafted for quality, transparency, and results you can trust."
+          }
+        }
+      },
+      "block_order": [
+        "choose_item_CdmHzC",
+        "choose_item_NhgRC3",
+        "choose_item_F7fUjz"
+      ],
+      "name": "Why Choose Section",
+      "settings": {
+        "heading": "Why Choose Roots?",
+        "subheading": "Encourages natural volume, supporting thicker, healthier hair growth."
+      }
+    },
+    "join_roots_wQkx3J": {
+      "type": "join-roots",
+      "name": "Subscribe Section",
+      "settings": {
+        "title": "Join the Roots Family",
+        "description": "Be the first to know about exclusive offers, self-care tips, and new launches.",
+        "enable_newsletter": true,
+        "email_placeholder": "Enter your email address",
+        "success_message": "Thank you for subscribing! You'll hear from us soon.",
+        "button_text": "Subscribe Now",
+        "button_link": "",
+        "show_arrow": false,
+        "card_bg_color": "#1E6C44",
+        "title_color": "#FFFFFF",
+        "description_color": "#F5F5F5"
+      }
     }
   },
   "order": [
     "main",
-    "common_banner_CB4HUt"
+    "common_banner_CB4HUt",
+    "why_choose_DxxCcg",
+    "join_roots_wQkx3J"
   ]
 }
