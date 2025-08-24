@@ -19,6 +19,17 @@
     },
     "main": {
       "type": "bundle",
+      "blocks": {
+        "product_block_AghmzA": {
+          "type": "product_block",
+          "settings": {
+            "product": "roots-organic-castor-oil-wellness-bundle"
+          }
+        }
+      },
+      "block_order": [
+        "product_block_AghmzA"
+      ],
       "settings": {}
     },
     "why_choose_DxxCcg": {
@@ -72,9 +83,9 @@
         "button_text": "Subscribe Now",
         "button_link": "",
         "show_arrow": false,
-        "card_bg_color": "#1E6C44",
-        "title_color": "#FFFFFF",
-        "description_color": "#F5F5F5"
+        "card_bg_color": "#1e6c44",
+        "title_color": "#ffffff",
+        "description_color": "#f5f5f5"
       }
     }
   },
