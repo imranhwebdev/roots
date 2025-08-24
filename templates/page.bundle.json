@@ -1,24 +1,40 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "bundle": {
       "type": "bundle",
       "blocks": {
-        "product1": {
+        "product_mi8GTy": {
           "type": "product",
           "settings": {
-            "product": "",
+            "product": "roots-organic-castor-oil-wellness-bundle",
             "layout": "left"
           }
         },
-        "product2": {
+        "product_fAEWRN": {
           "type": "product",
           "settings": {
-            "product": "",
+            "product": "roots-organic-castor-oil-wellness-bundle",
             "layout": "right"
           }
         }
-      }
+      },
+      "block_order": [
+        "product_mi8GTy",
+        "product_fAEWRN"
+      ],
+      "settings": {}
     }
   },
-  "order": ["bundle"]
+  "order": [
+    "bundle"
+  ]
 }
