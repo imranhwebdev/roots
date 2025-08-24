@@ -1280,6 +1280,9 @@
   .bg-\[\#E3E2E0\] {
     background-color: #E3E2E0;
   }
+  .bg-\[\#EAF5EC\] {
+    background-color: #EAF5EC;
+  }
   .bg-\[\#F0ECDC\] {
     background-color: #F0ECDC;
   }
@@ -1297,6 +1300,9 @@
   }
   .bg-\[\#FFE380\] {
     background-color: #FFE380;
+  }
+  .bg-\[\#FFF7E0\] {
+    background-color: #FFF7E0;
   }
   .bg-\[rgba\(30\,108\,68\,0\.10\)\] {
     background-color: rgba(30,108,68,0.10);
@@ -2272,6 +2278,13 @@
     &:hover {
       @media (hover: hover) {
         background-color: #0D2E1D;
+      }
+    }
+  }
+  .hover\:bg-\[\#1E6C44\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #1E6C44;
       }
     }
   }

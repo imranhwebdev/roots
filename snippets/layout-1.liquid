@@ -1,92 +1,14 @@
-<section class="best-seller bg-[#B7D6C6] py-10 md:py-14 lg:py-20 xl:py-25">
-  <div class="container">
-    <div class="w-full 2xl:w-10/12 mx-auto">
-      <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap gap-4 items-center justify-between w-full">
-        <div class="w-full md:w-1/2 xl:w-5/12 mb-6 md:mb-0">
-          <div class="xl:ml-10 w-full h-112.5 md:size-full lg:h-135.5 lg:w-110.5 shadow-[-8px_-10px_#FFC801] rounded-lg lg:rounded-[10px] lg:shadow-[-10px_-10px_#FFC801]">
-            <img
-              src="{{ product1.featured_image | image_url }}"
-              alt="{{ product1.title }}"
-              class="size-full"
-              width=""
-              height=""
-            >
-          </div>
-        </div>
-        <div class="w-full md:w-1/2 xl:w-6/12">
-          <div class=" xl:mr-10">
-            <h4 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-green font-bold mb-4 font-armany-bold">
-              {{ product1.title }}
-            </h4>
-
-            <div class="text-base md:text-lg lg:text-xl font-poppins mb-5">
-              {% assign description_html = product1.description %}
-              {% assign list_items = description_html | split: '<li>' %}
-
-              {% assign only_paragraphs = description_html | remove: '<ul>' | remove: '</ul>' %}
-              {% for item in list_items %}
-                {% if item contains '</li>' %}
-                  {% assign clean_li = '<li>' | append: item | split: '</li>' | first | append: '</li>' %}
-                  {% assign only_paragraphs = only_paragraphs | remove: clean_li %}
-                {% endif %}
-              {% endfor %}
-
-              <div class="prose text-para text-sm lg:text-base xl:text-xl lading-[160%] mb-5">
-                {{ only_paragraphs }}
-              </div>
-
-              {% if list_items.size > 1 %}
-                <ul class="mb-5 space-y-2 text-base lg:text-lg xl:text-[22px] text-[#1E6C44] !leading-[1.6] font-medium">
-                  {% for item in list_items %}
-                    {% if item contains '</li>' %}
-                      <li class="flex items-center gap-2">
-                        <svg
-                          width="25"
-                          height="25"
-                          viewBox="0 0 25 25"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d="M22.8262 11.5799V12.4999C22.8249 14.6563 22.1267 16.7545 20.8355 18.4817C19.5443 20.2088 17.7295 21.4723 15.6615 22.0838C13.5936 22.6952 11.3834 22.6218 9.36064 21.8744C7.33785 21.1271 5.61083 19.746 4.43713 17.9369C3.26344 16.1279 2.70596 13.9879 2.84785 11.8362C2.98973 9.68443 3.82338 7.63619 5.22445 5.99694C6.62552 4.35768 8.51896 3.21525 10.6224 2.74001C12.7258 2.26477 14.9264 2.4822 16.8962 3.35986M22.8262 4.49986L12.8262 14.5099L9.82618 11.5099" stroke="#1E6C44" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        {{ item | split: '</li>' | first | strip }}
-                      </li>
-                    {% endif %}
-                  {% endfor %}
-                </ul>
-              {% endif %}
-            </div>
-
-            <p class="text-xl lg:text-3xl !leading-[1.2] mb-4 font-semibold">
-              {{ product1.price | money }}
-            </p>
-            <div class="flex items-center gap-3 lg:gap-4 xl:gap-5">
-              <button
-                class="btn add-to-cart-btn !text-base lg:!text-lg xl:!text-xl !font-medium !leading-[1.6] lg:!leading-[1.2] text-[#1F1904]"
-                data-variant-id="{{ product1.selected_or_first_available_variant.id }}"
-                data-product-title="{{ product1.title }}"
-              >
-                <span class="btn-text !text-base lg:!text-lg xl:!text-xl !font-medium !leading-[1.6] lg:!leading-[1.2] text-[#1F1904]"
-                  >Add to Cart</span
-                >
-                <span class="btn-loading hidden">
-                  <svg class="animate-spin h-4 w-4 inline-block" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  Adding...
-                </span>
-              </button>
-              <a
-                href="{{product1.url}}"
-                class="inline-btn !text-base lg:!text-lg xl:!text-xl !font-medium !leading-[1.6] lg:!leading-[1.2]  border border-solid border-[#1E6C44] text-[#1F1904] hover:text-white hover:border-primary transition duration-300 flex items-center gap-3"
-              >
-                View Details
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<div class="layout-1 bg-[#F0ECDC] p-6 rounded-lg mb-8 shadow-md">
+  <img
+    src="{{ product.featured_image | image_url: 'master' }}"
+    alt="{{ product.title }}"
+    class="w-full h-auto rounded-lg mb-4"
+  >
+  <h2 class="text-2xl font-bold text-green mb-2">{{ product.title }}</h2>
+  <p class="text-xl font-semibold text-[#1F1904] mb-4">{{ product.price | money }}</p>
+  <a
+    href="{{ product.url }}"
+    class="inline-block text-[#1E6C44] border border-[#1E6C44] px-4 py-2 rounded hover:bg-[#1E6C44] hover:text-white transition"
+    >View Details</a
+  >
+</div>
