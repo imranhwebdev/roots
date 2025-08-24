@@ -9,10 +9,6 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "bundle",
-      "settings": {}
-    },
     "common_banner_CB4HUt": {
       "type": "common-banner",
       "name": "Common Banner",
@@ -20,6 +16,10 @@
         "default_title": "Complete Care, One Bundle",
         "default_description": "Our bundle pairs 16 oz for home rituals and 8 oz for travel, keeping hair, skin, lashes, and brows nourished."
       }
+    },
+    "main": {
+      "type": "bundle",
+      "settings": {}
     },
     "why_choose_DxxCcg": {
       "type": "why-choose",
@@ -79,8 +79,8 @@
     }
   },
   "order": [
-    "main",
     "common_banner_CB4HUt",
+    "main",
     "why_choose_DxxCcg",
     "join_roots_wQkx3J"
   ]
