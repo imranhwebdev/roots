@@ -1,18 +1,17 @@
 <div class="blog-details pt-9 pb-10 md:pb-16 lg:pb-20 2xl:pb-25">
   <div class="container">
     <!-- Breadcrumb -->
-    <p class="text-lg lg:text-xl text-[#797375] flex items-center mb-5 lg:mb-6 xl:mb-8.5">
-      <a href="{{ blog.url }}" class="hover:underline">Blog</a>
+    <p class="text-lg lg:text-xl text-[#797375] flex flex-wrap items-center mb-5 lg:mb-6 xl:mb-8.5">
+      <a href="{{ blog.url }}" class="hover:underline hover:text-[#0D2E1D] transition-all duration-300">Blog</a>
       <span>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
           <path d="M9.55556 17L14 12L9.55556 7" stroke="#797375" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </span>
-      <span class="text-[#514849] font-medium ">{{ article.title }}</span>
+      <span class="text-[#514849] font-medium text-sm lg:text-xl">{{ article.title }}</span>
     </p>
 
     <div class="blog-details-all">
-      <!-- Featured Image + Title -->
       {% if section.settings.show_featured_image and article.image %}
         <div
           class="
@@ -25,7 +24,7 @@
           </h1>
           <img
             src="{{ article.image | img_url: 'master' }}"
-            class="              w-full aspect-[1/.455] rounded-xl md:rounded-2xl lg:rounded-[20px]"
+            class="w-full object-cover object-top h-80 lg:h-auto lg:aspect-[1/.455] rounded-xl md:rounded-2xl lg:rounded-[20px]"
             width=""
             height=""
             alt="{{ article.image.alt | escape }}"
@@ -83,23 +82,23 @@
               <a
                 href="https://www.instagram.com/?url={{ share_url | url_encode }}"
                 target="_blank"
-                class="flex items-center justify-center size-8 lg:size-9 rounded-full bg-[#F0F0F0] p-2"
+                class="flex items-center justify-center size-8 lg:size-9 rounded-full bg-[#F0F0F0] transition-all duration-300 hover:bg-primary p-2"
               >
-                <img src="{{ 'Instagram.png' | asset_url }}" alt="Instagram">
+                <img src="{{ 'insta.svg' | asset_url }}" alt="Instagram">
               </a>
               <a
                 href="https://twitter.com/share?url={{ share_url | url_encode }}&text={{ article.title | url_encode }}"
                 target="_blank"
-                class="flex items-center justify-center size-8 lg:size-9 rounded-full bg-[#F0F0F0] p-2"
+                class="flex items-center justify-center size-8 lg:size-9 rounded-full bg-[#F0F0F0] transition-all duration-300 p-2 hover:bg-primary"
               >
-                <img src="{{ 'x.png' | asset_url }}" alt="Twitter">
+                <img src="{{ 'x.svg' | asset_url }}" alt="Twitter">
               </a>
               <a
                 href="https://www.facebook.com/sharer/sharer.php?u={{ share_url | url_encode }}"
                 target="_blank"
-                class="flex items-center justify-center size-8 lg:size-9 rounded-full bg-[#F0F0F0] p-2"
+                class="flex items-center justify-center size-8 lg:size-9 rounded-full bg-[#F0F0F0] transition-all duration-300 p-2 hover:bg-primary"
               >
-                <img src="{{ 'Facebook.png' | asset_url }}" alt="Facebook">
+                <img src="{{ 'facebook.svg' | asset_url }}" alt="Facebook">
               </a>
             </div>
           </div>
@@ -107,7 +106,7 @@
       </div>
 
       <!-- Article Content + Sidebar -->
-      <div class="flex flex-col md:flex-row gap-5 mt-8 md:mt-10">
+      <div class="flex flex-col md:flex-row gap-5 mt-2 md:mt-10 justify-between">
         <div class="w-full md:w-8/12">
           <div class="prose max-w-none">
             {{ article.content }}
@@ -117,18 +116,18 @@
         <!-- Sidebar Popular posts -->
         {% if section.settings.enable_related %}
           <div class="w-full md:w-4/12 lg:w-3/12">
-            <h5 class="text-[#0D2E1D] text-2xl lg:text-3xl xl:text-4xl font-medium mb-6 lg:mb-8">Popular Post</h5>
+            <h5 class="text-[#0D2E1D] text-2xl lg:text-3xl xl:text-4xl font-medium mb-6 lg:mb-8 mt-5">Popular Post</h5>
             <div class="card-area">
               {% assign count = 0 %}
               {% for post in blog.articles %}
                 {% if post.id != article.id %}
-                  <div class="mb-8 border-b border-[#F0F0F0] pb-6">
-                    <div class="px-3 pt-3 pb-6 bg-white rounded-lg">
+                  <div class="mb-8 border-b border-[#F0F0F0]">
+                    <div class="pb-6 bg-white rounded-lg">
                       {% if post.image %}
                         <div class="w-full aspect-[1/.68] mb-4">
                           <img
                             src="{{ post.image | img_url: '400x' }}"
-                            class="size-full rounded-[10px]"
+                            class="size-full rounded-[10px] object-cover object-top"
                             alt="{{ post.title }}"
                             width=""
                             height=""
@@ -136,9 +135,9 @@
                         </div>
                       {% endif %}
                       <div class="px-1">
-                        <p class="text-[#797375] text-sm uppercase mb-2.5">
+                        <p class="text-[#797375] text-sm mb-2.5">
                           {{ post.published_at | date: '%d %B, %Y' }}
-                          <span class="text-[#103C25]">BY {{ post.author }}</span>
+                          <span class="text-[#103C25] uppercase">BY {{ post.author }}</span>
                         </p>
                         <h6 class="text-[#0D2E1D] text-lg font-medium mb-3">
                           {{ post.title | strip_html | truncate: 55 }}
@@ -148,10 +147,16 @@
                         </p>
                         <a
                           href="{{ post.url }}"
-                          class="text-[#967901] text-sm font-medium hover:text-[#0D2E1D] flex items-center gap-2"
+                          class="text-[#967901] text-sm font-medium group hover:text-[#0D2E1D] flex items-center gap-2"
                         >
                           Learn More
-                          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="13" fill="none">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="17"
+                            height="13"
+                            fill="none"
+                            class="group-hover:translate-x-0.5 transition-all duration-300"
+                          >
                             <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                           </svg>
                         </a>

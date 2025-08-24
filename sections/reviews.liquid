@@ -5,19 +5,13 @@
     transition: all 0.3s ease-in-out;
     cursor: pointer;
   }
-  .swiper-button-prev::after {
-    content: '';
-  }
+  .swiper-button-prev::after,
   .swiper-button-next::after {
     content: '';
   }
   .swiper-button-next:hover,
   .swiper-button-prev:hover {
     background-color: #ffc801;
-  }
-  .swiper-button-prev {
-    /* transform: translateY(-50%);
-    margin-top: 35px; */
   }
   .swiper-button-next svg,
   .swiper-button-prev svg {
@@ -38,206 +32,90 @@
     height: 6px !important;
     border-radius: 30px !important;
   }
-  .swiper {
-  }
   .roots-customer-reviews .swiper-wrapper {
     padding-bottom: 35px !important;
   }
   .roots-customer-reviews .swiper-pagination-bullet-active {
     background-color: #1e6c44 !important;
   }
-
   @media screen and (max-width: 768px) {
     .roots-customer-reviews .swiper-pagination-bullet {
       display: block;
     }
   }
 </style>
+{% if section.blocks.size > 0 %}
+  <div class="roots-customer-reviews pb-17.5 md:pb-20 lg:pb-25 xl:pb-30 2xl:pb-37.5">
+    <div class="container">
+      {% if section.settings.heading != blank %}
+        <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-green !leading-[1.25] font-bold font-armany-bold mb-5.5 md:mb-7 lg:mb-10 xl:mb-12.5 md:ms-3">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
 
-<div class="roots-customer-reviews pb-17.5 md:pb-20 lg:pb-25 xl:pb-30 2xl:pb-37.5">
-  <div class="container">
-    <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-green !leading-[1.25] font-bold font-armany-bold mb-5.5 md:mb-7 lg:mb-10 xl:mb-12.5 md:ms-3">
-      Customer Reviews
-    </h2>
-    <div class=" relative z-1">
-      <div class="swiper review-slider ">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <div class="border border-[#E3E2E0] bg-white rounded-xl p-5 lg:p-9">
-              <div class="flex items-center gap-1.5 mb-3 lg:mb-4 xl:mb-5">
-                <span class="size-5 lg:size-6"
-                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
-                ></span>
-                <span class="size-5 lg:size-6"
-                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
-                ></span>
-                <span class="size-5 lg:size-6"
-                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
-                ></span>
-                <span class="size-5 lg:size-6"
-                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
-                ></span>
-                <span class="size-5 lg:size-6"
-                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
-                ></span>
-              </div>
-              <p class="text-sm lg:text-base xl:text-xl text-[#797375] !leading-[1.6] mb-3 md:mb-5 lg:mb-8 xl:mb-10 2xl:mb-12">
-                My hair feels thicker, my lashes fuller, and my scalp healthier. Pure, organic, and trustworthy Roots
-                Castor Oil truly delivers.
-              </p>
-              <div class="flex items-center gap-2">
-                <img
-                  src="{{'avator2.jpg' |  asset_url}}"
-                  class="size-10 lg:size-10 rounded-full"
-                  alt=""
-                  width=""
-                  height=""
-                >
-                <div>
-                  <p class="text-[#0D2E1D] text-base lg:text-lg xl:text-xl font-medium !leading-[1.5]">Sarah M</p>
-                  <p class="text-[#797375] text-xs lg:text-base !leading-[1.4] italic">Austin, TX</p>
+      <div class="relative z-1">
+        <div class="swiper review-slider">
+          <div class="swiper-wrapper">
+            {% for block in section.blocks %}
+              <div class="swiper-slide">
+                <div class="border border-[#E3E2E0] bg-white rounded-xl p-5 lg:p-9">
+                  <div class="flex items-center gap-1.5 mb-3 lg:mb-4 xl:mb-5">
+                    {% for i in (1..block.settings.stars) %}
+                      <span class="size-5 lg:size-6">
+                        <img src="{{ 'review-star.svg' | asset_url }}" alt="star" width="" height="">
+                      </span>
+                    {% endfor %}
+                  </div>
+                  <p class="text-sm lg:text-base xl:text-xl text-[#797375] !leading-[1.6] mb-3 md:mb-5 lg:mb-8 xl:mb-10 2xl:mb-12">
+                    {{ block.settings.review_text }}
+                  </p>
+                  <div class="flex items-center gap-2">
+                    {% if block.settings.avatar != blank %}
+                      <img
+                        src="{{ block.settings.avatar | image_url: width:100 }}"
+                        class="size-10 lg:size-10 rounded-full"
+                        alt="{{ block.settings.name }}"
+                        width=""
+                        height=""
+                      >
+                    {% endif %}
+                    <div>
+                      <p class="text-[#0D2E1D] text-base lg:text-lg xl:text-xl font-medium !leading-[1.5]">
+                        {{ block.settings.name }}
+                      </p>
+                      <p class="text-[#797375] text-xs lg:text-base !leading-[1.4] italic">
+                        {{ block.settings.location }}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            {% endfor %}
           </div>
-          <div class="swiper-slide">
-            <div class="border border-[#E3E2E0] bg-white rounded-xl p-5 lg:p-9">
-              <div class="flex items-center gap-1.5 mb-3 lg:mb-4 xl:mb-5">
-                <span class="size-5 lg:size-6"
-                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
-                ></span>
-                <span class="size-5 lg:size-6"
-                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
-                ></span>
-                <span class="size-5 lg:size-6"
-                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
-                ></span>
-                <span class="size-5 lg:size-6"
-                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
-                ></span>
-                <span class="size-5 lg:size-6"
-                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
-                ></span>
-              </div>
-              <p class="text-sm lg:text-base xl:text-xl text-[#797375] !leading-[1.6] mb-3 md:mb-5 lg:mb-8 xl:mb-10 2xl:mb-12">
-                Applying nightly to brows and lashes, I noticed real fullness. Soft, hydrated skin and visible results
-                my go-to beauty essential
-              </p>
-              <div class="flex items-center gap-2">
-                <img
-                  src="{{'avator3.jpg' |  asset_url}}"
-                  class="size-10 lg:size-10 rounded-full"
-                  alt=""
-                  width=""
-                  height=""
-                >
-                <div>
-                  <p class="text-[#0D2E1D] text-base lg:text-lg xl:text-xl font-medium !leading-[1.5]">Olivia R.</p>
-                  <p class="text-[#797375] text-xs lg:text-base !leading-[1.4]">New York, NY</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="border border-[#E3E2E0] bg-white rounded-xl p-5 lg:p-9">
-              <div class="flex items-center gap-1.5 mb-3 lg:mb-4 xl:mb-5">
-                <span class="size-5 lg:size-6"
-                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
-                ></span>
-                <span class="size-5 lg:size-6"
-                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
-                ></span>
-                <span class="size-5 lg:size-6"
-                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
-                ></span>
-                <span class="size-5 lg:size-6"
-                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
-                ></span>
-                <span class="size-5 lg:size-6"
-                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
-                ></span>
-              </div>
-              <p class="text-sm lg:text-base xl:text-xl text-[#797375] !leading-[1.6] mb-3 md:mb-5 lg:mb-8 xl:mb-10 2xl:mb-12">
-                After switching from chemical products, my split ends vanished. Stronger hair, glowing skin, and natural
-                results make this worth it.
-              </p>
-              <div class="flex items-center gap-2">
-                <img
-                  src="{{'avator.jpg' |  asset_url}}"
-                  class="size-10 lg:size-10 rounded-full"
-                  alt=""
-                  width=""
-                  height=""
-                >
-                <div>
-                  <p class="text-[#0D2E1D] text-base lg:text-lg xl:text-xl font-medium !leading-[1.5]">Daniel K.</p>
-                  <p class="text-[#797375] text-xs lg:text-base !leading-[1.4]">Chicago, IL</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="border border-[#E3E2E0] bg-white rounded-xl p-5 lg:p-9">
-              <div class="flex items-center gap-1.5 mb-3 lg:mb-4 xl:mb-5">
-                <span class="size-5 lg:size-6"
-                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
-                ></span>
-                <span class="size-5 lg:size-6"
-                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
-                ></span>
-                <span class="size-5 lg:size-6"
-                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
-                ></span>
-                <span class="size-5 lg:size-6"
-                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
-                ></span>
-                <span class="size-5 lg:size-6"
-                  ><img src="{{'review-star.svg' |  asset_url}}" alt="" width="" height=""
-                ></span>
-              </div>
-              <p class="text-sm lg:text-base xl:text-xl text-[#797375] !leading-[1.6] mb-3 md:mb-5 lg:mb-8 xl:mb-10 2xl:mb-12">
-                Applying nightly to brows and lashes, I noticed real fullness. Soft, hydrated skin and visible results
-                my go-to beauty essential
-              </p>
-              <div class="flex items-center gap-2">
-                <img
-                  src="{{'avator3.jpg' |  asset_url}}"
-                  class="size-10 lg:size-10 rounded-full"
-                  alt=""
-                  width=""
-                  height=""
-                >
-                <div>
-                  <p class="text-[#0D2E1D] text-base lg:text-lg xl:text-xl font-medium !leading-[1.5]">Olivia R.</p>
-                  <p class="text-[#797375] text-xs lg:text-base !leading-[1.4]">New York, NY</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="swiper-pagination"></div>
-      </div>
-      <!-- Navigation Arrows -->
 
-      <div class="absolute hidden md:block z-1 right-[5%] -top-[31%]  items-center gap-4">
-        <div class="swiper-button-prev bg-[#FFE380] !text-[#0D2E1D] hover:!text-black hidden md:block md:!size-14 rounded-full  items-center justify-center">
-          <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <div class="swiper-pagination"></div>
         </div>
-        <div class="swiper-button-next bg-[#FFE380] !text-[#0D2E1D] hover:!text-black hidden md:block md:!size-14 rounded-full  items-center justify-center">
-          <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6.66797 1L1.16797 6.5M1.16797 6.5L6.66797 12M1.16797 6.5L15.8346 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+
+        <!-- Navigation -->
+        <div class="absolute hidden md:block z-1 right-[5%] -top-[31%] flex items-center gap-4">
+          <div class="swiper-button-prev bg-[#FFE380] !text-[#0D2E1D] hover:!text-black md:!size-14 rounded-full flex items-center justify-center">
+            <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="swiper-button-next bg-[#FFE380] !text-[#0D2E1D] hover:!text-black md:!size-14 rounded-full flex items-center justify-center">
+            <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.66797 1L1.16797 6.5M1.16797 6.5L6.66797 12M1.16797 6.5L15.8346 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
+{% endif %}
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    const swiper = new Swiper('.review-slider', {
+    new Swiper('.review-slider', {
       loop: true,
       autoPlay: false,
       speed: 1200,
@@ -249,24 +127,39 @@
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
-      scrollbar: false,
       grabCursor: true,
       effect: 'slide',
-
       breakpoints: {
-        320: {
-          slidesPerView: 1.2,
-          spaceBetween: 10,
-        },
-        640: {
-          slidesPerView: 2,
-          spaceBetween: 20,
-        },
-        1024: {
-          slidesPerView: 3,
-          spaceBetween: 30,
-        },
+        320: { slidesPerView: 1.2, spaceBetween: 10 },
+        640: { slidesPerView: 2, spaceBetween: 20 },
+        1024: { slidesPerView: 3, spaceBetween: 30 },
       },
     });
   });
 </script>
+
+{% schema %}
+{
+  "name": "Customer Reviews",
+  "settings": [{ "type": "text", "id": "heading", "label": "Section Heading", "default": "Customer Reviews" }],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Customer Name", "default": "John Doe" },
+        { "type": "text", "id": "location", "label": "Customer Location", "default": "New York, NY" },
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Review Text",
+          "default": "This is a sample customer review."
+        },
+        { "type": "number", "id": "stars", "label": "Stars (1-5)", "default": 5 },
+        { "type": "image_picker", "id": "avatar", "label": "Customer Avatar" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Customer Reviews", "category": "Testimonials" }]
+}
+{% endschema %}
