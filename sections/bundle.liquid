@@ -1,88 +1,44 @@
-<div class="bundle">
-  {% for block in section.blocks %}
-    {% assign product = all_products[block.settings.product] %}
-    {% if product %}
-      {% case block.settings.layout %}
-        {% when 'left' %}
-          <section class="py-10 bg-[#F0ECDC]">
-            <div class="container flex flex-col md:flex-row gap-6 items-center">
-              <div class="w-full md:w-1/2">
-                <img src="{{ product.featured_image | image_url }}" alt="{{ product.title }}" class="rounded-lg">
-              </div>
-              <div class="w-full md:w-1/2">
-                <h3 class="text-2xl font-bold mb-4">{{ product.title }}</h3>
-                <div class="mb-4">{{ product.description | strip_html | truncatewords: 25 }}</div>
-                <p class="text-xl font-semibold mb-4">{{ product.price | money }}</p>
-                <a href="{{ product.url }}" class="btn">View Product</a>
-              </div>
-            </div>
-          </section>
+{% assign collection = collections[section.settings.collection] %}
 
-        {% when 'right' %}
-          <section class="py-10 bg-[#B7D6C6]">
-            <div class="container flex flex-col md:flex-row gap-6 items-center">
-              <div class="w-full md:w-1/2 order-2 md:order-1">
-                <h3 class="text-2xl font-bold mb-4">{{ product.title }}</h3>
-                <div class="mb-4">{{ product.description | strip_html | truncatewords: 25 }}</div>
-                <p class="text-xl font-semibold mb-4">{{ product.price | money }}</p>
-                <a href="{{ product.url }}" class="btn">View Product</a>
-              </div>
-              <div class="w-full md:w-1/2 order-1 md:order-2">
-                <img src="{{ product.featured_image | image_url }}" alt="{{ product.title }}" class="rounded-lg">
-              </div>
-            </div>
-          </section>
+{% if collection and collection.products.size > 0 %}
+  {% for product in collection.products %}
+    {% assign layout_index = forloop.index0 | modulo: 3 %}
 
-        {% when 'top' %}
-          <section class="py-10 bg-white text-center">
-            <div class="container">
-              <img
-                src="{{ product.featured_image | image_url }}"
-                alt="{{ product.title }}"
-                class="mx-auto mb-6 rounded-lg"
-              >
-              <h3 class="text-2xl font-bold mb-4">{{ product.title }}</h3>
-              <div class="mb-4 max-w-xl mx-auto">{{ product.description | strip_html | truncatewords: 25 }}</div>
-              <p class="text-xl font-semibold mb-4">{{ product.price | money }}</p>
-              <a href="{{ product.url }}" class="btn">View Product</a>
-            </div>
-          </section>
-      {% endcase %}
-    {% endif %}
+    {% case layout_index %}
+      {% when 0 %}
+        {%- assign product1 = product -%}
+        {% comment %} Layout 1 {% endcomment %}
+        <!-- Paste your full Layout 1 structure here, replacing product1 with product -->
+        {% include 'layout-1', product: product1 %}
+
+      {% when 1 %}
+        {%- assign product2 = product -%}
+        {% comment %} Layout 2 {% endcomment %}
+        <!-- Paste your full Layout 2 structure here, replacing product2 with product -->
+        {% include 'layout-2', product: product2 %}
+
+      {% when 2 %}
+        {%- assign product3 = product -%}
+        {% comment %} Layout 3 {% endcomment %}
+        <!-- Paste your full Layout 3 structure here, replacing product3 with product -->
+        {% include 'layout-3', product: product3 %}
+    {% endcase %}
   {% endfor %}
-</div>
+{% endif %}
 
 {% schema %}
 {
-  "name": "Bundle Section",
-  "blocks": [
+  "name": "3 Layout Auto Collection",
+  "settings": [
     {
-      "type": "product",
-      "name": "Product",
-      "settings": [
-        {
-          "type": "product",
-          "id": "product",
-          "label": "Select Product"
-        },
-        {
-          "type": "select",
-          "id": "layout",
-          "label": "Layout",
-          "default": "left",
-          "options": [
-            { "value": "left", "label": "Image Left" },
-            { "value": "right", "label": "Image Right" },
-            { "value": "top", "label": "Image Top" }
-          ]
-        }
-      ]
+      "type": "collection",
+      "id": "collection",
+      "label": "Select Collection"
     }
   ],
   "presets": [
     {
-      "name": "Bundle",
-      "blocks": [{ "type": "product" }, { "type": "product" }]
+      "name": "3 Layout Auto Collection"
     }
   ]
 }
