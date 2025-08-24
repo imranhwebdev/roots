@@ -18,6 +18,9 @@
     },
     "main": {
       "type": "collection",
+      "settings": {
+        "collection": "roots"
+      }
     },
     "why_choose_RWdhne": {
       "type": "why-choose",
