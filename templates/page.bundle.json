@@ -2,10 +2,6 @@
   "sections": {
     "bundle": {
       "type": "bundle",
-      "blocks": {
-        "product1": { "type": "product" },
-        "product2": { "type": "product" }
-      }
     }
   },
   "order": ["bundle"]

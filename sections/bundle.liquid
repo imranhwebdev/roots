@@ -6,22 +6,11 @@
 
     {% case layout_index %}
       {% when 0 %}
-        {%- assign product1 = product -%}
-        {% comment %} Layout 1 {% endcomment %}
-        <!-- Paste your full Layout 1 structure here, replacing product1 with product -->
-        {% include 'layout-1', product: product1 %}
-
+        {% render 'layout-1', product: product %}
       {% when 1 %}
-        {%- assign product2 = product -%}
-        {% comment %} Layout 2 {% endcomment %}
-        <!-- Paste your full Layout 2 structure here, replacing product2 with product -->
-        {% include 'layout-2', product: product2 %}
-
+        {% render 'layout-2', product: product %}
       {% when 2 %}
-        {%- assign product3 = product -%}
-        {% comment %} Layout 3 {% endcomment %}
-        <!-- Paste your full Layout 3 structure here, replacing product3 with product -->
-        {% include 'layout-3', product: product3 %}
+        {% render 'layout-3', product: product %}
     {% endcase %}
   {% endfor %}
 {% endif %}
