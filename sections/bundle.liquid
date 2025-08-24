@@ -1,5 +1,5 @@
 <div class="bundle">
-  <!-- Toast Notification for Cart Success -->
+  <!-- Toast Notification -->
   <div
     id="cart-success-toast"
     class="fixed top-4 right-4 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg transform translate-x-full opacity-0 transition-all duration-300 z-50"
@@ -12,107 +12,69 @@
     </div>
   </div>
 
+  <!-- Dynamic Layout Loop -->
   {% for block in section.blocks %}
     {% assign product = all_products[block.settings.product] %}
     {% if product %}
-      <section class="best-seller bg-[#F0ECDC] py-10 md:py-14 lg:py-20 xl:py-25">
+      <section class="py-10 md:py-14 lg:py-20 xl:py-25 {% cycle 'bg-[#B7D6C6]', 'bg-white', 'bg-[#F0ECDC]' %}">
         <div class="container">
           <div class="w-full 2xl:w-10/12 mx-auto">
             <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap gap-4 items-center justify-between w-full">
-              <div class="w-full md:w-1/2 xl:w-5/12 mb-6 md:mb-0">
-                <div class="xl:ml-10 w-full h-97 md:size-full lg:h-135.5 lg:w-110.5 shadow-[-8px_-10px_#FFC801] rounded-lg">
-                  <img
-                    src="{{ product.featured_image | image_url }}"
-                    alt="{{ product.title }}"
-                    class="size-full"
-                  >
+              {% if forloop.index0 | modulo: 2 == 0 %}
+                <!-- Image Left -->
+                <div class="w-full md:w-1/2 xl:w-5/12 mb-6 md:mb-0">
+                  <div class="xl:ml-10 shadow-[-8px_-10px_#FFC801] rounded-lg">
+                    <img src="{{ product.featured_image | image_url }}" alt="{{ product.title }}" class="size-full">
+                  </div>
                 </div>
-              </div>
+              {% endif %}
+
+              <!-- Content -->
               <div class="w-full md:w-1/2 xl:w-6/12">
                 <div class="xl:mr-10">
-                  <h4 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-green font-bold mb-4 font-armany-bold">
-                    {{ product.title }}
-                  </h4>
+                  <h4 class="text-2xl md:text-3xl lg:text-4xl font-bold text-green mb-4">{{ product.title }}</h4>
 
-                  <div class="text-base md:text-lg lg:text-xl font-poppins mb-5">
-                    {% assign description_html = product.description %}
-                    {% assign list_items = description_html | split: '<li>' %}
-
-                    {% assign only_paragraphs = description_html | remove: '<ul>' | remove: '</ul>' %}
-                    {% for item in list_items %}
-                      {% if item contains '</li>' %}
-                        {% assign clean_li = '<li>' | append: item | split: '</li>' | first | append: '</li>' %}
-                        {% assign only_paragraphs = only_paragraphs | remove: clean_li %}
-                      {% endif %}
-                    {% endfor %}
-
-                    <div class="prose text-para text-sm lg:text-lg xl:text-xl lading-[160%] mb-5">
-                      {{ only_paragraphs }}
-                    </div>
-
-                    {% if list_items.size > 1 %}
-                      <ul class="mb-6 space-y-2 text-[#1E6C44] font-medium">
-                        {% for item in list_items %}
-                          {% if item contains '</li>' %}
-                            <li class="flex items-center gap-2 text-base lg:text-lg xl:text-[22px] font-medium !leading-[1.6]">
-                              <svg
-                                width="25"
-                                height="25"
-                                viewBox="0 0 25 25"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path d="M22.8262 11.5799V12.4999C22.8249 14.6563 22.1267 16.7545 20.8355 18.4817C19.5443 20.2088 17.7295 21.4723 15.6615 22.0838C13.5936 22.6952 11.3834 22.6218 9.36064 21.8744C7.33785 21.1271 5.61083 19.746 4.43713 17.9369C3.26344 16.1279 2.70596 13.9879 2.84785 11.8362C2.98973 9.68443 3.82338 7.63619 5.22445 5.99694C6.62552 4.35768 8.51896 3.21525 10.6224 2.74001C12.7258 2.26477 14.9264 2.4822 16.8962 3.35986M22.8262 4.49986L12.8262 14.5099L9.82618 11.5099" stroke="#1E6C44" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
-                              </svg>
-                              {{ item | split: '</li>' | first | strip }}
-                            </li>
-                          {% endif %}
-                        {% endfor %}
-                      </ul>
-                    {% endif %}
+                  <div class="prose text-base md:text-lg lg:text-xl mb-5">
+                    {{ product.description | strip_html | truncatewords: 30 }}
                   </div>
 
-                  <p class="text-3xl !leading-[1.2] text-[#1F1904] font-semibold mb-4">
-                    {{ product.price | money }}
-                  </p>
-                  <div class="flex items-center gap-5 mt-3.5">
+                  <p class="text-3xl font-semibold mb-4">{{ product.price | money }}</p>
+                  <div class="flex items-center gap-5">
                     <button
-                      class="btn add-to-cart-btn !text-base lg:!text-lg xl:!text-xl !font-medium !leading-[1.6] lg:!leading-[1.2] text-[#1F1904]"
+                      class="btn add-to-cart-btn"
                       data-variant-id="{{ product.selected_or_first_available_variant.id }}"
                       data-product-title="{{ product.title }}"
                     >
                       <span class="btn-text">Add to Cart</span>
-                      <span class="btn-loading hidden">
-                        <svg class="animate-spin h-4 w-4 inline-block" viewBox="0 0 24 24">
-                          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
-                          <path class="opacity-75" fill="currentColor"
-                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Adding...
-                      </span>
+                      <span class="btn-loading hidden">Adding...</span>
                     </button>
-                    <a
-                      href="{{ product.url }}"
-                      class="inline-btn !text-base lg:!text-lg xl:!text-xl !font-medium !leading-[1.6] lg:!leading-[1.2] border border-solid border-[#1E6C44] text-[#1F1904] hover:text-white hover:border-primary transition duration-300 flex items-center gap-3"
-                    >
-                      View Details
-                    </a>
+                    <a href="{{ product.url }}" class="inline-btn border border-[#1E6C44]">View Details</a>
                   </div>
                 </div>
               </div>
+
+              {% if forloop.index0 | modulo: 2 == 1 %}
+                <!-- Image Right -->
+                <div class="w-full md:w-1/2 xl:w-5/12 mb-6 md:mb-0">
+                  <div class="xl:ml-10 shadow-[8px_-10px_#FFC801] rounded-lg">
+                    <img src="{{ product.featured_image | image_url }}" alt="{{ product.title }}" class="size-full">
+                  </div>
+                </div>
+              {% endif %}
             </div>
           </div>
         </div>
       </section>
     {% endif %}
   {% endfor %}
+</div>
 
-  {% schema %}
+{% schema %}
 {
-  "name": "Bundle Product Section",
+  "name": "Dynamic Product Layout",
   "blocks": [
     {
-      "type": "product_block",
+      "type": "product",
       "name": "Product",
       "settings": [
         {
@@ -125,10 +87,9 @@
   ],
   "presets": [
     {
-      "name": "Bundle Product Section",
-      "blocks": [{ "type": "product_block" }]
+      "name": "Dynamic Product Layout",
+      "blocks": [{ "type": "product" }, { "type": "product" }, { "type": "product" }]
     }
   ]
 }
-  {% endschema %}
-</div>
+{% endschema %}
