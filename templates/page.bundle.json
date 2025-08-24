@@ -22,10 +22,50 @@
       "settings": {
         "collection": "roots"
       }
+    },
+    "why_choose_yAzWKi": {
+      "type": "why-choose",
+      "blocks": {
+        "choose_item_zYmWdR": {
+          "type": "choose_item",
+          "settings": {
+            "icon_svg": "shopify://shop_images/why-choose-icon1.svg",
+            "title": "Strengthens & Promotes Growth",
+            "description": "Our organic castor oil nourishes from scalp to tip, reducing breakage and promoting stronger, healthier growth."
+          }
+        },
+        "choose_item_pj3Udk": {
+          "type": "choose_item",
+          "settings": {
+            "icon_svg": "shopify://shop_images/why-choose-icon2.svg",
+            "title": "Enhances Natural Beauty",
+            "description": "From thicker lashes and brows to radiant skin, our multi-purpose oil works gently yet effectively without harsh chemicals."
+          }
+        },
+        "choose_item_AEBrDc": {
+          "type": "choose_item",
+          "settings": {
+            "icon_svg": "shopify://shop_images/why-choose-icon3.svg",
+            "title": "Pure & Honest Care",
+            "description": "USDA Organic, cold-pressed, and hexane-freeevery drop is crafted for quality, transparency, and results you can trust."
+          }
+        }
+      },
+      "block_order": [
+        "choose_item_zYmWdR",
+        "choose_item_pj3Udk",
+        "choose_item_AEBrDc"
+      ],
+      "name": "Why Choose Section",
+      "settings": {
+        "heading": "Why Choose Roots?",
+        "subheading": "Encourages natural volume, supporting thicker, healthier hair growth."
+      }
     }
   },
   "order": [
     "common_banner_386Lac",
-    "main"
+    "main",
+    "why_choose_yAzWKi"
   ]
 }
