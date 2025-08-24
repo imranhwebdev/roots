@@ -1,11 +1,29 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "bundle",
       "settings": {}
+    },
+    "common_banner_CB4HUt": {
+      "type": "common-banner",
+      "name": "Common Banner",
+      "settings": {
+        "default_title": "Complete Care, One Bundle",
+        "default_description": "Our bundle pairs 16 oz for home rituals and 8 oz for travel, keeping hair, skin, lashes, and brows nourished."
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "common_banner_CB4HUt"
   ]
 }
