@@ -3,7 +3,6 @@
   {% if collection and collection.products.size > 0 %}
     {% for product in collection.products %}
       {% assign layout_index = forloop.index0 | modulo: 2 %}
-
       {% case layout_index %}
         {% when 0 %}
           {% render 'layout-1', product: product %}
