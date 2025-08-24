@@ -1,17 +1,14 @@
 <div class="bundle">
   {% assign collection = collections[section.settings.collection] %}
-
   {% if collection and collection.products.size > 0 %}
     {% for product in collection.products %}
-      {% assign layout_index = forloop.index0 | modulo: 3 %}
+      {% assign layout_index = forloop.index0 | modulo: 2 %}
 
       {% case layout_index %}
         {% when 0 %}
           {% render 'layout-1', product: product %}
         {% when 1 %}
           {% render 'layout-2', product: product %}
-        {% when 2 %}
-          {% render 'layout-3', product: product %}
       {% endcase %}
     {% endfor %}
   {% endif %}
@@ -19,7 +16,7 @@
 
 {% schema %}
 {
-  "name": "3 Layout Auto Collection",
+  "name": "2 Layout Auto Collection",
   "settings": [
     {
       "type": "collection",
