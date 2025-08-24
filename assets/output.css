@@ -994,6 +994,9 @@
   .flex-col {
     flex-direction: column;
   }
+  .flex-col-reverse {
+    flex-direction: column-reverse;
+  }
   .flex-wrap {
     flex-wrap: wrap;
   }
@@ -3259,6 +3262,11 @@
       display: block;
     }
   }
+  .lg\:flex {
+    @media (width >= 992px) {
+      display: flex;
+    }
+  }
   .lg\:aspect-\[1\/\.455\] {
     @media (width >= 992px) {
       aspect-ratio: 1/.455;
@@ -3876,6 +3884,11 @@
   .lg\:pb-20 {
     @media (width >= 992px) {
       padding-bottom: calc(var(--spacing) * 20);
+    }
+  }
+  .lg\:pb-22 {
+    @media (width >= 992px) {
+      padding-bottom: calc(var(--spacing) * 22);
     }
   }
   .lg\:pb-25 {
@@ -4768,6 +4781,16 @@
   .\32 xl\:pb-25 {
     @media (width >= 1400px) {
       padding-bottom: calc(var(--spacing) * 25);
+    }
+  }
+  .\32 xl\:pb-28 {
+    @media (width >= 1400px) {
+      padding-bottom: calc(var(--spacing) * 28);
+    }
+  }
+  .\32 xl\:pb-30 {
+    @media (width >= 1400px) {
+      padding-bottom: calc(var(--spacing) * 30);
     }
   }
   .\32 xl\:pb-35 {
