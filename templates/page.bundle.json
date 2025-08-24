@@ -11,6 +11,9 @@
   "sections": {
     "bundle": {
       "type": "bundle",
+      "settings": {
+        "collection": "best-seller"
+      }
     }
   },
   "order": [
