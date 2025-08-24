@@ -1,77 +1,64 @@
-<div class="bundle">
-  <!-- Toast Notification -->
-  <div
-    id="cart-success-toast"
-    class="fixed top-4 right-4 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg transform translate-x-full opacity-0 transition-all duration-300 z-50"
-  >
-    <div class="flex items-center gap-3">
-      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-      </svg>
-      <span id="cart-success-message">Product added to cart!</span>
-    </div>
-  </div>
-
-  <!-- Dynamic Layout Loop -->
+<div class="multi-layout-products">
   {% for block in section.blocks %}
     {% assign product = all_products[block.settings.product] %}
     {% if product %}
-      <section class="py-10 md:py-14 lg:py-20 xl:py-25 {% cycle 'bg-[#B7D6C6]', 'bg-white', 'bg-[#F0ECDC]' %}">
-        <div class="container">
-          <div class="w-full 2xl:w-10/12 mx-auto">
-            <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap gap-4 items-center justify-between w-full">
-              {% if forloop.index0 | modulo: 2 == 0 %}
-                <!-- Image Left -->
-                <div class="w-full md:w-1/2 xl:w-5/12 mb-6 md:mb-0">
-                  <div class="xl:ml-10 shadow-[-8px_-10px_#FFC801] rounded-lg">
-                    <img src="{{ product.featured_image | image_url }}" alt="{{ product.title }}" class="size-full">
-                  </div>
-                </div>
-              {% endif %}
+      {% assign layout_type = forloop.index0 | modulo: 3 %}
 
-              <!-- Content -->
-              <div class="w-full md:w-1/2 xl:w-6/12">
-                <div class="xl:mr-10">
-                  <h4 class="text-2xl md:text-3xl lg:text-4xl font-bold text-green mb-4">{{ product.title }}</h4>
-
-                  <div class="prose text-base md:text-lg lg:text-xl mb-5">
-                    {{ product.description | strip_html | truncatewords: 30 }}
-                  </div>
-
-                  <p class="text-3xl font-semibold mb-4">{{ product.price | money }}</p>
-                  <div class="flex items-center gap-5">
-                    <button
-                      class="btn add-to-cart-btn"
-                      data-variant-id="{{ product.selected_or_first_available_variant.id }}"
-                      data-product-title="{{ product.title }}"
-                    >
-                      <span class="btn-text">Add to Cart</span>
-                      <span class="btn-loading hidden">Adding...</span>
-                    </button>
-                    <a href="{{ product.url }}" class="inline-btn border border-[#1E6C44]">View Details</a>
-                  </div>
-                </div>
+      {% case layout_type %}
+        {% when 0 %}
+          <!-- Layout 1 -->
+          <section class="bg-[#B7D6C6] py-10">
+            <div class="container flex flex-col md:flex-row items-center gap-6">
+              <div class="w-full md:w-1/2">
+                <img src="{{ product.featured_image | image_url }}" alt="{{ product.title }}" class="rounded-lg">
               </div>
-
-              {% if forloop.index0 | modulo: 2 == 1 %}
-                <!-- Image Right -->
-                <div class="w-full md:w-1/2 xl:w-5/12 mb-6 md:mb-0">
-                  <div class="xl:ml-10 shadow-[8px_-10px_#FFC801] rounded-lg">
-                    <img src="{{ product.featured_image | image_url }}" alt="{{ product.title }}" class="size-full">
-                  </div>
-                </div>
-              {% endif %}
+              <div class="w-full md:w-1/2">
+                <h3 class="text-3xl font-bold mb-4">{{ product.title }}</h3>
+                <div class="mb-4">{{ product.description | strip_html | truncatewords: 25 }}</div>
+                <p class="text-xl font-semibold mb-4">{{ product.price | money }}</p>
+                <a href="{{ product.url }}" class="btn">View Product</a>
+              </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
+
+        {% when 1 %}
+          <!-- Layout 2 -->
+          <section class="bg-white py-10">
+            <div class="container flex flex-col md:flex-row items-center gap-6">
+              <div class="w-full md:w-1/2 order-2 md:order-1">
+                <h3 class="text-3xl font-bold mb-4">{{ product.title }}</h3>
+                <div class="mb-4">{{ product.description | strip_html | truncatewords: 25 }}</div>
+                <p class="text-xl font-semibold mb-4">{{ product.price | money }}</p>
+                <a href="{{ product.url }}" class="btn">View Product</a>
+              </div>
+              <div class="w-full md:w-1/2 order-1 md:order-2">
+                <img src="{{ product.featured_image | image_url }}" alt="{{ product.title }}" class="rounded-lg">
+              </div>
+            </div>
+          </section>
+
+        {% when 2 %}
+          <!-- Layout 3 -->
+          <section class="bg-[#F0ECDC] py-10 text-center">
+            <div class="container">
+              <img
+                src="{{ product.featured_image | image_url }}"
+                alt="{{ product.title }}"
+                class="mx-auto mb-6 rounded-lg"
+              >
+              <h3 class="text-3xl font-bold mb-4">{{ product.title }}</h3>
+              <div class="mb-4">{{ product.description | strip_html | truncatewords: 25 }}</div>
+              <p class="text-xl font-semibold mb-4">{{ product.price | money }}</p>
+              <a href="{{ product.url }}" class="btn">View Product</a>
+            </div>
+          </section>
+      {% endcase %}
     {% endif %}
   {% endfor %}
 </div>
-
 {% schema %}
 {
-  "name": "Dynamic Product Layout",
+  "name": "Multi Layout Product Section",
   "blocks": [
     {
       "type": "product",
@@ -87,7 +74,7 @@
   ],
   "presets": [
     {
-      "name": "Dynamic Product Layout",
+      "name": "Multi Layout Products",
       "blocks": [{ "type": "product" }, { "type": "product" }, { "type": "product" }]
     }
   ]
