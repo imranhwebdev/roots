@@ -1,19 +1,16 @@
-<div class="multi-layout-products">
+<div class="bundle">
   {% for block in section.blocks %}
     {% assign product = all_products[block.settings.product] %}
     {% if product %}
-      {% assign layout_type = forloop.index0 | modulo: 3 %}
-
-      {% case layout_type %}
-        {% when 0 %}
-          <!-- Layout 1 -->
-          <section class="bg-[#B7D6C6] py-10">
-            <div class="container flex flex-col md:flex-row items-center gap-6">
+      {% case block.settings.layout %}
+        {% when 'left' %}
+          <section class="py-10 bg-[#F0ECDC]">
+            <div class="container flex flex-col md:flex-row gap-6 items-center">
               <div class="w-full md:w-1/2">
                 <img src="{{ product.featured_image | image_url }}" alt="{{ product.title }}" class="rounded-lg">
               </div>
               <div class="w-full md:w-1/2">
-                <h3 class="text-3xl font-bold mb-4">{{ product.title }}</h3>
+                <h3 class="text-2xl font-bold mb-4">{{ product.title }}</h3>
                 <div class="mb-4">{{ product.description | strip_html | truncatewords: 25 }}</div>
                 <p class="text-xl font-semibold mb-4">{{ product.price | money }}</p>
                 <a href="{{ product.url }}" class="btn">View Product</a>
@@ -21,12 +18,11 @@
             </div>
           </section>
 
-        {% when 1 %}
-          <!-- Layout 2 -->
-          <section class="bg-white py-10">
-            <div class="container flex flex-col md:flex-row items-center gap-6">
+        {% when 'right' %}
+          <section class="py-10 bg-[#B7D6C6]">
+            <div class="container flex flex-col md:flex-row gap-6 items-center">
               <div class="w-full md:w-1/2 order-2 md:order-1">
-                <h3 class="text-3xl font-bold mb-4">{{ product.title }}</h3>
+                <h3 class="text-2xl font-bold mb-4">{{ product.title }}</h3>
                 <div class="mb-4">{{ product.description | strip_html | truncatewords: 25 }}</div>
                 <p class="text-xl font-semibold mb-4">{{ product.price | money }}</p>
                 <a href="{{ product.url }}" class="btn">View Product</a>
@@ -37,17 +33,16 @@
             </div>
           </section>
 
-        {% when 2 %}
-          <!-- Layout 3 -->
-          <section class="bg-[#F0ECDC] py-10 text-center">
+        {% when 'top' %}
+          <section class="py-10 bg-white text-center">
             <div class="container">
               <img
                 src="{{ product.featured_image | image_url }}"
                 alt="{{ product.title }}"
                 class="mx-auto mb-6 rounded-lg"
               >
-              <h3 class="text-3xl font-bold mb-4">{{ product.title }}</h3>
-              <div class="mb-4">{{ product.description | strip_html | truncatewords: 25 }}</div>
+              <h3 class="text-2xl font-bold mb-4">{{ product.title }}</h3>
+              <div class="mb-4 max-w-xl mx-auto">{{ product.description | strip_html | truncatewords: 25 }}</div>
               <p class="text-xl font-semibold mb-4">{{ product.price | money }}</p>
               <a href="{{ product.url }}" class="btn">View Product</a>
             </div>
@@ -56,9 +51,10 @@
     {% endif %}
   {% endfor %}
 </div>
+
 {% schema %}
 {
-  "name": "Multi Layout Product Section",
+  "name": "Bundle Section",
   "blocks": [
     {
       "type": "product",
@@ -68,14 +64,25 @@
           "type": "product",
           "id": "product",
           "label": "Select Product"
+        },
+        {
+          "type": "select",
+          "id": "layout",
+          "label": "Layout",
+          "default": "left",
+          "options": [
+            { "value": "left", "label": "Image Left" },
+            { "value": "right", "label": "Image Right" },
+            { "value": "top", "label": "Image Top" }
+          ]
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Multi Layout Products",
-      "blocks": [{ "type": "product" }, { "type": "product" }, { "type": "product" }]
+      "name": "Bundle",
+      "blocks": [{ "type": "product" }, { "type": "product" }]
     }
   ]
 }
