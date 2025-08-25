@@ -157,7 +157,7 @@
               </div>
 
               <div class="w-full md:w-6/12 mt-6 lg:mt-0">
-                <div class="banner-image relative ps-10">
+                <div class="banner-image relative ps-0 md:ps-10">
                   {% if block.settings.slide_image != blank %}
                     <div class="w-full">
                       <img
@@ -170,7 +170,7 @@
                     </div>
                   {% endif %}
                   {% if block.settings.product_image != blank %}
-                    <div class="w-full max-w-25 lg:max-w-35 xl:max-w-57 absolute bottom-3 md:bottom-10 left-0">
+                    <div class="w-full max-w-35 xl:max-w-57 absolute bottom-0 md:bottom-10 left-0">
                       <img
                         src="{{ block.settings.product_image | image_url }}"
                         class="size-full"

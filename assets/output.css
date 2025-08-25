@@ -311,6 +311,9 @@
   .-bottom-1 {
     bottom: calc(var(--spacing) * -1);
   }
+  .bottom-0 {
+    bottom: calc(var(--spacing) * 0);
+  }
   .bottom-2 {
     bottom: calc(var(--spacing) * 2);
   }
@@ -804,6 +807,9 @@
   }
   .max-w-31\.5 {
     max-width: calc(var(--spacing) * 31.5);
+  }
+  .max-w-35 {
+    max-width: calc(var(--spacing) * 35);
   }
   .max-w-60 {
     max-width: calc(var(--spacing) * 60);
@@ -1444,8 +1450,14 @@
   .py-25 {
     padding-block: calc(var(--spacing) * 25);
   }
+  .ps-0 {
+    padding-inline-start: calc(var(--spacing) * 0);
+  }
   .ps-2 {
     padding-inline-start: calc(var(--spacing) * 2);
+  }
+  .ps-5 {
+    padding-inline-start: calc(var(--spacing) * 5);
   }
   .ps-10 {
     padding-inline-start: calc(var(--spacing) * 10);
@@ -2792,6 +2804,11 @@
       padding-inline-start: calc(var(--spacing) * 4);
     }
   }
+  .md\:ps-10 {
+    @media (width >= 768px) {
+      padding-inline-start: calc(var(--spacing) * 10);
+    }
+  }
   .md\:pe-\[2\%\] {
     @media (width >= 768px) {
       padding-inline-end: 2%;
@@ -3335,6 +3352,11 @@
       justify-content: flex-start;
     }
   }
+  .lg\:gap-0 {
+    @media (width >= 992px) {
+      gap: calc(var(--spacing) * 0);
+    }
+  }
   .lg\:gap-2 {
     @media (width >= 992px) {
       gap: calc(var(--spacing) * 2);
@@ -3461,6 +3483,11 @@
   .lg\:p-2 {
     @media (width >= 992px) {
       padding: calc(var(--spacing) * 2);
+    }
+  }
+  .lg\:p-3 {
+    @media (width >= 992px) {
+      padding: calc(var(--spacing) * 3);
     }
   }
   .lg\:p-4 {
@@ -3601,6 +3628,11 @@
   .lg\:py-28 {
     @media (width >= 992px) {
       padding-block: calc(var(--spacing) * 28);
+    }
+  }
+  .lg\:ps-10 {
+    @media (width >= 992px) {
+      padding-inline-start: calc(var(--spacing) * 10);
     }
   }
   .lg\:pt-2 {
