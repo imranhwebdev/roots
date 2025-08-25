@@ -117,10 +117,10 @@
         {% if customer %}
           <a
             href="{{ routes.account_url }}"
-            class="text-white transition-all text-base lg:text-lg duration-300 flex items-center gap-1 lg:border border-solid border-[#929090] rounded-full lg:p-2 lg:pr-3 hover:border-primary"
+            class="text-white transition-all text-base lg:text-lg duration-300 flex items-center gap-1 md:border border-solid border-[#929090] rounded-full md:p-2 md:pr-3 hover:border-primary"
           >
             {% render 'icon-user' %}
-            <span class="hidden lg:block">Account</span>
+            <span class="md:!block hidden">Account</span>
           </a>
         {% else %}
           <a
