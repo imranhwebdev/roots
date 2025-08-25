@@ -1,136 +1,123 @@
 <div class="card py-10 md:py-16 lg:py-20 xl:py-25">
   <div class="container">
-    <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap gap-5 lg:gap-10 2xl:gap-16 3xl:gap-30 justify-between w-full xl:w-11/12 2xl:w-10/12 mx-auto">
-      <!-- Cart Items -->
-      <div class="max-h-max w-full md:w-7/12 flex flex-col gap-6 ">
-        <form id="cart-form" action="{{ routes.cart_url }}" method="post" novalidate>
-          {% for item in cart.items %}
-            <div
-              class="flex  mb-4 lg:mb-5 items-center gap-4 lg:gap-5 xl:gap-6 2xl:gap-7 3xl:gap-9.5  rounded-xl lg:rounded-2xl border lg:border-[1.5px] border-[#E3E2E0] bg-[#F0ECDC] p-3 lg:p-4 xl:p-6"
-              data-key="{{ item.key }}"
-            >
-              <!-- Product Image -->
-              <div class="w-39 h-44 lg:w-58 xl:w-64 lg:h-58 xl:h-65 2xl:h-73 flex-[0_0_auto]">
-                <a href="{{ item.url }}">
-                  <img
-                    src="{{ item.image | img_url: 'medium' }}"
-                    alt="{{ item.product.title }}"
-                    class="size-full rounded-[10px]"
-                    width=""
-                    height=""
-                  >
-                </a>
-              </div>
+    {% if cart.item_count > 0 %}
+      <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap gap-5 lg:gap-10 2xl:gap-16 3xl:gap-30 justify-between w-full xl:w-11/12 2xl:w-10/12 mx-auto">
+        <!-- Cart Items -->
+        <div class="max-h-max w-full md:w-7/12 flex flex-col gap-6 ">
+          <form id="cart-form" action="{{ routes.cart_url }}" method="post" novalidate>
+            {% for item in cart.items %}
+              <div
+                class="flex  mb-4 lg:mb-5 items-center gap-4 lg:gap-5 xl:gap-6 2xl:gap-7 3xl:gap-9.5  rounded-xl lg:rounded-2xl border lg:border-[1.5px] border-[#E3E2E0] bg-[#F0ECDC] p-3 lg:p-4 xl:p-6"
+                data-key="{{ item.key }}"
+              >
+                <!-- Product Image -->
+                <div class="w-39 h-44 lg:w-58 xl:w-64 lg:h-58 xl:h-65 2xl:h-73 flex-[0_0_auto]">
+                  <a href="{{ item.url }}">
+                    <img
+                      src="{{ item.image | img_url: 'medium' }}"
+                      alt="{{ item.product.title }}"
+                      class="size-full rounded-[10px]"
+                    >
+                  </a>
+                </div>
 
-              <!-- Product Details -->
-              <div class="w-full">
-                <p class="text-base lg:text-lg xl:text-[26px] text-[#0D2E1D] font-medium font-poppins !leading-[1.25] mb-2.5 lg:mb-4 xl:mb-5">
-                  {{ item.product.title }}
+                <!-- Product Details -->
+                <div class="w-full">
+                  <p class="text-base lg:text-lg xl:text-[26px] text-[#0D2E1D] font-medium font-poppins !leading-[1.25] mb-2.5 lg:mb-4 xl:mb-5">
+                    {{ item.product.title }}
+                  </p>
+
+                  <!-- Quantity Control -->
+                  <div class="bg-[#669F7F]  flex items-center justify-between gap-3.5 rounded-lg p-2.5 w-34.5 mb-7.5 lg:mb-10 xl:mb-12 2xl:mb-14">
+                    <button type="button" class="decrease cursor-pointer">-</button>
+                    <input
+                      type="number"
+                      class="qty-input w-8 focus:outline-0 text-lg font-medium font-poppins text-center text-white bg-transparent"
+                      value="{{ item.quantity }}"
+                      min="0"
+                    >
+                    <button type="button" class="increase cursor-pointer">+</button>
+                  </div>
+
+                  <!-- Price & Remove -->
+                  <div class="flex items-center justify-between">
+                    <h6 class="item-price text-xl lg:text-3xl xl:text-4xl text-[#0D2E1D] font-medium font-poppins !leading-[1.25]">
+                      {{ item.final_line_price | money }}
+                    </h6>
+                    <a
+                      href="{{ item.url_to_remove }}"
+                      class="remove-item hover:text-primary transform duration-300 ease-in-out  text-base lg:text-lg xl:text-xl font-poppins !leading-[1.25]"
+                    >
+                      Cancel
+                    </a>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </form>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="w-full md:w-5/12">
+          <div class="rounded-lg lg:rounded-xl bg-[#1E6C44] p-5 lg:p-6 xl:p-7 2xl:p-8">
+            <p class="text-white text-2xl font-medium font-poppins !leading-[1.6] pb-4 md:mb-5 lg:pb-6 mb-5 lg:mb-6 border-b border-b-[#3B7A5B]">
+              Order Summary
+            </p>
+
+            <div class="item-details">
+              <div class="flex items-center justify-between mb-4 lg:mb-5 xl:mb-6">
+                <p class="text-[#D1CDCE] text-xl font-poppins !leading-[1.6]">Items</p>
+                <p class="item-count text-white text-xl font-medium font-poppins !leading-[1.6]">
+                  {{ cart.item_count }}
                 </p>
-
-                <!-- Quantity Control -->
-                <div class="bg-[#669F7F]  flex items-center justify-between gap-3.5 rounded-lg p-2.5 w-34.5 mb-7.5 lg:mb-10 xl:mb-12 2xl:mb-14">
-                  <button type="button" class="decrease cursor-pointer">
-                    <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M3.75 10.5H15.4167" stroke="#ECECEC" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </button>
-                  <input
-                    type="number"
-                    class="qty-input w-8 focus:outline-0 text-lg font-medium font-poppins text-center text-white bg-transparent"
-                    value="{{ item.quantity }}"
-                    min="0"
-                  >
-                  <button type="button" class="increase cursor-pointer">
-                    <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M9.99935 4.66602V16.3327M4.16602 10.4993H15.8327" stroke="white" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </button>
-                </div>
-
-                <!-- Price & Remove -->
-                <div class="flex items-center justify-between">
-                  <h6 class="item-price text-xl lg:text-3xl xl:text-4xl text-[#0D2E1D] font-medium font-poppins !leading-[1.25]">
-                    {{ item.final_line_price | money }}
-                  </h6>
-                  <a
-                    href="{{ item.url_to_remove }}"
-                    class="remove-item hover:text-primary transform duration-300 ease-in-out  text-base lg:text-lg xl:text-xl font-poppins !leading-[1.25]"
-                    >Cancel</a
-                  >
-                </div>
               </div>
-            </div>
-          {% endfor %}
+              <div class="flex items-center justify-between mb-4 lg:mb-5 xl:mb-6">
+                <p class="text-[#D1CDCE] text-xl font-poppins !leading-[1.6]">Subtotal</p>
+                <p class="item-subtotal text-white text-xl font-medium font-poppins !leading-[1.6]">
+                  {{ cart.items_subtotal_price | money }}
+                </p>
+              </div>
+              <div class="flex items-center justify-between mb-4 lg:mb-5 xl:mb-6">
+                <p class="text-[#D1CDCE] text-xl font-poppins !leading-[1.6]">Shipping</p>
+                <p class="text-white text-xl font-medium font-poppins !leading-[1.6]">Calculated at checkout</p>
+              </div>
+              <div class="flex items-center justify-between  pb-4 lg:pb-5 border-b border-b-[#3B7A5B] mb-2.5">
+                <p class="text-[#D1CDCE] text-xl font-poppins !leading-[1.6]">Discount</p>
+                <p class="item-discount text-white text-xl font-medium font-poppins !leading-[1.6]">
+                  {{ cart.total_discount | money }}
+                </p>
+              </div>
+              <div class="flex items-center justify-between mb-4 lg:mb-5 xl:mb-6">
+                <p class="text-[#D1CDCE] text-xl font-poppins !leading-[1.6] ">Total</p>
+                <p class="item-total text-white text-xl font-medium font-poppins !leading-[1.6]">
+                  {{ cart.total_price | money }}
+                </p>
+              </div>
 
-          <!-- Update Cart Fallback -->
-          <div class="mt-6">
-            <input type="submit" class="btn" name="update" value="Update Cart">
-          </div>
-        </form>
-      </div>
-
-      <!-- Order Summary -->
-      <div class="w-full md:w-5/12">
-        <div class="rounded-lg lg:rounded-xl bg-[#1E6C44] p-5 lg:p-6 xl:p-7 2xl:p-8">
-          <p class="text-white text-2xl font-medium font-poppins !leading-[1.6] pb-4 md:mb-5 lg:pb-6 mb-5 lg:mb-6 border-b border-b-[#3B7A5B]">
-            Order Summary
-          </p>
-
-          <div class="item-details">
-            <div class="flex items-center justify-between mb-4 lg:mb-5 xl:mb-6">
-              <p class="text-[#D1CDCE] text-xl font-poppins !leading-[1.6]">Items</p>
-              <p class="item-count text-white text-xl font-medium font-poppins !leading-[1.6]">
-                {{ cart.item_count }}
-              </p>
+              <!-- Checkout Button -->
+              <a
+                href="/checkout"
+                type="button"
+                id="checkout-btn"
+                class="btn w-full text-center flex items-center justify-center gap-3"
+              >
+                Checkout
+              </a>
             </div>
-            <div class="flex items-center justify-between mb-4 lg:mb-5 xl:mb-6">
-              <p class="text-[#D1CDCE] text-xl font-poppins !leading-[1.6]">Subtotal</p>
-              <p class="item-subtotal text-white text-xl font-medium font-poppins !leading-[1.6]">
-                {{ cart.items_subtotal_price | money }}
-              </p>
-            </div>
-            <div class="flex items-center justify-between mb-4 lg:mb-5 xl:mb-6">
-              <p class="text-[#D1CDCE] text-xl font-poppins !leading-[1.6]">Shipping</p>
-              <p class="text-white text-xl font-medium font-poppins !leading-[1.6]">
-                Calculated at checkout
-              </p>
-            </div>
-            <div class="flex items-center justify-between  pb-4 lg:pb-5 border-b border-b-[#3B7A5B] mb-2.5">
-              <p class="text-[#D1CDCE] text-xl font-poppins !leading-[1.6]">Discount</p>
-              <p class="item-discount text-white text-xl font-medium font-poppins !leading-[1.6]">
-                {{ cart.total_discount | money }}
-              </p>
-            </div>
-            <div class="flex items-center justify-between mb-4 lg:mb-5 xl:mb-6">
-              <p class="text-[#D1CDCE] text-xl font-poppins !leading-[1.6] ">Total</p>
-              <p class="item-total text-white text-xl font-medium font-poppins !leading-[1.6]">
-                {{ cart.total_price | money }}
-              </p>
-            </div>
-
-            <!-- Checkout Button -->
-            <a
-              href="/checkout"
-              type="button"
-              id="checkout-btn"
-              class="btn w-full text-center flex items-center justify-center gap-3"
-            >
-              Checkout
-              <span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="13" viewBox="0 0 18 13" fill="none">
-                  <path d="M10.832 1L16.332 6.5M16.332 6.5L10.832 12M16.332 6.5L1.66536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-            </a>
           </div>
         </div>
       </div>
-    </div>
+    {% else %}
+      <div class="text-center py-20">
+        <p class="text-2xl lg:text-3xl font-poppins text-[#0D2E1D] mb-6">
+          Your cart is empty. Let’s start your natural beauty journey Now.
+        </p>
+        <a href="/collections/all" class="btn inline-block"> Continue Shopping </a>
+      </div>
+    {% endif %}
   </div>
 </div>
 
-<!-- AJAX Quantity Update Script -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     function updateCart(key, quantity, row) {
@@ -144,31 +131,27 @@
       })
         .then((res) => res.json())
         .then((data) => {
-          // Update individual line price
-          const linePrice = row.querySelector('.item-price');
-          const item = data.items.find((i) => i.key === key);
-          linePrice.textContent = Shopify.formatMoney(item.final_line_price);
-
-          // Update Order Summary
-          document.querySelector('.item-count').textContent = data.item_count;
-          document.querySelector('.item-subtotal').textContent = Shopify.formatMoney(data.items_subtotal_price);
-          document.querySelector('.item-discount').textContent = Shopify.formatMoney(data.total_discount);
-          document.querySelector('.item-total').textContent = Shopify.formatMoney(data.total_price);
+          // সবসময় reload হবে (update এর পর)
+          window.location.reload();
         })
         .catch((err) => console.error('Cart update error:', err));
     }
 
+    // Minus
     document.querySelectorAll('.decrease').forEach((btn) => {
       btn.addEventListener('click', function () {
         const row = this.closest('[data-key]');
         const input = row.querySelector('.qty-input');
         let qty = parseInt(input.value);
-        if (qty > 1) qty--;
-        input.value = qty;
-        updateCart(row.dataset.key, qty, row);
+        if (qty > 1) {
+          qty--;
+          input.value = qty;
+          updateCart(row.dataset.key, qty, row);
+        }
       });
     });
 
+    // Plus
     document.querySelectorAll('.increase').forEach((btn) => {
       btn.addEventListener('click', function () {
         const row = this.closest('[data-key]');
@@ -179,21 +162,16 @@
         updateCart(row.dataset.key, qty, row);
       });
     });
-  });
-  document.addEventListener('DOMContentLoaded', function () {
-    const checkoutBtn = document.getElementById('checkout-btn');
 
-    if (checkoutBtn) {
-      checkoutBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        this.disabled = true;
-        this.innerHTML = 'Processing...';
-
-        setTimeout(() => {
-          window.location.href = '/checkout';
-        }, 100);
+    // Manual input change
+    document.querySelectorAll('.qty-input').forEach((input) => {
+      input.addEventListener('change', function () {
+        const row = this.closest('[data-key]');
+        let qty = parseInt(this.value);
+        if (isNaN(qty) || qty < 1) qty = 1;
+        this.value = qty;
+        updateCart(row.dataset.key, qty, row);
       });
-    }
+    });
   });
 </script>
