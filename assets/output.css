@@ -12,6 +12,7 @@
     --color-red-200: oklch(88.5% 0.062 18.334);
     --color-red-400: oklch(70.4% 0.191 22.216);
     --color-red-500: oklch(63.7% 0.237 25.331);
+    --color-red-600: oklch(57.7% 0.245 27.325);
     --color-red-700: oklch(50.5% 0.213 27.518);
     --color-yellow-400: oklch(85.2% 0.199 91.936);
     --color-yellow-500: oklch(79.5% 0.184 86.047);
@@ -256,6 +257,9 @@
   .static {
     position: static;
   }
+  .sticky {
+    position: sticky;
+  }
   .inset-0 {
     inset: calc(var(--spacing) * 0);
   }
@@ -282,6 +286,9 @@
   }
   .top-5 {
     top: calc(var(--spacing) * 5);
+  }
+  .top-6 {
+    top: calc(var(--spacing) * 6);
   }
   .top-\[56\%\] {
     top: 56%;
@@ -435,6 +442,9 @@
   }
   .mt-17\.5 {
     margin-top: calc(var(--spacing) * 17.5);
+  }
+  .-mr-2 {
+    margin-right: calc(var(--spacing) * -2);
   }
   .mr-2 {
     margin-right: calc(var(--spacing) * 2);
@@ -615,6 +625,9 @@
   .h-16 {
     height: calc(var(--spacing) * 16);
   }
+  .h-24 {
+    height: calc(var(--spacing) * 24);
+  }
   .h-25 {
     height: calc(var(--spacing) * 25);
   }
@@ -717,6 +730,9 @@
   .w-12 {
     width: calc(var(--spacing) * 12);
   }
+  .w-24 {
+    width: calc(var(--spacing) * 24);
+  }
   .w-30 {
     width: calc(var(--spacing) * 30);
   }
@@ -765,6 +781,9 @@
   .\!max-w-\[1400px\] {
     max-width: 1400px !important;
   }
+  .max-w-2 {
+    max-width: calc(var(--spacing) * 2);
+  }
   .max-w-7 {
     max-width: calc(var(--spacing) * 7);
   }
@@ -812,6 +831,9 @@
   }
   .max-w-230 {
     max-width: calc(var(--spacing) * 230);
+  }
+  .max-w-260 {
+    max-width: calc(var(--spacing) * 260);
   }
   .max-w-267 {
     max-width: calc(var(--spacing) * 267);
@@ -918,6 +940,9 @@
   }
   .resize {
     resize: both;
+  }
+  .resize-none {
+    resize: none;
   }
   .appearance-none {
     appearance: none;
@@ -1089,6 +1114,9 @@
   .border-\[\#1E6C44\] {
     border-color: #1E6C44;
   }
+  .border-\[\#3B7A5B\] {
+    border-color: #3B7A5B;
+  }
   .border-\[\#929090\] {
     border-color: #929090;
   }
@@ -1139,6 +1167,9 @@
   }
   .border-t-\[\#D1CDCE\] {
     border-top-color: #D1CDCE;
+  }
+  .border-t-transparent {
+    border-top-color: transparent;
   }
   .border-b-\[\#3B7A5B\] {
     border-bottom-color: #3B7A5B;
@@ -1329,6 +1360,9 @@
   .px-7 {
     padding-inline: calc(var(--spacing) * 7);
   }
+  .px-8 {
+    padding-inline: calc(var(--spacing) * 8);
+  }
   .px-10 {
     padding-inline: calc(var(--spacing) * 10);
   }
@@ -1385,6 +1419,9 @@
   }
   .py-17\.5 {
     padding-block: calc(var(--spacing) * 17.5);
+  }
+  .py-18 {
+    padding-block: calc(var(--spacing) * 18);
   }
   .py-20 {
     padding-block: calc(var(--spacing) * 20);
@@ -1493,6 +1530,10 @@
   .text-3xl {
     font-size: var(--text-3xl);
     line-height: var(--tw-leading, var(--text-3xl--line-height));
+  }
+  .text-5xl {
+    font-size: var(--text-5xl);
+    line-height: var(--tw-leading, var(--text-5xl--line-height));
   }
   .text-6xl {
     font-size: var(--text-6xl);
@@ -1635,6 +1676,9 @@
   .text-\[\#103C25\] {
     color: #103C25;
   }
+  .text-\[\#666\] {
+    color: #666;
+  }
   .text-\[\#21201E\] {
     color: #21201E;
   }
@@ -1694,6 +1738,9 @@
   }
   .text-green-500 {
     color: var(--color-green-500);
+  }
+  .text-green-600 {
+    color: var(--color-green-600);
   }
   .text-green-700 {
     color: var(--color-green-700);
@@ -2027,6 +2074,13 @@
       }
     }
   }
+  .hover\:bg-\[\#5a8a70\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #5a8a70;
+      }
+    }
+  }
   .hover\:bg-\[\#155a37\] {
     &:hover {
       @media (hover: hover) {
@@ -2146,10 +2200,24 @@
       }
     }
   }
+  .hover\:text-para {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-para);
+      }
+    }
+  }
   .hover\:text-primary {
     &:hover {
       @media (hover: hover) {
         color: var(--color-primary);
+      }
+    }
+  }
+  .hover\:text-red-600 {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-red-600);
       }
     }
   }
@@ -2198,6 +2266,11 @@
   .focus\:ring-\[\#1E6C44\] {
     &:focus {
       --tw-ring-color: #1E6C44;
+    }
+  }
+  .focus\:ring-\[\#669F7F\] {
+    &:focus {
+      --tw-ring-color: #669F7F;
     }
   }
   .focus\:ring-blue-200 {

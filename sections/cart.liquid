@@ -16,6 +16,8 @@
                     <img
                       src="{{ item.image | img_url: 'medium' }}"
                       alt="{{ item.product.title }}"
+                      width=""
+                      height=""
                       class="size-full rounded-[10px]"
                     >
                   </a>
@@ -29,14 +31,24 @@
 
                   <!-- Quantity Control -->
                   <div class="bg-[#669F7F]  flex items-center justify-between gap-3.5 rounded-lg p-2.5 w-34.5 mb-7.5 lg:mb-10 xl:mb-12 2xl:mb-14">
-                    <button type="button" class="decrease cursor-pointer">-</button>
+                    <button
+                      type="button"
+                      class="decrease cursor-pointer text-white text-2xl hover:text-para transition-all duration-300"
+                    >
+                      -
+                    </button>
                     <input
                       type="number"
-                      class="qty-input w-8 focus:outline-0 text-lg font-medium font-poppins text-center text-white bg-transparent"
+                      class="qty-input w-12 focus:outline-0 text-lg font-medium font-poppins text-center text-white bg-transparent"
                       value="{{ item.quantity }}"
                       min="0"
                     >
-                    <button type="button" class="increase cursor-pointer">+</button>
+                    <button
+                      type="button"
+                      class="increase cursor-pointer  text-white text-2xl hover:text-para transition-all duration-300"
+                    >
+                      +
+                    </button>
                   </div>
 
                   <!-- Price & Remove -->
@@ -46,7 +58,7 @@
                     </h6>
                     <a
                       href="{{ item.url_to_remove }}"
-                      class="remove-item hover:text-primary transform duration-300 ease-in-out  text-base lg:text-lg xl:text-xl font-poppins !leading-[1.25]"
+                      class="remove-item hover:text-[#1E6C44] text-[#514849] transform underline duration-300 ease-in-out  text-base lg:text-lg xl:text-xl font-poppins !leading-[1.25]"
                     >
                       Cancel
                     </a>
@@ -108,11 +120,12 @@
         </div>
       </div>
     {% else %}
-      <div class="text-center py-20">
-        <p class="text-2xl lg:text-3xl font-poppins text-[#0D2E1D] mb-6">
+      <div class="text-center py-18 bg-[#B7D6C6] border border-solid border-[#1E6C44] rounded-xl lg:rounded-[20px]">
+        <img src="{{'empty-cart-logo.svg' |  asset_url}}" class="mx-auto mb-8" width="" height="" alt="">
+        <h1 class="text-2xl lg:text-3xl xl:text-5xl font-armany-bold max-w-260 mx-auto text-[#0D2E1D] leading-tight mb-6">
           Your cart is empty. Let’s start your natural beauty journey Now.
-        </p>
-        <a href="/collections/all" class="btn inline-block"> Continue Shopping </a>
+        </h1>
+        <a href="/collections" class="btn"> Continue Shopping </a>
       </div>
     {% endif %}
   </div>
@@ -175,3 +188,16 @@
     });
   });
 </script>
+
+<style>
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield; /* Firefox */
+  }
+</style>
