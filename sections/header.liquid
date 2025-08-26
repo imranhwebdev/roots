@@ -2,6 +2,18 @@
   .header-social-item svg {
     max-width: 18px;
   }
+  .main-header.fixed-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  .header-padding {
+    padding-top: var(--header-height, 80px);
+  }
 {% endstylesheet %}
 
 <div class="topbar bg-[#FFD500] text-black text-sm py-2 px-0 lg:px-6">
@@ -60,7 +72,7 @@
 </div>
 
 <!-- Main Header -->
-<header class="main-header bg-[#1E6B43] text-white py-4 px-0 md:px-2 lg:px-6 z-10">
+<header id="header-area" class="main-header bg-[#1E6B43] text-white py-4 px-0 md:px-2 lg:px-6 z-10 ">
   <div class="container">
     <div class="header-inner flex justify-between items-center">
       <!-- Mobile Menu Toggle -->
@@ -240,5 +252,74 @@
         link.classList.add('active', 'before:opacity-100');
       }
     });
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const header = document.getElementById('header-area');
+    const headerHeight = header.offsetHeight;
+    let lastScroll = 0;
+    let isScrolling = false;
+
+    // Set CSS variable for header height
+    document.documentElement.style.setProperty('--header-height', headerHeight + 'px');
+
+    // Throttle scroll events for better performance
+    function throttle(func, limit) {
+      let inThrottle;
+      return function () {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+          func.apply(context, args);
+          inThrottle = true;
+          setTimeout(() => (inThrottle = false), limit);
+        }
+      };
+    }
+
+    const handleScroll = throttle(function () {
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+      // Prevent negative scroll values
+      if (currentScroll < 0) return;
+
+      // Add fixed class after scrolling past header height
+      if (currentScroll > headerHeight) {
+        if (!header.classList.contains('fixed-top')) {
+          header.classList.add('fixed-top');
+          document.body.classList.add('header-padding');
+        }
+
+        // Hide header on scroll down, show on scroll up
+        if (currentScroll > lastScroll && currentScroll > headerHeight * 2) {
+          // Scrolling down
+          header.style.transform = 'translateY(-100%)';
+        } else {
+          // Scrolling up
+          header.style.transform = 'translateY(0)';
+        }
+      } else {
+        // Remove fixed positioning when near top
+        if (header.classList.contains('fixed-top')) {
+          header.classList.remove('fixed-top');
+          document.body.classList.remove('header-padding');
+          header.style.transform = 'translateY(0)';
+        }
+      }
+
+      lastScroll = currentScroll;
+    }, 10);
+
+    // Add scroll event listener
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Handle resize to recalculate header height
+    window.addEventListener(
+      'resize',
+      throttle(function () {
+        const newHeaderHeight = header.offsetHeight;
+        document.documentElement.style.setProperty('--header-height', newHeaderHeight + 'px');
+      }, 100)
+    );
   });
 </script>
