@@ -53,43 +53,46 @@
           "type": "feature",
           "settings": {
             "position": "left",
-            "title": "Feature Title",
-            "text": "Feature description goes here..."
+            "title": "USDA Organic & Cold-Pressed",
+            "text": "Cold-pressed to preserve the oil’s natural nutrients and potency, delivering maximum benefits for healthier hair, skin, and beauty."
           }
         },
         "feature_bXTwgK": {
           "type": "feature",
           "settings": {
             "position": "left",
-            "title": "Feature Title",
-            "text": "Feature description goes here..."
+            "icon": "shopify://shop_images/location.svg",
+            "title": "Made in USA",
+            "text": "Responsibly sourced and bottled locally to ensure freshness, support communities, and maintain quality."
           }
         },
-        "feature_nYiUkG": {
+        "feature_EiVY9Y": {
           "type": "feature",
           "settings": {
-            "position": "left",
-            "title": "Feature Title",
-            "text": "Feature description goes here..."
+            "position": "right",
+            "icon": "shopify://shop_images/lipe.svg",
+            "title": "Multi-Purpose Beauty Essential",
+            "text": "Perfect for nourishing hair, enhancing lashes, defining brows, and hydrating skin with pure, natural, multi-purpose organic care."
           }
         },
-        "feature_KThgcT": {
+        "feature_qcjebH": {
           "type": "feature",
           "settings": {
-            "position": "left",
-            "title": "Feature Title",
-            "text": "Feature description goes here..."
+            "position": "right",
+            "title": "Cruelty-Free & Hexane-Free",
+            "text": "Gentle, safe, and effective for all, providing pure, natural care suitable for every skin type, hair texture, and age."
           }
         }
       },
       "block_order": [
         "feature_JKNLV6",
         "feature_bXTwgK",
-        "feature_nYiUkG",
-        "feature_KThgcT"
+        "feature_EiVY9Y",
+        "feature_qcjebH"
       ],
       "settings": {
-        "heading": "Why Roots?"
+        "heading": "Why Roots?",
+        "main_image": "shopify://shop_images/product4.png"
       }
     },
     "join_roots": {
