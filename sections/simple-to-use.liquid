@@ -23,7 +23,7 @@
             {% if card.settings.card_image != blank %}
               <img
                 src="{{ card.settings.card_image | img_url: '1024x' }}"
-                class="size-full rounded-[10px]"
+                class="size-full rounded-[10px] object-cover object-top"
                 alt="{{ card.settings.card_title }}"
                 width=""
                 height=""
