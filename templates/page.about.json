@@ -18,19 +18,79 @@
     },
     "our_story": {
       "type": "about-our-story",
-      "settings": {}
+      "settings": {
+        "heading": "Our Story",
+        "subtext": "At Roots, we are more than a beauty brand - we are a celebration of nature’s healing power and timeless self-care rituals.",
+        "main_image": "shopify://shop_images/product3.png",
+        "text1": "Our journey began with a simple truth: beauty thrives when nurtured naturally.",
+        "text2": "That’s why we start with one of nature’s most powerful gifts - pure, organic castor oil - known for its ability to nourish, restore, and transform hair and skin.",
+        "text3": "We don’t just create oils - we create experiences rooted in care, simplicity, and transparency.",
+        "second_image": "shopify://shop_images/about1.png"
+      }
     },
     "our_mission": {
       "type": "our-mission",
-      "settings": {}
+      "settings": {
+        "image": "shopify://shop_images/about2.png",
+        "heading": "Our Mission",
+        "text1": "Our mission is to restore trust in natural care by offering premium-quality, organic beauty oils that support and enhance wellness.",
+        "text2": "We focus on removing the unnecessary, keeping only what is pure, honest, and truly beneficial. By combining nature’s wisdom with responsible sourcing, we aim to be a brand that stands for quality over trends, gentleness over harshness, and truth over hype."
+      }
     },
     "our_vision": {
       "type": "our-vision",
-      "settings": {}
+      "settings": {
+        "heading": "Our Vision",
+        "text1": "We envision a world where clean, organic self-care is the norm, not the exception.",
+        "text2": "Roots aims to inspire a community of individuals who choose products that align with their values — beauty that is conscious, sustainable, and kind to both people and the planet.",
+        "image": "shopify://shop_images/ahout3.png"
+      }
     },
     "why_roots": {
       "type": "about-roots",
-      "settings": {}
+      "blocks": {
+        "feature_JKNLV6": {
+          "type": "feature",
+          "settings": {
+            "position": "left",
+            "title": "Feature Title",
+            "text": "Feature description goes here..."
+          }
+        },
+        "feature_bXTwgK": {
+          "type": "feature",
+          "settings": {
+            "position": "left",
+            "title": "Feature Title",
+            "text": "Feature description goes here..."
+          }
+        },
+        "feature_nYiUkG": {
+          "type": "feature",
+          "settings": {
+            "position": "left",
+            "title": "Feature Title",
+            "text": "Feature description goes here..."
+          }
+        },
+        "feature_KThgcT": {
+          "type": "feature",
+          "settings": {
+            "position": "left",
+            "title": "Feature Title",
+            "text": "Feature description goes here..."
+          }
+        }
+      },
+      "block_order": [
+        "feature_JKNLV6",
+        "feature_bXTwgK",
+        "feature_nYiUkG",
+        "feature_KThgcT"
+      ],
+      "settings": {
+        "heading": "Why Roots?"
+      }
     },
     "join_roots": {
       "type": "join-roots",
