@@ -1128,6 +1128,9 @@
   .border-\[rgba\(255\,_255\,_255\,_0\.40\)\] {
     border-color: rgba(255, 255, 255, 0.40);
   }
+  .border-gray-300 {
+    border-color: var(--color-gray-300);
+  }
   .border-green-200 {
     border-color: var(--color-green-200);
   }
@@ -2057,6 +2060,13 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-white) !important;
+      }
+    }
+  }
+  .hover\:bg-\[\#1E6C44\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #1E6C44;
       }
     }
   }
