@@ -1,15 +1,15 @@
 <div class="block-insights py-16 lg:py-20 xl:py-25 bg-[#F0ECDC]">
   <div class="container">
+    <!-- Heading & Tabs -->
     <div class="mb-5 md:mb-6 lg:mb-9 xl:mb-12.5 flex flex-col md:flex-row flex-wrap md:flex-nowrap md:items-center md:justify-between gap-5">
       <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-start flex-[0_0_auto] text-green !leading-[1.25] font-bold font-armany-bold">
         {{ section.settings.heading }}
       </h2>
 
-      <!-- Tabs Header -->
       <div class="overflow-auto">
         <div class="flex items-center gap-3 lg:gap-4 w-78 md:w-130 lg:w-auto">
           <button
-            class="tab-btn flex-[0_0_auto] active-tab text-white bg-[#1E6C44] cursor-pointer ease-in-out duration-300 text-lg lg:text-xl font-medium !leading-[1.2] font-poppins py-3.5 lg:py-4.5 px-7 lg:px-8 rounded-3xl lg:rounded-[40px]"
+            class="tab-btn flex-[0_0_auto] text-white bg-[#1E6C44] cursor-pointer ease-in-out duration-300 text-lg lg:text-xl font-medium !leading-[1.2] font-poppins py-3.5 lg:py-4.5 px-7 lg:px-8 rounded-3xl lg:rounded-[40px]"
             data-tab="all"
           >
             All
@@ -31,98 +31,85 @@
       </div>
     </div>
 
-    <!-- All posts (single container, filterable) -->
-    {% paginate blogs[section.settings.blog].articles by section.settings.posts_per_page %}
-      <div class="tabs-wrapper grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-7 xl:gap-8">
-        {% for article in paginate.items %}
-          <div
-            class="blog-post px-3 pt-3 pb-6 bg-white rounded-lg lg:rounded-[10px] flex flex-col justify-between"
-            data-tags="{{ article.tags | join: ' ' | handleize }}"
-          >
-            {% if article.image %}
-              <div class="w-full h-53 md:h-60 lg:h-64 mb-4 md:mb-5 lg:mb-6">
-                {{
-                  article.image
-                  | image_url: width: 500
-                  | image_tag: class: 'size-full rounded-[10px] object-cover object-top'
-                }}
-              </div>
-            {% endif %}
-            <div class="px-3 flex flex-col justify-between grow">
-              <div class="post-info">
-                <div class="flex items-center gap-4 lg:gap-5 mb-2.5 lg:mb-3">
-                  {% if article.tags.size > 0 %}
-                    <span class="text-sm !leading-[1.2] tracking-[1.64px] uppercase font-poppins text-[#514849] rounded-2xl lg:rounded-[20px] py-2.5 px-4 block bg-[#F0F0F0] border border-[#F0F0F0] max-w-max">
-                      {{ article.tags.first }}
-                    </span>
-                  {% endif %}
-                  {% assign words = article.content | strip_html | split: ' ' | size %}
-                  {% assign minutes = words | divided_by: 50 %}
-                  {% if minutes < 1 %}
-                    {% assign minutes = 1 %}
-                  {% endif %}
-                  <p class="text-[#103C25] text-sm m !leading-[1.2] tracking-[1.64px] uppercase font-poppins">
-                    {{ minutes }} min read
-                  </p>
-                </div>
-                <h6 class="text-[#0D2E1D] font-poppins text-xl lg:text-2xl font-medium !leading-[1.6] mb-4 lg:mb-5">
-                  <a href="{{ article.url }}">{{ article.title | strip_html | truncate: 76 }}</a>
-                </h6>
-                <p class="text-[#514849] text-base lg:text-lg !leading-[1.6] mb-3 lg:mb-4">
-                  {{ article.excerpt | strip_html | truncate: 100 }}
+    <!-- Blog posts without pagination for filtering -->
+    {% assign all_articles = blogs[section.settings.blog].articles %}
+    {% assign posts_per_page = section.settings.posts_per_page %}
+
+    <div
+      class="tabs-wrapper grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-7 xl:gap-8"
+      id="blog-posts-container"
+    >
+      {% for article in all_articles limit: 50 %}
+        <div
+          class="blog-post px-3 pt-3 pb-6 bg-white rounded-lg lg:rounded-[10px] flex flex-col justify-between transition-all duration-300"
+          data-tags="{{ article.tags | join: ' ' | handleize }}"
+          data-date="{{ article.published_at | date: '%s' }}"
+        >
+          {% if article.image %}
+            <div class="w-full h-53 md:h-60 lg:h-64 mb-4 md:mb-5 lg:mb-6">
+              {{
+                article.image
+                | image_url: width: 500
+                | image_tag: class: 'size-full rounded-[10px] object-cover object-top', loading: 'lazy'
+              }}
+            </div>
+          {% endif %}
+          <div class="px-3 flex flex-col justify-between grow">
+            <div class="post-info">
+              <div class="flex items-center gap-4 lg:gap-5 mb-2.5 lg:mb-3">
+                {% if article.tags.size > 0 %}
+                  <span class="text-sm !leading-[1.2] tracking-[1.64px] uppercase font-poppins text-[#514849] rounded-2xl lg:rounded-[20px] py-2.5 px-4 block bg-[#F0F0F0] border border-[#F0F0F0] max-w-max">
+                    {{ article.tags.first }}
+                  </span>
+                {% endif %}
+                {% assign words = article.content | strip_html | split: ' ' | size %}
+                {% assign minutes = words | divided_by: 50 %}
+                {% if minutes < 1 %}
+                  {% assign minutes = 1 %}
+                {% endif %}
+                <p class="text-[#103C25] text-sm !leading-[1.2] tracking-[1.64px] uppercase font-poppins">
+                  {{ minutes }} min read
                 </p>
               </div>
-
-              <a
-                href="{{ article.url }}"
-                class="text-[#967901] group text-lg lg:text-xl font-medium hover:text-green !leading-[1.2] font-poppins flex items-center gap-2 lg:gap-3"
-              >
-                Learn More
-                <span class="group-hover:translate-x-1 transform ease-in-out duration-300">
-                  <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </span>
-              </a>
+              <h6 class="text-[#0D2E1D] font-poppins text-xl lg:text-2xl font-medium !leading-[1.6] mb-4 lg:mb-5">
+                <a href="{{ article.url }}">{{ article.title | strip_html | truncate: 76 }}</a>
+              </h6>
+              <p class="text-[#514849] text-base lg:text-lg !leading-[1.6] mb-3 lg:mb-4">
+                {{ article.excerpt | strip_html | truncate: 100 }}
+              </p>
             </div>
+
+            <a
+              href="{{ article.url }}"
+              class="text-[#967901] group text-lg lg:text-xl font-medium hover:text-green !leading-[1.2] font-poppins flex items-center gap-2 lg:gap-3"
+            >
+              Learn More
+              <span class="group-hover:translate-x-1 transform ease-in-out duration-300">
+                <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </a>
           </div>
-        {% endfor %}
-      </div>
-
-      <!-- Pagination -->
-      {% if paginate.pages > 1 %}
-        <div class="pagination flex items-center justify-center gap-3 mt-8">
-          {% if paginate.previous %}
-            <a
-              href="{{ paginate.previous.url }}"
-              class="px-4 py-2 rounded bg-white border border-gray-300 text-[#1E6C44] hover:bg-[#1E6C44] hover:text-white"
-              >Prev</a
-            >
-          {% endif %}
-
-          {% for part in paginate.parts %}
-            {% if part.is_link %}
-              <a
-                href="{{ part.url }}"
-                class="px-4 py-2 rounded bg-white border border-gray-300 text-[#1E6C44] hover:bg-[#1E6C44] hover:text-white"
-              >
-                {{- part.title -}}
-              </a>
-            {% else %}
-              <span class="px-4 py-2 rounded bg-[#1E6C44] text-white">{{ part.title }}</span>
-            {% endif %}
-          {% endfor %}
-
-          {% if paginate.next %}
-            <a
-              href="{{ paginate.next.url }}"
-              class="px-4 py-2 rounded bg-white border border-gray-300 text-[#1E6C44] hover:bg-[#1E6C44] hover:text-white"
-              >Next</a
-            >
-          {% endif %}
         </div>
-      {% endif %}
-    {% endpaginate %}
+      {% endfor %}
+    </div>
+
+    <!-- Load More Button -->
+    <div class="text-center mt-8" id="load-more-container">
+      <button
+        id="load-more-btn"
+        class="px-8 py-3 bg-[#1E6C44] text-white rounded-3xl hover:bg-[#145533] transition-colors duration-300"
+        style="display: none;"
+      >
+        Load More Posts
+      </button>
+    </div>
+
+    <!-- No posts message -->
+    <div id="no-posts-message" class="text-center mt-8 text-gray-600" style="display: none;">
+      <p class="text-lg">No posts found for this category.</p>
+    </div>
   </div>
 </div>
 
@@ -152,29 +139,82 @@
 {% endschema %}
 
 <script>
-  const tabBtns = document.querySelectorAll('.tab-btn');
-  const allPosts = document.querySelectorAll('.blog-post');
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const allPosts = document.querySelectorAll('.blog-post');
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    const noPostsMessage = document.getElementById('no-posts-message');
+    const postsPerPage = {{ section.settings.posts_per_page }};
 
-  tabBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      tabBtns.forEach((b) => {
-        b.classList.remove('bg-[#1E6C44]', 'text-white');
-        b.classList.add('bg-white', 'text-[#1E6C44]');
+    let currentFilter = 'all';
+    let currentVisibleCount = postsPerPage;
+
+    // Initialize - show only first set of posts
+    showPosts();
+
+    function showPosts() {
+      let filteredPosts = Array.from(allPosts);
+
+      // Filter posts based on current filter
+      if (currentFilter !== 'all') {
+        filteredPosts = filteredPosts.filter(post => {
+          const postTags = post.dataset.tags.split(' ');
+          return postTags.includes(currentFilter);
+        });
+      }
+
+      // Hide all posts first
+      allPosts.forEach(post => {
+        post.style.display = 'none';
       });
 
-      btn.classList.add('bg-[#1E6C44]', 'text-white');
-      btn.classList.remove('bg-white', 'text-[#1E6C44]');
+      // Show filtered posts up to current visible count
+      const postsToShow = filteredPosts.slice(0, currentVisibleCount);
+      postsToShow.forEach(post => {
+        post.style.display = 'block';
+      });
 
-      const filter = btn.dataset.tab;
+      // Handle load more button visibility
+      if (filteredPosts.length > currentVisibleCount) {
+        loadMoreBtn.style.display = 'inline-block';
+      } else {
+        loadMoreBtn.style.display = 'none';
+      }
 
-      allPosts.forEach((post) => {
-        const postTags = post.dataset.tags.split(' ');
-        if (filter === 'all' || postTags.includes(filter)) {
-          post.style.display = 'block';
-        } else {
-          post.style.display = 'none';
-        }
+      // Handle no posts message
+      if (filteredPosts.length === 0) {
+        noPostsMessage.style.display = 'block';
+      } else {
+        noPostsMessage.style.display = 'none';
+      }
+    }
+
+    // Tab button functionality
+    tabBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        // Reset active states
+        tabBtns.forEach((b) => {
+          b.classList.remove('bg-[#1E6C44]', 'text-white');
+          b.classList.add('bg-white', 'text-[#1E6C44]');
+        });
+
+        // Set active state
+        btn.classList.add('bg-[#1E6C44]', 'text-white');
+        btn.classList.remove('bg-white', 'text-[#1E6C44]');
+
+        // Update filter and reset visible count
+        currentFilter = btn.dataset.tab;
+        currentVisibleCount = postsPerPage;
+        showPosts();
       });
     });
+
+    // Load more functionality
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener('click', () => {
+        currentVisibleCount += postsPerPage;
+        showPosts();
+      });
+    }
   });
 </script>
