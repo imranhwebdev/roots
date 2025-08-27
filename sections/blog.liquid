@@ -8,8 +8,8 @@
       {%- assign first_article = blog.articles.first -%}
       {%- if first_article -%}
         <!-- Featured First Article -->
-        <div class="p-3 lg:p-4 bg-[#B7D6C6] rounded-lg lg:rounded-[10px] flex flex-col justify-between">
-          <div class="mb-8 md:mb-10 lg:mb-12 xl:mb-14.5 mt-5 lg:mt-7 xl:mt-10">
+        <div class="p-3 lg:p-4 bg-[#B7D6C6] rounded-lg lg:rounded-[10px] flex flex-col-reverse md:flex-col justify-between">
+          <div class="mb-0 md:mb-10 lg:mb-12 xl:mb-14.5 mt-5 lg:mt-7 xl:mt-10">
             <div class="flex items-center gap-4 lg:gap-5 mb-2.5 lg:mb-3.5">
               {% if first_article.tags.size > 0 %}
                 <span class="text-sm md:text-base !leading-[1.2] tracking-[1.92px] uppercase font-poppins text-white rounded-full lg:rounded-[20px] py-2.5 px-4 block bg-[#669F7F] max-w-max">
