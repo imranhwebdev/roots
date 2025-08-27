@@ -39,7 +39,7 @@
       {% assign max_posts = section.settings.max_posts | default: 50 %}
       {% for article in blogs[section.settings.blog].articles limit: max_posts %}
         <div
-          class="blog-post hidden px-3 pt-3 pb-6 bg-white rounded-lg lg:rounded-[10px] flex flex-col justify-between transition-all duration-300 ease-in-out"
+          class="blog-post hidden px-3 pt-3 pb-6 bg-white rounded-lg lg:rounded-[10px] md:flex flex-col justify-between transition-all duration-300 ease-in-out"
           data-tags="{{ article.tags | join: ' ' | handleize }}"
           data-date="{{ article.published_at | date: '%s' }}"
         >
@@ -150,11 +150,10 @@
     const showAllBtn = document.getElementById('show-all-btn');
     const loadMoreBtn = document.getElementById('load-more-btn');
 
-    let postsPerPage = 3; // প্রতি বার কত post দেখাবে
+    let postsPerPage = 9;
     let visiblePosts = 0;
     let currentFilter = 'all';
 
-    // প্রথমে কিছু পোস্ট দেখানো
     function showInitialPosts() {
       visiblePosts = 0;
       allPosts.forEach((post) => post.classList.add('hidden'));
@@ -175,7 +174,6 @@
         }
       });
 
-      // যদি আর পোস্ট না থাকে তবে বাটন hide
       const hiddenPosts = Array.from(allPosts).filter((post) => {
         const postTags = post.dataset.tags ? post.dataset.tags.split(' ') : [];
         return (currentFilter === 'all' || postTags.includes(currentFilter)) && post.classList.contains('hidden');
