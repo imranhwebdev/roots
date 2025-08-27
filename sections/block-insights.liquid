@@ -39,7 +39,7 @@
       {% assign max_posts = section.settings.max_posts | default: 50 %}
       {% for article in blogs[section.settings.blog].articles limit: max_posts %}
         <div
-          class="blog-post hidden px-3 pt-3 pb-6 bg-white rounded-lg lg:rounded-[10px] md:flex flex-col justify-between transition-all duration-300 ease-in-out"
+          class="blog-post hidden px-3 pt-3 pb-6 bg-white rounded-lg lg:rounded-[10px] md;flex flex-col justify-between transition-all duration-300 ease-in-out"
           data-tags="{{ article.tags | join: ' ' | handleize }}"
           data-date="{{ article.published_at | date: '%s' }}"
         >
@@ -150,23 +150,25 @@
     const showAllBtn = document.getElementById('show-all-btn');
     const loadMoreBtn = document.getElementById('load-more-btn');
 
-    let postsPerPage = 6;
+    let initialPosts = 9; // প্রথমে কতগুলো পোস্ট দেখাবে
+    let postsPerPage = 3; // Load More ক্লিক করলে কতগুলো আসবে
     let visiblePosts = 0;
     let currentFilter = 'all';
 
+    // প্রথমে কিছু পোস্ট দেখানো
     function showInitialPosts() {
       visiblePosts = 0;
       allPosts.forEach((post) => post.classList.add('hidden'));
-      loadMorePosts();
+      loadMorePosts(initialPosts); // প্রথমে ৯টা দেখাবে
     }
 
     // Load More function
-    function loadMorePosts() {
+    function loadMorePosts(limit = postsPerPage) {
       let count = 0;
       allPosts.forEach((post) => {
         const postTags = post.dataset.tags ? post.dataset.tags.split(' ') : [];
         if ((currentFilter === 'all' || postTags.includes(currentFilter)) && post.classList.contains('hidden')) {
-          if (count < postsPerPage) {
+          if (count < limit) {
             post.classList.remove('hidden');
             count++;
             visiblePosts++;
@@ -174,6 +176,7 @@
         }
       });
 
+      // যদি আর পোস্ট না থাকে তবে বাটন hide
       const hiddenPosts = Array.from(allPosts).filter((post) => {
         const postTags = post.dataset.tags ? post.dataset.tags.split(' ') : [];
         return (currentFilter === 'all' || postTags.includes(currentFilter)) && post.classList.contains('hidden');
@@ -187,7 +190,7 @@
       currentFilter = filter;
       visiblePosts = 0;
       allPosts.forEach((post) => post.classList.add('hidden'));
-      loadMorePosts();
+      loadMorePosts(initialPosts); // নতুন filter এ গেলে আবার ৯টা দেখাবে
     }
 
     tabBtns.forEach((btn) => {
@@ -210,7 +213,7 @@
 
     if (loadMoreBtn) {
       loadMoreBtn.addEventListener('click', () => {
-        loadMorePosts();
+        loadMorePosts(postsPerPage); // প্রতি বার ৩টা করে লোড হবে
       });
     }
 
