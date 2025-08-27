@@ -1353,9 +1353,6 @@
   .px-7 {
     padding-inline: calc(var(--spacing) * 7);
   }
-  .px-8 {
-    padding-inline: calc(var(--spacing) * 8);
-  }
   .px-10 {
     padding-inline: calc(var(--spacing) * 10);
   }
@@ -2077,13 +2074,6 @@
     &:hover {
       @media (hover: hover) {
         background-color: #155a37;
-      }
-    }
-  }
-  .hover\:bg-\[\#145533\] {
-    &:hover {
-      @media (hover: hover) {
-        background-color: #145533;
       }
     }
   }

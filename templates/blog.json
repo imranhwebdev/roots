@@ -19,7 +19,7 @@
     "main": {
       "type": "blog",
       "settings": {
-        "blog": "",
+        "blog": "news",
         "heading": "Take a look at the latest articles"
       }
     },
@@ -31,7 +31,8 @@
         "tab_1": "Indulge",
         "tab_2": "Revitalize",
         "tab_3": "Define",
-        "tab_4": "Glow"
+        "tab_4": "Glow",
+        "posts_per_page": 9
       }
     },
     "join_roots": {
