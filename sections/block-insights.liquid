@@ -9,7 +9,7 @@
       <div class="overflow-auto">
         <div class="flex items-center gap-3 lg:gap-4 w-78 md:w-130 lg:w-auto">
           <button
-            class="tab-btn flex-[0_0_auto] text-white bg-[#1E6C44] cursor-pointer ease-in-out duration-300 text-lg lg:text-xl font-medium !leading-[1.2] font-poppins py-3.5 lg:py-4.5 px-7 lg:px-8 rounded-3xl lg:rounded-[40px]"
+            class="tab-btn active-tab flex-[0_0_auto] text-white bg-[#1E6C44] cursor-pointer ease-in-out duration-300 text-lg lg:text-xl font-medium !leading-[1.2] font-poppins py-3.5 lg:py-4.5 px-7 lg:px-8 rounded-3xl lg:rounded-[40px]"
             data-tab="all"
           >
             All
@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <!-- Blog posts with pagination (your original approach) -->
+    <!-- Blog posts with pagination -->
     {% paginate blogs[section.settings.blog].articles by section.settings.posts_per_page %}
       <div class="tabs-wrapper grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-7 xl:gap-8">
         {% for article in paginate.items %}
@@ -95,7 +95,7 @@
           {% if paginate.previous %}
             <a
               href="{{ paginate.previous.url }}"
-              class="px-4 py-2 rounded bg-white border border-gray-300 text-[#1E6C44] hover:bg-[#1E6C44] hover:text-white transition-colors"
+              class="px-4 py-2 rounded bg-white border border-gray-300 text-[#1E6C44] hover:bg-[#1E6C44] hover:text-white"
               >Prev</a
             >
           {% endif %}
@@ -104,7 +104,7 @@
             {% if part.is_link %}
               <a
                 href="{{ part.url }}"
-                class="px-4 py-2 rounded bg-white border border-gray-300 text-[#1E6C44] hover:bg-[#1E6C44] hover:text-white transition-colors"
+                class="px-4 py-2 rounded bg-white border border-gray-300 text-[#1E6C44] hover:bg-[#1E6C44] hover:text-white"
               >
                 {{- part.title -}}
               </a>
@@ -116,24 +116,13 @@
           {% if paginate.next %}
             <a
               href="{{ paginate.next.url }}"
-              class="px-4 py-2 rounded bg-white border border-gray-300 text-[#1E6C44] hover:bg-[#1E6C44] hover:text-white transition-colors"
+              class="px-4 py-2 rounded bg-white border border-gray-300 text-[#1E6C44] hover:bg-[#1E6C44] hover:text-white"
               >Next</a
             >
           {% endif %}
         </div>
       {% endif %}
     {% endpaginate %}
-
-    <!-- Message when no posts match filter -->
-    <div id="no-posts-message" class="text-center mt-8 text-gray-600" style="display: none;">
-      <p class="text-lg font-poppins">No posts found for this category.</p>
-      <button
-        id="show-all-btn"
-        class="mt-4 px-6 py-2 bg-[#1E6C44] text-white rounded-full hover:bg-[#145533] transition-colors"
-      >
-        Show All Posts
-      </button>
-    </div>
   </div>
 </div>
 
@@ -163,93 +152,40 @@
 {% endschema %}
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', () => {
     const tabBtns = document.querySelectorAll('.tab-btn');
-    const noPostsMessage = document.getElementById('no-posts-message');
-    const showAllBtn = document.getElementById('show-all-btn');
-    let allPosts = [];
 
-    // Cache all posts on page load
-    function cacheAllPosts() {
-      allPosts = Array.from(document.querySelectorAll('.blog-post'));
-    }
-
-    // Filter posts function
     function filterPosts(filter) {
-      if (allPosts.length === 0) {
-        cacheAllPosts();
-      }
-
-      let visibleCount = 0;
-
-      allPosts.forEach(function (post) {
-        const postTags = post.dataset.tags ? post.dataset.tags.split(' ') : [];
-
-        if (filter === 'all' || postTags.includes(filter)) {
+      const allPosts = document.querySelectorAll('.blog-post');
+      allPosts.forEach((post) => {
+        if (filter === 'all') {
           post.style.display = 'block';
-          post.style.opacity = '1';
-          visibleCount++;
         } else {
-          post.style.display = 'none';
-          post.style.opacity = '0';
+          const postTags = post.dataset.tags.split(' ');
+          if (postTags.includes(filter)) {
+            post.style.display = 'block';
+          } else {
+            post.style.display = 'none';
+          }
         }
       });
-
-      // Show/hide no posts message
-      if (visibleCount === 0 && filter !== 'all') {
-        noPostsMessage.style.display = 'block';
-      } else {
-        noPostsMessage.style.display = 'none';
-      }
     }
 
-    // Tab button click handlers
-    tabBtns.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        // Update active tab styling
-        tabBtns.forEach(function (b) {
-          b.classList.remove('bg-[#1E6C44]', 'text-white');
+    tabBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        // Remove active class from all buttons
+        tabBtns.forEach((b) => {
+          b.classList.remove('active-tab', 'bg-[#1E6C44]', 'text-white');
           b.classList.add('bg-white', 'text-[#1E6C44]');
         });
 
-        // Set clicked tab as active
-        btn.classList.add('bg-[#1E6C44]', 'text-white');
+        // Add active class to clicked button
+        btn.classList.add('active-tab', 'bg-[#1E6C44]', 'text-white');
         btn.classList.remove('bg-white', 'text-[#1E6C44]');
 
-        // Filter posts
         const filter = btn.dataset.tab;
         filterPosts(filter);
       });
     });
-
-    // Show all button handler
-    if (showAllBtn) {
-      showAllBtn.addEventListener('click', function () {
-        // Reset to "All" tab
-        tabBtns.forEach(function (b) {
-          b.classList.remove('bg-[#1E6C44]', 'text-white');
-          b.classList.add('bg-white', 'text-[#1E6C44]');
-        });
-
-        // Set "All" tab as active
-        const allTab = document.querySelector('[data-tab="all"]');
-        if (allTab) {
-          allTab.classList.add('bg-[#1E6C44]', 'text-white');
-          allTab.classList.remove('bg-white', 'text-[#1E6C44]');
-        }
-
-        filterPosts('all');
-      });
-    }
-
-    // Initialize - cache posts and show all
-    cacheAllPosts();
-
-    // Ensure all posts are visible initially
-    setTimeout(function () {
-      if (allPosts.length > 0) {
-        filterPosts('all');
-      }
-    }, 100);
   });
 </script>
