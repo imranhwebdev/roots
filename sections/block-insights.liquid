@@ -1,15 +1,15 @@
 <div class="block-insights py-16 lg:py-20 xl:py-25 bg-[#F0ECDC]">
   <div class="container">
-    <!-- Heading & Tabs -->
     <div class="mb-5 md:mb-6 lg:mb-9 xl:mb-12.5 flex flex-col md:flex-row flex-wrap md:flex-nowrap md:items-center md:justify-between gap-5">
       <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-[44px] text-start flex-[0_0_auto] text-green !leading-[1.25] font-bold font-armany-bold">
         {{ section.settings.heading }}
       </h2>
 
+      <!-- Tabs Header -->
       <div class="overflow-auto">
         <div class="flex items-center gap-3 lg:gap-4 w-78 md:w-130 lg:w-auto">
           <button
-            class="tab-btn flex-[0_0_auto] text-white bg-[#1E6C44] cursor-pointer ease-in-out duration-300 text-lg lg:text-xl font-medium !leading-[1.2] font-poppins py-3.5 lg:py-4.5 px-7 lg:px-8 rounded-3xl lg:rounded-[40px]"
+            class="tab-btn flex-[0_0_auto] active-tab text-white bg-[#1E6C44] cursor-pointer ease-in-out duration-300 text-lg lg:text-xl font-medium !leading-[1.2] font-poppins py-3.5 lg:py-4.5 px-7 lg:px-8 rounded-3xl lg:rounded-[40px]"
             data-tab="all"
           >
             All
@@ -31,112 +31,69 @@
       </div>
     </div>
 
-    <!-- Blog posts with pagination -->
-    {% paginate blogs[section.settings.blog].articles by section.settings.posts_per_page %}
-      <div class="tabs-wrapper grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-7 xl:gap-8">
-        {% for article in paginate.items %}
-          <div
-            class="blog-post px-3 pt-3 pb-6 bg-white rounded-lg lg:rounded-[10px] flex flex-col justify-between"
-            data-tags="{{ article.tags | join: ' ' | handleize }}"
-          >
-            {% if article.image %}
-              <div class="w-full h-53 md:h-60 lg:h-64 mb-4 md:mb-5 lg:mb-6">
-                {{
-                  article.image
-                  | image_url: width: 500
-                  | image_tag: class: 'size-full rounded-[10px] object-cover object-top'
-                }}
-              </div>
-            {% endif %}
-            <div class="px-3 flex flex-col justify-between grow">
-              <div class="post-info">
-                <div class="flex items-center gap-4 lg:gap-5 mb-2.5 lg:mb-3">
-                  {% if article.tags.size > 0 %}
-                    <span class="text-sm !leading-[1.2] tracking-[1.64px] uppercase font-poppins text-[#514849] rounded-2xl lg:rounded-[20px] py-2.5 px-4 block bg-[#F0F0F0] border border-[#F0F0F0] max-w-max">
-                      {{ article.tags.first }}
-                    </span>
-                  {% endif %}
-                  {% assign words = article.content | strip_html | split: ' ' | size %}
-                  {% assign minutes = words | divided_by: 50 %}
-                  {% if minutes < 1 %}
-                    {% assign minutes = 1 %}
-                  {% endif %}
-                  <p class="text-[#103C25] text-sm !leading-[1.2] tracking-[1.64px] uppercase font-poppins">
-                    {{ minutes }} min read
-                  </p>
-                </div>
-                <h6 class="text-[#0D2E1D] font-poppins text-xl lg:text-2xl font-medium !leading-[1.6] mb-4 lg:mb-5">
-                  <a href="{{ article.url }}">{{ article.title | strip_html | truncate: 76 }}</a>
-                </h6>
-                <p class="text-[#514849] text-base lg:text-lg !leading-[1.6] mb-3 lg:mb-4">
-                  {{
-                    article.excerpt
-                    | strip_html
-                    | truncate: 100
-                    | default: article.content
-                    | strip_html
-                    | truncate: 100
-                  }}
+    <!-- All posts (single container, filterable) -->
+    <div class="tabs-wrapper grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-7 xl:gap-8">
+      {% for article in blogs[section.settings.blog].articles %}
+        <div
+          class="blog-post px-3 pt-3 pb-6 bg-white rounded-lg lg:rounded-[10px] flex flex-col justify-between transition-opacity duration-300"
+          data-tags="{{ article.tags | join: ' ' | handleize }}"
+        >
+          {% if article.image %}
+            <div class="w-full h-53 md:h-60 lg:h-64 mb-4 md:mb-5 lg:mb-6">
+              {{
+                article.image
+                | image_url: width: 500
+                | image_tag: class: 'size-full rounded-[10px] object-cover object-top'
+              }}
+            </div>
+          {% endif %}
+          <div class="px-3 flex flex-col justify-between grow">
+            <div class="post-info">
+              <div class="flex items-center gap-4 lg:gap-5 mb-2.5 lg:mb-3">
+                {% if article.tags.size > 0 %}
+                  <span class="text-sm !leading-[1.2] tracking-[1.64px] uppercase font-poppins text-[#514849] rounded-2xl lg:rounded-[20px] py-2.5 px-4 block bg-[#F0F0F0] border border-[#F0F0F0] max-w-max">
+                    {{ article.tags.first }}
+                  </span>
+                {% endif %}
+                {% assign words = article.content | strip_html | split: ' ' | size %}
+                {% assign minutes = words | divided_by: 50 %}
+                {% if minutes < 1 %}
+                  {% assign minutes = 1 %}
+                {% endif %}
+                <p class="text-[#103C25] text-sm !leading-[1.2] tracking-[1.64px] uppercase font-poppins">
+                  {{ minutes }} min read
                 </p>
               </div>
-
-              <a
-                href="{{ article.url }}"
-                class="text-[#967901] group text-lg lg:text-xl font-medium hover:text-green !leading-[1.2] font-poppins flex items-center gap-2 lg:gap-3"
-              >
-                Learn More
-                <span class="group-hover:translate-x-1 transform ease-in-out duration-300">
-                  <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </span>
-              </a>
+              <h6 class="text-[#0D2E1D] font-poppins text-xl lg:text-2xl font-medium !leading-[1.6] mb-4 lg:mb-5">
+                <a href="{{ article.url }}">{{ article.title | strip_html | truncate: 76 }}</a>
+              </h6>
+              <p class="text-[#514849] text-base lg:text-lg !leading-[1.6] mb-3 lg:mb-4">
+                {{ article.excerpt | strip_html | truncate: 100 }}
+              </p>
             </div>
+
+            <a
+              href="{{ article.url }}"
+              class="text-[#967901] group text-lg lg:text-xl font-medium hover:text-green !leading-[1.2] font-poppins flex items-center gap-2 lg:gap-3"
+            >
+              Learn More
+              <span class="group-hover:translate-x-1 transform ease-in-out duration-300">
+                <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </a>
           </div>
-        {% endfor %}
-      </div>
-
-      <!-- Pagination -->
-      {% if paginate.pages > 1 %}
-        <div class="pagination flex items-center justify-center gap-3 mt-8">
-          {% if paginate.previous %}
-            <a
-              href="{{ paginate.previous.url }}"
-              class="px-4 py-2 rounded bg-white border border-gray-300 text-[#1E6C44] hover:bg-[#1E6C44] hover:text-white transition-colors"
-              >Prev</a
-            >
-          {% endif %}
-
-          {% for part in paginate.parts %}
-            {% if part.is_link %}
-              <a
-                href="{{ part.url }}"
-                class="px-4 py-2 rounded bg-white border border-gray-300 text-[#1E6C44] hover:bg-[#1E6C44] hover:text-white transition-colors"
-              >
-                {{- part.title -}}
-              </a>
-            {% else %}
-              <span class="px-4 py-2 rounded bg-[#1E6C44] text-white">{{ part.title }}</span>
-            {% endif %}
-          {% endfor %}
-
-          {% if paginate.next %}
-            <a
-              href="{{ paginate.next.url }}"
-              class="px-4 py-2 rounded bg-white border border-gray-300 text-[#1E6C44] hover:bg-[#1E6C44] hover:text-white transition-colors"
-              >Next</a
-            >
-          {% endif %}
         </div>
-      {% endif %}
-    {% endpaginate %}
+      {% endfor %}
+    </div>
 
-    <!-- Message when no posts match filter -->
+    <!-- No posts message -->
     <div id="no-posts-message" class="text-center mt-8 text-gray-600" style="display: none;">
       <p class="text-lg font-poppins">No posts found for this category.</p>
       <button
         id="show-all-btn"
-        class="mt-4 px-6 py-2 bg-[#1E6C44] text-white rounded-full hover:bg-[#145533] transition-colors"
+        class="mt-4 px-6 py-2 bg-[#1E6C44] text-white rounded-full hover:bg-[#145533] transition-colors duration-300"
       >
         Show All Posts
       </button>
@@ -154,16 +111,7 @@
     { "type": "text", "id": "tab_1", "label": "Tab 1 Tag", "default": "Tag 1" },
     { "type": "text", "id": "tab_2", "label": "Tab 2 Tag", "default": "Tag 2" },
     { "type": "text", "id": "tab_3", "label": "Tab 3 Tag", "default": "Tag 3" },
-    { "type": "text", "id": "tab_4", "label": "Tab 4 Tag", "default": "Tag 4" },
-    {
-      "type": "range",
-      "id": "posts_per_page",
-      "label": "Posts per page",
-      "min": 3,
-      "max": 24,
-      "step": 3,
-      "default": 9
-    }
+    { "type": "text", "id": "tab_4", "label": "Tab 4 Tag", "default": "Tag 4" }
   ],
   "presets": [{ "name": "Blog Section", "category": "Blog" }]
 }
@@ -171,95 +119,66 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    console.log('Blog Section Script Loaded');
     const tabBtns = document.querySelectorAll('.tab-btn');
+    const allPosts = document.querySelectorAll('.blog-post');
     const noPostsMessage = document.getElementById('no-posts-message');
     const showAllBtn = document.getElementById('show-all-btn');
-    let allPosts = [];
 
-    // Cache all posts on page load
-    function cacheAllPosts() {
-      allPosts = Array.from(document.querySelectorAll('.blog-post'));
-      console.log('Cached posts:', allPosts.length, allPosts);
-    }
-
-    // Filter posts function
     function filterPosts(filter) {
-      console.log('Filtering posts with:', filter);
       let visibleCount = 0;
 
-      allPosts.forEach(function (post) {
+      allPosts.forEach((post) => {
         const postTags = post.dataset.tags ? post.dataset.tags.split(' ') : [];
-        console.log('Post tags:', postTags);
 
         if (filter === 'all' || postTags.includes(filter)) {
           post.style.display = 'block';
-          post.style.opacity = '1';
           visibleCount++;
         } else {
           post.style.display = 'none';
-          post.style.opacity = '0';
         }
       });
 
       // Show/hide no posts message
-      noPostsMessage.style.display = visibleCount === 0 && filter !== 'all' ? 'block' : 'none';
-      console.log('Visible posts:', visibleCount);
+      if (visibleCount === 0 && filter !== 'all') {
+        noPostsMessage.style.display = 'block';
+      } else {
+        noPostsMessage.style.display = 'none';
+      }
     }
 
-    // Tab button click handlers
-    tabBtns.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        console.log('Tab clicked:', btn.dataset.tab);
-        // Update active tab styling
-        tabBtns.forEach(function (b) {
-          b.classList.remove('bg-[#1E6C44]', 'text-white');
+    tabBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        // Update tab styling
+        tabBtns.forEach((b) => {
+          b.classList.remove('bg-[#1E6C44]', 'text-white', 'active-tab');
           b.classList.add('bg-white', 'text-[#1E6C44]');
         });
 
-        // Set clicked tab as active
-        btn.classList.add('bg-[#1E6C44]', 'text-white');
+        btn.classList.add('bg-[#1E6C44]', 'text-white', 'active-tab');
         btn.classList.remove('bg-white', 'text-[#1E6C44]');
 
-        // Filter posts
-        filterPosts(btn.dataset.tab);
+        const filter = btn.dataset.tab;
+        filterPosts(filter);
       });
     });
 
-    // Show all button handler
+    // Show all button functionality
     if (showAllBtn) {
-      showAllBtn.addEventListener('click', function () {
-        console.log('Show all clicked');
+      showAllBtn.addEventListener('click', () => {
         // Reset to "All" tab
-        tabBtns.forEach(function (b) {
-          b.classList.remove('bg-[#1E6C44]', 'text-white');
+        tabBtns.forEach((b) => {
+          b.classList.remove('bg-[#1E6C44]', 'text-white', 'active-tab');
           b.classList.add('bg-white', 'text-[#1E6C44]');
         });
 
-        // Set "All" tab as active
         const allTab = document.querySelector('[data-tab="all"]');
         if (allTab) {
-          allTab.classList.add('bg-[#1E6C44]', 'text-white');
+          allTab.classList.add('bg-[#1E6C44]', 'text-white', 'active-tab');
           allTab.classList.remove('bg-white', 'text-[#1E6C44]');
         }
 
         filterPosts('all');
       });
-    }
-
-    // Initialize - cache posts and show all
-    cacheAllPosts();
-    if (allPosts.length > 0) {
-      filterPosts('all');
-      // Ensure "All" tab is active on load
-      const allTab = document.querySelector('[data-tab="all"]');
-      if (allTab) {
-        allTab.classList.add('bg-[#1E6C44]', 'text-white');
-        allTab.classList.remove('bg-white', 'text-[#1E6C44]');
-      }
-    } else {
-      console.log('No posts found');
-      noPostsMessage.style.display = 'block';
     }
   });
 </script>
