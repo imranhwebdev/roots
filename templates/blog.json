@@ -32,7 +32,7 @@
         "tab_2": "Revitalize",
         "tab_3": "Define",
         "tab_4": "Glow",
-        "posts_per_page": 9
+        "max_posts": 4
       }
     },
     "join_roots": {
