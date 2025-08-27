@@ -33,17 +33,19 @@
 
     <!-- All posts (single container, filterable) -->
     <div class="tabs-wrapper grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-7 xl:gap-8">
-      {% for article in blogs[section.settings.blog].articles %}
+      {% assign max_posts = section.settings.max_posts | default: 50 %}
+      {% for article in blogs[section.settings.blog].articles limit: max_posts %}
         <div
-          class="blog-post px-3 pt-3 pb-6 bg-white rounded-lg lg:rounded-[10px] flex flex-col justify-between transition-opacity duration-300"
+          class="blog-post px-3 pt-3 pb-6 bg-white rounded-lg lg:rounded-[10px] flex flex-col justify-between transition-all duration-300 ease-in-out"
           data-tags="{{ article.tags | join: ' ' | handleize }}"
+          data-date="{{ article.published_at | date: '%s' }}"
         >
           {% if article.image %}
             <div class="w-full h-53 md:h-60 lg:h-64 mb-4 md:mb-5 lg:mb-6">
               {{
                 article.image
                 | image_url: width: 500
-                | image_tag: class: 'size-full rounded-[10px] object-cover object-top'
+                | image_tag: class: 'size-full rounded-[10px] object-cover object-top', loading: 'lazy'
               }}
             </div>
           {% endif %}
@@ -111,7 +113,17 @@
     { "type": "text", "id": "tab_1", "label": "Tab 1 Tag", "default": "Tag 1" },
     { "type": "text", "id": "tab_2", "label": "Tab 2 Tag", "default": "Tag 2" },
     { "type": "text", "id": "tab_3", "label": "Tab 3 Tag", "default": "Tag 3" },
-    { "type": "text", "id": "tab_4", "label": "Tab 4 Tag", "default": "Tag 4" }
+    { "type": "text", "id": "tab_4", "label": "Tab 4 Tag", "default": "Tag 4" },
+    {
+      "type": "range",
+      "id": "max_posts",
+      "label": "Maximum posts to load",
+      "min": 10,
+      "max": 100,
+      "step": 10,
+      "default": 50,
+      "info": "Loading too many posts may slow down the page"
+    }
   ],
   "presets": [{ "name": "Blog Section", "category": "Blog" }]
 }
@@ -127,23 +139,32 @@
     function filterPosts(filter) {
       let visibleCount = 0;
 
-      allPosts.forEach((post) => {
+      allPosts.forEach((post, index) => {
         const postTags = post.dataset.tags ? post.dataset.tags.split(' ') : [];
 
         if (filter === 'all' || postTags.includes(filter)) {
-          post.style.display = 'block';
+          // Staggered animation for better UX
+          setTimeout(() => {
+            post.style.display = 'block';
+            post.style.opacity = '1';
+            post.style.transform = 'translateY(0)';
+          }, index * 50);
           visibleCount++;
         } else {
           post.style.display = 'none';
+          post.style.opacity = '0';
+          post.style.transform = 'translateY(10px)';
         }
       });
 
       // Show/hide no posts message
-      if (visibleCount === 0 && filter !== 'all') {
-        noPostsMessage.style.display = 'block';
-      } else {
-        noPostsMessage.style.display = 'none';
-      }
+      setTimeout(() => {
+        if (visibleCount === 0 && filter !== 'all') {
+          noPostsMessage.style.display = 'block';
+        } else {
+          noPostsMessage.style.display = 'none';
+        }
+      }, allPosts.length * 50);
     }
 
     tabBtns.forEach((btn) => {
