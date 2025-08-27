@@ -14,44 +14,17 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "social_link_xwhpHd": {
-          "type": "social_link",
-          "settings": {
-            "title": "facebook",
-            "url": "#",
-            "icon": "shopify://shop_images/Facebook.png"
-          }
-        },
         "social_link_VCQHMD": {
           "type": "social_link",
           "settings": {
             "title": "instagram",
-            "url": "#",
+            "url": "https://www.instagram.com/chooseroots/",
             "icon": "shopify://shop_images/Instagram.png"
-          }
-        },
-        "social_link_j7BH3E": {
-          "type": "social_link",
-          "settings": {
-            "title": "tiktok",
-            "url": "#",
-            "icon": "shopify://shop_images/tiktolk.png"
-          }
-        },
-        "social_link_4T6btd": {
-          "type": "social_link",
-          "settings": {
-            "title": "twitter",
-            "url": "#",
-            "icon": "shopify://shop_images/x.png"
           }
         }
       },
       "block_order": [
-        "social_link_xwhpHd",
-        "social_link_VCQHMD",
-        "social_link_j7BH3E",
-        "social_link_4T6btd"
+        "social_link_VCQHMD"
       ],
       "settings": {
         "logo_image": "shopify://shop_images/footer-logo.svg",
