@@ -32,11 +32,14 @@
     </div>
 
     <!-- All posts (single container, filterable) -->
-    <div class="tabs-wrapper grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-7 xl:gap-8">
+    <div
+      id="posts-container"
+      class="tabs-wrapper grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-7 xl:gap-8"
+    >
       {% assign max_posts = section.settings.max_posts | default: 50 %}
       {% for article in blogs[section.settings.blog].articles limit: max_posts %}
         <div
-          class="blog-post px-3 pt-3 pb-6 bg-white rounded-lg lg:rounded-[10px] flex flex-col justify-between transition-all duration-300 ease-in-out"
+          class="blog-post hidden px-3 pt-3 pb-6 bg-white rounded-lg lg:rounded-[10px] flex flex-col justify-between transition-all duration-300 ease-in-out"
           data-tags="{{ article.tags | join: ' ' | handleize }}"
           data-date="{{ article.published_at | date: '%s' }}"
         >
@@ -100,6 +103,16 @@
         Show All Posts
       </button>
     </div>
+
+    <!-- Load More button -->
+    <div class="text-center mt-10">
+      <button
+        id="load-more-btn"
+        class="px-6 py-2 bg-[#1E6C44] text-white rounded-full hover:bg-[#145533] transition-colors duration-300"
+      >
+        Load More
+      </button>
+    </div>
   </div>
 </div>
 
@@ -121,7 +134,7 @@
       "min": 1,
       "max": 100,
       "step": 1,
-      "default": 9,
+      "default": 50,
       "info": "Loading too many posts may slow down the page"
     }
   ],
@@ -135,71 +148,75 @@
     const allPosts = document.querySelectorAll('.blog-post');
     const noPostsMessage = document.getElementById('no-posts-message');
     const showAllBtn = document.getElementById('show-all-btn');
+    const loadMoreBtn = document.getElementById('load-more-btn');
 
-    function filterPosts(filter) {
-      let visibleCount = 0;
+    let postsPerPage = 3; // প্রতি বার কত post দেখাবে
+    let visiblePosts = 0;
+    let currentFilter = 'all';
 
-      allPosts.forEach((post, index) => {
+    // প্রথমে কিছু পোস্ট দেখানো
+    function showInitialPosts() {
+      visiblePosts = 0;
+      allPosts.forEach((post) => post.classList.add('hidden'));
+      loadMorePosts();
+    }
+
+    // Load More function
+    function loadMorePosts() {
+      let count = 0;
+      allPosts.forEach((post) => {
         const postTags = post.dataset.tags ? post.dataset.tags.split(' ') : [];
-
-        if (filter === 'all' || postTags.includes(filter)) {
-          // Staggered animation for better UX
-          setTimeout(() => {
-            post.style.display = 'block';
-            post.style.opacity = '1';
-            post.style.transform = 'translateY(0)';
-          }, index * 50);
-          visibleCount++;
-        } else {
-          post.style.display = 'none';
-          post.style.opacity = '0';
-          post.style.transform = 'translateY(10px)';
+        if ((currentFilter === 'all' || postTags.includes(currentFilter)) && post.classList.contains('hidden')) {
+          if (count < postsPerPage) {
+            post.classList.remove('hidden');
+            count++;
+            visiblePosts++;
+          }
         }
       });
 
-      // Show/hide no posts message
-      setTimeout(() => {
-        if (visibleCount === 0 && filter !== 'all') {
-          noPostsMessage.style.display = 'block';
-        } else {
-          noPostsMessage.style.display = 'none';
-        }
-      }, allPosts.length * 50);
+      // যদি আর পোস্ট না থাকে তবে বাটন hide
+      const hiddenPosts = Array.from(allPosts).filter((post) => {
+        const postTags = post.dataset.tags ? post.dataset.tags.split(' ') : [];
+        return (currentFilter === 'all' || postTags.includes(currentFilter)) && post.classList.contains('hidden');
+      });
+
+      loadMoreBtn.style.display = hiddenPosts.length > 0 ? 'inline-block' : 'none';
+    }
+
+    // Filter function
+    function filterPosts(filter) {
+      currentFilter = filter;
+      visiblePosts = 0;
+      allPosts.forEach((post) => post.classList.add('hidden'));
+      loadMorePosts();
     }
 
     tabBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
-        // Update tab styling
         tabBtns.forEach((b) => {
           b.classList.remove('bg-[#1E6C44]', 'text-white', 'active-tab');
           b.classList.add('bg-white', 'text-[#1E6C44]');
         });
-
         btn.classList.add('bg-[#1E6C44]', 'text-white', 'active-tab');
         btn.classList.remove('bg-white', 'text-[#1E6C44]');
-
-        const filter = btn.dataset.tab;
-        filterPosts(filter);
+        filterPosts(btn.dataset.tab);
       });
     });
 
-    // Show all button functionality
     if (showAllBtn) {
       showAllBtn.addEventListener('click', () => {
-        // Reset to "All" tab
-        tabBtns.forEach((b) => {
-          b.classList.remove('bg-[#1E6C44]', 'text-white', 'active-tab');
-          b.classList.add('bg-white', 'text-[#1E6C44]');
-        });
-
-        const allTab = document.querySelector('[data-tab="all"]');
-        if (allTab) {
-          allTab.classList.add('bg-[#1E6C44]', 'text-white', 'active-tab');
-          allTab.classList.remove('bg-white', 'text-[#1E6C44]');
-        }
-
         filterPosts('all');
       });
     }
+
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener('click', () => {
+        loadMorePosts();
+      });
+    }
+
+    // Initial Load
+    showInitialPosts();
   });
 </script>
