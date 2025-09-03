@@ -143,7 +143,7 @@
   }
   .jdgm-rev__pic-img.jdgm-rev__pic-img {
     border-radius: 100%;
-}
+  }
   select.jdgm-sort-dropdown {
     border-radius: 70px;
     border: 1px solid #e3e2e0;
@@ -371,7 +371,7 @@
                       </svg>
                     </button>
                   </div>
-                  <p class="text-xl lg:text-[26px] xl:text-3xl font-semibold !leading-[1.2]">
+                  <p id="total-price" class="text-xl lg:text-[26px] xl:text-3xl font-semibold !leading-[1.2]">
                     {{ product.price | money }}
                   </p>
                 </div>
@@ -379,12 +379,25 @@
 
               <div class="flex items-center gap-3 lg:gap-5">
                 <a
-                  href="{{routes.cart_url}}/{{ product.selected_or_first_available_variant.id }}:1"
+                  href="javascript:void(0);"
+                  onclick="shopNow({{ product.selected_or_first_available_variant.id }})"
                   class="btn flex items-center gap-3 !text-base lg:!text-lg xl:!text-xl"
                 >
                   Shop Now
-                  <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <svg
+                    width="17"
+                    height="13"
+                    viewBox="0 0 17 13"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
                   </svg>
                 </a>
 
@@ -465,35 +478,35 @@
 {% endcomment %}
 
 <script>
+  // === Quantity Change ===
   function changeQty(amount) {
-    const qtyInput = document.getElementById('quantity');
+    const qtyInput = document.getElementById("quantity");
     let value = parseInt(qtyInput.value);
     if (!isNaN(value)) {
       value += amount;
       if (value < 1) value = 1;
       qtyInput.value = value;
+      updatePrice();
     }
   }
 
-  // Tabs
-  document.addEventListener('DOMContentLoaded', function () {
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabPanes = document.querySelectorAll('.tab-pane');
+  // === Tabs ===
+  document.addEventListener("DOMContentLoaded", function () {
+    const tabBtns = document.querySelectorAll(".tab-btn");
+    const tabPanes = document.querySelectorAll(".tab-pane");
 
     tabBtns.forEach((btn) => {
-      btn.addEventListener('click', function () {
-        const target = this.getAttribute('data-tab');
+      btn.addEventListener("click", function () {
+        const target = this.getAttribute("data-tab");
 
-        // Remove active classes
-        tabBtns.forEach((b) => b.classList.remove('active'));
-        tabPanes.forEach((p) => p.classList.add('hidden'));
+        tabBtns.forEach((b) => b.classList.remove("active"));
+        tabPanes.forEach((p) => p.classList.add("hidden"));
 
-        // Add active classes
-        this.classList.add('active');
-        document.getElementById('tab-' + target).classList.remove('hidden');
+        this.classList.add("active");
+        document.getElementById("tab-" + target).classList.remove("hidden");
 
-        // Trigger Judge.me widget refresh if reviews tab is opened
-        if (target === 'reviews') {
+        // Judge.me refresh
+        if (target === "reviews") {
           if (window.jdgm && window.jdgm.reviewWidget) {
             window.jdgm.reviewWidget.render();
           }
@@ -501,12 +514,96 @@
       });
     });
 
-    // Initialize Judge.me after DOM is loaded
     if (window.jdgm) {
       window.jdgm.customizeBadge({
         hideEmptyBadges: false,
       });
     }
+  });
+
+  // === Add to Cart Button ===
+  document.addEventListener("DOMContentLoaded", function () {
+    const addToCartBtn = document.querySelector(".add-to-cart-btn");
+
+    addToCartBtn.addEventListener("click", function () {
+      const variantId = this.getAttribute("data-variant-id");
+      const qty = parseInt(document.getElementById("quantity").value) || 1;
+
+      this.querySelector(".btn-text").classList.add("hidden");
+      this.querySelector(".btn-loading").classList.remove("hidden");
+
+      fetch("/cart/add.js", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          id: variantId,
+          quantity: qty,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("Added to cart:", data);
+          window.location.href = "/cart"; // redirect to checkout
+        })
+        .catch((err) => console.error("Error:", err))
+        .finally(() => {
+          this.querySelector(".btn-text").classList.remove("hidden");
+          this.querySelector(".btn-loading").classList.add("hidden");
+        });
+    });
+  });
+
+  // === Shop Now Button ===
+  function shopNow(variantId) {
+    const qty = parseInt(document.getElementById("quantity").value) || 1;
+
+    fetch("/cart/add.js", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        id: variantId,
+        quantity: qty,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Shop Now Added:", data);
+        window.location.href = "/checkout"; // redirect to checkout
+      })
+      .catch((err) => console.error("Error:", err));
+  }
+
+  // === Price Update ===
+  document.addEventListener("DOMContentLoaded", function () {
+    const qtyInput = document.getElementById("quantity");
+    const totalPriceEl = document.getElementById("total-price");
+
+    const unitPrice = {{ product.price | divided_by: 100 }};
+
+    window.updatePrice = function () {
+      let qty = parseInt(qtyInput.value) || 1;
+      let total = unitPrice * qty;
+
+      totalPriceEl.textContent = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "{{ shop.currency }}",
+      }).format(total);
+    };
+
+    qtyInput.addEventListener("input", updatePrice);
+
+    document.querySelectorAll(".quantity-btn").forEach((btn) => {
+      btn.addEventListener("click", updatePrice);
+    });
+
+    // Initial
+    updatePrice();
   });
 </script>
 

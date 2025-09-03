@@ -90,3 +90,48 @@
     </div>
   </div>
 </section>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const qtyInput = document.getElementById('product-qty');
+    const plusBtn = document.querySelector('.qty-btn.plus');
+    const minusBtn = document.querySelector('.qty-btn.minus');
+    const addToCartBtn = document.querySelector('.add-to-cart-btn');
+
+    // plus button
+    plusBtn.addEventListener('click', () => {
+      qtyInput.value = parseInt(qtyInput.value) + 1;
+    });
+
+    // minus button
+    minusBtn.addEventListener('click', () => {
+      if (parseInt(qtyInput.value) > 1) {
+        qtyInput.value = parseInt(qtyInput.value) - 1;
+      }
+    });
+
+    // add to cart button
+    addToCartBtn.addEventListener('click', function () {
+      const variantId = this.getAttribute('data-variant-id');
+      const quantity = parseInt(qtyInput.value);
+
+      // Shopify Ajax API call
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          id: variantId,
+          quantity: quantity,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log('Added to cart:', data);
+          window.location.href = '/cart'; // চাইলে checkout এ redirect দিতে পারেন
+        })
+        .catch((err) => console.error('Error:', err));
+    });
+  });
+</script>
