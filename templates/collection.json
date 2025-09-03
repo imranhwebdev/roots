@@ -22,6 +22,12 @@
         "collection": "roots"
       }
     },
+    "collection_NQTy3X": {
+      "type": "collection",
+      "settings": {
+        "collection": "bundle"
+      }
+    },
     "why_choose_RWdhne": {
       "type": "why-choose",
       "blocks": {
@@ -83,6 +89,7 @@
   "order": [
     "banner",
     "main",
+    "collection_NQTy3X",
     "why_choose_RWdhne",
     "join_roots_D7GAEa"
   ]

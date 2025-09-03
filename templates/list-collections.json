@@ -22,6 +22,12 @@
         "collection": "roots"
       }
     },
+    "collections_hFNPY8": {
+      "type": "collections",
+      "settings": {
+        "collection": "bundle"
+      }
+    },
     "why_choose": {
       "type": "why-choose",
       "blocks": {
@@ -81,6 +87,7 @@
   "order": [
     "banner",
     "main",
+    "collections_hFNPY8",
     "why_choose",
     "join_roots"
   ]
