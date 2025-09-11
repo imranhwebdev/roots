@@ -273,6 +273,14 @@
         "heading": "Customer Reviews"
       }
     },
+
+    "mothers_trust": {
+      "type": "mothers-trust",
+      "settings": {
+       
+      }
+    },
+
     "latest_blog": {
       "type": "latest-blog",
       "settings": {
@@ -313,6 +321,7 @@
     "our_root",
     "simple_to_use",
     "reviews",
+    "mothers_trust",
     "latest_blog",
     "join_roots"
   ]

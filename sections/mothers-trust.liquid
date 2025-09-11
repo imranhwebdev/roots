@@ -1,0 +1,186 @@
+<style>
+  .swiper-button-next,
+  .swiper-button-prev {
+    z-index: 99;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    content: '';
+  }
+  .swiper-button-next:hover,
+  .swiper-button-prev:hover {
+    background-color: #ffc801;
+  }
+  .swiper-button-next svg,
+  .swiper-button-prev svg {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+  }
+  .swiper-pagination {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    justify-content: center;
+  }
+  .roots-customer-reviews .swiper-pagination-bullet {
+    display: none;
+    background-color: #b7d6c6;
+    width: 18px !important;
+    height: 6px !important;
+    border-radius: 30px !important;
+  }
+  .roots-customer-reviews .swiper-wrapper {
+    padding-bottom: 35px !important;
+  }
+  .roots-customer-reviews .swiper-pagination-bullet-active {
+    background-color: #1e6c44 !important;
+  }
+  @media screen and (max-width: 768px) {
+    .roots-customer-reviews .swiper-pagination-bullet {
+      display: block;
+    }
+  }
+</style>
+
+<div class="mother pb-17.5 md:pb-20 lg:pb-22 xl:pb-25 2xl:pb-28">
+  <div class="container">
+    <div class="relative z-1">
+      <div class="swiper mother-slider">
+        <div class="swiper-wrapper">
+          <!-- Card 1 -->
+          <div class="swiper-slide">
+            <div class="video-card border border-red-500">
+              <video class="video" preload="none" poster="poster1.jpg">
+                <source src="{{ 'video.mp4' | asset_url }}" type="video/mp4">
+              </video>
+              <button class="play-btn">▶</button>
+              <div class="info">
+                <h4>Sarah M.</h4>
+                <p>Mother of 2</p>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="video-card border border-red-500">
+              <video class="video" preload="none" poster="poster1.jpg">
+                <source src="{{ 'video.mp4' | asset_url }}" type="video/mp4">
+              </video>
+              <button class="play-btn">▶</button>
+              <div class="info">
+                <h4>Sarah M.</h4>
+                <p>Mother of 2</p>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="video-card border border-red-500">
+              <video class="video" preload="none" poster="poster1.jpg">
+                <source src="{{ 'video.mp4' | asset_url }}" type="video/mp4">
+              </video>
+              <button class="play-btn">▶</button>
+              <div class="info">
+                <h4>Sarah M.</h4>
+                <p>Mother of 2</p>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="video-card border border-red-500">
+              <video class="video" preload="none" poster="poster1.jpg">
+                <source src="{{ 'video.mp4' | asset_url }}" type="video/mp4">
+              </video>
+              <button class="play-btn">▶</button>
+              <div class="info">
+                <h4>Sarah M.</h4>
+                <p>Mother of 2</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-pagination"></div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="absolute md:block z-1 w-30 md:w-40 right-0 -top-[31%] lg:flex items-center gap-4">
+        <div class="swiper-button-prev bg-[#FFE380] !text-[#0D2E1D] hover:!text-black !size-10 md:!size-14 rounded-full flex items-center justify-center">
+          <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.66797 1L1.16797 6.5M1.16797 6.5L6.66797 12M1.16797 6.5L15.8346 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="swiper-button-next  bg-[#FFE380] !text-[#0D2E1D] hover:!text-black !size-10 md:!size-14 rounded-full flex items-center justify-center">
+          <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.332 1L15.832 6.5M15.832 6.5L10.332 12M15.832 6.5L1.16536 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+ document.addEventListener("DOMContentLoaded", function () {
+  const swiper = new Swiper(".mother-slider", {
+    slidesPerView: 3,
+    spaceBetween: 20,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+      320: { slidesPerView: 1 },
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+    }
+  });
+
+  const playButtons = document.querySelectorAll(".mother-slider .play-btn");
+  const videos = document.querySelectorAll(".mother-slider .video");
+
+  // Play/Pause button click
+  playButtons.forEach((btn, index) => {
+    btn.addEventListener("click", () => {
+      // Stop all other videos
+      videos.forEach((video, i) => {
+        if (i !== index) {
+          video.pause();
+          video.currentTime = 0;
+          playButtons[i].style.display = "block";
+        }
+      });
+
+      const video = videos[index];
+      if (video.paused) {
+        video.play();
+        btn.style.display = "none";
+      } else {
+        video.pause();
+        btn.style.display = "block";
+      }
+
+      // Show play button again when video ends
+      video.addEventListener("ended", () => {
+        btn.style.display = "block";
+      });
+    });
+  });
+
+  // When slide changes (next/prev or drag), stop all videos
+  swiper.on("slideChangeTransitionStart", function () {
+    videos.forEach((video, i) => {
+      video.pause();
+      video.currentTime = 0;
+      playButtons[i].style.display = "block";
+    });
+  });
+});
+
+
+</script>
