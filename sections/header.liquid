@@ -103,11 +103,11 @@
 
       <!-- Desktop Menu -->
       {% assign main_menu = section.settings.menu | default: linklists['main-menu'] %}
-      <nav id="desktopMenu" class="hidden md:!flex gap-5 lg:gap-10">
+      <nav id="desktopMenu" class="hidden md:!flex gap-5 sm:gap-2 lg:gap-5 xl:gap-10">
         {% for link in main_menu.links %}
           <a
             href="{{ link.url }}"
-            class="menu-link text-lg text-white font-poppins relative z-1 hover:text-[#FFD500] transition duration-300 before:absolute before:w-full before:h-[2px] before:rounded-3xl before:bg-primary before:-bottom-2 before:left-0 before:opacity-0"
+            class="menu-link text-sm lg:text-base xl:text-lg text-white font-poppins relative z-1 hover:text-[#FFD500] transition duration-300 before:absolute before:w-full before:h-[2px] before:rounded-3xl before:bg-primary before:-bottom-2 before:left-0 before:opacity-0"
           >
             {{ link.title }}
           </a>
