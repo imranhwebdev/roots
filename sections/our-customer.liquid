@@ -16,61 +16,59 @@
           <div class="swiper-wrapper">
             {% for block in section.blocks %}
               <div class="swiper-slide">
-                <div class="border border-[#E3E2E0] bg-white rounded-xl p-5 lg:p-9">
-                  <div class="lg:w-10/12 mx-auto">
-                    <div class="relative w-full h-55 md:h-[400px] lg:h-[500px] xl:h-[600px]">
-                      {% if block.settings.poster_image != blank %}
-                        <img
-                          src="{{ block.settings.poster_image | image_url: width: 1600 }}"
-                          alt="{{ block.settings.poster_alt | default: 'Video poster' }}"
-                          class="w-full h-full object-cover rounded-xl"
-                          loading="lazy"
-                        >
-                      {% else %}
-                        <div class="w-full h-full bg-gray-200 rounded-xl flex items-center justify-center">
-                          <p class="text-gray-500">Video poster image lagbe</p>
-                        </div>
-                      {% endif %}
+                <div class="rounded-[10px]">
+                  <div class="relative w-full h-55 md:h-[400px] lg:h-[500px] xl:h-[600px]">
+                    {% if block.settings.poster_image != blank %}
+                      <img
+                        src="{{ block.settings.poster_image | image_url: width: 1600 }}"
+                        alt="{{ block.settings.poster_alt | default: 'Video poster' }}"
+                        class="w-full h-full object-cover rounded-xl"
+                        width=""
+                        height=""
+                        loading="lazy"
+                      >
+                    {% else %}
+                      <div class="w-full h-full bg-gray-200 rounded-xl flex items-center justify-center">
+                        <p class="text-gray-500">Video poster image lagbe</p>
+                      </div>
+                    {% endif %}
 
-                      {% if block.settings.youtube_url != blank %}
-                        <button
-                          id="playBtn-{{ block.id }}"
-                          data-video-url="{{ block.settings.youtube_url }}"
-                          class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 size-6.5 lg:size-10 xl:size-13 flex items-center justify-center rounded-full shadow-lg transition-all cursor-pointer duration-300 hover:scale-110"
-                          aria-label="Play video"
+                    {% if block.settings.youtube_url != blank %}
+                      <button
+                        id="playBtn-{{ block.id }}"
+                        data-video-url="{{ block.settings.youtube_url }}"
+                        class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 size-6.5 lg:size-10 xl:size-13 flex items-center justify-center rounded-full shadow-lg transition-all cursor-pointer duration-300 hover:scale-110"
+                        aria-label="Play video"
+                      >
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="text-green"
                         >
-                          <svg
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="text-green"
-                          >
-                            <path d="M8 5V19L19 12L8 5Z" fill="currentColor"/>
-                          </svg>
-                        </button>
+                          <path d="M8 5V19L19 12L8 5Z" fill="currentColor"/>
+                        </svg>
+                      </button>
 
-                        <div id="videoWrapper-{{ block.id }}" class="absolute inset-0 hidden">
-                          <iframe
-                            id="youtube-{{ block.id }}"
-                            class="w-full h-full rounded-xl"
-                            src=""
-                            title="YouTube video player"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen
-                          ></iframe>
-                        </div>
-                      {% endif %}
-                    </div>
+                      <div id="videoWrapper-{{ block.id }}" class="absolute inset-0 hidden">
+                        <iframe
+                          id="youtube-{{ block.id }}"
+                          class="w-full h-full rounded-xl"
+                          src=""
+                          title="YouTube video player"
+                          frameborder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowfullscreen
+                        ></iframe>
+                      </div>
+                    {% endif %}
                   </div>
                 </div>
               </div>
             {% endfor %}
           </div>
-
-          <div class="swiper-pagination"></div>
         </div>
 
         <!-- Navigation -->
