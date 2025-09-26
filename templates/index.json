@@ -286,6 +286,11 @@
         "button_link": "shopify://blogs/news"
       }
     },
+    "our_customer": {
+      "type": "our-customer",
+      "settings": {
+      }
+    },
     "join_roots": {
       "type": "join-roots",
       "settings": {
@@ -314,6 +319,7 @@
     "simple_to_use",
     "reviews",
     "latest_blog",
+    "our_customer",
     "join_roots"
   ]
 }

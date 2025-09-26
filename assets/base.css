@@ -85,3 +85,11 @@ body{
     stroke-dashoffset: 101;
     transition: all 250ms cubic-bezier(1, 0, 0.37, 0.91);
   }
+  
+  @view-transition{
+    navigation: auto;
+  }
+
+  ::view-transition-group(*){
+   animation-duration: .3s;
+  }
