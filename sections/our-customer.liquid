@@ -1,12 +1,12 @@
-<div class="our-customer py-37.5">
-  <div class="container">
+<div class="our-customer py-15 md:py-20 lg:py-37.5">
+  <div class="container !max-w-[1220px] mx-auto px-4">
     <div class="our-customer-wrapper">
-      <div class="section-title text-center">
-        <h2 class="title text-2xl md:text-3xl lg:text-[44px] font-bold text-[#0D2E1D] font-armany-bold leading-tight mb-4">
+      <div class="section-title text-center mb-20">
+        <h2 class="title text-3xl lg:text-[44px] font-bold text-[#0D2E1D] font-armany-bold leading-tight mb-4">
           {{ section.settings.heading }}
         </h2>
         {% if section.settings.subheading != blank %}
-          <p class="description text-[#797375] text-base md:text-lg lg:text-xl leading-[1.6] font-poppins mb-10">
+          <p class="description text-[#797375] text-base md:text-lg lg:text-xl leading-[1.6] font-poppins">
             {{ section.settings.subheading }}
           </p>
         {% endif %}
@@ -17,7 +17,7 @@
             {% for block in section.blocks %}
               <div class="swiper-slide">
                 <div class="rounded-[10px]">
-                  <div class="relative w-full h-55 md:h-[400px] lg:h-[500px] xl:h-[600px]">
+                  <div class="relative w-full h-75 md:h-[400px] lg:h-[500px] xl:h-[600px]">
                     {% if block.settings.poster_image != blank %}
                       <img
                         src="{{ block.settings.poster_image | image_url: width: 1600 }}"
@@ -37,7 +37,7 @@
                       <button
                         id="playBtn-{{ block.id }}"
                         data-video-url="{{ block.settings.youtube_url }}"
-                        class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 size-6.5 lg:size-10 xl:size-13 flex items-center justify-center rounded-full shadow-lg transition-all cursor-pointer duration-300 hover:scale-110"
+                        class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[rgba(255,255,255,0.10)] border-1.5 border-solid border-[rgba(255,255,255,0.20)] backdrop-blur-sm hover:bg-gray-100 size-10 xl:size-13 flex items-center justify-center rounded-full shadow-[0_0_44px_0_rgba(0,0,0,0.24)] transition-all cursor-pointer duration-300 hover:scale-110"
                         aria-label="Play video"
                       >
                         <svg
@@ -72,7 +72,7 @@
         </div>
 
         <!-- Navigation -->
-        <div class="absolute md:block z-1 w-30 md:w-40 right-0 -top-[31%] lg:flex items-center gap-4">
+        <div class="absolute md:block z-1 w-30 md:w-40 right-0 -top-[12%] lg:-top-[31%] lg:flex items-center gap-4">
           <div class="swiper-button-prev bg-[#FFE380] !text-[#0D2E1D] hover:!text-black !size-10 md:!size-14 rounded-full flex items-center justify-center">
             <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M6.66797 1L1.16797 6.5M1.16797 6.5L6.66797 12M1.16797 6.5L15.8346 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
