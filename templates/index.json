@@ -36,7 +36,6 @@
             "button_text": "Shop Now",
             "button_link2": "shopify://pages/about-us",
             "button_text2": "Discover Our Story",
-            "slide_image": "shopify://shop_images/banner-slider-img2_ce220c15-b5e8-44db-8c7d-b54ebc38f267.jpg",
             "product_image": "shopify://shop_images/banner-product-img2-0.png"
           }
         }
@@ -288,7 +287,22 @@
     },
     "our_customer": {
       "type": "our-customer",
+      "blocks": {
+        "review_yTKid8": {
+          "type": "review",
+          "settings": {
+            "poster_image": "shopify://shop_images/castor-video-img.png",
+            "poster_alt": "",
+            "youtube_url": "https://youtu.be/ZKDPJJ36v_A?si=1dXQ60MYRZGYtsAg"
+          }
+        }
+      },
+      "block_order": [
+        "review_yTKid8"
+      ],
       "settings": {
+        "heading": "Hear Directly From Our Customers",
+        "subheading": "Real experiences, real stories. Watch how ChooseRoots has made a difference."
       }
     },
     "join_roots": {
