@@ -308,6 +308,7 @@
           "type": "review",
           "settings": {
             "video_file": "shopify://files/videos/chooseroots-video1.mp4",
+            "poster_image": "shopify://shop_images/deburk-seven-common.png",
             "poster_alt": ""
           }
         },
@@ -336,6 +337,7 @@
           "type": "review",
           "settings": {
             "video_file": "shopify://files/videos/chooseroots-video1.mp4",
+            "poster_image": "shopify://shop_images/how-to-store-organic.png",
             "poster_alt": ""
           }
         }
