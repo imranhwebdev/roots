@@ -307,7 +307,6 @@
         "review_yTKid8": {
           "type": "review",
           "settings": {
-            "poster_image": "shopify://shop_images/deburk-seven-common.png",
             "poster_alt": "",
             "youtube_url": ""
           }
@@ -332,22 +331,13 @@
             "poster_alt": "",
             "youtube_url": ""
           }
-        },
-        "review_9eieiA": {
-          "type": "review",
-          "settings": {
-            "poster_image": "shopify://shop_images/how-to-store-organic.png",
-            "poster_alt": "",
-            "youtube_url": ""
-          }
         }
       },
       "block_order": [
         "review_yTKid8",
         "review_wbGRiP",
         "review_J3wyLB",
-        "review_3ppKHy",
-        "review_9eieiA"
+        "review_3ppKHy"
       ],
       "settings": {
         "heading": "Hear Directly From Our Customers",
