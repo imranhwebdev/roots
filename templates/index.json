@@ -331,6 +331,7 @@
         "review_3ppKHy": {
           "type": "review",
           "settings": {
+            "poster_image": "shopify://shop_images/poster4.png",
             "poster_alt": "",
             "youtube_url": "https://youtube.com/shorts/n8bxF1HGVdU"
           }
