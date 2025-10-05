@@ -23,7 +23,7 @@
             "button_link2": "",
             "button_text2": "",
             "slide_image": "shopify://shop_images/banner-slider-img2.jpg",
-            "product_image": "shopify://shop_images/banner-product-img1-0.png"
+            "product_image": "shopify://shop_images/banner-product-img1.png"
           }
         },
         "slide_N3atmd": {
@@ -37,7 +37,7 @@
             "button_link2": "shopify://pages/about-us",
             "button_text2": "Discover Our Story",
             "slide_image": "shopify://shop_images/banner-slider-img1.jpg",
-            "product_image": "shopify://shop_images/banner-product-img1-0.png"
+            "product_image": "shopify://shop_images/banner-product-img1.png"
           }
         },
         "slide_tERyTX": {
@@ -353,7 +353,7 @@
         "review_BHhUGA"
       ],
       "custom_css": [
-        ".our-customer-wrapper svg {color: #fff !important; transition: all .3s ease-in-out}",
+        ".our-customer-wrapper svg {color: #fff !important; transition: all 0.3s ease-in-out;}",
         ".our-customer-wrapper button:hover svg {color: #000 !important;}"
       ],
       "settings": {
