@@ -311,37 +311,41 @@
             "poster_alt": ""
           }
         },
-        "review_K8Jarz": {
+        "review_wbGRiP": {
           "type": "review",
           "settings": {
+            "video_file": "shopify://files/videos/chooseroots-video1.mp4",
             "poster_alt": ""
           }
         },
-        "review_i86NWA": {
+        "review_J3wyLB": {
           "type": "review",
           "settings": {
+            "video_file": "shopify://files/videos/chooseroots-video1.mp4",
             "poster_alt": ""
           }
         },
-        "review_TigQwA": {
+        "review_3ppKHy": {
           "type": "review",
           "settings": {
+            "video_file": "shopify://files/videos/chooseroots-video1.mp4",
             "poster_alt": ""
           }
         },
-        "review_DB66aa": {
+        "review_9eieiA": {
           "type": "review",
           "settings": {
+            "video_file": "shopify://files/videos/chooseroots-video1.mp4",
             "poster_alt": ""
           }
         }
       },
       "block_order": [
         "review_yTKid8",
-        "review_K8Jarz",
-        "review_i86NWA",
-        "review_TigQwA",
-        "review_DB66aa"
+        "review_wbGRiP",
+        "review_J3wyLB",
+        "review_3ppKHy",
+        "review_9eieiA"
       ],
       "settings": {
         "heading": "Hear Directly From Our Customers",
