@@ -353,7 +353,7 @@
         "review_BHhUGA"
       ],
       "custom_css": [
-        "#playBtn-review_BHhUGA svg {color: #fff !important;}"
+        ".our-customer-wrapper svg {color: #fff !important;}"
       ],
       "settings": {
         "heading": "Hear Directly From Our Customers",
