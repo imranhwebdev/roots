@@ -338,8 +338,8 @@
         "review_BHhUGA"
       ],
       "custom_css": [
-        ".our-customer-wrapper svg {color: #fff !important; transition: all 0.3s ease-in-out;}",
-        ".our-customer-wrapper button:hover svg {color: #000 !important;}"
+        ".our-customer-wrapper .swiper-slide button svg {color: #fff !important; transition: all 0.3s ease-in-out;}",
+        ".our-customer-wrapper .swiper-slide button:hover svg {color: #000 !important;}"
       ],
       "settings": {
         "heading": "Hear Directly From Our Customers",
