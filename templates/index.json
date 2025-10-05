@@ -12,20 +12,6 @@
     "banner": {
       "type": "home-banner",
       "blocks": {
-        "slide_cU7LWL": {
-          "type": "slide",
-          "settings": {
-            "tagline": "Made in USA • Cold-Pressed",
-            "heading": "Your Slide Heading",
-            "des": "Your slide description goes here.",
-            "button_link": "",
-            "button_text": "",
-            "button_link2": "",
-            "button_text2": "",
-            "slide_image": "shopify://shop_images/banner-slider-img2.jpg",
-            "product_image": "shopify://shop_images/banner-product-img1.png"
-          }
-        },
         "slide_N3atmd": {
           "type": "slide",
           "settings": {
@@ -56,7 +42,6 @@
         }
       },
       "block_order": [
-        "slide_cU7LWL",
         "slide_N3atmd",
         "slide_tERyTX"
       ],
