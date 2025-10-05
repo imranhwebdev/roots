@@ -291,7 +291,6 @@
         "review_yTKid8": {
           "type": "review",
           "settings": {
-            "poster_image": "shopify://shop_images/castor-video-img.png",
             "poster_alt": "",
             "youtube_url": "https://youtu.be/ZKDPJJ36v_A?si=1dXQ60MYRZGYtsAg"
           }
@@ -299,7 +298,6 @@
         "review_K8Jarz": {
           "type": "review",
           "settings": {
-            "poster_image": "shopify://shop_images/castor-video-img2.png",
             "poster_alt": "",
             "youtube_url": "https://youtu.be/sGj3CEVK97w?si=YYomjN0z_un-NtZ-"
           }
@@ -307,7 +305,13 @@
         "review_i86NWA": {
           "type": "review",
           "settings": {
-            "poster_image": "shopify://shop_images/castor-video-img3.png",
+            "poster_alt": "",
+            "youtube_url": "https://youtu.be/6PzbVEH1GpQ?si=KP_-wO_xCZ58QR9-"
+          }
+        },
+        "review_TigQwA": {
+          "type": "review",
+          "settings": {
             "poster_alt": "",
             "youtube_url": "https://youtu.be/6PzbVEH1GpQ?si=KP_-wO_xCZ58QR9-"
           }
@@ -316,7 +320,8 @@
       "block_order": [
         "review_yTKid8",
         "review_K8Jarz",
-        "review_i86NWA"
+        "review_i86NWA",
+        "review_TigQwA"
       ],
       "settings": {
         "heading": "Hear Directly From Our Customers",
