@@ -265,6 +265,9 @@
   .-top-1 {
     top: calc(var(--spacing) * -1);
   }
+  .-top-\[10\%\] {
+    top: calc(10% * -1);
+  }
   .-top-\[12\%\] {
     top: calc(12% * -1);
   }
