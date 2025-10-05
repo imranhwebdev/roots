@@ -307,6 +307,7 @@
         "review_yTKid8": {
           "type": "review",
           "settings": {
+            "poster_image": "shopify://shop_images/poster1.png",
             "poster_alt": "",
             "youtube_url": "https://youtube.com/shorts/g9tmDpLbVKk"
           }
