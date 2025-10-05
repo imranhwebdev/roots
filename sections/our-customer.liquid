@@ -135,7 +135,7 @@
 
         const videoId = getYouTubeVideoId(url);
         if (videoId) {
-          iframe.src = https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1;
+          iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
           wrapper.classList.remove('hidden');
           btn.style.display = 'none';
           if (posterImg) posterImg.style.display = 'none';
