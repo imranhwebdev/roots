@@ -335,13 +335,22 @@
             "poster_alt": "",
             "youtube_url": "https://youtube.com/shorts/n8bxF1HGVdU"
           }
+        },
+        "review_BHhUGA": {
+          "type": "review",
+          "settings": {
+            "poster_image": "shopify://shop_images/poster4.png",
+            "poster_alt": "",
+            "youtube_url": "https://youtube.com/shorts/9Fw23a04fYI"
+          }
         }
       },
       "block_order": [
         "review_yTKid8",
         "review_wbGRiP",
         "review_J3wyLB",
-        "review_3ppKHy"
+        "review_3ppKHy",
+        "review_BHhUGA"
       ],
       "settings": {
         "heading": "Hear Directly From Our Customers",
