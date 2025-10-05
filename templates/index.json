@@ -307,45 +307,47 @@
         "review_yTKid8": {
           "type": "review",
           "settings": {
-            "poster_alt": "",
-            "youtube_url": "https://youtu.be/ZKDPJJ36v_A?si=1dXQ60MYRZGYtsAg"
+            "video_file": "shopify://files/videos/chooseroots-video1.mp4",
+            "poster_image": "shopify://shop_images/deburk-seven-common.png",
+            "poster_alt": ""
           }
         },
-        "review_K8Jarz": {
+        "review_wbGRiP": {
           "type": "review",
           "settings": {
-            "poster_alt": "",
-            "youtube_url": "https://youtu.be/sGj3CEVK97w?si=YYomjN0z_un-NtZ-"
+            "video_file": "shopify://files/videos/chooseroots-video1.mp4",
+            "poster_alt": ""
           }
         },
-        "review_i86NWA": {
+        "review_J3wyLB": {
           "type": "review",
           "settings": {
-            "poster_alt": "",
-            "youtube_url": "https://youtu.be/6PzbVEH1GpQ?si=KP_-wO_xCZ58QR9-"
+            "video_file": "shopify://files/videos/chooseroots-video1.mp4",
+            "poster_alt": ""
           }
         },
-        "review_TigQwA": {
+        "review_3ppKHy": {
           "type": "review",
           "settings": {
-            "poster_alt": "",
-            "youtube_url": "https://youtu.be/6PzbVEH1GpQ?si=KP_-wO_xCZ58QR9-"
+            "video_file": "shopify://files/videos/chooseroots-video1.mp4",
+            "poster_alt": ""
           }
         },
-        "review_DB66aa": {
+        "review_9eieiA": {
           "type": "review",
           "settings": {
-            "poster_alt": "",
-            "youtube_url": "https://youtu.be/6PzbVEH1GpQ?si=KP_-wO_xCZ58QR9-"
+            "video_file": "shopify://files/videos/chooseroots-video1.mp4",
+            "poster_image": "shopify://shop_images/how-to-store-organic.png",
+            "poster_alt": ""
           }
         }
       },
       "block_order": [
         "review_yTKid8",
-        "review_K8Jarz",
-        "review_i86NWA",
-        "review_TigQwA",
-        "review_DB66aa"
+        "review_wbGRiP",
+        "review_J3wyLB",
+        "review_3ppKHy",
+        "review_9eieiA"
       ],
       "settings": {
         "heading": "Hear Directly From Our Customers",
