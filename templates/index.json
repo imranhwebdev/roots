@@ -315,6 +315,7 @@
         "review_wbGRiP": {
           "type": "review",
           "settings": {
+            "poster_image": "shopify://shop_images/poster2.png",
             "poster_alt": "",
             "youtube_url": "https://youtube.com/shorts/l8UsQjnImoo"
           }
