@@ -138,7 +138,7 @@
       </p>
       <div class="payment-method-icons order-1 md:order-2">
         {% if shop.enabled_payment_types.size > 0 %}
-          <div class="flex items-center gap-3 lg:gap-2.5 mb-5 md:mb-0">
+          <div class="flex items-center  flex-wrap md:flex-nowrap justify-center md:justify-end  gap-3 lg:gap-2.5 mb-5 md:mb-0">
             {% for type in shop.enabled_payment_types %}
               <div class="w-11.5 h-8 border-[.8px] border-[#D9D9D9] rounded-[5px]">
                 {{ type | payment_type_svg_tag: class: 'size-full rounded-[5px]' }}
