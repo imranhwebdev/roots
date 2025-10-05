@@ -11,6 +11,7 @@
           </p>
         {% endif %}
       </div>
+
       <div class="relative z-1">
         <div class="swiper review-slider">
           <div class="swiper-wrapper">
@@ -18,51 +19,20 @@
               <div class="swiper-slide">
                 <div class="rounded-[10px]">
                   <div class="relative w-full h-75 md:h-[400px] lg:h-[500px] xl:h-[600px]">
-                    {% if block.settings.poster_image != blank %}
-                      <img
-                        src="{{ block.settings.poster_image | image_url: width: 1600 }}"
-                        alt="{{ block.settings.poster_alt | default: 'Video poster' }}"
+                    {% if block.settings.video_file != blank %}
+                      <video
+                        autoplay
+                        muted
+                        loop
+                        playsinline
+                        preload="metadata"
                         class="w-full h-full object-cover rounded-xl"
-                        width=""
-                        height=""
-                        loading="lazy"
+                        {% if block.settings.poster_image != blank %}
+                          poster="{{ block.settings.poster_image | image_url: width: 1600 }}"
+                        {% endif %}
                       >
-                    {% else %}
-                      <div class="w-full h-full bg-gray-200 rounded-xl flex items-center justify-center">
-                        <p class="text-gray-500">Video poster image lagbe</p>
-                      </div>
-                    {% endif %}
-
-                    {% if block.settings.youtube_url != blank %}
-                      <button
-                        id="playBtn-{{ block.id }}"
-                        data-video-url="{{ block.settings.youtube_url }}"
-                        class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[rgba(255,255,255,0.10)] border-1.5 border-solid border-[rgba(255,255,255,0.20)] backdrop-blur-sm hover:bg-gray-100 size-10 xl:size-13 flex items-center justify-center rounded-full shadow-[0_0_44px_0_rgba(0,0,0,0.24)] transition-all cursor-pointer duration-300 hover:scale-110"
-                        aria-label="Play video"
-                      >
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="text-green"
-                        >
-                          <path d="M8 5V19L19 12L8 5Z" fill="currentColor"/>
-                        </svg>
-                      </button>
-
-                      <div id="videoWrapper-{{ block.id }}" class="absolute inset-0 hidden">
-                        <iframe
-                          id="youtube-{{ block.id }}"
-                          class="w-full h-full rounded-xl"
-                          src=""
-                          title="YouTube video player"
-                          frameborder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                          allowfullscreen
-                        ></iframe>
-                      </div>
+                        <source src="{{ block.settings.video_file }}" type="video/mp4">
+                      </video>
                     {% endif %}
                   </div>
                 </div>
@@ -72,7 +42,7 @@
         </div>
 
         <!-- Navigation -->
-        <div class="absolute md:block z-1 w-30 md:w-40 right-0 -top-[12%] lg:-top-[31%] lg:flex items-center gap-4">
+        <div class="absolute md:block z-1 w-30 md:w-40 right-0 -top-[12%] lg:flex items-center gap-4">
           <div class="swiper-button-prev bg-[#FFE380] !text-[#0D2E1D] hover:!text-black !size-10 md:!size-14 rounded-full flex items-center justify-center">
             <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M6.66797 1L1.16797 6.5M1.16797 6.5L6.66797 12M1.16797 6.5L15.8346 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -107,52 +77,8 @@
       breakpoints: {
         320: { slidesPerView: 1.2, spaceBetween: 10 },
         640: { slidesPerView: 2, spaceBetween: 20 },
-        1024: { slidesPerView: 3, spaceBetween: 30 } /* default 3 items */,
+        1024: { slidesPerView: 3, spaceBetween: 30 },
       },
-    });
-
-    // Play button logic
-    document.querySelectorAll('[id^="playBtn-"]').forEach(function (btn) {
-      const blockId = btn.id.replace('playBtn-', '');
-      const wrapper = document.getElementById('videoWrapper-' + blockId);
-      const iframe = document.getElementById('youtube-' + blockId);
-      const posterImg = btn?.parentElement.querySelector('img');
-      const url = btn.dataset.videoUrl;
-
-      btn.addEventListener('click', function () {
-        function getYouTubeVideoId(url) {
-          if (!url) return null;
-          const patterns = [
-            /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/v\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/,
-            /youtube\.com\/watch\?.*v=([a-zA-Z0-9_-]{11})/,
-          ];
-          for (let pattern of patterns) {
-            const match = url.match(pattern);
-            if (match && match[1]) return match[1];
-          }
-          return null;
-        }
-
-        const videoId = getYouTubeVideoId(url);
-        if (videoId) {
-          iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
-          wrapper.classList.remove('hidden');
-          btn.style.display = 'none';
-          if (posterImg) posterImg.style.display = 'none';
-        } else {
-          alert('Valid YouTube URL din. Example: https://www.youtube.com/watch?v=VIDEO_ID');
-        }
-      });
-
-      // ESC দিয়ে বন্ধ
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && !wrapper.classList.contains('hidden')) {
-          iframe.src = '';
-          wrapper.classList.add('hidden');
-          btn.style.display = 'block';
-          if (posterImg) posterImg.style.display = 'block';
-        }
-      });
     });
   });
 </script>
@@ -180,9 +106,13 @@
       "type": "review",
       "name": "Review Video",
       "settings": [
-        { "type": "image_picker", "id": "poster_image", "label": "Poster Image" },
-        { "type": "text", "id": "poster_alt", "label": "Poster Alt Text" },
-        { "type": "url", "id": "youtube_url", "label": "YouTube Video URL" }
+        {
+          "type": "video",
+          "id": "video_file",
+          "label": "Upload Video"
+        },
+        { "type": "image_picker", "id": "poster_image", "label": "Poster Image (optional)" },
+        { "type": "text", "id": "poster_alt", "label": "Poster Alt Text" }
       ]
     }
   ],
