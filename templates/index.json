@@ -12,6 +12,20 @@
     "banner": {
       "type": "home-banner",
       "blocks": {
+        "slide_cU7LWL": {
+          "type": "slide",
+          "settings": {
+            "tagline": "Made in USA • Cold-Pressed",
+            "heading": "Your Slide Heading",
+            "des": "Your slide description goes here.",
+            "button_link": "",
+            "button_text": "",
+            "button_link2": "",
+            "button_text2": "",
+            "slide_image": "shopify://shop_images/banner-slider-img2.jpg",
+            "product_image": "shopify://shop_images/banner-product-img1-0.png"
+          }
+        },
         "slide_N3atmd": {
           "type": "slide",
           "settings": {
@@ -36,11 +50,13 @@
             "button_text": "Shop Now",
             "button_link2": "shopify://pages/about-us",
             "button_text2": "Discover Our Story",
+            "slide_image": "shopify://shop_images/banner-slider-img2_ce220c15-b5e8-44db-8c7d-b54ebc38f267.jpg",
             "product_image": "shopify://shop_images/banner-product-img2-0.png"
           }
         }
       },
       "block_order": [
+        "slide_cU7LWL",
         "slide_N3atmd",
         "slide_tERyTX"
       ],
@@ -291,7 +307,6 @@
         "review_yTKid8": {
           "type": "review",
           "settings": {
-            "poster_image": "shopify://shop_images/castor-video-img.png",
             "poster_alt": "",
             "youtube_url": "https://youtu.be/ZKDPJJ36v_A?si=1dXQ60MYRZGYtsAg"
           }
@@ -299,7 +314,6 @@
         "review_K8Jarz": {
           "type": "review",
           "settings": {
-            "poster_image": "shopify://shop_images/castor-video-img2.png",
             "poster_alt": "",
             "youtube_url": "https://youtu.be/sGj3CEVK97w?si=YYomjN0z_un-NtZ-"
           }
@@ -307,7 +321,20 @@
         "review_i86NWA": {
           "type": "review",
           "settings": {
-            "poster_image": "shopify://shop_images/castor-video-img3.png",
+            "poster_alt": "",
+            "youtube_url": "https://youtu.be/6PzbVEH1GpQ?si=KP_-wO_xCZ58QR9-"
+          }
+        },
+        "review_TigQwA": {
+          "type": "review",
+          "settings": {
+            "poster_alt": "",
+            "youtube_url": "https://youtu.be/6PzbVEH1GpQ?si=KP_-wO_xCZ58QR9-"
+          }
+        },
+        "review_DB66aa": {
+          "type": "review",
+          "settings": {
             "poster_alt": "",
             "youtube_url": "https://youtu.be/6PzbVEH1GpQ?si=KP_-wO_xCZ58QR9-"
           }
@@ -316,7 +343,9 @@
       "block_order": [
         "review_yTKid8",
         "review_K8Jarz",
-        "review_i86NWA"
+        "review_i86NWA",
+        "review_TigQwA",
+        "review_DB66aa"
       ],
       "settings": {
         "heading": "Hear Directly From Our Customers",
