@@ -307,38 +307,29 @@
         "review_yTKid8": {
           "type": "review",
           "settings": {
-            "video_file": "shopify://files/videos/chooseroots-video1.mp4",
-            "poster_image": "shopify://shop_images/deburk-seven-common.png",
-            "poster_alt": ""
+            "poster_alt": "",
+            "youtube_url": "https://youtu.be/gF8BHgRhQZg?si=fCDxQ5c-7PCDc2d5"
           }
         },
         "review_wbGRiP": {
           "type": "review",
           "settings": {
-            "video_file": "shopify://files/videos/chooseroots-video1.mp4",
-            "poster_alt": ""
+            "poster_alt": "",
+            "youtube_url": "https://vimeo.com/1124621212?fl=pl&fe=sh"
           }
         },
         "review_J3wyLB": {
           "type": "review",
           "settings": {
-            "video_file": "shopify://files/videos/chooseroots-video1.mp4",
-            "poster_alt": ""
+            "poster_alt": "",
+            "youtube_url": ""
           }
         },
         "review_3ppKHy": {
           "type": "review",
           "settings": {
-            "video_file": "shopify://files/videos/chooseroots-video1.mp4",
-            "poster_alt": ""
-          }
-        },
-        "review_9eieiA": {
-          "type": "review",
-          "settings": {
-            "video_file": "shopify://files/videos/chooseroots-video1.mp4",
-            "poster_image": "shopify://shop_images/how-to-store-organic.png",
-            "poster_alt": ""
+            "poster_alt": "",
+            "youtube_url": ""
           }
         }
       },
@@ -346,8 +337,7 @@
         "review_yTKid8",
         "review_wbGRiP",
         "review_J3wyLB",
-        "review_3ppKHy",
-        "review_9eieiA"
+        "review_3ppKHy"
       ],
       "settings": {
         "heading": "Hear Directly From Our Customers",
