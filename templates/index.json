@@ -352,6 +352,9 @@
         "review_3ppKHy",
         "review_BHhUGA"
       ],
+      "custom_css": [
+        "#playBtn-review_BHhUGA svg {color: #fff !important;}"
+      ],
       "settings": {
         "heading": "Hear Directly From Our Customers",
         "subheading": "Real experiences, real stories. Watch how ChooseRoots has made a difference."
