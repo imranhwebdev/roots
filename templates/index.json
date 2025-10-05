@@ -323,8 +323,9 @@
         "review_J3wyLB": {
           "type": "review",
           "settings": {
+            "poster_image": "shopify://shop_images/poster3.png",
             "poster_alt": "",
-            "youtube_url": ""
+            "youtube_url": "https://youtube.com/shorts/pBu3I-9qFX8"
           }
         },
         "review_3ppKHy": {
