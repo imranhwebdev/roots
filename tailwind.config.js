@@ -13,7 +13,7 @@ module.exports = {
         armanyBold: ['Armany-Bold', 'sans-serif'],
         poppins: ['Poppins', 'sans-serif'],
       }
-    },
+    },   
   },
   plugins: [],
 }
