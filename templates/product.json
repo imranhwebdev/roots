@@ -20,10 +20,6 @@
       "type": "product",
       "settings": {}
     },
-    "1755674576e116d7a1": {
-      "type": "apps",
-      "settings": {}
-    },
     "our_customer_WKJwLW": {
       "type": "our-customer",
       "blocks": {
@@ -67,6 +63,10 @@
         "heading": "Hear Directly From Our Customers",
         "subheading": "Real experiences, real stories. Watch how ChooseRoots has made a difference."
       }
+    },
+    "1755674576e116d7a1": {
+      "type": "apps",
+      "settings": {}
     },
     "simple_to_use": {
       "type": "simple-to-use",
@@ -139,8 +139,8 @@
   "order": [
     "banner",
     "main",
-    "1755674576e116d7a1",
     "our_customer_WKJwLW",
+    "1755674576e116d7a1",
     "simple_to_use",
     "join_roots"
   ]
