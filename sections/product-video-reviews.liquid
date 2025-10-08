@@ -124,7 +124,14 @@
     });
   </script>
 {% endif %}
-
+{%- stylesheet -%}
+  .swiper-button-next:after {
+    display: none;
+  }
+  .swiper-button-prev:after {
+    display: none;
+  }
+{%- endstylesheet -%}
 {% schema %}
 {
   "name": "Product Video Reviews",
