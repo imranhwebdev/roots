@@ -1,18 +1,7 @@
 {% if product.metafields.custom.product_video_reviews != blank %}
-  <div class="our-customer py-15 md:py-20 lg:py-37.5">
+  <div class="our-customer py-10">
     <div class="container !max-w-[1220px] mx-auto px-4">
       <div class="our-customer-wrapper">
-        <div class="section-title text-center mb-12">
-          <h2 class="title text-3xl lg:text-[44px] font-bold text-[#0D2E1D] font-armany-bold leading-tight mb-4">
-            {{ section.settings.heading }}
-          </h2>
-          {% if section.settings.subheading != blank %}
-            <p class="description text-[#797375] text-base md:text-lg lg:text-xl leading-[1.6] font-poppins">
-              {{ section.settings.subheading }}
-            </p>
-          {% endif %}
-        </div>
-
         <div class="relative z-1">
           <div class="swiper review-slider">
             <div class="swiper-wrapper">
@@ -141,20 +130,6 @@
 {% schema %}
 {
   "name": "Product Video Reviews",
-  "settings": [
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Section Title",
-      "default": "Hear Directly From Our Customers"
-    },
-    {
-      "type": "textarea",
-      "id": "subheading",
-      "label": "Section Subtitle",
-      "default": "Real experiences, real stories. Watch how our customers share their experiences."
-    }
-  ],
   "presets": [
     {
       "name": "Product Video Reviews"
