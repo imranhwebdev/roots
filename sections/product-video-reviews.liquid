@@ -125,11 +125,17 @@
   </script>
 {% endif %}
 {%- stylesheet -%}
-  .swiper-button-next:after {
+  .our-customer .swiper-button-next:after {
     display: none;
   }
-  .swiper-button-prev:after {
+  .our-customer .swiper-button-prev:after {
     display: none;
+  }
+  .our-customer .swiper-button-next svg,
+  .our-customer .swiper-button-prev svg {
+    width: 27px;
+    height: auto;
+    object-fit: contain;
   }
 {%- endstylesheet -%}
 {% schema %}
