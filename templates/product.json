@@ -24,6 +24,37 @@
       "type": "apps",
       "settings": {}
     },
+    "reviews_KzQRVL": {
+      "type": "reviews",
+      "blocks": {
+        "review_kUfGx9": {
+          "type": "review",
+          "settings": {
+            "name": "John Doe",
+            "location": "New York, NY",
+            "review_text": "This is a sample customer review.",
+            "stars": 5
+          }
+        },
+        "review_HdLhj3": {
+          "type": "review",
+          "settings": {
+            "name": "John Doe",
+            "location": "New York, NY",
+            "review_text": "This is a sample customer review.",
+            "stars": 5
+          }
+        }
+      },
+      "block_order": [
+        "review_kUfGx9",
+        "review_HdLhj3"
+      ],
+      "name": "Customer Reviews",
+      "settings": {
+        "heading": "Customer Reviews"
+      }
+    },
     "simple_to_use": {
       "type": "simple-to-use",
       "blocks": {
@@ -96,6 +127,7 @@
     "banner",
     "main",
     "1755674576e116d7a1",
+    "reviews_KzQRVL",
     "simple_to_use",
     "join_roots"
   ]
