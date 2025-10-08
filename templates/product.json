@@ -24,6 +24,50 @@
       "type": "apps",
       "settings": {}
     },
+    "our_customer_WKJwLW": {
+      "type": "our-customer",
+      "blocks": {
+        "review_JE68nG": {
+          "type": "review",
+          "settings": {
+            "poster_alt": "",
+            "youtube_url": ""
+          }
+        },
+        "review_rc6aNf": {
+          "type": "review",
+          "settings": {
+            "poster_alt": "",
+            "youtube_url": ""
+          }
+        },
+        "review_fVXEVP": {
+          "type": "review",
+          "settings": {
+            "poster_alt": "",
+            "youtube_url": ""
+          }
+        },
+        "review_aYUFwF": {
+          "type": "review",
+          "settings": {
+            "poster_alt": "",
+            "youtube_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_JE68nG",
+        "review_rc6aNf",
+        "review_fVXEVP",
+        "review_aYUFwF"
+      ],
+      "name": "Our Customer",
+      "settings": {
+        "heading": "Hear Directly From Our Customers",
+        "subheading": "Real experiences, real stories. Watch how ChooseRoots has made a difference."
+      }
+    },
     "simple_to_use": {
       "type": "simple-to-use",
       "blocks": {
@@ -96,6 +140,7 @@
     "banner",
     "main",
     "1755674576e116d7a1",
+    "our_customer_WKJwLW",
     "simple_to_use",
     "join_roots"
   ]
