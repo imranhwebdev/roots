@@ -1,4 +1,4 @@
-{% if product.metafields.custom.video_reviews != blank %}
+{% if product.metafields.custom.product_video_reviews != blank %}
   <div class="our-customer py-15 md:py-20 lg:py-37.5">
     <div class="container !max-w-[1220px] mx-auto px-4">
       <div class="our-customer-wrapper">
@@ -60,21 +60,23 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      new Swiper('.review-slider', {
-        loop: true,
-        speed: 700,
-        navigation: {
-          prevEl: '.swiper-button-prev',
-          nextEl: '.swiper-button-next',
-        },
-        grabCursor: true,
-        effect: 'slide',
-        breakpoints: {
-          320: { slidesPerView: 1.2, spaceBetween: 10 },
-          640: { slidesPerView: 2, spaceBetween: 20 },
-          1024: { slidesPerView: 3, spaceBetween: 30 },
-        },
-      });
+      if (typeof Swiper !== 'undefined') {
+        new Swiper('.review-slider', {
+          loop: true,
+          speed: 700,
+          navigation: {
+            prevEl: '.swiper-button-prev',
+            nextEl: '.swiper-button-next',
+          },
+          grabCursor: true,
+          effect: 'slide',
+          breakpoints: {
+            320: { slidesPerView: 1.2, spaceBetween: 10 },
+            640: { slidesPerView: 2, spaceBetween: 20 },
+            1024: { slidesPerView: 3, spaceBetween: 30 },
+          },
+        });
+      }
     });
   </script>
 {% endif %}
@@ -82,7 +84,6 @@
 {% schema %}
 {
   "name": "Product Video Reviews",
-  "tag": "section",
   "settings": [
     {
       "type": "text",
