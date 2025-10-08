@@ -16,7 +16,7 @@
         <div class="relative z-1">
           <div class="swiper review-slider">
             <div class="swiper-wrapper">
-              {% for video_url in product.metafields.custom.video_reviews.value %}
+              {% for video_url in product.metafields.custom.product_video_reviews.value %}
                 {% assign video_id = video_url | split: 'v=' | last %}
                 <div class="swiper-slide">
                   <div class="rounded-[10px]">
