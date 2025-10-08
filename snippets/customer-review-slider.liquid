@@ -1,16 +1,6 @@
 <div class="our-customer py-15 md:py-20 lg:py-37.5">
   <div class="container !max-w-[1220px] mx-auto px-4">
     <div class="our-customer-wrapper">
-      <div class="section-title text-center mb-12">
-        <h2 class="title text-3xl lg:text-[44px] font-bold text-[#0D2E1D] font-armany-bold leading-tight mb-4">
-          {{ section.settings.heading }}
-        </h2>
-        {% if section.settings.subheading != blank %}
-          <p class="description text-[#797375] text-base md:text-lg lg:text-xl leading-[1.6] font-poppins">
-            {{ section.settings.subheading }}
-          </p>
-        {% endif %}
-      </div>
       <div class="relative z-1">
         <div class="swiper review-slider">
           <div class="swiper-wrapper">
@@ -109,11 +99,10 @@
       breakpoints: {
         320: { slidesPerView: 1.2, spaceBetween: 10 },
         640: { slidesPerView: 2, spaceBetween: 20 },
-        1024: { slidesPerView: 3, spaceBetween: 30 } /* default 3 items */,
+        1024: { slidesPerView: 3, spaceBetween: 30 },
       },
     });
 
-    // Play button logic
     document.querySelectorAll('[id^="playBtn-"]').forEach(function (btn) {
       const blockId = btn.id.replace('playBtn-', '');
       const wrapper = document.getElementById('videoWrapper-' + blockId);
@@ -146,7 +135,6 @@
         }
       });
 
-      
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && !wrapper.classList.contains('hidden')) {
           iframe.src = '';
@@ -158,44 +146,3 @@
     });
   });
 </script>
-
-{% schema %}
-{
-  "name": "Our Customer",
-  "tag": "section",
-  "settings": [
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Section Title",
-      "default": "Hear Directly From Our Customers"
-    },
-    {
-      "type": "textarea",
-      "id": "subheading",
-      "label": "Section Subtitle",
-      "default": "Real experiences, real stories. Watch how ChooseRoots has made a difference."
-    }
-  ],
-  "blocks": [
-    {
-      "type": "review",
-      "name": "Review Video",
-      "settings": [
-        { "type": "image_picker", "id": "poster_image", "label": "Poster Image" },
-        { "type": "text", "id": "poster_alt", "label": "Poster Alt Text" },
-        { "type": "url", "id": "youtube_url", "label": "YouTube Video URL" }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Our Customer",
-      "settings": {
-        "heading": "Hear Directly From Our Customers",
-        "subheading": "Real experiences, real stories. Watch how ChooseRoots has made a difference."
-      }
-    }
-  ]
-}
-{% endschema %}
