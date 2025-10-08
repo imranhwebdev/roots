@@ -20,48 +20,12 @@
       "type": "product",
       "settings": {}
     },
-    "our_customer_WKJwLW": {
-      "type": "our-customer",
-      "blocks": {
-        "review_JE68nG": {
-          "type": "review",
-          "settings": {
-            "poster_alt": "",
-            "youtube_url": ""
-          }
-        },
-        "review_rc6aNf": {
-          "type": "review",
-          "settings": {
-            "poster_alt": "",
-            "youtube_url": ""
-          }
-        },
-        "review_fVXEVP": {
-          "type": "review",
-          "settings": {
-            "poster_alt": "",
-            "youtube_url": ""
-          }
-        },
-        "review_aYUFwF": {
-          "type": "review",
-          "settings": {
-            "poster_alt": "",
-            "youtube_url": ""
-          }
-        }
-      },
-      "block_order": [
-        "review_JE68nG",
-        "review_rc6aNf",
-        "review_fVXEVP",
-        "review_aYUFwF"
-      ],
-      "name": "Our Customer",
+    "product_video_reviews_dtBi9U": {
+      "type": "product-video-reviews",
+      "name": "Product Video Reviews",
       "settings": {
         "heading": "Hear Directly From Our Customers",
-        "subheading": "Real experiences, real stories. Watch how ChooseRoots has made a difference."
+        "subheading": "Real experiences, real stories. Watch how our customers share their experiences."
       }
     },
     "1755674576e116d7a1": {
@@ -139,7 +103,7 @@
   "order": [
     "banner",
     "main",
-    "our_customer_WKJwLW",
+    "product_video_reviews_dtBi9U",
     "1755674576e116d7a1",
     "simple_to_use",
     "join_roots"
