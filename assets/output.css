@@ -1916,6 +1916,11 @@
       color: #1E6C44;
     }
   }
+  .group-hover\:text-black {
+    &:is(:where(.group):hover *) {
+      color: var(--color-black);
+    }
+  }
   .placeholder\:text-\[\#797375\] {
     &::placeholder {
       color: #797375;
