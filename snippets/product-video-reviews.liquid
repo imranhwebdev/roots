@@ -1,6 +1,6 @@
 {% if product.metafields.custom.product_video_reviews != blank %}
-  <div class="our-customer py-10">
-    <div class="container !max-w-[1220px] mx-auto px-4">
+  <div class="our-customer pb-10 pt-20">
+    <div class="container">
       <div class="our-customer-wrapper">
         <div class="relative z-1">
           <div class="swiper review-slider">
@@ -87,7 +87,8 @@
           breakpoints: {
             320: { slidesPerView: 1.2, spaceBetween: 10 },
             640: { slidesPerView: 2, spaceBetween: 20 },
-            1024: { slidesPerView: 3, spaceBetween: 30 },
+            1024: { slidesPerView: 3, spaceBetween: 25 },
+            1280: { slidesPerView: 4, spaceBetween: 25 },
           },
         });
       }
@@ -127,13 +128,3 @@
     object-fit: contain;
   }
 {%- endstylesheet -%}
-{% schema %}
-{
-  "name": "Product Video Reviews",
-  "presets": [
-    {
-      "name": "Product Video Reviews"
-    }
-  ]
-}
-{% endschema %}

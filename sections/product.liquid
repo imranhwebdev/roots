@@ -421,6 +421,9 @@
         </div>
       </div>
     </div>
+    {% if product.metafields.custom.product_video_reviews %}
+      {% render 'product-video-reviews' %}
+    {% endif %}
 
     <!-- Tabs: Description + Reviews -->
     <div class="mt-12">
